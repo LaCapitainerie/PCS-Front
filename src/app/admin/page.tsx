@@ -1,7 +1,9 @@
-export default function Bailleur() {
+import AdminLayout from "@/components/Layout/AdminLayout";
+
+export default function Admin() {
     return (
-        <>
-            <h1>Test page 2</h1>
-        </>
+        <AdminLayout>
+            Salut
+        </AdminLayout>
     );
 }

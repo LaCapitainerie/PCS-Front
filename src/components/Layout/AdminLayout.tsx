@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import HeaderAdmin from "@/components/Header/HeaderAdmin";
 
 interface AdminLayoutProps {
     children: ReactNode;
@@ -7,7 +8,7 @@ interface AdminLayoutProps {
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     return (
       <>
-          <header>Oui</header>
+          <HeaderAdmin />
           <main>{children}</main>
       </>
     );
