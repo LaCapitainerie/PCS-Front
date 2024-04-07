@@ -18,7 +18,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ children }) => {
     return (
-        <header class="flex justify-between items-center bg-blue-800 p-4 h-24">
+        <header className="flex justify-between items-center bg-blue-800 p-4 h-24">
             <div className="flex items-center space-x-4">
             <div className="logo">
                 <Link href="/admin">
