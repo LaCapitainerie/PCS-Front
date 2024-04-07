@@ -1,1 +1,114 @@
-{}
+{
+    "Sidebar": [
+        {
+            "ID_tab": 1,
+            "Icon": "Calendar",
+            "Hover": "Calendar",
+            "Href": "#"
+        },
+        {
+            "ID_tab": 2,
+            "Icon": "Msg",
+            "Hover": "Messages",
+            "Href": "#"
+        },
+        {
+            "ID_tab": 3,
+            "Icon": "Gauge",
+            "Hover": "Dashboard",
+            "Href": "#"
+        }
+    ],
+
+    "Bien_immobilier": [
+        {
+            "ID": 0,
+            "Nom": "Appartement 1",
+            "Type": "Appartement",
+            "Prix": 100000,
+            "Surface": 100,
+            "Chambres": 3,
+            "Salles_de_bain": 2,
+            "Garages": 0,
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Image": "appartement.jpg"
+        },
+        {
+            "ID": 1,
+            "Nom": "Maison 1",
+            "Type": "Maison",
+            "Prix": 200000,
+            "Surface": 200,
+            "Chambres": 4,
+            "Salles_de_bain": 3,
+            "Garages": 2,
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Image": "maison.jpg"
+        },
+        {
+            "ID": 2,
+            "Nom": "Villa 1",
+            "Type": "Villa",
+            "Prix": 300000,
+            "Surface": 300,
+            "Chambres": 5,
+            "Salles_de_bain": 4,
+            "Garages": 3,
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Image": "villa.jpg"
+        }
+    ],
+
+    "Housing": [
+        {
+            "ID_Housing": 0,
+            "ID_Client": 0,
+            "ID_Bien_Immobilier": 0,
+            "particulier": "jean.dupont@gmail.com",
+            "status": "processing",
+            "Type": "Nettoyage",
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Duree": 2,
+            "Prix": "50.00"
+        },
+        {
+            "ID_Housing": 1,
+            "ID_Client": 1,
+            "ID_Bien_Immobilier": 1,
+            "particulier": "john.doe@gmail.com",
+            "status": "success",
+            "Type": "Cuisine",
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Duree": 2,
+            "Prix": "50"
+        },
+        {
+            "ID_Housing": 2,
+            "ID_Client": 2,
+            "ID_Bien_Immobilier": 2,
+            "particulier": "template@gmail.com",
+            "status": "failed",
+            "Type": "Remise de clef",
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Duree": 2,
+            "Prix": 50
+        },
+        {
+            "ID_Housing": 3,
+            "ID_Client": 3,
+            "ID_Bien_Immobilier": 3,
+            "particulier": "host@domain.com",
+            "status": "pending",
+            "Type": "État des lieux",
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Duree": 2,
+            "Prix": 50
+        }
+    ],
+
+    "Null": []
+}
