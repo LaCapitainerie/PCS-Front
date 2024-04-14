@@ -75,7 +75,7 @@ const BienImmo = () => {
 
     return (
         <div className="fixed inset-y-0 left-[3.5rem] z-0 hidden w-[30%] flex-col border-r bg-background sm:flex">
-            <a className="w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">Bien Immobiliers</a>
+            <a className="py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">Bien Immobiliers</a>
 
             <Separator className="my-2" />
 

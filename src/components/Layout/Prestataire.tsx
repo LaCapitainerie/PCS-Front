@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
 import BienImmo from '../Sidebar/Bienlist';
 import MainContent from '../Sidebar/MainContent';
-import Order from '../cavaservir/order';
 
 interface PrestaLayoutProps {
     children: ReactNode;
@@ -14,7 +13,6 @@ const PrestaLayout: React.FC<PrestaLayoutProps> = ({ children }) => {
           <Sidebar/>
           <BienImmo/>
           <MainContent/>
-          <main>{children}</main>
       </body>
     );
 }
