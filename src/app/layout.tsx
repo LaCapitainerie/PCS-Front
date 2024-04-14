@@ -16,20 +16,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
-    <html lang="fr" suppressHydrationWarning>
-      <head />
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
-  </>
+      <>
+      <html lang="fr" suppressHydrationWarning>
+        <head />
+        <body className={`${inter.className} h-screen`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </>
   );
 }

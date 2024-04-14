@@ -110,5 +110,117 @@
         }
     ],
 
+    "Reservations": [
+        {
+            "ID_Reservation": 0,
+            "ID_Housing": 0,
+            "ID_Prestataire": 0,
+            "ID_Locataire": 0,
+            "Date": "2024-04-13",
+            "Heure": "10:00",
+            "Duree": 2,
+            "Prix": 50
+        },
+        {
+            "ID_Reservation": 1,
+            "ID_Housing": 1,
+            "ID_Prestataire": 1,
+            "ID_Locataire": 1,
+            "Date": "2024-04-13",
+            "Heure": "10:00",
+            "Duree": 2,
+            "Prix": 50
+        },
+        {
+            "ID_Reservation": 2,
+            "ID_Housing": 2,
+            "ID_Prestataire": 2,
+            "ID_Locataire": 2,
+            "Date": "2024-04-13",
+            "Heure": "10:00",
+            "Duree": 2,
+            "Prix": 50
+        }
+    ],
+
+    "Prestataires": [
+        {
+            "ID_Prestataire": 0,
+            "particulier": "Jacob",
+            "status": "success",
+            "Type": "peinture",
+            "Prix": 20
+        },
+        {
+            "ID_Prestataire": 1,
+            "particulier": "Ezekiel",
+            "status": "processing",
+            "Type": "reparation",
+            "Prix": 20
+        },
+        {
+            "ID_Prestataire": 2,
+            "particulier": "Adolf",
+            "status": "failed",
+            "Type": "peinture",
+            "Prix": 20
+        },
+        {
+            "ID_Prestataire": 3,
+            "particulier": "Himmler",
+            "status": "pending",
+            "Type": "peinture",
+            "Prix": 20
+        }
+    ],
+
+    "Photos": [
+        {
+            "ID_Photo": 0,
+            "ID_Bien": 0,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933a.jpg"
+        },
+        {
+            "ID_Photo": 1,
+            "ID_Bien": 0,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933b.jpg"
+        },
+        {
+            "ID_Photo": 2,
+            "ID_Bien": 0,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933c.jpg"
+        },
+        {
+            "ID_Photo": 3,
+            "ID_Bien": 1,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933d.jpg"
+        },
+        {
+            "ID_Photo": 4,
+            "ID_Bien": 1,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933e.jpg"
+        },
+        {
+            "ID_Photo": 5,
+            "ID_Bien": 1,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933f.jpg"
+        },
+        {
+            "ID_Photo": 6,
+            "ID_Bien": 2,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933g.jpg"
+        },
+        {
+            "ID_Photo": 7,
+            "ID_Bien": 2,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933h.jpg"
+        },
+        {
+            "ID_Photo": 8,
+            "ID_Bien": 2,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933i.jpg"
+        }
+    ],
+
     "Null": []
 }

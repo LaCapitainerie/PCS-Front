@@ -1,5 +1,5 @@
 import { columns } from "./columns"
-import { Housing } from "./customclass";
+import { Housing } from "../Prestataire/customclass";
 import { DataTable } from "./data-table"
  
 async function getData(): Promise<Housing[]> {

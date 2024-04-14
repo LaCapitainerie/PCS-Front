@@ -1,60 +1,88 @@
+"use client"
+
 import * as React from "react"
-import { CarouselPlugin } from "../MainDashboard/Carroussel";
-import { CardDemo } from "../MainDashboard/Description";
-import { DescriptionBien } from "../MainDashboard/customclass";
+import { CarouselPlugin } from "../Prestataire/Carroussel";
+import { CardDesc } from "../Prestataire/Cards";
+import { Bien_immobilier, DescriptionBien, Photos, Prestataire, Reservation as Res } from "../Prestataire/customclass";
+import { Reservation } from "../Prestataire/Reservation";
+import Title from "../ui/title";
+import { useEffect, useState } from "react";
 
 
 
-const Biens: DescriptionBien = {
-    detail: [
-        {
-            title: "Nom du bien",
-            description: "Description du bien",
-            color: "red",
-        },
-        {
-            title: "Nom du bien",
-            description: "Description du bien",
-            color: "green",
-        },
-    ],
-    prestataire: [
-        {
-            ID_Prestataire: "1",
-            particulier: "Prestataire",
-            status: "success",
-            Type: "peinture",
-            Date: "2021-10-10",
-            Heure: "10:00",
-            Duree: 2,
-            Prix: 20,
-        },
-        {
-            ID_Prestataire: "2",
-            particulier: "Prestataire",
-            status: "processing",
-            Type: "reparation",
-            Date: "2021-10-10",
-            Heure: "10:00",
-            Duree: 2,
-            Prix: 20,
-        },
-    ],
-}
 
+const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
+    
+    const [photos, setPhotos] = useState<Photos[]>([]);
 
-const MainContent = () => {
-    const style = { "padding-right": "calc(3.5rem + 30%)" } as React.CSSProperties;
+    useEffect(() => {
+        const dataFetch = async () => {
+            const data: Photos[] = await (
+                await fetch(
+                    "http://localhost:2000/Photos"
+                )
+            ).json();
+
+            setPhotos(data.filter((photo) => photo.ID_Bien === house?.ID));
+        };
+
+        dataFetch();
+    }, [house]);
+
+    const [Desc, setDesc] = useState<DescriptionBien>();
+
+    useEffect(() => {
+        const dataFetch = async () => {
+            const DescMaker = {} as DescriptionBien;
+
+            DescMaker.Bien = house? house : {} as Bien_immobilier;
+
+            const data2: Res[] = await (
+                await fetch(
+                    "http://localhost:2000/Reservations"
+                )
+            ).json();
+            
+            DescMaker.reservation = data2.filter((res) => res.ID_Housing === house?.ID);
+
+            const data3: Prestataire[] = await (
+                await fetch(
+                    "http://localhost:2000/Prestataires"
+                )
+            ).json();
+
+            DescMaker.prestataire = data3.filter((prest) => DescMaker.reservation.map((res) => res.ID_Prestataire).includes(prest.ID_Prestataire));
+
+            console.log(DescMaker);
+            
+
+            setDesc(DescMaker);
+        };
+
+        dataFetch();
+    }, [house]);
+
+    console.log(Desc);
+    
+
     return (
 
-        <div className="fixed flex flex-col left-[calc(3.5rem+30%)] w-full" style={style}>
+        <div className="absolute w-fit right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%]">
             <main className="w-full h-full flex flex-col">
-                <CarouselPlugin />
+                <CarouselPlugin images={photos} />
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
-                        <h1 className="w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">Nom du Bien</h1>
-                        <div className="flex flex-row justify-around">
-                            <CardDemo Desc={Biens} />
+                        <Title titre="Nom du bien" sous_titre={Desc?.Bien.Description}/>
+                        <div className="flex flex-row justify-around gap-2">
+                            <CardDesc Desc={Desc} />
+                        </div>
+                    </div>
+                </div>
+                <div className="p-1">
+                    <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
+                        <Title titre="Réservations" sous_titre=""/>
+                        <div className="flex flex-col justify-around gap-2">
+                            <Reservation/>
                         </div>
                     </div>
                 </div>

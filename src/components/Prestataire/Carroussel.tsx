@@ -9,18 +9,13 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
+import { Photos } from "./customclass"
 
-export function CarouselPlugin() {
+export function CarouselPlugin({ images }: { images: Photos[] }) {
   const plugin = React.useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true})
   )
-  const links = [
-    "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933a.jpg",
-    "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933b.jpg",
-    "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933c.jpg",
-    "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933d.jpg",
-    "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933e.jpg",
-  ]
+  
 
   return (
     <Carousel
@@ -34,13 +29,13 @@ export function CarouselPlugin() {
       }}
     >
       <CarouselContent className="h-full">
-        {Array.from({ length: 5 }).map((_, index) => (
+        {images.map((photo, index) => (
           <CarouselItem className="h-full" key={index}>
             <div className="p-1">
               <Card>
                 <CardContent className="flex items-center justify-center p-0">
                     <img
-                        src={links[index]}
+                        src={photo.Image}
                         alt={`Random Image ${index + 1}`}
                         className="w-full h-full object-cover rounded-lg max-h-96"
                     />
