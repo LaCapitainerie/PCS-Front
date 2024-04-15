@@ -1,8 +1,8 @@
 import { CheckIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence } from "lucide-react"
-import { DescriptionBien, Prestataire } from "./customclass"
+import { DescriptionBien, Prestataire } from "../customclass"
 import { HoverCard, HoverCardContent, HoverCardTrigger, } from "@/components/ui/hover-card"
 
 function statusToColor(params: Prestataire["status"]) {

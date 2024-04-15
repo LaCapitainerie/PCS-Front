@@ -2,9 +2,9 @@
 
 import React, { ReactNode, useState } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
-import BienImmo from '../Sidebar/BienImmo';
-import MainContent from '../Sidebar/MainContent';
-import { Bien_immobilier } from '../Prestataire/customclass';
+import BienImmo from '../../Prestataire/Bien/BienImmo';
+import MainContent from '../../Prestataire/Bien/MainContent';
+import { Bien_immobilier } from '../../Prestataire/customclass';
 
 interface PrestaLayoutProps {
     children: ReactNode;

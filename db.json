@@ -4,13 +4,13 @@
             "ID_tab": 1,
             "Icon": "Calendar",
             "Hover": "Calendar",
-            "Href": "#"
+            "Href": "/Prestataire/Biens"
         },
         {
             "ID_tab": 2,
             "Icon": "Msg",
             "Hover": "Messages",
-            "Href": "#"
+            "Href": "/Prestataire/Messages"
         },
         {
             "ID_tab": 3,
@@ -116,7 +116,7 @@
             "ID_Housing": 0,
             "ID_Prestataire": 0,
             "ID_Locataire": 0,
-            "Date": "2024-04-13",
+            "Date": "2024-04-20",
             "Heure": "10:00",
             "Duree": 2,
             "Prix": 50
@@ -222,5 +222,67 @@
         }
     ],
 
-    "Null": []
+    "Null": [],
+
+    "Utilisateurs": [
+        {
+            "ID": 0,
+            "Nom": "Dupont",
+            "Prenom": "Jean",
+            "Type": "Particulier"
+        },
+        {
+            "ID": 1,
+            "Nom": "Doe",
+            "Prenom": "John",
+            "Type": "Particulier"
+        },
+        {
+            "ID": 2,
+            "Nom": "Template",
+            "Prenom": "Template",
+            "Type": "Particulier"
+        },
+        {
+            "ID": 3,
+            "Nom": "Host",
+            "Prenom": "Domain",
+            "Type": "Particulier"
+        }
+    ],
+
+    "Messages": [
+        {
+            "ID": 0,
+            "ID_Exp": 0,
+            "ID_Dest": 1,
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Message": "Premier Message de Jean Dupont à John Doe."
+        },
+        {
+            "ID": 1,
+            "ID_Exp": 1,
+            "ID_Dest": 0,
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Message": "Retour de John Doe à Jean Dupont."
+        },
+        {
+            "ID": 2,
+            "ID_Exp": 2,
+            "ID_Dest": 3,
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Message": "Message de Template à Host Domain."
+        },
+        {
+            "ID": 3,
+            "ID_Exp": 0,
+            "ID_Dest": 2,
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Message": "Message de Jean Dupont à Template."
+        }
+    ]
 }

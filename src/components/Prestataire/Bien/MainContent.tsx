@@ -1,11 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { CarouselPlugin } from "../Prestataire/Carroussel";
-import { CardDesc } from "../Prestataire/Cards";
-import { Bien_immobilier, DescriptionBien, Photos, Prestataire, Reservation as Res } from "../Prestataire/customclass";
-import { Reservation } from "../Prestataire/Reservation";
-import Title from "../ui/title";
+import { CarouselPlugin } from "./Carroussel";
+import { CardDesc } from "./Cards";
+import { Bien_immobilier, DescriptionBien, Photos, Prestataire, Reservation as Res } from "../customclass";
+import { Reservation } from "./Reservation";
+import Title from "../../ui/title";
 import { useEffect, useState } from "react";
 
 
@@ -82,7 +82,7 @@ const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Réservations" sous_titre=""/>
                         <div className="flex flex-col justify-around gap-2">
-                            <Reservation/>
+                            <Reservation ReservationVal={Desc?.reservation}/>
                         </div>
                     </div>
                 </div>

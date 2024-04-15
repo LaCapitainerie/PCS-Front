@@ -1,9 +1,9 @@
 "use client"
 
-import { DatePickerWithRange } from "../ui/rangedate";
+import { DatePickerWithRange } from "../../ui/rangedate";
 
-import React, { useState } from 'react';
- 
+import React, { useEffect, useState } from 'react';
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -22,10 +22,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { DateRange } from "react-day-picker";
- 
-export function CardWithForm({Date}: {Date: string | null}) {
+import { Reservation as ReservationType } from "../customclass";
+
+export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | null, ReservationVal: ReservationType[] | undefined}) {
+
 
   return (
     <Card className="w-full">
@@ -34,23 +36,23 @@ export function CardWithForm({Date}: {Date: string | null}) {
           variant="outline"
           size="icon"
           className="overflow-hidden rounded-full"
-          >
+        >
           <Avatar>
-              <AvatarImage src="https://github.com/LaCapitainerie.png" />
-              <AvatarFallback>Avatar</AvatarFallback>
+            <AvatarImage src="https://github.com/LaCapitainerie.png" />
+            <AvatarFallback>Avatar</AvatarFallback>
           </Avatar>
         </Button>
         <CardHeader className="p-0">
           <CardTitle>Réservations</CardTitle>
-          <CardDescription>{`Reservation du ${Date}`}</CardDescription>
+          <CardDescription>{`Reservation du ${DateVal}`}</CardDescription>
         </CardHeader>
       </div>
       <CardContent>
         <form>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Name of your project" />
+              <Label htmlFor="name">Locataire :</Label>
+              <Input id="name" placeholder="Name of your project" disabled={true} value={ReservationVal && ReservationVal.length > 0 ? ReservationVal[0].ID_Locataire : ''}/>
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="framework">Framework</Label>
@@ -80,7 +82,7 @@ export function CardWithForm({Date}: {Date: string | null}) {
   )
 }
 
-const Reservation = () => {
+const Reservation = ( { ReservationVal }: { ReservationVal: ReservationType[] | undefined } ) => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   const handleDateChange = (date: DateRange | undefined) => {
@@ -95,8 +97,8 @@ const Reservation = () => {
 
   return (
     <>
-      <DatePickerWithRange id="date" onDateChange={handleDateChange}/>
-      <CardWithForm Date={selectedDate}/>
+      <DatePickerWithRange id="date" onDateChange={handleDateChange} />
+      <CardWithForm DateVal={selectedDate} ReservationVal={ReservationVal}/>
     </>
   );
 };
