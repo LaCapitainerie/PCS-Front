@@ -3,9 +3,9 @@
 import * as React from "react"
 import { CarouselPlugin } from "./Carroussel";
 import { CardDesc } from "./Cards";
-import { Bien_immobilier, DescriptionBien, Photos, Prestataire, Reservation as Res } from "../customclass";
+import { Bien_immobilier, DescriptionBien, Photos, Prestataire, Reservation as Res } from "../../../customclass";
 import { Reservation } from "./Reservation";
-import Title from "../../ui/title";
+import Title from "../../../ui/title";
 import { useEffect, useState } from "react";
 
 
@@ -61,9 +61,6 @@ const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
 
         dataFetch();
     }, [house]);
-
-    console.log(Desc);
-    
 
     return (
 

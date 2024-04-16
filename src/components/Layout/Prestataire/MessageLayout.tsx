@@ -2,9 +2,9 @@
 
 import React, { ReactNode, useState } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
-import { Utilisateur } from '../../Prestataire/customclass';
-import ContactList from '@/components/Prestataire/Message/Contact';
-import MessageList from '@/components/Prestataire/Message/Messages';
+import { Utilisateur } from '../../customclass';
+import ContactList from '@/components/Layout/Prestataire/Message/Contact';
+import MessageList from '@/components/Layout/Prestataire/Message/Messages';
 
 interface PrestaMessageProps {
     children: ReactNode;
@@ -21,7 +21,7 @@ const PrestaMessage: React.FC<PrestaMessageProps> = ({ children }) => {
 
     return (
       <>
-          <Sidebar/>
+          <Sidebar index={1}/>
           <ContactList onUserChange={SelectedUser}/>
           <MessageList CurrentUser={User}/>
       </>

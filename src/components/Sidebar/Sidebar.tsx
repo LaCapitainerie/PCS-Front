@@ -1,12 +1,18 @@
 "use client"
 
+
+const Me = 1;
+
+
+
+import { Sidebar as SidebarType } from "../customclass";
+
 import * as React from "react"
 import Link from "next/link"
 import {
     Home,
     LineChart,
     Package,
-    Package2,
     Settings,
     ShoppingCart,
     Users2,
@@ -39,7 +45,6 @@ import {
 import { useEffect, useState } from 'react';
 import { Button } from "../ui/button"
 
-type Sidebar = { ID_tab: number; Icon: string; Hover: string; Href: string }[];
 
 // Store the icons in an dictionary
 const icons = {
@@ -53,12 +58,8 @@ const icons = {
     Gauge: GaugeIcon,
 };
 
-interface SidebarProps {
-    className: "h-5 w-5";
-}
-
-const Component = () => {
-    const [state, setState] = useState<Sidebar>([]);
+const Component = (index:number) => {
+    const [state, setState] = useState<SidebarType[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
@@ -68,7 +69,7 @@ const Component = () => {
                 )
             ).json();
 
-            setState(data);
+            setState(data.filter((value: SidebarType) => value.Permission <= Me));
         };
 
         dataFetch();
@@ -76,13 +77,13 @@ const Component = () => {
 
     return (
         <>
-            {state.map((value) =>
+            {state.map((value, i) =>
                 <TooltipProvider key={value.ID_tab}>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
                                 href={value.Href}
-                                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                             >
                                 {React.createElement(icons[value.Icon as keyof typeof icons], { className: "h-5 w-5" })}
                                 <span className="sr-only">{value.Hover}</span>
@@ -99,7 +100,7 @@ const Component = () => {
 
 
 
-const Sidebar = () => {
+const Sidebar = ({ index }: {index:number}) => {
     const { setTheme } = useTheme();
     
     return (
@@ -128,7 +129,7 @@ const Sidebar = () => {
                 </DropdownMenuContent>
                 </DropdownMenu>
                 
-                { Component() }
+                { Component(index) }
             </nav>
             <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
                 <DropdownMenu>

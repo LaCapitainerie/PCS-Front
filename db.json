@@ -2,21 +2,24 @@
     "Sidebar": [
         {
             "ID_tab": 1,
+            "Permission": 1,
             "Icon": "Calendar",
             "Hover": "Calendar",
             "Href": "/Prestataire/Biens"
         },
         {
             "ID_tab": 2,
+            "Permission": 1,
             "Icon": "Msg",
             "Hover": "Messages",
             "Href": "/Prestataire/Messages"
         },
         {
             "ID_tab": 3,
+            "Permission": 2,
             "Icon": "Gauge",
             "Hover": "Dashboard",
-            "Href": "#"
+            "Href": "/Admin/Dashboard"
         }
     ],
 
@@ -227,27 +230,80 @@
     "Utilisateurs": [
         {
             "ID": 0,
+            "Username": "Jean Dupont",
             "Nom": "Dupont",
             "Prenom": "Jean",
-            "Type": "Particulier"
+            "Email": "jean.dupont@email.com",
+            "Type": "Particulier",
+            "Avatar": "https://randomuser.me/api/portraits",
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Joined": "2019-01-01"
         },
         {
             "ID": 1,
+            "Username": "John Doe",
             "Nom": "Doe",
             "Prenom": "John",
-            "Type": "Particulier"
+            "Email": "john.doe@email.com",
+            "Type": "Particulier",
+            "Avatar": "https://randomuser.me/api/portraits",
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Joined": "2019-01-01"
         },
         {
             "ID": 2,
+            "Username": "Template",
             "Nom": "Template",
             "Prenom": "Template",
-            "Type": "Particulier"
+            "Email": "template.template@email.com",
+            "Type": "Particulier",
+            "Avatar": "https://randomuser.me/api/portraits",
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Joined": "2019-01-01"
         },
         {
             "ID": 3,
+            "Username": "Host Domain",
             "Nom": "Host",
             "Prenom": "Domain",
-            "Type": "Particulier"
+            "Email": "domain.host@email.com",
+            "Type": "Particulier",
+            "Avatar": "https://randomuser.me/api/portraits",
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Joined": "2019-01-01"
+        },
+        {
+            "ID": 4,
+            "Username": "LaCapitainerie",
+            "Nom": "Antreassian",
+            "Prenom": "Hugo",
+            "Email": "Hugo.Antreassian@gmail.com",
+            "Type": "Admin",
+            "Avatar": "https://github.com/LaCapitainerie.png",
+            "Description": "C'est moi qui gère tout ça !",
+            "Joined": "2019-01-01"
+        },
+        {
+            "ID": 5,
+            "Username": "Skalefou",
+            "Nom": "Poupard",
+            "Prenom": "Thomas",
+            "Email": "Thomas.Poupard@email.com",
+            "Type": "Admin",
+            "Avatar": "https://github.com/Skalefou.png",
+            "Description": "Indisponible pour le moment. appelez la CIA.",
+            "Joined": "2019-01-01"
+        },
+        {
+            "ID": 6,
+            "Username": "BySajed",
+            "Nom": "Ben Youssef",
+            "Prenom": "Sajed",
+            "Email": "Sajed.Ben_Youssef@email.com",
+            "Type": "Admin",
+            "Avatar": "https://github.com/BySajed.png",
+            "Description": "0 Faute c'est promis !",
+            "Joined": "2019-01-01"
         }
     ],
 

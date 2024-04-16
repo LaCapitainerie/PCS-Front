@@ -1,4 +1,4 @@
-import Prestataire from "@/components/Layout/Prestataire/Bien";
+import Prestataire from "@/components/Layout/Prestataire/BienLayout";
 
 export default function PrestaPageBiens() {
     return (

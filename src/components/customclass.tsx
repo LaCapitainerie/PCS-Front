@@ -68,9 +68,22 @@ type Message = {
 
 type Utilisateur = {
     ID: number
+    Username: string
     Nom: string
     Prenom: string
+    Email: string
     Type: string
+    Avatar: string
+    Description: string
+    Joined: string
 }
 
-export type { DetailType, DescriptionBien, Prestataire, Bien_immobilier, Photos, Reservation, Locataire, Message, Utilisateur}
+type Sidebar = {
+    ID_tab: number
+    Permission: number
+    Icon: string
+    Hover: string
+    Href: string
+};
+
+export type { DetailType, DescriptionBien, Prestataire, Bien_immobilier, Photos, Reservation, Locataire, Message, Utilisateur, Sidebar }

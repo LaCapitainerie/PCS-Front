@@ -1,6 +1,6 @@
 "use client"
 
-import { DatePickerWithRange } from "../../ui/rangedate";
+import { DatePickerWithRange } from "../../../ui/rangedate";
 
 import React, { useEffect, useState } from 'react';
 
@@ -22,9 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "../../../ui/avatar";
 import { DateRange } from "react-day-picker";
-import { Reservation as ReservationType } from "../customclass";
+import { Reservation as ReservationType } from "../../../customclass";
 
 export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | null, ReservationVal: ReservationType[] | undefined}) {
 
