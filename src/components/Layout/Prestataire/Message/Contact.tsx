@@ -13,6 +13,9 @@ const ContactList = ({
   }: React.HTMLAttributes<HTMLDivElement> & { onUserChange?: (user : Utilisateur) => void }) => {
     const [state, setState] = useState<Utilisateur[]>([]);
 
+    // Temporary
+    const ME = 2;
+
     useEffect(() => {
         const dataFetch = async () => {
             const data = await (
@@ -21,7 +24,7 @@ const ContactList = ({
                 )
             ).json();
 
-            setState(data);
+            setState(data.filter((value: Utilisateur) => value.ID !== ME));
         };
 
         dataFetch();

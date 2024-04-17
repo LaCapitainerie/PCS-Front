@@ -143,6 +143,16 @@
             "Heure": "10:00",
             "Duree": 2,
             "Prix": 50
+        },
+        {
+            "ID_Reservation": 3,
+            "ID_Housing": 2,
+            "ID_Prestataire": 2,
+            "ID_Locataire": 2,
+            "Date": "2024-04-16",
+            "Heure": "10:00",
+            "Duree": 5,
+            "Prix": 50
         }
     ],
 
@@ -229,7 +239,7 @@
 
     "Utilisateurs": [
         {
-            "ID": 0,
+            "ID": 6,
             "Username": "Jean Dupont",
             "Nom": "Dupont",
             "Prenom": "Jean",
@@ -240,7 +250,7 @@
             "Joined": "2019-01-01"
         },
         {
-            "ID": 1,
+            "ID": 5,
             "Username": "John Doe",
             "Nom": "Doe",
             "Prenom": "John",
@@ -251,7 +261,7 @@
             "Joined": "2019-01-01"
         },
         {
-            "ID": 2,
+            "ID": 4,
             "Username": "Template",
             "Nom": "Template",
             "Prenom": "Template",
@@ -273,7 +283,7 @@
             "Joined": "2019-01-01"
         },
         {
-            "ID": 4,
+            "ID": 2,
             "Username": "LaCapitainerie",
             "Nom": "Antreassian",
             "Prenom": "Hugo",
@@ -284,7 +294,7 @@
             "Joined": "2019-01-01"
         },
         {
-            "ID": 5,
+            "ID": 1,
             "Username": "Skalefou",
             "Nom": "Poupard",
             "Prenom": "Thomas",
@@ -295,7 +305,7 @@
             "Joined": "2019-01-01"
         },
         {
-            "ID": 6,
+            "ID": 0,
             "Username": "BySajed",
             "Nom": "Ben Youssef",
             "Prenom": "Sajed",

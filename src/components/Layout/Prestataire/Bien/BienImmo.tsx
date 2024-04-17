@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input"
 import { HomeIcon, Hotel } from "lucide-react"
 import { Separator } from "@/components/ui/separator";
 import { Bien_immobilier } from "../../../customclass";
-import { Button } from "../../../ui/button";
 
 function getIcon(type: string) {
     switch (type) {
@@ -22,6 +21,10 @@ const BienImmo = ({
     onHouseChange,
   }: React.HTMLAttributes<HTMLDivElement> & { onHouseChange?: (house: Bien_immobilier) => void }) => {
     const [state, setState] = useState<Bien_immobilier[]>([]);
+    const [house, setHouse] = useState<Bien_immobilier>({} as Bien_immobilier);
+    const [filter, setFilter] = useState<string>("");
+
+    const toComparable = (...str: string[]) => str.join().normalize().toLowerCase();
 
     useEffect(() => {
         const dataFetch = async () => {
@@ -31,26 +34,15 @@ const BienImmo = ({
                 )
             ).json();
 
-            setState(data);
+            const biens = data.filter((value: Bien_immobilier) => toComparable(value.Prix.toString(), value.Nom, value.Description).includes(toComparable(filter)));
+
+            setHouse(biens[0]);
+            setState(biens);
         };
 
         dataFetch();
-    }, []);
+    }, [filter]);
     
-    const [house, setHouse] = useState<Bien_immobilier>(
-        {
-            ID: 0,
-            Nom: "",
-            Type: "Maison",
-            Prix: 0,
-            Surface: 0,
-            Chambres: 0,
-            Salles_de_bain: 0,
-            Garages: 0,
-            Description: "",
-            Image: ""
-        }
-    );
     
     useEffect(() => {
         onHouseChange?.(house);
@@ -64,7 +56,7 @@ const BienImmo = ({
             <Separator className="my-2" />
 
             <div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <Input placeholder="Search" className="w-full p-4" />
+                <Input placeholder="Search" className="w-full p-4" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilter(event.target.value)}/>
             </div>
             <div className="flex flex-col gap-2 p-4 pt-0">
                 {state.map((value) => <>

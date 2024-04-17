@@ -16,7 +16,7 @@ const MessageList = ({
     const [Messages, setMessages] = useState<Message[]>([]);
 
     // Temporary
-    const Me = 1;
+    const Me = 2;
 
     useEffect(() => {
         const dataFetch = async () => {
