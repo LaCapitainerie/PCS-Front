@@ -2,21 +2,24 @@
     "Sidebar": [
         {
             "ID_tab": 1,
+            "Permission": 1,
             "Icon": "Calendar",
             "Hover": "Calendar",
-            "Href": "#"
+            "Href": "/Prestataire/Biens"
         },
         {
             "ID_tab": 2,
+            "Permission": 1,
             "Icon": "Msg",
             "Hover": "Messages",
-            "Href": "#"
+            "Href": "/Prestataire/Messages"
         },
         {
             "ID_tab": 3,
+            "Permission": 2,
             "Icon": "Gauge",
             "Hover": "Dashboard",
-            "Href": "#"
+            "Href": "/Admin/Dashboard"
         }
     ],
 
@@ -110,5 +113,235 @@
         }
     ],
 
-    "Null": []
+    "Reservations": [
+        {
+            "ID_Reservation": 0,
+            "ID_Housing": 0,
+            "ID_Prestataire": 0,
+            "ID_Locataire": 0,
+            "Date": "2024-04-20",
+            "Heure": "10:00",
+            "Duree": 2,
+            "Prix": 50,
+            "Statut": "En attente"
+        },
+        {
+            "ID_Reservation": 2,
+            "ID_Housing": 2,
+            "ID_Prestataire": 2,
+            "ID_Locataire": 1,
+            "Date": "2024-04-13",
+            "Heure": "10:00",
+            "Duree": 2,
+            "Prix": 50,
+            "Statut": "Refusée"
+        },
+        {
+            "ID_Reservation": 3,
+            "ID_Housing": 2,
+            "ID_Prestataire": 2,
+            "ID_Locataire": 2,
+            "Date": "2024-04-16",
+            "Heure": "10:00",
+            "Duree": 5,
+            "Prix": 50,
+            "Statut": "Acceptée"
+        }
+    ],
+
+    "Prestataires": [
+        {
+            "ID_Prestataire": 0,
+            "ID": 7,
+            "particulier": "Jacob",
+            "Type": "peinture",
+            "Prix": 20
+        },
+        {
+            "ID_Prestataire": 1,
+            "ID": 6,
+            "particulier": "Ezekiel",
+            "Type": "reparation",
+            "Prix": 20
+        },
+        {
+            "ID_Prestataire": 2,
+            "ID": 5,
+            "particulier": "Adolf",
+            "Type": "peinture",
+            "Prix": 20
+        },
+        {
+            "ID_Prestataire": 3,
+            "ID": 3,
+            "particulier": "Himmler",
+            "Type": "peinture",
+            "Prix": 20
+        }
+    ],
+
+    "Photos": [
+        {
+            "ID_Photo": 0,
+            "ID_Bien": 0,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933a.jpg"
+        },
+        {
+            "ID_Photo": 1,
+            "ID_Bien": 0,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933b.jpg"
+        },
+        {
+            "ID_Photo": 2,
+            "ID_Bien": 0,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933c.jpg"
+        },
+        {
+            "ID_Photo": 3,
+            "ID_Bien": 1,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933d.jpg"
+        },
+        {
+            "ID_Photo": 4,
+            "ID_Bien": 1,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933e.jpg"
+        },
+        {
+            "ID_Photo": 5,
+            "ID_Bien": 1,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933f.jpg"
+        },
+        {
+            "ID_Photo": 6,
+            "ID_Bien": 2,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933g.jpg"
+        },
+        {
+            "ID_Photo": 7,
+            "ID_Bien": 2,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933h.jpg"
+        },
+        {
+            "ID_Photo": 8,
+            "ID_Bien": 2,
+            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933i.jpg"
+        }
+    ],
+
+    "Null": [],
+
+    "Utilisateurs": [
+        {
+            "ID": 6,
+            "Username": "Jean Dupont",
+            "Nom": "Dupont",
+            "Prenom": "Jean",
+            "Email": "jean.dupont@email.com",
+            "Type": "Particulier",
+            "Avatar": "https://randomuser.me/api/portraits",
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Joined": "2019-01-01"
+        },
+        {
+            "ID": 5,
+            "Username": "John Doe",
+            "Nom": "Doe",
+            "Prenom": "John",
+            "Email": "john.doe@email.com",
+            "Type": "Particulier",
+            "Avatar": "https://randomuser.me/api/portraits",
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Joined": "2019-01-01"
+        },
+        {
+            "ID": 4,
+            "Username": "Template",
+            "Nom": "Template",
+            "Prenom": "Template",
+            "Email": "template.template@email.com",
+            "Type": "Particulier",
+            "Avatar": "https://randomuser.me/api/portraits",
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Joined": "2019-01-01"
+        },
+        {
+            "ID": 3,
+            "Username": "Host Domain",
+            "Nom": "Host",
+            "Prenom": "Domain",
+            "Email": "domain.host@email.com",
+            "Type": "Particulier",
+            "Avatar": "https://randomuser.me/api/portraits",
+            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "Joined": "2019-01-01"
+        },
+        {
+            "ID": 2,
+            "Username": "LaCapitainerie",
+            "Nom": "Antreassian",
+            "Prenom": "Hugo",
+            "Email": "Hugo.Antreassian@gmail.com",
+            "Type": "Admin",
+            "Avatar": "https://github.com/LaCapitainerie.png",
+            "Description": "C'est moi qui gère tout ça !",
+            "Joined": "2019-01-01"
+        },
+        {
+            "ID": 1,
+            "Username": "Skalefou",
+            "Nom": "Poupard",
+            "Prenom": "Thomas",
+            "Email": "Thomas.Poupard@email.com",
+            "Type": "Admin",
+            "Avatar": "https://github.com/Skalefou.png",
+            "Description": "Indisponible pour le moment. appelez la CIA.",
+            "Joined": "2019-01-01"
+        },
+        {
+            "ID": 0,
+            "Username": "BySajed",
+            "Nom": "Ben Youssef",
+            "Prenom": "Sajed",
+            "Email": "Sajed.Ben_Youssef@email.com",
+            "Type": "Admin",
+            "Avatar": "https://github.com/BySajed.png",
+            "Description": "0 Faute c'est promis !",
+            "Joined": "2019-01-01"
+        }
+    ],
+
+    "Messages": [
+        {
+            "ID": 0,
+            "ID_Exp": 0,
+            "ID_Dest": 1,
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Message": "Premier Message de Jean Dupont à John Doe."
+        },
+        {
+            "ID": 1,
+            "ID_Exp": 1,
+            "ID_Dest": 0,
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Message": "Retour de John Doe à Jean Dupont."
+        },
+        {
+            "ID": 2,
+            "ID_Exp": 2,
+            "ID_Dest": 3,
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Message": "Message de Template à Host Domain."
+        },
+        {
+            "ID": 3,
+            "ID_Exp": 0,
+            "ID_Dest": 2,
+            "Date": "2019-01-01",
+            "Heure": "10:00",
+            "Message": "Message de Jean Dupont à Template."
+        }
+    ]
 }

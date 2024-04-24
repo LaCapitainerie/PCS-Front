@@ -1,4 +1,5 @@
-import { Housing, columns } from "./columns"
+import { columns } from "./columns"
+import { Housing } from "../customclass";
 import { DataTable } from "./data-table"
  
 async function getData(): Promise<Housing[]> {
@@ -11,7 +12,7 @@ async function getData(): Promise<Housing[]> {
   return data
 }
  
-export default async function DemoPage() {
+export default async function PrestationTable() {
   const data = await getData()
  
   return (

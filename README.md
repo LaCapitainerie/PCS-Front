@@ -14,13 +14,13 @@
     - [ ] Envoyer un message pour chaque étape du paiement
 
 ### Bailleur
-- [ ] Aperçu de ses biens
+- [x] Aperçu de ses biens
     - [x] Détails, prestas associés, locataire
-    - [ ] Pouvoir les modifier (uniquement les détails)
+    - [x] Pouvoir les modifier (uniquement les détails)
 - [ ] Calendrier des dates importantes, avec option de verrouiller des dates
 - [ ] Système de messagerie
-    - [ ] Pouvoir échanger avec les **Locataires**
-    - [ ] Pouvoir échanger avec les **Prestataires**
+    - [x] Pouvoir échanger avec les **Locataires**
+    - [x] Pouvoir échanger avec les **Prestataires**
     - [ ] Notification push sur téléphone
 
 ### Prestataires
