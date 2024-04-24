@@ -3,7 +3,7 @@
 import * as React from "react"
 import { CarouselPlugin } from "./Carroussel";
 import { CardDesc } from "./Cards";
-import { Bien_immobilier, DescriptionBien, Photos, Prestataire, Reservation as Res } from "../../../customclass";
+import { Bien_immobilier, DescriptionBien, Photos, Utilisateur, Reservation as Res } from "../../../customclass";
 import { Reservation } from "./Reservation";
 import Title from "../../../ui/title";
 import { useEffect, useState } from "react";
@@ -45,17 +45,14 @@ const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
             
             DescMaker.reservation = data2.filter((res) => res.ID_Housing === house?.ID);
 
-            const data3: Prestataire[] = await (
+            const data3: Utilisateur[] = await (
                 await fetch(
                     "http://localhost:2000/Prestataires"
                 )
             ).json();
 
-            DescMaker.prestataire = data3.filter((prest) => DescMaker.reservation.map((res) => res.ID_Prestataire).includes(prest.ID_Prestataire));
-
-            console.log(DescMaker);
-            
-
+            DescMaker.utilisateur = data3.filter((prest) => DescMaker.reservation.map((res) => res.ID_Prestataire).includes(prest.ID));
+          
             setDesc(DescMaker);
         };
 

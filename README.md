@@ -1,3 +1,52 @@
+### Accueil
+- [ ] Page d'accueil
+    - [ ] Pouvoir rechercher un bien directement
+    - [ ] Présentation du site
+
+### Locataire
+- [ ] Pouvoir reserver un bien
+    - [ ] Affichage des biens et des disponibilités
+    - [ ] Affichage d'un **énooorme popup** pour sélection de date, personnes, préstations via multi selector
+
+- [ ] Pouvoir échanger avec des **Bailleurs**
+    - [ ] Envoyer un message lors qu'une demande de réservation
+        - [ ] pouvoir approuver ou non
+    - [ ] Envoyer un message pour chaque étape du paiement
+
+### Bailleur
+- [ ] Aperçu de ses biens
+    - [x] Détails, prestas associés, locataire
+    - [ ] Pouvoir les modifier (uniquement les détails)
+- [ ] Calendrier des dates importantes, avec option de verrouiller des dates
+- [ ] Système de messagerie
+    - [ ] Pouvoir échanger avec les **Locataires**
+    - [ ] Pouvoir échanger avec les **Prestataires**
+    - [ ] Notification push sur téléphone
+
+### Prestataires
+- [ ] Apercu de son compte
+    - [ ] Modification de celui-ci
+- [ ] Calendrier des jours de travail
+    - [ ] Carte popup pour détail de mission (Locataire, commentaire, details)
+
+### Admin
+- [ ] Dashboard
+    - [ ] Partie Chiffre
+        - [ ] Informations Préstations (argent rapporté, croissance)
+        - [ ] Informations Réservations (argent rapporté, croissance)
+        - [ ] Informations Issues (argent rapporté, croissance)
+        - [ ] Informations Utilisateurs (argent rapporté, croissance)
+    - [ ] Overview des Reservations, Prestations et Issues
+        - [ ] Pouvoir ouvrir une popup des details
+
+    - [ ] Overview Utilisateurs
+        - [ ] Pouvoir effectuer des actions admins dessus
+            - [ ] Bloquer accès au site
+            - [ ] Bloquer certaines capacités
+            - [ ] Voir les discussions Réportés
+            - [ ] Shut down le compte
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

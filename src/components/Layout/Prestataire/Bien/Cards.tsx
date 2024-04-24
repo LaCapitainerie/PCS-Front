@@ -2,10 +2,11 @@ import { CheckIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence } from "lucide-react"
-import { DescriptionBien, Prestataire } from "../../../customclass"
-import { HoverCard, HoverCardContent, HoverCardTrigger, } from "@/components/ui/hover-card"
+import { DescriptionBien, Prestataire, Utilisateur } from "../../../customclass"
+import Usercard from "@/components/ui/usercard"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-function statusToColor(params: Prestataire["status"]) {
+function statusToColor(params: "pending" | "processing" | "success" | "failed") {
   switch (params) {
     case "pending":
       return "yellow"
@@ -19,7 +20,7 @@ function statusToColor(params: Prestataire["status"]) {
 
 }
 
-function typeToDom(type: Prestataire["Type"], status: Prestataire["status"]) {
+function typeToDom(type: Prestataire["Type"], status: "pending" | "processing" | "success" | "failed") {
   switch (type) {
     case "chauffage":
       return <Heater className={`h-5 w-5 text-${statusToColor(status)}-500`} />
@@ -39,7 +40,6 @@ function typeToDom(type: Prestataire["Type"], status: Prestataire["status"]) {
 const descriptionKey = ["Nom", "Type", "Prix", "Surface", "Chambres", "Salles_de_bain", "Garages"]
 
 export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
-  console.log(Desc);
   
   return (<>
     <Card className="w-full">
@@ -53,7 +53,17 @@ export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
       </CardHeader>
       <CardContent className="grid gap-4">
 
-        <div className="overflow-y-scroll max-h-64">
+        <div className="max-h-64" style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gridTemplateRows: '1fr 1fr 1fr',
+            gap: '0px',
+            gridTemplateAreas: `
+              ". . ."
+              ". . ."
+              ". . ."
+            `
+          }}>
           {Desc?.Bien && Object.entries(Desc.Bien).filter((val) => descriptionKey.includes(val[0].toString())).map(([key, value], index) => (
             <div
               key={index}
@@ -89,26 +99,20 @@ export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
         <CardContent className="grid gap-4">
 
           <div className="">
-            {Desc?.prestataire.map((presta, index) => (
-                <HoverCard openDelay={400}>
-                  <HoverCardTrigger key={index} className="mb-4 flex items-center gap-3 pb-4 last:mb-0 last:pb-0">
-                    {typeToDom(presta.Type, presta.status)}
+            {Desc?.utilisateur.map((presta, index) => (
+              <Usercard user={presta as unknown as Utilisateur}>
+                {typeToDom("peinture", "pending")}
                     <div className="space-y-1">
                       
                       <p className="text-sm font-medium leading-none">
-                        {presta.particulier}
+                        {presta.ID}
                       </p>
 
                       <p className="text-sm text-muted-foreground">
                         {presta.Type}
                       </p>
                     </div>
-                  </HoverCardTrigger>
-                  <HoverCardContent>
-                    Carte de {presta.particulier}
-                  </HoverCardContent>
-                </HoverCard>
-                
+              </Usercard>
             ))}
           </div>
         </CardContent>

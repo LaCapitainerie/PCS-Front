@@ -24,24 +24,86 @@ import {
 } from "@/components/ui/select"
 import { Avatar, AvatarFallback, AvatarImage } from "../../../ui/avatar";
 import { DateRange } from "react-day-picker";
-import { Reservation as ReservationType } from "../../../customclass";
+import { Locataire, Reservation as ReservationType, Utilisateur } from "../../../customclass";
+import Usercard from "@/components/ui/usercard";
+
+type aggregate = {
+  Reservation: ReservationType;
+  Locataire: Utilisateur;
+}
+
+function ToBox(agg:aggregate, styleCol: React.CSSProperties) {
+  console.log(agg);
+  
+  return (
+    <div className="my-4 rounded-lg border bg-card text-card-foreground shadow-sm w-full">
+      <CardContent className="p-6 grid gap-8 items-start" style={styleCol}>
+        <div className="flex items-center gap-4">
+          <Usercard user={agg.Locataire}>
+            <div className="flex items-center gap-4 w-full">
+              <Avatar className="hidden h-9 w-9 sm:flex">
+                <AvatarImage src={agg.Locataire.Avatar} alt="Avatar" />
+                <AvatarFallback>{agg.Locataire.Nom[0] + agg.Locataire.Prenom[0]}</AvatarFallback>
+              </Avatar>
+              <div className="grid gap-1">
+                <p className="text-sm font-medium leading-none">
+                  {agg.Locataire.Nom + " " + agg.Locataire.Prenom}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {agg.Locataire.Email}
+                </p>
+              </div>
+            </div>
+          </Usercard>
+        </div>
+      </CardContent>
+
+      <CardContent className="p-6 grid gap-8 items-start" style={styleCol}>
+        <div>
+          <Label htmlFor="paye">Statut du paiement : </Label>
+          <Input id="paye" type="paye" defaultValue={agg.Reservation.Statut} />
+        </div>
+      </CardContent>
+    </div>
+  )
+}
 
 export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | null, ReservationVal: ReservationType[] | undefined}) {
 
+  const [choosen, setChoosen] = useState<aggregate | undefined>(undefined);
+  const [aggregat, setAggregat] = useState<aggregate[]>([]);
+
+  useEffect(() => {
+    if(ReservationVal === undefined) return;
+
+    const dataFetch = async () => {
+      const data: Utilisateur[] = await (
+          await fetch(
+              "http://localhost:2000/Utilisateurs"
+          )
+      ).json();
+
+      const tmpAggregat = ReservationVal.map((res) => {
+        return {
+          Reservation: res,
+          Locataire: data.filter((user) => user.ID === res.ID_Locataire).shift() || {} as Utilisateur
+        } as aggregate
+      });
+
+      setAggregat( tmpAggregat );
+    };
+
+    dataFetch();
+  }, [ReservationVal]);
+
+  useEffect(() => {
+    if(aggregat.length == 0) return;
+    setChoosen(aggregat[0]);
+  }, [aggregat]);
 
   return (
     <Card className="w-full">
       <div className="flex flex-row items-center p-6 gap-6">
-        <Button
-          variant="outline"
-          size="icon"
-          className="overflow-hidden rounded-full"
-        >
-          <Avatar>
-            <AvatarImage src="https://github.com/LaCapitainerie.png" />
-            <AvatarFallback>Avatar</AvatarFallback>
-          </Avatar>
-        </Button>
         <CardHeader className="p-0">
           <CardTitle>Réservations</CardTitle>
           <CardDescription>{`Reservation du ${DateVal}`}</CardDescription>
@@ -49,34 +111,33 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
       </div>
       <CardContent>
         <form>
+
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Locataire :</Label>
-              <Input id="name" placeholder="Name of your project" disabled={true} value={ReservationVal && ReservationVal.length > 0 ? ReservationVal[0].ID_Locataire : ''}/>
-            </div>
-            <div className="flex flex-col space-y-1.5">
-              <Label htmlFor="framework">Framework</Label>
-              <Select>
-                <SelectTrigger id="framework">
-                  <SelectValue placeholder="Select" />
-                </SelectTrigger>
-                <SelectContent position="popper">
-                  <SelectItem value="next">Next.js</SelectItem>
-                  <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                  <SelectItem value="astro">Astro</SelectItem>
-                  <SelectItem value="nuxt">Nuxt.js</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="flex flex-row justify-between">
+                <Select disabled={aggregat.length == 0} onValueChange={(value) => setChoosen(aggregat[parseInt(value)])} defaultValue={aggregat.length > 0 ? aggregat[0].Locataire.Username :""}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={(aggregat.length > 0 && "Select a tenant") || "No tenant" }></SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {aggregat.map((value, index) => (
+                    <SelectItem value={index.toString()}>{value.Locataire.Username}</SelectItem>
+                    ))}
+                    
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
+
+          {choosen && ToBox(choosen, {gridTemplateColumns: "auto 1fr"})}
+
+
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        {
-
-          <Button>Deploy</Button>
-        }
+        <Button>Deploy</Button>
       </CardFooter>
     </Card>
   )

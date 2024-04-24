@@ -6,7 +6,7 @@ import { ReactNode } from "react";
 
 const Usercard = ({user, children}: {user: Utilisateur | undefined, children: ReactNode}) => {
     return (
-        <HoverCard>
+        <HoverCard openDelay={400}>
             <HoverCardTrigger asChild>
                 {children}
             </HoverCardTrigger>

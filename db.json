@@ -122,27 +122,19 @@
             "Date": "2024-04-20",
             "Heure": "10:00",
             "Duree": 2,
-            "Prix": 50
-        },
-        {
-            "ID_Reservation": 1,
-            "ID_Housing": 1,
-            "ID_Prestataire": 1,
-            "ID_Locataire": 1,
-            "Date": "2024-04-13",
-            "Heure": "10:00",
-            "Duree": 2,
-            "Prix": 50
+            "Prix": 50,
+            "Statut": "En attente"
         },
         {
             "ID_Reservation": 2,
             "ID_Housing": 2,
             "ID_Prestataire": 2,
-            "ID_Locataire": 2,
+            "ID_Locataire": 1,
             "Date": "2024-04-13",
             "Heure": "10:00",
             "Duree": 2,
-            "Prix": 50
+            "Prix": 50,
+            "Statut": "Refusée"
         },
         {
             "ID_Reservation": 3,
@@ -152,36 +144,37 @@
             "Date": "2024-04-16",
             "Heure": "10:00",
             "Duree": 5,
-            "Prix": 50
+            "Prix": 50,
+            "Statut": "Acceptée"
         }
     ],
 
     "Prestataires": [
         {
             "ID_Prestataire": 0,
+            "ID": 7,
             "particulier": "Jacob",
-            "status": "success",
             "Type": "peinture",
             "Prix": 20
         },
         {
             "ID_Prestataire": 1,
+            "ID": 6,
             "particulier": "Ezekiel",
-            "status": "processing",
             "Type": "reparation",
             "Prix": 20
         },
         {
             "ID_Prestataire": 2,
+            "ID": 5,
             "particulier": "Adolf",
-            "status": "failed",
             "Type": "peinture",
             "Prix": 20
         },
         {
             "ID_Prestataire": 3,
+            "ID": 3,
             "particulier": "Himmler",
-            "status": "pending",
             "Type": "peinture",
             "Prix": 20
         }

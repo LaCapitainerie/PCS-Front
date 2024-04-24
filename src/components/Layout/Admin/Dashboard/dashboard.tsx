@@ -1,4 +1,4 @@
-import { Activity, CalendarIcon, CreditCard, DollarSign, Users } from "lucide-react"
+import { Activity, CalendarIcon, CircleDot, CreditCard, DollarSign, Users } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -85,7 +85,7 @@ export function Dashboard() {
           <Card x-chunk="dashboard-01-chunk-2">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">Issues</CardTitle>
-              <CreditCard className="h-4 w-4 text-muted-foreground" />
+              <CircleDot className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">+Stats</div>

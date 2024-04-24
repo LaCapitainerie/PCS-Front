@@ -6,15 +6,15 @@ type DetailType = {
 
 type DescriptionBien = {
     Bien: Bien_immobilier;
-    prestataire: Prestataire[];
+    utilisateur: Utilisateur[];
     reservation: Reservation[];
     className?: string
 }
 
 type Prestataire = {
     ID_Prestataire: number
+    ID: number
     particulier: string
-    status: "pending" | "processing" | "success" | "failed"
     Type: "reparation" | "peinture" | "jardinage" | "chauffage" | "electricite" | "conciergerie"
     Date: Date
     Heure: string
@@ -36,6 +36,7 @@ type Reservation = {
     Heure: string
     Duree: number
     Prix: number
+    Statut: "En attente" | "Acceptée" | "Refusée"
 }
 
 type Bien_immobilier = {
