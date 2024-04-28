@@ -2,7 +2,7 @@ import { CheckIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence, Check } from "lucide-react"
-import { DescriptionBien, Prestataire, Utilisateur } from "../../../customclass"
+import { DescriptionBien, Prestation, Utilisateur } from "../../../customclass"
 import Usercard from "@/components/ui/usercard"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -23,7 +23,7 @@ function statusToColor(params: "pending" | "processing" | "success" | "failed") 
 
 }
 
-function typeToDom(type: Prestataire["Type"], status: "pending" | "processing" | "success" | "failed") {
+function typeToDom(type: Prestation["Type"], status: "pending" | "processing" | "success" | "failed") {
   switch (type) {
     case "chauffage":
       return <Heater className={`h-5 w-5 text-${statusToColor(status)}-500`} />

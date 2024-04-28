@@ -3,9 +3,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import { Utilisateur } from "@/components/customclass"
+import { Prestation, Reservation, Utilisateur } from "@/components/customclass"
 import { useEffect, useState } from "react"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import ReservationsBoard from "./reservations"
 import PrestationsBoard from "./prestations"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -32,22 +31,116 @@ export function Dashboard() {
 
   const [users, setUsers] = useState<Utilisateur[]>([]);
 
-    useEffect(() => {
-        const dataFetch = async () => {
-            const data: Utilisateur[] = await (
-                await fetch(
-                    "http://localhost:2000/Utilisateurs"
-                )
-            ).json();
+  useEffect(() => {
+      const dataFetch = async () => {
+          const data: Utilisateur[] = await (
+              await fetch(
+                  "http://localhost:2000/Utilisateurs"
+              )
+          ).json();
 
-            setUsers(data.sort((a, b) => a.ID - b.ID).filter((user) => toComparable(user.Email, user.Nom, user.Prenom).includes(toComparable(filterUser))).slice(0, filterUserCount));
-        };
+          setUsers(data.sort((a, b) => a.ID - b.ID).filter((user) => toComparable(user.Email, user.Nom, user.Prenom).includes(toComparable(filterUser))).slice(0, filterUserCount));
+      };
 
-        dataFetch();
-    }, [filterUser, filterUserCount]);
+      dataFetch();
+  }, [filterUser, filterUserCount]);
 
 
+  const [currentPresta, setCurrentPresta] = useState<string>();
+  const [ratioPresta, setRatioPresta] = useState<string>();
 
+  useEffect(() => {
+      const dataFetch = async () => {
+          const data: Prestation[] = await (
+              await fetch(
+                  "http://localhost:2000/Housing"
+              )
+          ).json();
+
+          // Get prestation from the previous month and from this month
+
+          // Get the current date
+          const date = new Date();
+          const month = date.getMonth();
+          const year = date.getFullYear();
+
+          // Get the previous month
+          const prevMonth = month === 0 ? 11 : month - 1;
+          const prevYear = month === 0 ? year - 1 : year;
+
+          // Get the prestation from the previous month
+          const prestaPrev = data.filter((house) => {
+              const date = new Date(house.Date);
+              return date.getMonth() === prevMonth && date.getFullYear() === prevYear;
+          });
+
+          // Get the prestation from this month
+          const prestaThis = data.filter((house) => {
+              const date = new Date(house.Date);
+              return date.getMonth() === month && date.getFullYear() === year;
+          });
+
+          // Get the $ of prestation from the previous month
+          const previousMonthDollar = prestaPrev.reduce((acc, house) => acc + house.Prix, 0);
+          const thisMonthDollar = prestaThis.reduce((acc, house) => acc + house.Prix, 0);
+
+          // Get the augment percentage of $ from the previous month to this month
+          const dollarAugmentNumber = ((thisMonthDollar - previousMonthDollar) / previousMonthDollar) * 100;
+          
+          setCurrentPresta(thisMonthDollar.toFixed(2));
+          setRatioPresta(dollarAugmentNumber.toFixed(2));
+      };
+
+      dataFetch();
+  }, [filterUser, filterUserCount]);
+
+  const [currentReserv, setCurrentReserv] = useState<string>();
+  const [ratioReserv, setRatioReserv] = useState<string>();
+
+  useEffect(() => {
+      const dataFetch = async () => {
+          const data: Reservation[] = await (
+              await fetch(
+                  "http://localhost:2000/Reservations"
+              )
+          ).json();
+
+          // Get prestation from the previous month and from this month
+
+          // Get the current date
+          const date = new Date();
+          const month = date.getMonth();
+          const year = date.getFullYear();
+
+          // Get the previous month
+          const prevMonth = month === 0 ? 11 : month - 1;
+          const prevYear = month === 0 ? year - 1 : year;
+
+          // Get the prestation from the previous month
+          const prestaPrev = data.filter((house) => {
+              const date = new Date(house.Date);
+              return date.getMonth() === prevMonth && date.getFullYear() === prevYear;
+          });
+
+          // Get the prestation from this month
+          const prestaThis = data.filter((house) => {
+              const date = new Date(house.Date);
+              return date.getMonth() === month && date.getFullYear() === year;
+          });
+
+          // Get the $ of prestation from the previous month
+          const previousMonthDollar = prestaPrev.reduce((acc, house) => acc + house.Prix, 0);
+          const thisMonthDollar = prestaThis.reduce((acc, house) => acc + house.Prix, 0);
+
+          // Get the augment percentage of $ from the previous month to this month
+          const dollarAugmentNumber = ((thisMonthDollar - previousMonthDollar) / previousMonthDollar) * 100;
+          
+          setCurrentReserv(thisMonthDollar.toFixed(2));
+          setRatioReserv(dollarAugmentNumber.toFixed(2));
+      };
+
+      dataFetch();
+  }, [filterUser, filterUserCount]);
 
 
   return (
@@ -62,9 +155,9 @@ export function Dashboard() {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$Stats</div>
+              <div className="text-2xl font-bold">{currentPresta}$</div>
               <p className="text-xs text-muted-foreground">
-                +Stats% from last month
+                +{ratioPresta}% from last month
               </p>
             </CardContent>
           </Card>
@@ -76,9 +169,9 @@ export function Dashboard() {
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+Stats</div>
+              <div className="text-2xl font-bold">{currentReserv}$</div>
               <p className="text-xs text-muted-foreground">
-                +Stats% from last month
+                +{ratioReserv}% from last month
               </p>
             </CardContent>
           </Card>

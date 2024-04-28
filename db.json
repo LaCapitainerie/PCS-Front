@@ -19,7 +19,42 @@
             "Permission": 2,
             "Icon": "Gauge",
             "Hover": "Dashboard",
+            "Href": "/Bailleur/Dashboard"
+        },
+        {
+            "ID_tab": 4,
+            "Permission": 1,
+            "Icon": "Home",
+            "Hover": "Biens",
+            "Href": "/Prestataire/Biens"
+        },
+        {
+            "ID_tab": 5,
+            "Permission": 1,
+            "Icon": "Msg",
+            "Hover": "Messages",
+            "Href": "/Prestataire/Messages"
+        },
+        {
+            "ID_tab": 6,
+            "Permission": 2,
+            "Icon": "Gauge",
+            "Hover": "Dashboard",
             "Href": "/Admin/Dashboard"
+        },
+        {
+            "ID_tab": 7,
+            "Permission": 1,
+            "Icon": "Home",
+            "Hover": "Biens",
+            "Href": "/Locataire/Biens"
+        },
+        {
+            "ID_tab": 8,
+            "Permission": 1,
+            "Icon": "Msg",
+            "Hover": "Messages",
+            "Href": "/Locataire/Messages"
         }
     ],
 
@@ -67,49 +102,57 @@
             "ID_Housing": 0,
             "ID_Client": 0,
             "ID_Bien_Immobilier": 0,
-            "Locataire": "jean.dupont@gmail.com",
+            "Nom": "jean",
+            "Prenom": "dupont",
+            "Prestataire": "jean.dupont@gmail.com",
             "status": "processing",
-            "Type": "Nettoyage",
-            "Date": "2019-01-01",
+            "Type": "electricite",
+            "Date": "2024-03-01",
             "Heure": "10:00",
             "Duree": 2,
-            "Prix": "50.00"
+            "Prix": 50.00
         },
         {
             "ID_Housing": 1,
             "ID_Client": 1,
             "ID_Bien_Immobilier": 1,
-            "Locataire": "john.doe@gmail.com",
+            "Nom": "john",
+            "Prenom": "doe",
+            "Prestataire": "john.doe@gmail.com",
             "status": "success",
-            "Type": "Cuisine",
-            "Date": "2019-01-01",
+            "Type": "chauffage",
+            "Date": "2024-03-01",
             "Heure": "10:00",
             "Duree": 2,
-            "Prix": "50"
+            "Prix": 75
         },
         {
             "ID_Housing": 2,
             "ID_Client": 2,
             "ID_Bien_Immobilier": 2,
-            "Locataire": "template@gmail.com",
+            "Nom": "template",
+            "Prenom": "template",
+            "Prestataire": "template@gmail.com",
             "status": "failed",
-            "Type": "Remise de clef",
-            "Date": "2019-01-01",
+            "Type": "jardinage",
+            "Date": "2024-04-01",
             "Heure": "10:00",
             "Duree": 2,
-            "Prix": 50
+            "Prix": 150
         },
         {
             "ID_Housing": 3,
             "ID_Client": 3,
             "ID_Bien_Immobilier": 3,
-            "Locataire": "host@domain.com",
+            "Nom": "host",
+            "Prenom": "domain",
+            "Prestataire": "host@domain.com",
             "status": "pending",
-            "Type": "État des lieux",
-            "Date": "2019-01-01",
+            "Type": "reparation",
+            "Date": "2024-04-01",
             "Heure": "10:00",
             "Duree": 2,
-            "Prix": 50
+            "Prix": 250
         }
     ],
 

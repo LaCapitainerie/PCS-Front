@@ -13,10 +13,14 @@ type DescriptionBien = {
     className?: string
 }
 
-type Prestataire = {
-    ID_Prestataire: number
-    ID: number
-    particulier: string
+type Prestation = {
+    ID_Housing: number
+    ID_Client: number
+    ID_Bien_Immobilier: number
+    Nom: string
+    Prenom: string
+    Prestataire: string
+    status: "pending" | "processing" | "success" | "failed"
     Type: "reparation" | "peinture" | "jardinage" | "chauffage" | "electricite" | "conciergerie"
     Date: Date
     Heure: string
@@ -89,4 +93,4 @@ type Sidebar = {
     Href: string
 };
 
-export type { DetailType, DescriptionBien, Prestataire, Bien_immobilier, Photos, Reservation, Locataire, Message, Utilisateur, Sidebar }
+export type { DetailType, DescriptionBien, Prestation, Bien_immobilier, Photos, Reservation, Locataire, Message, Utilisateur, Sidebar }

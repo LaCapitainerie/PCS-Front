@@ -1,6 +1,6 @@
 import { Separator } from "./separator";
 
-const Title = ({titre, sous_titre}: {titre:string, sous_titre:string | null | undefined}) => {
+const Title = ({titre, sous_titre}: {titre:string | undefined, sous_titre:string | null | undefined}) => {
     return (
         <>
             <h1 className="w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">

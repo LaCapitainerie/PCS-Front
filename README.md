@@ -4,21 +4,27 @@
     - [ ] Présentation du site
 
 ### Locataire
+- [ ] Apercu de son compte
+    - [ ] Modification de celui-ci
 - [ ] Pouvoir reserver un bien
-    - [ ] Affichage des biens et des disponibilités
+    - [x] Affichage des biens et des disponibilités
     - [ ] Affichage d'un **énooorme popup** pour sélection de date, personnes, préstations via multi selector
 
 - [ ] Pouvoir échanger avec des **Bailleurs**
+    - [x] Système de message
     - [ ] Envoyer un message lors qu'une demande de réservation
         - [ ] pouvoir approuver ou non
     - [ ] Envoyer un message pour chaque étape du paiement
 
 ### Bailleur
+- [ ] Apercu de son compte
+    - [ ] Modification de celui-ci
 - [x] Aperçu de ses biens
     - [x] Détails, prestas associés, locataire
     - [x] Pouvoir les modifier (uniquement les détails)
 - [ ] Calendrier des dates importantes, avec option de verrouiller des dates
 - [ ] Système de messagerie
+    - [x] Système de message
     - [x] Pouvoir échanger avec les **Locataires**
     - [x] Pouvoir échanger avec les **Prestataires**
     - [ ] Notification push sur téléphone
@@ -32,8 +38,8 @@
 ### Admin
 - [ ] Dashboard
     - [ ] Partie Chiffre
-        - [ ] Informations Préstations (argent rapporté, croissance)
-        - [ ] Informations Réservations (argent rapporté, croissance)
+        - [x] Informations Préstations (argent rapporté, croissance)
+        - [x] Informations Réservations (argent rapporté, croissance)
         - [ ] Informations Issues (argent rapporté, croissance)
         - [ ] Informations Utilisateurs (argent rapporté, croissance)
     - [ ] Overview des Reservations, Prestations et Issues
