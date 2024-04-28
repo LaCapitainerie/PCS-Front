@@ -63,9 +63,9 @@ const MessageList = ({
                         <div className={`flex ${value.ID_Dest == Me && "justify-end"}`}>
                             <button className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.ID_Dest == Me && "bg-accent"}`}>
                                 <div className="flex w-full flex-col gap-1">
-                                    <div className="text-xs font-medium">{value.Heure.toString()} {[value.ID_Dest, value.ID_Exp]} {CurrentUser?.ID} {Me}</div>
+                                    <div className="text-xs font-medium">{value.Heure.toString()}</div>
                                 </div>
-                                <div className="line-clamp-2 text-xs text-muted-foreground">{value.Message}</div>
+                                <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.Message}</div>
                             </button>
                         </div>
                     )}

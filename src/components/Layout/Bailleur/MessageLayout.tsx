@@ -3,15 +3,15 @@
 import React, { ReactNode, useState } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { Utilisateur } from '../../customclass';
-import ContactList from '@/components/Layout/Prestataire/Message/Contact';
-import MessageList from '@/components/Layout/Prestataire/Message/Messages';
+import ContactList from '@/components/Layout/Bailleur/Message/Contact';
+import MessageList from '@/components/Layout/Bailleur/Message/Messages';
 import { Toaster } from '@/components/ui/toaster';
 
-interface PrestaMessageProps {
+interface BailleurMessageProps {
     children: ReactNode;
 }
 
-const PrestaMessage: React.FC<PrestaMessageProps> = ({ children }) => {
+const BailleurMessage: React.FC<BailleurMessageProps> = ({ children }) => {
     const [User, setUser] = useState<Utilisateur>();
 
     const SelectedUser = (User: Utilisateur) => {
@@ -30,4 +30,4 @@ const PrestaMessage: React.FC<PrestaMessageProps> = ({ children }) => {
     );
 }
 
-export default PrestaMessage;
+export default BailleurMessage;

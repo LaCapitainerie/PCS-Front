@@ -1,3 +1,5 @@
+export const toComparable = (...str: string[]) => str.join().normalize().toLowerCase();
+
 type DetailType = {
     title: string;
     description: string;
@@ -73,7 +75,7 @@ type Utilisateur = {
     Nom: string
     Prenom: string
     Email: string
-    Type: string
+    Type: "Locataire" | "Prestataire" | "Bailleur" | "Admin"
     Avatar: string
     Description: string
     Joined: string
