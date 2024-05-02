@@ -58,18 +58,23 @@ const icons = {
     Gauge: GaugeIcon,
 };
 
+interface SideBarTypeDTO {
+    Sidebar: SidebarType[];
+}
+
 const Component = (index:number) => {
     const [state, setState] = useState<SidebarType[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data = await (
+            const data: SideBarTypeDTO = await (
                 await fetch(
-                    "http://localhost:2000/Sidebar"
+                    `${process.env.NEXT_PUBLIC_API_URL}/sidebar`
                 )
             ).json();
 
-            setState(data.filter((value: SidebarType) => value.Permission <= Me));
+
+            setState(data.Sidebar.filter((value: SidebarType) => value.Permission <= Me));
         };
 
         dataFetch();

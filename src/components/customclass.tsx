@@ -86,7 +86,7 @@ type Utilisateur = {
 }
 
 type Sidebar = {
-    ID_tab: number
+    ID_tab: string
     Permission: number
     Icon: string
     Hover: string
