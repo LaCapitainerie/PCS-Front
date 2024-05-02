@@ -3,15 +3,16 @@
 import * as React from "react"
 import { CarouselPlugin } from "./Carroussel";
 import { CardDesc } from "./Cards";
-import { Bien_immobilier, DescriptionBien, Photos, Utilisateur, Reservation as Res } from "../../../customclass";
+import { DescriptionBien, Photos, Utilisateur, Reservation as Res } from "../../../customclass";
 import { Reservation } from "./Reservation";
 import Title from "../../../ui/title";
 import { useEffect, useState } from "react";
+import {Property} from "@/type/Property";
 
 
 
 
-const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
+const MainContent = ({house}: {house:Property | undefined}) => {
     
     const [photos, setPhotos] = useState<Photos[]>([]);
 
@@ -23,7 +24,7 @@ const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
                 )
             ).json();
 
-            setPhotos(data.filter((photo) => photo.ID_Bien === house?.ID));
+            setPhotos(data.filter((photo) => photo.ID_Bien === house?.id));
         };
 
         dataFetch();
@@ -35,7 +36,7 @@ const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
         const dataFetch = async () => {
             const DescMaker = {} as DescriptionBien;
 
-            DescMaker.Bien = house? house : {} as Bien_immobilier;
+            DescMaker.Bien = house? house : {} as Property;
 
             const data2: Res[] = await (
                 await fetch(
@@ -43,7 +44,7 @@ const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
                 )
             ).json();
             
-            DescMaker.reservation = data2.filter((res) => res.ID_Housing === house?.ID);
+            DescMaker.reservation = data2.filter((res) => res.ID_Housing === house?.id);
 
             const data3: Utilisateur[] = await (
                 await fetch(
@@ -51,7 +52,7 @@ const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
                 )
             ).json();
 
-            DescMaker.utilisateur = data3.filter((prest) => DescMaker.reservation.map((res) => res.ID_Prestataire).includes(prest.ID));
+            DescMaker.utilisateur = data3.filter((prest) => DescMaker.reservation.map((res) => res.ID_Prestataire).includes(prest.id));
           
             setDesc(DescMaker);
         };
@@ -66,7 +67,7 @@ const MainContent = ({house}: {house:Bien_immobilier | undefined}) => {
                 <CarouselPlugin images={photos} />
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
-                        <Title titre={Desc?.Bien.Nom} sous_titre={Desc?.Bien.Description}/>
+                        <Title titre={Desc?.Bien.name} sous_titre={Desc?.Bien.description}/>
                         <div className="flex flex-row justify-around gap-2">
                             <CardDesc Desc={Desc} />
                         </div>

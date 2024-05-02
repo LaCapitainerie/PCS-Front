@@ -34,7 +34,7 @@ const MessageList = ({
     const [Messages, setMessages] = useState<Message[]>([]);
 
     // Temporary
-    const Me = 2;
+    const Me = "2";
 
     useEffect(() => {
         const dataFetch = async () => {
@@ -45,7 +45,7 @@ const MessageList = ({
             ).json();
 
             if (CurrentUser === undefined) return;
-            setMessages(data.filter((value: Message) => [value.ID_Dest, value.ID_Exp].includes(CurrentUser.ID) && [value.ID_Dest, value.ID_Exp].includes(Me)));
+            setMessages(data.filter((value: Message) => [value.ID_Dest, value.ID_Exp].includes(CurrentUser.id) && [value.ID_Dest, value.ID_Exp].includes(Me)));
         };
 
         dataFetch();

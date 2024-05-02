@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Input } from "@/components/ui/input"
 import { HomeIcon, Hotel } from "lucide-react"
 import { Separator } from "@/components/ui/separator";
-import { Bien_immobilier as BI, Bien_immobilier, toComparable } from "../../../customclass";
+import { toComparable } from "../../../customclass";
  
 import {
   Select,
@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {Property as BI, Property} from "@/type/Property";
 
 export function getIcon(type: string) {
     switch (type) {
@@ -29,9 +30,9 @@ export function getIcon(type: string) {
 
 const BienImmo = ({
     onHouseChange,
-  }: React.HTMLAttributes<HTMLDivElement> & { onHouseChange?: (house: Bien_immobilier) => void }) => {
-    const [state, setState] = useState<Bien_immobilier[]>([]);
-    const [house, setHouse] = useState<Bien_immobilier>({} as Bien_immobilier);
+  }: React.HTMLAttributes<HTMLDivElement> & { onHouseChange?: (house: Property) => void }) => {
+    const [state, setState] = useState<Property[]>([]);
+    const [house, setHouse] = useState<Property>({} as Property);
     const [filter, setFilter] = useState<string>("");
 
     const [minsup, setMinsup] = useState<number>(0);
@@ -43,12 +44,12 @@ const BienImmo = ({
         const dataFetch = async () => {
             const data = await (
                 await fetch(
-                    "http://localhost:2000/Bien_immobilier"
+                    "http://localhost:2000/Property"
                 )
             ).json();
             
-            const biens = data.filter((value: Bien_immobilier) => toComparable(value.Prix.toString(), value.Nom, value.Description).includes(toComparable(filter)));
-            const biens2 = biens.filter((value: BI) => value.Surface >= minsup && value.Surface <= maxsup);
+            const biens = data.filter((value: Property) => toComparable(value.price.toString(), value.name, value.description).includes(toComparable(filter)));
+            const biens2 = biens.filter((value: BI) => value.surface >= minsup && value.surface <= maxsup);
             
             setHouse(biens2[0]);
             setState(biens2);
@@ -105,22 +106,22 @@ const BienImmo = ({
                         <div className="flex w-full flex-col gap-1">
                             <div className="flex items-center">
                                 <div className="flex flex-row items-center gap-2">
-                                    {getIcon(value.Type)}
-                                    <div className="font-semibold">{value.Nom}</div>
+                                    {getIcon(value.type)}
+                                    <div className="font-semibold">{value.name}</div>
                                 </div>
                                 <div className="ml-auto text-xs text-foreground">{}</div>
                             </div>
-                            <div className="text-xs font-medium">{value.Type}</div>
+                            <div className="text-xs font-medium">{value.type}</div>
                         </div>
-                        <div className="line-clamp-2 text-xs text-muted-foreground">{value.Description}</div>
+                        <div className="line-clamp-2 text-xs text-muted-foreground">{value.description}</div>
                         <div className="flex items-center gap-2">
                             <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80">
-                                {value.Type}</div>
+                                {value.type}</div>
                             <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                                Salle de bain : {value.Salles_de_bain}</div>
-                            {value.Garages > 0 && <div
+                                Salle de bain : {value.bathroom}</div>
+                            {value.garage > 0 && <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
                                 Garage</div>}
                         </div>

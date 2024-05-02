@@ -1,3 +1,5 @@
+import {Property} from "@/type/Property";
+
 export const toComparable = (...str: string[]) => str.join().normalize().toLowerCase();
 
 type DetailType = {
@@ -7,16 +9,16 @@ type DetailType = {
 }
 
 type DescriptionBien = {
-    Bien: Bien_immobilier;
+    Bien: Property;
     utilisateur: Utilisateur[];
     reservation: Reservation[];
     className?: string
 }
 
 type Prestation = {
-    ID_Housing: number
-    ID_Client: number
-    ID_Bien_Immobilier: number
+    ID_Housing: string
+    ID_Client: string
+    ID_Bien_Immobilier: string
     Nom: string
     Prenom: string
     Prestataire: string
@@ -29,15 +31,15 @@ type Prestation = {
 }
 
 type Locataire = {
-    ID_Locataire: number
+    ID_Locataire: string
     particulier: string
 }
 
 type Reservation = {
-    ID_Reservation: number
-    ID_Housing: number
-    ID_Prestataire: number
-    ID_Locataire: number
+    ID_Reservation: string
+    ID_Housing: string
+    ID_Prestataire: string
+    ID_Locataire: string
     Date: Date
     Heure: string
     Duree: number
@@ -45,7 +47,7 @@ type Reservation = {
     Statut: "En attente" | "Acceptée" | "Refusée"
 }
 
-type Bien_immobilier = {
+/*type Bien_immobilier = {
     ID: number
     Nom: string
     Type: "Maison" | "Appartement" | "Terrain" | "Villa"
@@ -56,25 +58,25 @@ type Bien_immobilier = {
     Garages: number
     Description: string
     Image: string
-};
+};*/
 
 type Photos = {
-    ID_Photo: number
-    ID_Bien: number
+    ID_Photo: string
+    ID_Bien: string
     Image: string
 }
 
 type Message = {
-    ID: number
-    ID_Exp: number
-    ID_Dest: number
+    ID: string
+    ID_Exp: string
+    ID_Dest: string
     Date: Date
     Heure: Date
     Message: string
 }
 
 type Utilisateur = {
-    ID: number
+    id: string
     Username: string
     Nom: string
     Prenom: string
@@ -85,12 +87,4 @@ type Utilisateur = {
     Joined: string
 }
 
-type Sidebar = {
-    ID_tab: string
-    Permission: number
-    Icon: string
-    Hover: string
-    Href: string
-};
-
-export type { DetailType, DescriptionBien, Prestation, Bien_immobilier, Photos, Reservation, Locataire, Message, Utilisateur, Sidebar }
+export type { DetailType, DescriptionBien, Prestation, Photos, Reservation, Locataire, Message, Utilisateur}

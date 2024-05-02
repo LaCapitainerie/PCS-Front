@@ -4,16 +4,16 @@ import React, { ReactNode, useState } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
 import BienImmo from './Bien/BienImmo';
 import MainContent from './Bien/MainContent';
-import { Bien_immobilier } from '../../customclass';
+import {Property} from "@/type/Property";
 
 interface PrestaLayoutProps {
     children: ReactNode;
 }
 
 const PrestaLayout: React.FC<PrestaLayoutProps> = ({ children }) => {
-    const [House, setHouse] = useState<Bien_immobilier>();
+    const [House, setHouse] = useState<Property>();
 
-    const SelectedHouse = (house: Bien_immobilier) => {
+    const SelectedHouse = (house: Property) => {
         setHouse(house);
     };
 
