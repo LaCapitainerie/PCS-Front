@@ -1,9 +1,9 @@
-import Locataire from "@/components/Layout/Locataire/BienLayout";
+import BienLayout from "@/components/CustomComponent/layout/BienLayout";
 
 export default function LocatairePageBiens() {
     return (
-        <Locataire>
+        <BienLayout>
             <></>
-        </Locataire>
+        </BienLayout>
     );
 }

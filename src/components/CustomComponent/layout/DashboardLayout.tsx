@@ -2,13 +2,13 @@
 
 import React, { ReactNode } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
-import { Dashboard } from './Dashboard/dashboard';
+import { Dashboard } from '../component/Dashboard/dashboard';
 
-interface PrestaLayoutProps {
+interface LayoutProps {
     children: ReactNode;
 }
 
-const Bailleur_Dashboard_Layout: React.FC<PrestaLayoutProps> = ({ children }) => {
+const Dashboard_Layout: React.FC<LayoutProps> = ({ children }) => {
 
     return (
         <>
@@ -18,4 +18,4 @@ const Bailleur_Dashboard_Layout: React.FC<PrestaLayoutProps> = ({ children }) =>
     );
 }
 
-export default Bailleur_Dashboard_Layout;
+export default Dashboard_Layout;

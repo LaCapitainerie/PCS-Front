@@ -1,9 +1,9 @@
-import Prestataire from "@/components/Layout/Prestataire/BienLayout";
+import BienLayout from "@/components/CustomComponent/layout/BienLayout";
 
 export default function PrestaPageBiens() {
     return (
-        <Prestataire>
+        <BienLayout>
             <></>
-        </Prestataire>
+        </BienLayout>
     );
 }

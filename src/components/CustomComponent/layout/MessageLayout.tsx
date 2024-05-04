@@ -2,20 +2,19 @@
 
 import React, { ReactNode, useState } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
-import ContactList from '@/components/Layout/Bailleur/Message/Contact';
-import MessageList from '@/components/Layout/Bailleur/Message/Messages';
+import ContactList from '../component/Message/Contact';
+import MessageList from '../component/Message/Messages';
 import { Toaster } from '@/components/ui/toaster';
 import { User } from '@/type/User';
 
-interface BailleurMessageProps {
+interface MessageProps {
     children: ReactNode;
 }
 
-const BailleurMessage: React.FC<BailleurMessageProps> = ({ children }) => {
+const Message_Layout: React.FC<MessageProps> = ({ children }) => {
     const [User, setUser] = useState<User>();
 
     const SelectedUser = (User: User) => {
-        console.log(User);
         setUser(User);
     };
 
@@ -30,4 +29,4 @@ const BailleurMessage: React.FC<BailleurMessageProps> = ({ children }) => {
     );
 }
 
-export default BailleurMessage;
+export default Message_Layout;

@@ -24,7 +24,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../../../ui/avatar";
 import { DateRange } from "react-day-picker";
 import Usercard from "@/components/ui/usercard";
-import { Traveler } from "@/type/Traveler";
 import { Reservation as ReservationType } from "@/type/Reservation";
 import { User } from "@/type/User";
 
@@ -34,7 +33,6 @@ type aggregate = {
 }
 
 function ToBox(agg: aggregate, styleCol: React.CSSProperties) {
-  console.log(agg);
   
   return (
     <div className="my-4 rounded-lg border bg-card text-card-foreground shadow-sm w-full">
@@ -44,7 +42,7 @@ function ToBox(agg: aggregate, styleCol: React.CSSProperties) {
             <div className="flex items-center gap-4 w-full">
               <Avatar className="hidden h-9 w-9 sm:flex">
                 <AvatarImage src={agg.Locataire.Avatar} alt="Avatar" />
-                <AvatarFallback>{agg.Locataire.Nom[0] + agg.Locataire.Prenom[0]}</AvatarFallback>
+                <AvatarFallback>{agg.Locataire?.Nom[0] + agg.Locataire?.Prenom[0]}</AvatarFallback>
               </Avatar>
               <div className="grid gap-1">
                 <p className="text-sm font-medium leading-none">
@@ -83,11 +81,12 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
             `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
           )
       ).json();
+      
 
-      const tmpAggregat = ReservationVal.map((res) => {
+      const tmpAggregat = ReservationVal.map((res) => {        
         return {
           Reservation: res,
-          Locataire: data.filter((user) => user.ID === res.ID_tenant).shift() || {} as User
+          Locataire: data.filter((user) => user.ID === res.ID_Tenant)[0] || {} as User
         } as aggregate
       });
 
@@ -123,7 +122,7 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
                   </SelectTrigger>
                   <SelectContent>
                     {aggregat.map((value, index) => (
-                    <SelectItem value={index.toString()}>{value.Locataire.Username}</SelectItem>
+                    <SelectItem value={index.toString()} key={index}>{value.Locataire.Username}</SelectItem>
                     ))}
                     
                   </SelectContent>
@@ -132,7 +131,7 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
             </div>
           </div>
 
-          {choosen && ToBox(choosen, {gridTemplateColumns: "auto 1fr"})}
+          {choosen?.Locataire && ToBox(choosen, {gridTemplateColumns: "auto 1fr"})}
 
 
         </form>

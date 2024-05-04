@@ -1,9 +1,9 @@
-import LocataireMessage from "@/components/Layout/Locataire/MessageLayout";
+import Message_Layout from "@/components/CustomComponent/layout/MessageLayout";
 
-export default function LocatairePageMessage() {
+export default function BailleurPageMessage() {
     return (
-        <LocataireMessage>
+        <Message_Layout>
             <></>
-        </LocataireMessage>
+        </Message_Layout>
     );
 }

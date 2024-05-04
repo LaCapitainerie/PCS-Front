@@ -1,9 +1,9 @@
-import PrestaMessage from "@/components/Layout/Prestataire/MessageLayout";
+import Message_Layout from "@/components/CustomComponent/layout/MessageLayout";
 
-export default function PrestaPageMessage() {
+export default function BailleurPageMessage() {
     return (
-        <PrestaMessage>
+        <Message_Layout>
             <></>
-        </PrestaMessage>
+        </Message_Layout>
     );
 }

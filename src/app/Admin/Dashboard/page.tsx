@@ -1,8 +1,8 @@
-import Admin_Dashboard_Layout from "@/components/Layout/Admin/DashboardLayout";
+import Dashboard_Layout from "@/components/CustomComponent/layout/DashboardLayout";
 
 export default function Admin() {
     return (
-        <Admin_Dashboard_Layout children={undefined}>
-        </Admin_Dashboard_Layout>
+        <Dashboard_Layout children={undefined}>
+        </Dashboard_Layout>
     );
 }

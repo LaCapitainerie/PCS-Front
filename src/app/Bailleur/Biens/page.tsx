@@ -1,9 +1,9 @@
-import Bailleur from "@/components/Layout/Bailleur/BienLayout";
+import BienLayout from "@/components/CustomComponent/layout/BienLayout";
 
 export default function BailleurPageBiens() {
     return (
-        <Bailleur>
+        <BienLayout>
             <></>
-        </Bailleur>
+        </BienLayout>
     );
 }

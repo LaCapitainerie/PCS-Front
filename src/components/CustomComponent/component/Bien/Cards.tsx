@@ -1,10 +1,15 @@
 import { CheckIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
-import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence } from "lucide-react"
-import { DescriptionBien, Prestataire, Utilisateur } from "../../../functions"
+import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence, Check } from "lucide-react"
 import Usercard from "@/components/ui/usercard"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { use, useEffect, useState } from "react"
+import { useToast } from "@/components/ui/use-toast"
+import { Property } from "@/type/Property"
+import { Prestataire } from "@/type/Prestataire"
+import { User } from "@/type/User"
 
 function statusToColor(params: "pending" | "processing" | "success" | "failed") {
   switch (params) {
@@ -20,7 +25,7 @@ function statusToColor(params: "pending" | "processing" | "success" | "failed") 
 
 }
 
-function typeToDom(type: Prestataire["Type"], status: "pending" | "processing" | "success" | "failed") {
+function typeToDom(type: string = "", status: "pending" | "processing" | "success" | "failed") {
   switch (type) {
     case "chauffage":
       return <Heater className={`h-5 w-5 text-${statusToColor(status)}-500`} />
@@ -37,46 +42,63 @@ function typeToDom(type: Prestataire["Type"], status: "pending" | "processing" |
   }
 }
 
-const descriptionKey = ["Nom", "Type", "Prix", "Surface", "Chambres", "Salles_de_bain", "Garages"]
+const descriptionKey = ["Name", "Type", "Price", "Surface", "Room", "Bathroom", "Garage", "Address", "City"]
 
-export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
+interface UserTypeDTO {
+  User: User[];
+}
+
+export function CardProperty({ Property, Prestataire }: { Property: Property | undefined, Prestataire: Prestataire[]}) {
+
+  const { toast } = useToast();
   
+  const [edit, setEdit] = useState<boolean>(false);
+
+  const [user, setUser] = useState<User[]>([]);
+
+  useEffect(() => {
+    const dataFetch = async () => {
+        const data: User[] = await (
+            await fetch(
+                `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
+            )
+        ).json();
+        
+        
+        const user = data.filter((value: User) => Prestataire.map((val) => val.ID).includes(value.ID));
+
+        setUser(user);
+    };
+
+    dataFetch();
+}, []);
+
   return (<>
     <Card className="w-full">
       <CardHeader>
         <div className="flex flex-row justify-between">
           <CardTitle className="">Details du bien</CardTitle>
-          <Button variant="outline" size="icon">
-            <Edit2 className="h-4 w-4" />
+          <Button variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
+            {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
           </Button>
         </div>
       </CardHeader>
       <CardContent className="grid gap-4">
 
-        <div className="max-h-64" style={{
-            display: 'grid',
+        <div className="grid max-h-64 gap-2" style={{
             gridTemplateColumns: '1fr 1fr 1fr',
             gridTemplateRows: '1fr 1fr 1fr',
-            gap: '0px',
             gridTemplateAreas: `
               ". . ."
               ". . ."
               ". . ."
             `
           }}>
-          {Desc?.Bien && Object.entries(Desc.Bien).filter((val) => descriptionKey.includes(val[0].toString())).map(([key, value], index) => (
-            <div
-              key={index}
-              className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-            >
-              <span className="flex h-2 w-2 translate-y-1 rounded-full bg-blue-500" />
-              <div className="space-y-1">
-                <p className="text-sm font-medium leading-none">
-                  {key}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  {value}
-                </p>
+          {Property && Object.entries(Property).filter((val) => descriptionKey.includes(val[0].toString())).map(([key, value], index) => (
+            <div key={index} className="mb-4 pb-4 last:mb-0 last:pb-0" >
+              <div className="w-full">
+                <Label htmlFor={key}>{key} : </Label>
+                <Input id={key} type="text" defaultValue={value} readOnly={!edit}/>
               </div>
             </div>
           ))}
@@ -99,8 +121,8 @@ export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
         <CardContent className="grid gap-4">
 
           <div className="">
-            {Desc?.utilisateur.map((presta, index) => (
-              <Usercard user={presta as unknown as Utilisateur}>
+            {user.map((presta, index) => (
+              <Usercard user={presta as unknown as User}>
                 {typeToDom("peinture", "pending")}
                     <div className="space-y-1">
                       

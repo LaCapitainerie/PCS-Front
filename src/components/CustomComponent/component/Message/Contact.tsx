@@ -5,8 +5,9 @@ import * as React from "react"
 import { useEffect, useState } from 'react';
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
-import { Utilisateur, toComparable } from "../../../functions";
+import { toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { User } from "@/type/User";
 
 
 
@@ -14,23 +15,23 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const ContactList = ({
     onUserChange,
-  }: React.HTMLAttributes<HTMLDivElement> & { onUserChange?: (user : Utilisateur) => void }) => {
-    const [state, setState] = useState<Utilisateur[]>([]);
-    const [User, setUser] = useState<Utilisateur>((state[0] || {}) as Utilisateur);
+  }: React.HTMLAttributes<HTMLDivElement> & { onUserChange?: (user : User) => void }) => {
+    const [state, setState] = useState<User[]>([]);
+    const [User, setUser] = useState<User>((state[0] || {}) as User);
     const [filter, setFilter] = useState<string>("");
 
     // Temporary
-    const ME = "2";
+    const ME = "3";
 
     useEffect(() => {
         const dataFetch = async () => {
             const data = await (
                 await fetch(
-                    "http://localhost:2000/Utilisateurs"
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
                 )
             ).json();
 
-            setState(data.filter((value: Utilisateur) => value.id !== ME && toComparable(value.Nom, value.Prenom, value.Type).includes(toComparable(filter))));
+            setState(data.filter((value: User) => value.ID !== ME && toComparable(value.Nom, value.Prenom, value.Type).includes(toComparable(filter))));
             setUser(state[0]);
         };
 
@@ -43,7 +44,7 @@ const ContactList = ({
         onUserChange?.(User);
     }, [User, onUserChange]);
 
-    const ContactListFiltered = (state: Utilisateur[]) => {
+    const ContactListFiltered = (state: User[]) => {
         return (
             <div className="flex flex-col gap-2 py-4 pt-0">
                 {state.map((value) => <>

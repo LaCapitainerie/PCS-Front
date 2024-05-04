@@ -2,16 +2,16 @@
 
 import React, { ReactNode, useState } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
-import BienImmo from './Bien/BienImmo';
-import MainContent from './Bien/MainContent';
+import BienImmo from '../component/Bien/BienImmo';
+import MainContent from '../component/Bien/MainContent';
 import { Toaster } from '@/components/ui/toaster';
 import {Property} from "@/type/Property";
 
-interface BailleurLayoutProps {
+interface LayoutProps {
     children: ReactNode;
 }
 
-const BailleurLayout: React.FC<BailleurLayoutProps> = ({ children }) => {
+const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
     const [House, setHouse] = useState<Property>();
 
     const SelectedHouse = (house: Property) => {
@@ -29,4 +29,4 @@ const BailleurLayout: React.FC<BailleurLayoutProps> = ({ children }) => {
     );
 }
 
-export default BailleurLayout;
+export default Bien_Layout;

@@ -1,10 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
+import { User } from "@/type/User";
 import { CalendarIcon } from "lucide-react";
-import { Utilisateur } from "../functions";
 import { ReactNode } from "react";
 
-const Usercard = ({user, children}: {user: Utilisateur | undefined, children: ReactNode}) => {
+const Usercard = ({user, children}: {user: User | undefined, children: ReactNode}) => {
+    
     return (
         <HoverCard openDelay={400}>
             <HoverCardTrigger asChild>

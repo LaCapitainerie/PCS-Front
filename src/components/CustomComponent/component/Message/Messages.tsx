@@ -5,9 +5,10 @@ import * as React from "react"
 import { useEffect, useState } from 'react';
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
-import { Message, Utilisateur } from "../../../functions";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast"
+import { User } from "@/type/User";
+import { Message } from "@/type/Message";
 
 export function ToastSimple() {
     const { toast } = useToast()
@@ -28,24 +29,26 @@ export function ToastSimple() {
 
 const MessageList = ({
     CurrentUser,
-  }: React.HTMLAttributes<HTMLDivElement> & { CurrentUser : Utilisateur | undefined}) => {
+  }: React.HTMLAttributes<HTMLDivElement> & { CurrentUser : User | undefined}) => {
 
     const { toast } = useToast();
     const [Messages, setMessages] = useState<Message[]>([]);
 
     // Temporary
-    const Me = "2";
+    const Me = "3";
 
     useEffect(() => {
         const dataFetch = async () => {
             const data = await (
                 await fetch(
-                    "http://localhost:2000/Messages"
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/message`
                 )
             ).json();
 
             if (CurrentUser === undefined) return;
-            setMessages(data.filter((value: Message) => [value.ID_Dest, value.ID_Exp].includes(CurrentUser.id) && [value.ID_Dest, value.ID_Exp].includes(Me)));
+            console.log(data.filter((value: Message) => [value.ID_Destinataire, value.ID_Expediteur].includes(CurrentUser.ID) && [value.ID_Destinataire, value.ID_Expediteur].includes(Me)));
+            
+            setMessages(data.filter((value: Message) => [value.ID_Destinataire, value.ID_Expediteur].includes(CurrentUser.ID) && [value.ID_Destinataire, value.ID_Expediteur].includes(Me)));
         };
 
         dataFetch();
@@ -60,10 +63,10 @@ const MessageList = ({
             <div className="flex flex-col h-full justify-between">
                 <div className="flex flex-col gap-2 p-4 pt-0">
                     {Messages.map((value) => 
-                        <div className={`flex ${value.ID_Dest == Me && "justify-end"}`}>
-                            <button className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.ID_Dest == Me && "bg-accent"}`}>
+                        <div className={`flex ${value.ID_Destinataire == Me && "justify-end"}`}>
+                            <button className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.ID_Destinataire == Me && "bg-accent"}`}>
                                 <div className="flex w-full flex-col gap-1">
-                                    <div className="text-xs font-medium">{value.Heure.toString()}</div>
+                                    <div className="text-xs font-medium">{value.Date.toString()}</div>
                                 </div>
                                 <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.Message}</div>
                             </button>

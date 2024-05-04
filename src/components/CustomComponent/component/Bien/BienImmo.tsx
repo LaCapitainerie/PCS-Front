@@ -7,15 +7,20 @@ import { Input } from "@/components/ui/input"
 import { HomeIcon, Hotel } from "lucide-react"
 import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
-import {Property} from "@/type/Property";
+import { Property } from "@/type/Property";
 
 function getIcon(type: string) {
+    
     switch (type) {
         case "Appartement":
             return <HomeIcon />;
-        case "Maison":
+        case "Maison": case "Villa":
             return <Hotel />;
     }
+}
+
+interface PropertyTypeDTO {
+    Property: Property[];
 }
 
 const BienImmo = ({
@@ -29,13 +34,14 @@ const BienImmo = ({
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data = await (
+            const data: PropertyTypeDTO = await (
                 await fetch(
-                    "http://localhost:2000/Property"
+                    `${process.env.NEXT_PUBLIC_API_URL}/property`
                 )
             ).json();
+            
 
-            const biens = data.filter((value: Property) => toComparable(value.price.toString(), value.name, value.description).includes(toComparable(filter)));
+            const biens = data.Property.filter((value: Property) => toComparable(value.Name, value.Description).includes(toComparable(filter)));
 
             setHouse(biens[0]);
             setState(biens);
@@ -60,31 +66,31 @@ const BienImmo = ({
                 <Input placeholder="Search" className="w-full p-4" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilter(event.target.value)}/>
             </div>
             <div className="flex flex-col gap-2 p-4 pt-0">
-                {state.map((value) => <>
-                    <button className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => setHouse(value)}>
+                {state.map((value, index) => 
+                    <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => setHouse(value)}>
                         <div className="flex w-full flex-col gap-1">
                             <div className="flex items-center">
                                 <div className="flex flex-row items-center gap-2">
                                     {getIcon(value.type)}
-                                    <div className="font-semibold">{value.name}</div>
+                                    <div className="font-semibold">{value.Name}</div>
                                 </div>
                                 <div className="ml-auto text-xs text-foreground">{}</div>
                             </div>
                             <div className="text-xs font-medium">{value.type}</div>
                         </div>
-                        <div className="line-clamp-2 text-xs text-muted-foreground">{value.description}</div>
+                        <div className="line-clamp-2 text-xs text-muted-foreground">{value.Description}</div>
                         <div className="flex items-center gap-2">
                             <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80">
                                 {value.type}</div>
                             <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                                Salle de bain : {value.bathroom}</div>
-                            {value.garage > 0 && <div
+                                Salle de bain : {value.Bathroom}</div>
+                            {value.Garage > 0 && <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
                                 Garage</div>}
                         </div>
-                    </button></>
+                    </button>
                 )}
             </div>
 

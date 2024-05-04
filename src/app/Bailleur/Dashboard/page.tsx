@@ -1,8 +1,8 @@
-import Bailleur_Dashboard_Layout from "@/components/Layout/Bailleur/DashboardLayout";
+import Dashboard_Layout from "@/components/CustomComponent/layout/DashboardLayout";
 
 export default function Bailleur() {
     return (
-        <Bailleur_Dashboard_Layout children={undefined}>
-        </Bailleur_Dashboard_Layout>
+        <Dashboard_Layout children={undefined}>
+        </Dashboard_Layout>
     );
 }
