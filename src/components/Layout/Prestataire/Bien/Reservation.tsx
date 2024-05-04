@@ -86,7 +86,7 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
       const tmpAggregat = ReservationVal.map((res) => {
         return {
           Reservation: res,
-          Locataire: data.filter((user) => user.ID === res.ID_Locataire).shift() || {} as Utilisateur
+          Locataire: data.filter((user) => user.id === res.ID_Locataire).shift() || {} as Utilisateur
         } as aggregate
       });
 

@@ -4,8 +4,7 @@
 const Me = 2;
 
 
-
-import { Sidebar as SidebarType } from "../customclass";
+import { Sidebar as SidebarType} from "../../type/Sidebar";
 
 import * as React from "react"
 import Link from "next/link"
@@ -74,7 +73,7 @@ const Component = (index:number) => {
             ).json();
 
 
-            setState(data.Sidebar.filter((value: SidebarType) => value.Permission <= Me));
+            setState(data.Sidebar.filter((value: SidebarType) => value.permission <= Me));
         };
 
         dataFetch();
@@ -83,18 +82,18 @@ const Component = (index:number) => {
     return (
         <>
             {state.map((value, i) =>
-                <TooltipProvider key={value.ID_tab}>
+                <TooltipProvider key={value.id}>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href={value.Href}
+                                href={value.href}
                                 className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                             >
-                                {React.createElement(icons[value.Icon as keyof typeof icons], { className: "h-5 w-5" })}
-                                <span className="sr-only">{value.Hover}</span>
+                                {React.createElement(icons[value.icon as keyof typeof icons], { className: "h-5 w-5" })}
+                                <span className="sr-only">{value.hover}</span>
                             </Link>
                         </TooltipTrigger>
-                        <TooltipContent side="right">{value.Hover}</TooltipContent>
+                        <TooltipContent side="right">{value.hover}</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
             

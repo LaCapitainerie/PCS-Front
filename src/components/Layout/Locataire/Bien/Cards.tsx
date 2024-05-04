@@ -139,9 +139,9 @@ export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
           <div className="flex flex-row cols-3 w-full gap-2">
           
             {prestations.map((presta, index) => {
-              console.log(presta.ID_Bien_Immobilier, Desc?.Bien.ID);
+              console.log(presta.ID_Bien_Immobilier, Desc?.Bien.id);
 
-              if (presta.ID_Bien_Immobilier !== Desc?.Bien.ID) return null;
+              if (presta.ID_Bien_Immobilier !== Desc?.Bien.id) return null;
               
               return (
                 <HoverCard>

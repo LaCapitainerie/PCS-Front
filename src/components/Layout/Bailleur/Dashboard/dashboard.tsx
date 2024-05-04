@@ -39,7 +39,9 @@ export function Dashboard() {
                 )
             ).json();
 
-            setUsers(data.sort((a, b) => a.ID - b.ID).filter((user) => toComparable(user.Email, user.Nom, user.Prenom).includes(toComparable(filterUser))).slice(0, filterUserCount));
+            //TODO: Same here
+            //setUsers(data.sort((a, b) => a.ID - b.ID).filter((user) => toComparable(user.Email, user.Nom, user.Prenom).includes(toComparable(filterUser))).slice(0, filterUserCount));
+            setUsers(data);
         };
 
         dataFetch();

@@ -96,7 +96,7 @@ const ReservationsBoard = () => {
                 <TableBody>
                   {reservations.map((reservation) => {
 
-                    const tmpUser = Utilisateurs.find((user) => user.ID === reservation.ID_Locataire);
+                    const tmpUser = Utilisateurs.find((user) => user.id === reservation.ID_Locataire);
 
                     const startDate = new Date(reservation.Date);
                     const endDate = addDays(new Date(reservation.Date), reservation.Duree);

@@ -102,7 +102,7 @@ export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
                     <div className="space-y-1">
                       
                       <p className="text-sm font-medium leading-none">
-                        {presta.ID}
+                        {presta.id}
                       </p>
 
                       <p className="text-sm text-muted-foreground">

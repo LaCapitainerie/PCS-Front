@@ -1,99 +1,55 @@
 {
-    "Sidebar": [
-        {
-            "ID_tab": 0,
-            "Permission": 1,
-            "Icon": "Home",
-            "Hover": "Biens",
-            "Href": "/Bailleur/Biens"
-        },
-        {
-            "ID_tab": 2,
-            "Permission": 1,
-            "Icon": "Msg",
-            "Hover": "Messages",
-            "Href": "/Bailleur/Messages"
-        },
-        {
-            "ID_tab": 3,
-            "Permission": 2,
-            "Icon": "Gauge",
-            "Hover": "Dashboard",
-            "Href": "/Bailleur/Dashboard"
-        },
-        {
-            "ID_tab": 4,
-            "Permission": 1,
-            "Icon": "Home",
-            "Hover": "Biens",
-            "Href": "/Prestataire/Biens"
-        },
-        {
-            "ID_tab": 5,
-            "Permission": 1,
-            "Icon": "Msg",
-            "Hover": "Messages",
-            "Href": "/Prestataire/Messages"
-        },
-        {
-            "ID_tab": 6,
-            "Permission": 2,
-            "Icon": "Gauge",
-            "Hover": "Dashboard",
-            "Href": "/Admin/Dashboard"
-        },
-        {
-            "ID_tab": 7,
-            "Permission": 1,
-            "Icon": "Home",
-            "Hover": "Biens",
-            "Href": "/Locataire/Biens"
-        },
-        {
-            "ID_tab": 8,
-            "Permission": 1,
-            "Icon": "Msg",
-            "Hover": "Messages",
-            "Href": "/Locataire/Messages"
-        }
-    ],
-
     "Bien_immobilier": [
         {
-            "ID": 0,
-            "Nom": "Appartement 1",
-            "Type": "Appartement",
-            "Prix": 100000,
-            "Surface": 100,
-            "Chambres": 3,
-            "Salles_de_bain": 2,
-            "Garages": 0,
-            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "Image": "appartement.jpg"
+            "id": "0",
+            "name": "Appartement 1",
+            "type": "Appartement",
+            "price": 100000,
+            "surface": 100,
+            "room": 3,
+            "bathroom": 2,
+            "garage": 0,
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "address": "",
+            "city": "",
+            "zipCode": "",
+            "country": "",
+            "administrationValidation": false,
+            "lessorId": ""
         },
         {
-            "ID": 1,
-            "Nom": "Maison 1",
-            "Type": "Maison",
-            "Prix": 200000,
-            "Surface": 200,
-            "Chambres": 4,
-            "Salles_de_bain": 3,
-            "Garages": 2,
-            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "Image": "maison.jpg"
+            "id": "1",
+            "name": "Maison 1",
+            "type": "Maison",
+            "price": 200000,
+            "surface": 200,
+            "room": 4,
+            "bathroom": 3,
+            "garage": 2,
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "address": "",
+            "city": "",
+            "zipCode": "",
+            "country": "",
+            "administrationValidation": true,
+            "lessorId": ""
         },
         {
-            "ID": 2,
-            "Nom": "Villa 1",
-            "Type": "Villa",
-            "Prix": 300000,
-            "Surface": 300,
-            "Chambres": 5,
-            "Salles_de_bain": 4,
-            "Garages": 3,
-            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "Image": "villa.jpg"
+            "id": "2",
+            "name": "Villa 1",
+            "type": "Villa",
+            "price": 300000,
+            "surface": 300,
+            "room": 5,
+            "bathroom": 4,
+            "garage": 3,
+            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+            "address": "",
+            "city": "",
+            "zipCode": "",
+            "country": "",
+            "administrationValidation": true,
+            "lessorId": ""
         }
     ],
 

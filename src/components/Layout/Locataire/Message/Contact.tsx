@@ -20,7 +20,7 @@ const ContactList = ({
     const [filter, setFilter] = useState<string>("");
 
     // Temporary
-    const ME = 2;
+    const ME = "2";
 
     useEffect(() => {
         const dataFetch = async () => {
@@ -30,7 +30,7 @@ const ContactList = ({
                 )
             ).json();
 
-            setState(data.filter((value: Utilisateur) => value.ID !== ME && toComparable(value.Nom, value.Prenom, value.Type).includes(toComparable(filter))));
+            setState(data.filter((value: Utilisateur) => value.id !== ME && toComparable(value.Nom, value.Prenom, value.Type).includes(toComparable(filter))));
             setUser(state[0]);
         };
 
