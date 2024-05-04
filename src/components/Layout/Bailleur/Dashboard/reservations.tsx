@@ -1,12 +1,16 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reservation, Utilisateur } from "@/components/customclass";
 import { useEffect, useState } from "react";
 import Usercard from "@/components/ui/usercard";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Copy } from "lucide-react";
+import { Calendar } from "@/components/ui/customcalendar";
+import Calendrier from "../../Calendrier";
 
 const ReservationsBoard = () => {
 
@@ -50,19 +54,27 @@ const ReservationsBoard = () => {
 
     return (
         <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
-            <CardHeader className="flex flex-row items-center">
-              <div className="grid gap-2">
+            <CardHeader className="flex flex-row justify-between items-center">
+              <div className="flex flex-col gap-2">
                 <CardTitle>Reservations</CardTitle>
                 <CardDescription>
                   Recent reservations from your store.
                 </CardDescription>
               </div>
-              <Button asChild size="sm" className="ml-auto gap-1">
-                <Link href="#">
-                  View All
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              </Button>
+
+
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline">View</Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-fit">
+
+                  <Calendrier/>
+
+                </DialogContent>
+              </Dialog>
+
+              
             </CardHeader>
             <CardContent>
               <Table>
