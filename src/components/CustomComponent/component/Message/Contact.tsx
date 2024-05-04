@@ -11,11 +11,10 @@ import { User } from "@/type/User";
 
 
 
-
-
 const ContactList = ({
     onUserChange,
-  }: React.HTMLAttributes<HTMLDivElement> & { onUserChange?: (user : User) => void }) => {
+    Categories
+  }: React.HTMLAttributes<HTMLDivElement> & { onUserChange?: (user : User) => void , Categories: User["Type"][]}) => {
     const [state, setState] = useState<User[]>([]);
     const [User, setUser] = useState<User>((state[0] || {}) as User);
     const [filter, setFilter] = useState<string>("");
@@ -87,22 +86,22 @@ const ContactList = ({
                 <Tabs defaultValue="Locataires" className="xl:col-span-2 w-full">
                     <TabsList className="w-full">
                         <TabsTrigger value="Tous" className="w-full">Tous</TabsTrigger>
-                        <TabsTrigger value="Locataires" className="w-full">Locataires</TabsTrigger>
-                        <TabsTrigger value="Prestataires" className="w-full">Prestataires</TabsTrigger>
-                        <TabsTrigger value="Admins" className="w-full">Admins</TabsTrigger>
+                        {
+                            Categories.map((value) => (
+                                <TabsTrigger value={value} className="w-full">{value+"s"}</TabsTrigger>
+                            ))
+                        }
                     </TabsList>
-                    <TabsContent value="Tous">
+                    <TabsContent value={"Tous"}>
                         {ContactListFiltered(state)}
                     </TabsContent>
-                    <TabsContent value="Locataires">
-                        {ContactListFiltered(state.filter((value) => value.Type === "Locataire"))}
-                    </TabsContent>
-                    <TabsContent value="Prestataires">
-                        {ContactListFiltered(state.filter((value) => value.Type === "Prestataire"))}
-                    </TabsContent>
-                    <TabsContent value="Admins">
-                        {ContactListFiltered(state.filter((value) => value.Type === "Admin"))}
-                    </TabsContent>
+                    {
+                        Categories.map((value) => (
+                            <TabsContent value={value}>
+                                {ContactListFiltered(state.filter((val) => val.Type === value))}
+                            </TabsContent>
+                        ))
+                    }
                 </Tabs>
             </div>
             

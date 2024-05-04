@@ -37,11 +37,11 @@
 
 ### Admin
 - [ ] Dashboard
-    - [ ] Partie Chiffre
+    - [x] Partie Chiffre
         - [x] Informations Préstations (argent rapporté, croissance)
         - [x] Informations Réservations (argent rapporté, croissance)
-        - [ ] Informations Issues (argent rapporté, croissance)
-        - [ ] Informations Utilisateurs (argent rapporté, croissance)
+        - [x] Informations Issues (argent rapporté, croissance)
+        - [x] Informations Utilisateurs (argent rapporté, croissance)
     - [ ] Overview des Reservations, Prestations et Issues
         - [ ] Pouvoir ouvrir une popup des details
 

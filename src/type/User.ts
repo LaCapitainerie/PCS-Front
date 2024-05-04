@@ -4,7 +4,7 @@ export interface User {
     Nom: string;
     Prenom: string;
     Email: string;
-    Type: string;
+    Type: "Bailleur" | "Locataire" | "Prestataire" | "Admin";
     Avatar: string;
     Description: string;
     Joined: string;

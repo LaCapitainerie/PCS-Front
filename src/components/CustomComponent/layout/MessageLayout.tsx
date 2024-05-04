@@ -9,9 +9,10 @@ import { User } from '@/type/User';
 
 interface MessageProps {
     children: ReactNode;
+    categories: User["Type"][];
 }
 
-const Message_Layout: React.FC<MessageProps> = ({ children }) => {
+const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
     const [User, setUser] = useState<User>();
 
     const SelectedUser = (User: User) => {
@@ -22,7 +23,7 @@ const Message_Layout: React.FC<MessageProps> = ({ children }) => {
     return (
       <>
           <Sidebar index={1}/>
-          <ContactList onUserChange={SelectedUser}/>
+          <ContactList onUserChange={SelectedUser} Categories={categories}/>
           <MessageList CurrentUser={User}/>
           <Toaster />
       </>
