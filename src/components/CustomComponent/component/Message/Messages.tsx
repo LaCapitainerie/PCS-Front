@@ -46,7 +46,9 @@ const MessageList = ({
             ).json();
 
             if (CurrentUser === undefined) return;
-            console.log(data.filter((value: Message) => [value.ID_Destinataire, value.ID_Expediteur].includes(CurrentUser.ID) && [value.ID_Destinataire, value.ID_Expediteur].includes(Me)));
+            data.forEach((value: Message) => {
+                console.log(value, CurrentUser.ID, Me, [value.ID_Destinataire, value.ID_Expediteur], [value.ID_Destinataire, value.ID_Expediteur].includes(CurrentUser.ID), [value.ID_Destinataire, value.ID_Expediteur].includes(Me));
+            });
             
             setMessages(data.filter((value: Message) => [value.ID_Destinataire, value.ID_Expediteur].includes(CurrentUser.ID) && [value.ID_Destinataire, value.ID_Expediteur].includes(Me)));
         };

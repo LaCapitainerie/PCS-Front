@@ -1,8 +1,8 @@
 "use client"
 
+import { Prestation } from "@/type/Prestation"
 import { ColumnDef } from "@tanstack/react-table"
 import { BadgeCheckIcon, BadgeXIcon, Hourglass, PackageSearchIcon } from "lucide-react"
-import { Housing } from "../functions"
 
 
 
@@ -10,7 +10,7 @@ import { Housing } from "../functions"
 // You can use a Zod schema here if you want.
 
 
-function getStatus(status:Housing["status"]) {
+function getStatus(status:Prestation["Status"]) {
   switch (status) {
     case "pending":
       return <Hourglass className="h-5 w-5 text-grey-500"/>
@@ -23,19 +23,17 @@ function getStatus(status:Housing["status"]) {
   }
 }
 
-export const columns: ColumnDef<Housing>[] = [
+export const columns: ColumnDef<Prestation>[] = [
   {
     accessorKey: "status",
     header: () => <div className="text-right">Status</div>,
     cell: ({ row }) => {
       const Status = row.getValue("status") as string;
-      const formatted = getStatus(Status as Housing["status"]);
+      const formatted = getStatus(Status as Prestation["Status"]);
  
       return <>{formatted}</>;
     },
-  },
-
-  
+  },  
   {
     accessorKey: "particulier",
     header: "Email",

@@ -2,7 +2,7 @@
 
 import React, { ReactNode } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
-import { Dashboard } from '../component/Dashboard/dashboard';
+import { ValuableThing, Dashboard } from '../component/Dashboard/dashboard';
 
 interface LayoutProps {
     children: ReactNode;
@@ -10,10 +10,26 @@ interface LayoutProps {
 
 const Dashboard_Layout: React.FC<LayoutProps> = ({ children }) => {
 
+
+    const Columns: ValuableThing[] = [
+        {
+            name: 'Prestations',
+            path: '/prestation',
+            valueColumn: 'Prix',
+            dateColumn: 'Date',
+        },
+        {
+            name: 'Reservations',
+            path: '/reservation',
+            valueColumn: 'Prix',
+            dateColumn: 'Date',
+        }
+    ];
+
     return (
         <>
           <Sidebar index={2}/>
-          <Dashboard/>
+          <Dashboard Column={Columns}/>
         </>
     );
 }

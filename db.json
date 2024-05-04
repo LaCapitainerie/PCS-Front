@@ -344,8 +344,8 @@
     "message": [
       {
         "ID": "0",
-        "ID_Exp": "3",
-        "ID_Dest": "6",
+        "ID_Expediteur": "3",
+        "ID_Destinataire": "6",
         "Date": "2023-05-05",
         "Heure": "10:00:00",
         "Message": "Bonjour, je suis intéressé par votre bien immobilier.",
@@ -353,8 +353,8 @@
       },
       {
         "ID": "1",
-        "ID_Exp": "6",
-        "ID_Dest": "3",
+        "ID_Expediteur": "6",
+        "ID_Destinataire": "3",
         "Date": "2023-05-05",
         "Heure": "10:30:00",
         "Message": "Bonjour, je suis disponible pour une visite demain.",
