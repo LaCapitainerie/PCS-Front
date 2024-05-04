@@ -31,11 +31,13 @@ export function Dashboard() {
 
     useEffect(() => {
         const dataFetch = async () => {
+
             const data: User[] = await (
                 await fetch(
-                  `${process.env.LOCAL_PUBLIC_API_URL}/users`
+                  `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
                 )
             ).json();
+
 
             setUsers(data);
         };
@@ -43,7 +45,7 @@ export function Dashboard() {
         dataFetch();
     }, [filterUser, filterUserCount]);
 
-
+    
 
 
 

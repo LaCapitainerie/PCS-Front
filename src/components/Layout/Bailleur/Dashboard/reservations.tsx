@@ -17,7 +17,7 @@ const ReservationsBoard = () => {
         const dataFetch = async () => {
             const data: Reservation[] = await (
                 await fetch(
-                  `${process.env.LOCAL_PUBLIC_API_URL}/reservations`
+                  `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/reservations`
                 )
             ).json();
 
@@ -33,7 +33,7 @@ const ReservationsBoard = () => {
         const dataFetch = async () => {
             const data: User[] = await (
                 await fetch(
-                  `${process.env.LOCAL_PUBLIC_API_URL}/users`
+                  `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
                 )
             ).json();
 

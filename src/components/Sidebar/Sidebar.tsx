@@ -70,10 +70,7 @@ const Component = (index:number) => {
                 await fetch(
                     `${process.env.NEXT_PUBLIC_API_URL}/sidebar`
                 )
-            ).json();
-
-            console.log(data.Sidebar);
-            
+            ).json();            
 
             setState(data.Sidebar.filter((value: SidebarType) => value.Permission <= Me));
         };

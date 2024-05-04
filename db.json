@@ -78,7 +78,7 @@
         "Joined": "2019-01-01"
       }
     ],
-    "Prestataires": [
+    "prestataires": [
       {
         "ID": "0",
         "ID_user": "7",
@@ -109,6 +109,57 @@
       }
     ],
     "property": [
+      {
+        "ID": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+        "Name": "Appartement 1",
+        "type": "Appartement",
+        "Price": 100000,
+        "Surface": 100,
+        "Room": 3,
+        "Bathroom": 2,
+        "Garage": 0,
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "Adress": "",
+        "City": "",
+        "Zip_Code": "",
+        "Country": "",
+        "AdministrationValidation": false,
+        "Lessor_id": "f3b2507f-3021-4f8e-836b-c15c5ee3a5a8"
+      },
+      {
+        "ID": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+        "Name": "Maison 1",
+        "type": "Maison",
+        "Price": 200000,
+        "Surface": 200,
+        "Room": 4,
+        "Bathroom": 3,
+        "Garage": 2,
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "Adress": "",
+        "City": "",
+        "Zip_Code": "",
+        "Country": "",
+        "AdministrationValidation": true,
+        "Lessor_id": "1da0f550-9cc1-4881-95c2-ebeb78cb7df0"
+      },
+      {
+        "ID": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+        "Name": "Villa 1",
+        "type": "Villa",
+        "Price": 300000,
+        "Surface": 300,
+        "Room": 5,
+        "Bathroom": 4,
+        "Garage": 3,
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "Adress": "",
+        "City": "",
+        "Zip_Code": "",
+        "Country": "",
+        "AdministrationValidation": true,
+        "Lessor_id": "647d216d-d534-4c7e-b1f1-0c2d815bd3f4"
+      },
       {
         "id": "0",
         "name": "Appartement 1",
@@ -245,21 +296,51 @@
     ],
     "property_image": [
       {
-        "ID_Photo": "0",
-        "ID_Bien_Immobilier": "0",
-        "Image": "https://example.com/image1.jpg"
+          "ID": 0,
+          "ID_property": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933a.jpg"
       },
       {
-        "ID_Photo": "1",
-        "ID_Bien_Immobilier": "1",
-        "Image": "https://example.com/image2.jpg"
+          "ID": 1,
+          "ID_property": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933b.jpg"
       },
       {
-        "ID_Photo": "2",
-        "ID_Bien_Immobilier": "2",
-        "Image": "https://example.com/image3.jpg"
+          "ID": 2,
+          "ID_property": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933c.jpg"
+      },
+      {
+          "ID": 3,
+          "ID_property": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933d.jpg"
+      },
+      {
+          "ID": 4,
+          "ID_property": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933e.jpg"
+      },
+      {
+          "ID": 5,
+          "ID_property": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933f.jpg"
+      },
+      {
+          "ID": 6,
+          "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933g.jpg"
+      },
+      {
+          "ID": 7,
+          "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933h.jpg"
+      },
+      {
+          "ID": 8,
+          "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933i.jpg"
       }
-    ],
+  ],
     "message": [
       {
         "ID": "0",

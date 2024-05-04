@@ -41,7 +41,7 @@ const MessageList = ({
         const dataFetch = async () => {
             const data = await (
                 await fetch(
-                    `${process.env.LOCAL_PUBLIC_API_URL}/message`
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/message`
                 )
             ).json();
 

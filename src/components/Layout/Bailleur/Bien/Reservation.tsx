@@ -80,7 +80,7 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
     const dataFetch = async () => {
       const data: User[] = await (
           await fetch(
-            `${process.env.LOCAL_PUBLIC_API_URL}/users`
+            `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
           )
       ).json();
 

@@ -22,11 +22,11 @@ const MainContent = ({house}: {house:Property | undefined}) => {
         const dataFetch = async () => {
             const data: Property_image[] = await (
                 await fetch(
-                    `${process.env.LOCAL_PUBLIC_API_URL}/property_image`
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/property_image`
                 )
             ).json();
 
-            setPhotos(data.filter((photo) => photo.ID_property === house?.id));
+            setPhotos(data.filter((photo) => photo.ID_property == house?.ID));
         };
 
         dataFetch();
@@ -40,15 +40,15 @@ const MainContent = ({house}: {house:Property | undefined}) => {
 
             const data2: ReservationType[] = await (
                 await fetch(
-                    `${process.env.LOCAL_PUBLIC_API_URL}/reservation`
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/reservation`
                 )
             ).json();
             
-            setReservation(data2.filter((res) => res.ID_property === house?.id));
+            setReservation(data2.filter((res) => res.ID_property === house?.ID));
 
             const data3: Prestataire[] = await (
                 await fetch(
-                    `${process.env.LOCAL_PUBLIC_API_URL}/prestataires`
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/prestataires`
                 )
             ).json();
 
@@ -65,7 +65,7 @@ const MainContent = ({house}: {house:Property | undefined}) => {
                 <CarouselPlugin images={photos} />
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
-                        <Title titre="Nom du bien" sous_titre={house?.description}/>
+                        <Title titre="Nom du bien" sous_titre={house?.Description}/>
                         <div className="flex flex-row justify-around gap-2">
                             <CardProperty Prestataire={prestataire} Property={house} />
                         </div>

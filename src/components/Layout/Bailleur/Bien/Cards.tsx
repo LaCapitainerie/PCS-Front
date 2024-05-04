@@ -41,7 +41,7 @@ function typeToDom(type: string = "", status: "pending" | "processing" | "succes
   }
 }
 
-const descriptionKey = ["Nom", "Type", "Prix", "Surface", "Chambres", "Salles_de_bain", "Garages"]
+const descriptionKey = ["Name", "Type", "Price", "Surface", "Room", "Bathroom", "Garage", "Address", "City"]
 
 export function CardProperty({ Property, Prestataire }: { Property: Property | undefined, Prestataire: Prestataire[]}) {
 
