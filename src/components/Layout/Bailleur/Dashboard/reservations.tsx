@@ -67,7 +67,7 @@ const ReservationsBoard = () => {
                 <DialogTrigger asChild>
                   <Button variant="outline">View</Button>
                 </DialogTrigger>
-                <DialogContent className="max-w-fit">
+                <DialogContent className="aspect-w-16 aspect-h-9" style={{maxWidth: '90%'}}>
 
                   <Calendrier/>
 

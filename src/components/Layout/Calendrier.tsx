@@ -9,7 +9,7 @@ interface CalendrierProps {
 const Calendrier: React.FC<CalendrierProps> = () => {
 
     return (
-        <div className='flex flex-row justify-between max-h-80' style={{maxHeight: '33rem'}}>
+        <div className='flex flex-row justify-between' style={{maxHeight: '100%'}}>
             <Calendar/>
             <Order/>
         </div>
