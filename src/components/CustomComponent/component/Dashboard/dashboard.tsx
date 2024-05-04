@@ -26,7 +26,7 @@ function MakeCard(name:string, currentPresta:string, ratioPresta:string, index:n
       <CardContent>
         <div className="text-2xl font-bold">{currentPresta}$</div>
         <p className="text-xs text-muted-foreground">
-          +{ratioPresta}% from last month
+          {ratioPresta == "not enought data"?ratioPresta:`+${ratioPresta}%`} from last month
         </p>
       </CardContent>
     </Card>
@@ -116,11 +116,14 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
         });
 
         // Get the $ of prestation from the previous month
-        const previousMonthDollar = prestaPrev.reduce((acc, house) => acc + house[column.valueColumn], 0);
-        const thisMonthDollar = prestaThis.reduce((acc, house) => acc + house[column.valueColumn], 0);
+        const previousMonthDollar:number = prestaPrev.reduce((acc, house) => acc + house[column.valueColumn], 0);
+        const thisMonthDollar:number = prestaThis.reduce((acc, house) => acc + house[column.valueColumn], 0);
 
         // Get the augment percentage of $ from the previous month to this month
         const dollarAugmentNumber = ((thisMonthDollar - previousMonthDollar) / previousMonthDollar) * 100;
+
+        console.log(thisMonthDollar);
+        
 
         let newValuable = {
           name: column.name,
@@ -128,8 +131,8 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
           ratioPresta: dollarAugmentNumber.toFixed(2)
         }
 
-        if (newValuable.ratioPresta in ["Infinity", "-Infinity", "NaN", "-NaN"]) {
-          newValuable.ratioPresta = "0";
+        if (["Infinity", "-Infinity", "NaN", "-NaN"].includes(newValuable.ratioPresta)) {
+          newValuable.ratioPresta = "not enought data";
         };
 
         let tmpCurrentValuable = currentValuable;
@@ -153,36 +156,12 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
   return (
     <div className="flex min-h-screen w-full flex-col left-[3.5rem]" style={stylePage}>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+        <div className={`grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-${cards.length}`}>
           {
             cards.map((card, index) => (
               MakeCard(card.name, card.currentPresta, card.ratioPresta, index)
             ))
           }
-          <Card x-chunk="dashboard-01-chunk-2">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Issues</CardTitle>
-              <CircleDot className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">+Stats</div>
-              <p className="text-xs text-muted-foreground">
-                +Stats% from last month
-              </p>
-            </CardContent>
-          </Card>
-          <Card x-chunk="dashboard-01-chunk-3">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Now</CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">+Stats</div>
-              <p className="text-xs text-muted-foreground">
-                +Stats since last hour
-              </p>
-            </CardContent>
-          </Card>
         </div>
 
 

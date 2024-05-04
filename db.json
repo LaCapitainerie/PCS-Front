@@ -84,28 +84,28 @@
         "ID_user": "7",
         "Locataire": "Jacob",
         "Type": "peinture",
-        "Prix": "20"
+        "Prix": 20
       },
       {
         "ID": "1",
         "ID_user": "6",
         "particulier": "Ezekiel",
         "Type": "reparation",
-        "Prix": "20"
+        "Prix": 20
       },
       {
         "ID": "2",
         "ID_user": "5",
         "particulier": "Adolf",
         "Type": "peinture",
-        "Prix": "20"
+        "Prix": 20
       },
       {
         "ID": "3",
         "ID_user": "3",
         "particulier": "Himmler",
         "Type": "peinture",
-        "Prix": "20"
+        "Prix": 20
       }
     ],
     "property": [
@@ -222,10 +222,10 @@
         "Prestataire": "peinture",
         "status": "Disponible",
         "Type": "Appartement",
-        "Date": "2023-05-07",
+        "Date": "2024-04-07",
         "Heure": "14:00:00",
         "Duree": "2",
-        "Prix": "50"
+        "Prix": 50
       },
       {
         "ID_Housing": "1",
@@ -236,10 +236,10 @@
         "Prestataire": "reparation",
         "status": "Indisponible",
         "Type": "Maison",
-        "Date": "2023-05-09",
+        "Date": "2024-05-09",
         "Heure": "10:00:00",
         "Duree": "3",
-        "Prix": "100"
+        "Prix": 100
       },
       {
         "ID_Housing": "2",
@@ -250,10 +250,10 @@
         "Prestataire": "peinture",
         "status": "Disponible",
         "Type": "Villa",
-        "Date": "2023-05-12",
+        "Date": "2024-05-12",
         "Heure": "12:00:00",
         "Duree": "4",
-        "Prix": "150"
+        "Prix": 150
       }
     ],
     "reservation": [
@@ -263,11 +263,11 @@
         "ID_lessor": "0",
         "ID_property": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
         "Status": "Valide",
-        "Date": "2023-05-07",
+        "Date": "2024-04-07",
         "Heure": "14:00:00",
         "Description": "",
         "Duree": "2",
-        "Prix": "50"
+        "Prix": 50
       },
       {
         "ID": "1",
@@ -275,11 +275,11 @@
         "ID_lessor": "1",
         "ID_property": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
         "Status": "En Attente",
-        "Date": "2023-05-09",
+        "Date": "2024-05-09",
         "Heure": "10:00:00",
         "Description": "",
         "Duree": "3",
-        "Prix": "50"
+        "Prix": 50
       },
       {
         "ID": "2",
@@ -287,11 +287,11 @@
         "ID_lessor": "2",
         "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
         "Status": "Valide",
-        "Date": "2023-05-12",
+        "Date": "2024-05-12",
         "Heure": "12:00:00",
         "Description": "",
         "Duree": "4",
-        "Prix": "50"
+        "Prix": 50
       }
     ],
     "property_image": [
@@ -346,7 +346,7 @@
         "ID": "0",
         "ID_Expediteur": "3",
         "ID_Destinataire": "6",
-        "Date": "2023-05-05",
+        "Date": "2024-05-05",
         "Heure": "10:00:00",
         "Message": "Bonjour, je suis intéressé par votre bien immobilier.",
         "Lu": "true"
@@ -355,7 +355,7 @@
         "ID": "1",
         "ID_Expediteur": "6",
         "ID_Destinataire": "3",
-        "Date": "2023-05-05",
+        "Date": "2024-05-05",
         "Heure": "10:30:00",
         "Message": "Bonjour, je suis disponible pour une visite demain.",
         "Lu": "true"

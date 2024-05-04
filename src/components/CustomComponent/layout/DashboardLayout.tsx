@@ -4,32 +4,17 @@ import React, { ReactNode } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { ValuableThing, Dashboard } from '../component/Dashboard/dashboard';
 
-interface LayoutProps {
+interface DashBoardProps {
     children: ReactNode;
+    dataColumn: ValuableThing[];
 }
 
-const Dashboard_Layout: React.FC<LayoutProps> = ({ children }) => {
-
-
-    const Columns: ValuableThing[] = [
-        {
-            name: 'Prestations',
-            path: '/prestation',
-            valueColumn: 'Prix',
-            dateColumn: 'Date',
-        },
-        {
-            name: 'Reservations',
-            path: '/reservation',
-            valueColumn: 'Prix',
-            dateColumn: 'Date',
-        }
-    ];
+const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn }: {children:React.ReactNode, dataColumn:ValuableThing[]}) => {
 
     return (
         <>
           <Sidebar index={2}/>
-          <Dashboard Column={Columns}/>
+          <Dashboard Column={dataColumn}/>
         </>
     );
 }
