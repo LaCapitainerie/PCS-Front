@@ -1,378 +1,284 @@
 {
-    "Bien_immobilier": [
-        {
-            "id": "0",
-            "name": "Appartement 1",
-            "type": "Appartement",
-            "price": 100000,
-            "surface": 100,
-            "room": 3,
-            "bathroom": 2,
-            "garage": 0,
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "address": "",
-            "city": "",
-            "zipCode": "",
-            "country": "",
-            "administrationValidation": false,
-            "lessorId": ""
-        },
-        {
-            "id": "1",
-            "name": "Maison 1",
-            "type": "Maison",
-            "price": 200000,
-            "surface": 200,
-            "room": 4,
-            "bathroom": 3,
-            "garage": 2,
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "address": "",
-            "city": "",
-            "zipCode": "",
-            "country": "",
-            "administrationValidation": true,
-            "lessorId": ""
-        },
-        {
-            "id": "2",
-            "name": "Villa 1",
-            "type": "Villa",
-            "price": 300000,
-            "surface": 300,
-            "room": 5,
-            "bathroom": 4,
-            "garage": 3,
-            "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "address": "",
-            "city": "",
-            "zipCode": "",
-            "country": "",
-            "administrationValidation": true,
-            "lessorId": ""
-        }
+    "users": [
+      {
+        "ID": "0",
+        "Username": "BySajed",
+        "Nom": "Ben Youssef",
+        "Prenom": "Sajed",
+        "Email": "Sajed.Ben_Youssef@email.com",
+        "Type": "Admin",
+        "Avatar": "https://github.com/BySajed.png",
+        "Description": "0 Faute c'est promis !",
+        "Joined": "2019-01-01"
+      },
+      {
+        "ID": "1",
+        "Username": "Skalefou",
+        "Nom": "Poupard",
+        "Prenom": "Thomas",
+        "Email": "Thomas.Poupard@email.com",
+        "Type": "Admin",
+        "Avatar": "https://github.com/Skalefou.png",
+        "Description": "Indisponible pour le moment. appelez la CIA.",
+        "Joined": "2019-01-01"
+      },
+      {
+        "ID": "2",
+        "Username": "LaCapitainerie",
+        "Nom": "Antreassian",
+        "Prenom": "Hugo",
+        "Email": "Hugo.Antreassian@gmail.com",
+        "Type": "Admin",
+        "Avatar": "https://github.com/LaCapitainerie.png",
+        "Description": "C'est moi qui gère tout ça !",
+        "Joined": "2019-01-01"
+      },
+      {
+        "ID": "3",
+        "Username": "Host Domain",
+        "Nom": "Host",
+        "Prenom": "Domain",
+        "Email": "domain.host@email.com",
+        "Type": "Locataire",
+        "Avatar": "https://randomuser.me/api/portraits",
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "Joined": "2019-01-01"
+      },
+      {
+        "ID": "4",
+        "Username": "Template",
+        "Nom": "Template",
+        "Prenom": "Template",
+        "Email": "template.template@email.com",
+        "Type": "Admin",
+        "Avatar": "https://randomuser.me/api/portraits",
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "Joined": "2019-01-01"
+      },
+      {
+        "ID": "5",
+        "Username": "John Doe",
+        "Nom": "Doe",
+        "Prenom": "John",
+        "Email": "john.doe@email.com",
+        "Type": "Prestataire",
+        "Avatar": "https://randomuser.me/api/portraits",
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "Joined": "2019-01-01"
+      },
+      {
+        "ID": "6",
+        "Username": "Jean Dupont",
+        "Nom": "Dupont",
+        "Prenom": "Jean",
+        "Email": "jean.dupont@email.com",
+        "Type": "Locataire",
+        "Avatar": "https://randomuser.me/api/portraits",
+        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "Joined": "2019-01-01"
+      }
     ],
-
-    "Housing": [
-        {
-            "ID_Housing": 0,
-            "ID_Client": 0,
-            "ID_Bien_Immobilier": 0,
-            "Nom": "jean",
-            "Prenom": "dupont",
-            "Prestataire": "jean.dupont@gmail.com",
-            "status": "processing",
-            "Type": "electricite",
-            "Date": "2024-03-01",
-            "Heure": "10:00",
-            "Duree": 2,
-            "Prix": 50.00
-        },
-        {
-            "ID_Housing": 1,
-            "ID_Client": 1,
-            "ID_Bien_Immobilier": 1,
-            "Nom": "john",
-            "Prenom": "doe",
-            "Prestataire": "john.doe@gmail.com",
-            "status": "success",
-            "Type": "chauffage",
-            "Date": "2024-03-01",
-            "Heure": "10:00",
-            "Duree": 2,
-            "Prix": 75
-        },
-        {
-            "ID_Housing": 2,
-            "ID_Client": 2,
-            "ID_Bien_Immobilier": 2,
-            "Nom": "template",
-            "Prenom": "template",
-            "Prestataire": "template@gmail.com",
-            "status": "failed",
-            "Type": "jardinage",
-            "Date": "2024-04-01",
-            "Heure": "10:00",
-            "Duree": 2,
-            "Prix": 150
-        },
-        {
-            "ID_Housing": 3,
-            "ID_Client": 3,
-            "ID_Bien_Immobilier": 3,
-            "Nom": "host",
-            "Prenom": "domain",
-            "Prestataire": "host@domain.com",
-            "status": "pending",
-            "Type": "reparation",
-            "Date": "2024-04-01",
-            "Heure": "10:00",
-            "Duree": 2,
-            "Prix": 250
-        }
-    ],
-
-    "Reservations": [
-        {
-            "ID_Reservation": 0,
-            "ID_Housing": 0,
-            "ID_Prestataire": 0,
-            "ID_Locataire": 0,
-            "Date": "2024-04-20",
-            "Heure": "10:00",
-            "Duree": 2,
-            "Prix": 50,
-            "Statut": "En attente"
-        },
-        {
-            "ID_Reservation": 2,
-            "ID_Housing": 2,
-            "ID_Prestataire": 2,
-            "ID_Locataire": 1,
-            "Date": "2024-04-13",
-            "Heure": "10:00",
-            "Duree": 2,
-            "Prix": 50,
-            "Statut": "Refusée"
-        },
-        {
-            "ID_Reservation": 3,
-            "ID_Housing": 2,
-            "ID_Prestataire": 2,
-            "ID_Locataire": 2,
-            "Date": "2024-04-16",
-            "Heure": "10:00",
-            "Duree": 5,
-            "Prix": 50,
-            "Statut": "Acceptée"
-        }
-    ],
-
     "Prestataires": [
-        {
-            "ID_Prestataire": 0,
-            "ID": 7,
-            "Locataire": "Jacob",
-            "Type": "peinture",
-            "Prix": 20
-        },
-        {
-            "ID_Prestataire": 1,
-            "ID": 6,
-            "particulier": "Ezekiel",
-            "Type": "reparation",
-            "Prix": 20
-        },
-        {
-            "ID_Prestataire": 2,
-            "ID": 5,
-            "particulier": "Adolf",
-            "Type": "peinture",
-            "Prix": 20
-        },
-        {
-            "ID_Prestataire": 3,
-            "ID": 3,
-            "particulier": "Himmler",
-            "Type": "peinture",
-            "Prix": 20
-        }
+      {
+        "ID": "0",
+        "ID_user": "7",
+        "Locataire": "Jacob",
+        "Type": "peinture",
+        "Prix": "20"
+      },
+      {
+        "ID": "1",
+        "ID_user": "6",
+        "particulier": "Ezekiel",
+        "Type": "reparation",
+        "Prix": "20"
+      },
+      {
+        "ID": "2",
+        "ID_user": "5",
+        "particulier": "Adolf",
+        "Type": "peinture",
+        "Prix": "20"
+      },
+      {
+        "ID": "3",
+        "ID_user": "3",
+        "particulier": "Himmler",
+        "Type": "peinture",
+        "Prix": "20"
+      }
     ],
-
-    "Photos": [
-        {
-            "ID_Photo": 0,
-            "ID_Bien": 0,
-            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933a.jpg"
-        },
-        {
-            "ID_Photo": 1,
-            "ID_Bien": 0,
-            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933b.jpg"
-        },
-        {
-            "ID_Photo": 2,
-            "ID_Bien": 0,
-            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933c.jpg"
-        },
-        {
-            "ID_Photo": 3,
-            "ID_Bien": 1,
-            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933d.jpg"
-        },
-        {
-            "ID_Photo": 4,
-            "ID_Bien": 1,
-            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933e.jpg"
-        },
-        {
-            "ID_Photo": 5,
-            "ID_Bien": 1,
-            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933f.jpg"
-        },
-        {
-            "ID_Photo": 6,
-            "ID_Bien": 2,
-            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933g.jpg"
-        },
-        {
-            "ID_Photo": 7,
-            "ID_Bien": 2,
-            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933h.jpg"
-        },
-        {
-            "ID_Photo": 8,
-            "ID_Bien": 2,
-            "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933i.jpg"
-        }
+    "property": [
+      {
+        "id": "0",
+        "name": "Appartement 1",
+        "type": "Appartement",
+        "price": 100000,
+        "surface": 100,
+        "room": 3,
+        "bathroom": 2,
+        "garage": 0,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "address": "",
+        "city": "",
+        "zipCode": "",
+        "country": "",
+        "administrationValidation": false,
+        "lessorId": ""
+      },
+      {
+        "id": "1",
+        "name": "Maison 1",
+        "type": "Maison",
+        "price": 200000,
+        "surface": 200,
+        "room": 4,
+        "bathroom": 3,
+        "garage": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "address": "",
+        "city": "",
+        "zipCode": "",
+        "country": "",
+        "administrationValidation": true,
+        "lessorId": ""
+      },
+      {
+        "id": "2",
+        "name": "Villa 1",
+        "type": "Villa",
+        "price": 300000,
+        "surface": 300,
+        "room": 5,
+        "bathroom": 4,
+        "garage": 3,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "address": "",
+        "city": "",
+        "zipCode": "",
+        "country": "",
+        "administrationValidation": true,
+        "lessorId": ""
+      }
     ],
-
-    "Null": [],
-
-    "Utilisateurs": [
-        {
-            "ID": 6,
-            "Username": "Jean Dupont",
-            "Nom": "Dupont",
-            "Prenom": "Jean",
-            "Email": "jean.dupont@email.com",
-            "Type": "Locataire",
-            "Avatar": "https://randomuser.me/api/portraits",
-            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "Joined": "2019-01-01"
-        },
-        {
-            "ID": 5,
-            "Username": "John Doe",
-            "Nom": "Doe",
-            "Prenom": "John",
-            "Email": "john.doe@email.com",
-            "Type": "Prestataire",
-            "Avatar": "https://randomuser.me/api/portraits",
-            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "Joined": "2019-01-01"
-        },
-        {
-            "ID": 4,
-            "Username": "Template",
-            "Nom": "Template",
-            "Prenom": "Template",
-            "Email": "template.template@email.com",
-            "Type": "Admin",
-            "Avatar": "https://randomuser.me/api/portraits",
-            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "Joined": "2019-01-01"
-        },
-        {
-            "ID": 3,
-            "Username": "Host Domain",
-            "Nom": "Host",
-            "Prenom": "Domain",
-            "Email": "domain.host@email.com",
-            "Type": "Locataire",
-            "Avatar": "https://randomuser.me/api/portraits",
-            "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-            "Joined": "2019-01-01"
-        },
-        {
-            "ID": 2,
-            "Username": "LaCapitainerie",
-            "Nom": "Antreassian",
-            "Prenom": "Hugo",
-            "Email": "Hugo.Antreassian@gmail.com",
-            "Type": "Admin",
-            "Avatar": "https://github.com/LaCapitainerie.png",
-            "Description": "C'est moi qui gère tout ça !",
-            "Joined": "2019-01-01"
-        },
-        {
-            "ID": 1,
-            "Username": "Skalefou",
-            "Nom": "Poupard",
-            "Prenom": "Thomas",
-            "Email": "Thomas.Poupard@email.com",
-            "Type": "Admin",
-            "Avatar": "https://github.com/Skalefou.png",
-            "Description": "Indisponible pour le moment. appelez la CIA.",
-            "Joined": "2019-01-01"
-        },
-        {
-            "ID": 0,
-            "Username": "BySajed",
-            "Nom": "Ben Youssef",
-            "Prenom": "Sajed",
-            "Email": "Sajed.Ben_Youssef@email.com",
-            "Type": "Admin",
-            "Avatar": "https://github.com/BySajed.png",
-            "Description": "0 Faute c'est promis !",
-            "Joined": "2019-01-01"
-        }
+    "prestation": [
+      {
+        "ID_Housing": "0",
+        "ID_Client": "0",
+        "ID_Bien_Immobilier": "0",
+        "Nom": "Hugo",
+        "Prenom": "Antreassian",
+        "Prestataire": "peinture",
+        "status": "Disponible",
+        "Type": "Appartement",
+        "Date": "2023-05-07",
+        "Heure": "14:00:00",
+        "Duree": "2",
+        "Prix": "50"
+      },
+      {
+        "ID_Housing": "1",
+        "ID_Client": "1",
+        "ID_Bien_Immobilier": "1",
+        "Nom": "Thomas",
+        "Prenom": "Poupard",
+        "Prestataire": "reparation",
+        "status": "Indisponible",
+        "Type": "Maison",
+        "Date": "2023-05-09",
+        "Heure": "10:00:00",
+        "Duree": "3",
+        "Prix": "100"
+      },
+      {
+        "ID_Housing": "2",
+        "ID_Client": "2",
+        "ID_Bien_Immobilier": "2",
+        "Nom": "Sajed",
+        "Prenom": "Ben Youssef",
+        "Prestataire": "peinture",
+        "status": "Disponible",
+        "Type": "Villa",
+        "Date": "2023-05-12",
+        "Heure": "12:00:00",
+        "Duree": "4",
+        "Prix": "150"
+      }
     ],
-
-    "Messages": [
-        {
-            "ID": 0,
-            "ID_Exp": 0,
-            "ID_Dest": 1,
-            "Date": "2019-01-01",
-            "Heure": "10:00",
-            "Message": "Premier Message de Jean Dupont à John Doe."
-        },
-        {
-            "ID": 1,
-            "ID_Exp": 1,
-            "ID_Dest": 0,
-            "Date": "2019-01-01",
-            "Heure": "10:00",
-            "Message": "Retour de John Doe à Jean Dupont."
-        },
-        {
-            "ID": 2,
-            "ID_Exp": 2,
-            "ID_Dest": 3,
-            "Date": "2019-01-01",
-            "Heure": "10:00",
-            "Message": "Message de Template à Host Domain."
-        },
-        {
-            "ID": 3,
-            "ID_Exp": 0,
-            "ID_Dest": 2,
-            "Date": "2019-01-01",
-            "Heure": "10:00",
-            "Message": "Message de Jean Dupont à Template."
-        },
-        {
-            "ID": 4,
-            "ID_Exp": 2,
-            "ID_Dest": 1,
-            "Date": "2019-01-01",
-            "Heure": "10:00",
-            "Message": "Qu-est-ce que tu crois toi ?!"
-        },
-        {
-            "ID": 5,
-            "ID_Exp": 2,
-            "ID_Dest": 1,
-            "Date": "2019-01-01",
-            "Heure": "10:01",
-            "Message": "Tu vas faire quoi avec tes banques ?"
-        },
-        {
-            "ID": 6,
-            "ID_Exp": 2,
-            "ID_Dest": 1,
-            "Date": "2019-01-01",
-            "Heure": "10:01",
-            "Message": "Tu vas racheter le paradis avec tes banques ?"
-        },
-        {
-            "ID": 6,
-            "ID_Exp": 2,
-            "ID_Dest": 1,
-            "Date": "2019-01-01",
-            "Heure": "10:03",
-            "Message": "Tu t'enorgueillis, tu te crois tout puissant ? Tous les jours tu m'appelles ! Et puis tu veux que moi je sois gentil avec toi ?"
-        }
+    "reservation": [
+      {
+        "ID": "0",
+        "ID_Tenant": "3",
+        "ID_lessor": "0",
+        "ID_property": "0",
+        "Status": "Valide",
+        "Date": "2023-05-07",
+        "Heure": "14:00:00",
+        "Description": "",
+        "Duree": "2",
+        "Prix": "50"
+      },
+      {
+        "ID": "1",
+        "ID_Tenant": "6",
+        "ID_lessor": "1",
+        "ID_property": "1",
+        "Status": "En Attente",
+        "Date": "2023-05-09",
+        "Heure": "10:00:00",
+        "Description": "",
+        "Duree": "3",
+        "Prix": "50"
+      },
+      {
+        "ID": "2",
+        "ID_Tenant": "3",
+        "ID_lessor": "2",
+        "ID_property": "2",
+        "Status": "Valide",
+        "Date": "2023-05-12",
+        "Heure": "12:00:00",
+        "Description": "",
+        "Duree": "4",
+        "Prix": "50"
+      }
+    ],
+    "property_image": [
+      {
+        "ID_Photo": "0",
+        "ID_Bien_Immobilier": "0",
+        "Image": "https://example.com/image1.jpg"
+      },
+      {
+        "ID_Photo": "1",
+        "ID_Bien_Immobilier": "1",
+        "Image": "https://example.com/image2.jpg"
+      },
+      {
+        "ID_Photo": "2",
+        "ID_Bien_Immobilier": "2",
+        "Image": "https://example.com/image3.jpg"
+      }
+    ],
+    "message": [
+      {
+        "ID": "0",
+        "ID_Exp": "3",
+        "ID_Dest": "6",
+        "Date": "2023-05-05",
+        "Heure": "10:00:00",
+        "Message": "Bonjour, je suis intéressé par votre bien immobilier.",
+        "Lu": "true"
+      },
+      {
+        "ID": "1",
+        "ID_Exp": "6",
+        "ID_Dest": "3",
+        "Date": "2023-05-05",
+        "Heure": "10:30:00",
+        "Message": "Bonjour, je suis disponible pour une visite demain.",
+        "Lu": "true"
+      }
     ]
-}
+  }
+  

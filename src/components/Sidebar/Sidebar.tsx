@@ -72,8 +72,10 @@ const Component = (index:number) => {
                 )
             ).json();
 
+            console.log(data.Sidebar);
+            
 
-            setState(data.Sidebar.filter((value: SidebarType) => value.permission <= Me));
+            setState(data.Sidebar.filter((value: SidebarType) => value.Permission <= Me));
         };
 
         dataFetch();
@@ -82,18 +84,18 @@ const Component = (index:number) => {
     return (
         <>
             {state.map((value, i) =>
-                <TooltipProvider key={value.id}>
+                <TooltipProvider key={value.Id_tab}>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href={value.href}
+                                href={value.Href}
                                 className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                             >
-                                {React.createElement(icons[value.icon as keyof typeof icons], { className: "h-5 w-5" })}
-                                <span className="sr-only">{value.hover}</span>
+                                {React.createElement(icons[value.Icon as keyof typeof icons], { className: "h-5 w-5" })}
+                                <span className="sr-only">{value.Hover}</span>
                             </Link>
                         </TooltipTrigger>
-                        <TooltipContent side="right">{value.hover}</TooltipContent>
+                        <TooltipContent side="right">{value.Hover}</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
             

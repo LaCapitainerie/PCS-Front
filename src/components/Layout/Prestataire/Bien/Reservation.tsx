@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/select"
 import { Avatar, AvatarFallback, AvatarImage } from "../../../ui/avatar";
 import { DateRange } from "react-day-picker";
-import { Locataire, Reservation as ReservationType, Utilisateur } from "../../../customclass";
+import { Locataire, Reservation as ReservationType, Utilisateur } from "../../../functions";
 import Usercard from "@/components/ui/usercard";
 
 type aggregate = {

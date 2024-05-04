@@ -9,7 +9,7 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
-import { Photos } from "../../../customclass"
+import { Photos } from "../../../functions"
 
 export function CarouselPlugin({ images }: { images: Photos[] }) {
   const plugin = React.useRef(

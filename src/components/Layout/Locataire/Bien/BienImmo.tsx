@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Input } from "@/components/ui/input"
 import { HomeIcon, Hotel } from "lucide-react"
 import { Separator } from "@/components/ui/separator";
-import { toComparable } from "../../../customclass";
+import { toComparable } from "../../../functions";
  
 import {
   Select,

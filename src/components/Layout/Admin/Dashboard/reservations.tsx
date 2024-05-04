@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Reservation, Utilisateur } from "@/components/customclass";
+import { Reservation, Utilisateur } from "@/components/functions";
 import { useEffect, useState } from "react";
 import Usercard from "@/components/ui/usercard";
 

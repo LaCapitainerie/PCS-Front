@@ -5,7 +5,7 @@ import * as React from "react"
 import { useEffect, useState } from 'react';
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
-import { Message, Utilisateur } from "../../../customclass";
+import { Message, Utilisateur } from "../../../functions";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast"
 

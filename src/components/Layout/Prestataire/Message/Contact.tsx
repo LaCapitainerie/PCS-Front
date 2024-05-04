@@ -5,7 +5,7 @@ import * as React from "react"
 import { useEffect, useState } from 'react';
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
-import { Utilisateur, toComparable } from "../../../customclass";
+import { Utilisateur, toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 

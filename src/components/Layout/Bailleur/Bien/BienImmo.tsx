@@ -6,16 +6,20 @@ import { useEffect, useState } from 'react';
 import { Input } from "@/components/ui/input"
 import { HomeIcon, Hotel } from "lucide-react"
 import { Separator } from "@/components/ui/separator";
-import { toComparable } from "../../../customclass";
+import { toComparable } from "../../../functions";
 import { Property } from "@/type/Property";
 
 function getIcon(type: string) {
     switch (type) {
         case "Appartement":
             return <HomeIcon />;
-        case "Maison":
+        case "Maison": case "Villa":
             return <Hotel />;
     }
+}
+
+interface PropertyTypeDTO {
+    Property: Property[];
 }
 
 const BienImmo = ({
@@ -29,13 +33,14 @@ const BienImmo = ({
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data = await (
+            const data: PropertyTypeDTO = await (
                 await fetch(
-                    "http://localhost:2000/Bien_immobilier"
+                    `${process.env.NEXT_PUBLIC_API_URL}/property`
                 )
             ).json();
+            
 
-            const biens = data.filter((value: Property) => toComparable(value.price.toString(), value.name, value.description).includes(toComparable(filter)));
+            const biens = data.Property.filter((value: Property) => toComparable(value.name, value.description).includes(toComparable(filter)));
 
             setHouse(biens[0]);
             setState(biens);

@@ -1,0 +1,1 @@
+export const toComparable = (...str: string[]) => str.join().normalize().toLowerCase();

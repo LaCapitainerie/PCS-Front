@@ -3,7 +3,7 @@
 import * as React from "react"
 import { CarouselPlugin } from "./Carroussel";
 import { CardDesc } from "./Cards";
-import { DescriptionBien, Photos, Utilisateur, Reservation as Res } from "../../../customclass";
+import { DescriptionBien, Photos, Utilisateur, Reservation as Res } from "../../../functions";
 import { Reservation } from "./Reservation";
 import Title from "../../../ui/title";
 import { useEffect, useState } from "react";

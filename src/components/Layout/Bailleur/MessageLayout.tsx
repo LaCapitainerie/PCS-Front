@@ -2,19 +2,19 @@
 
 import React, { ReactNode, useState } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
-import { Utilisateur } from '../../customclass';
 import ContactList from '@/components/Layout/Bailleur/Message/Contact';
 import MessageList from '@/components/Layout/Bailleur/Message/Messages';
 import { Toaster } from '@/components/ui/toaster';
+import { User } from '@/type/User';
 
 interface BailleurMessageProps {
     children: ReactNode;
 }
 
 const BailleurMessage: React.FC<BailleurMessageProps> = ({ children }) => {
-    const [User, setUser] = useState<Utilisateur>();
+    const [User, setUser] = useState<User>();
 
-    const SelectedUser = (User: Utilisateur) => {
+    const SelectedUser = (User: User) => {
         console.log(User);
         setUser(User);
     };

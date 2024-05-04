@@ -2,12 +2,13 @@ import { CheckIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence, Check } from "lucide-react"
-import { DescriptionBien, Prestation, Utilisateur } from "../../../customclass"
 import Usercard from "@/components/ui/usercard"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
+import { Property } from "@/type/Property"
+import { Prestataire } from "@/type/Prestataire"
 
 function statusToColor(params: "pending" | "processing" | "success" | "failed") {
   switch (params) {
@@ -23,7 +24,7 @@ function statusToColor(params: "pending" | "processing" | "success" | "failed") 
 
 }
 
-function typeToDom(type: Prestation["Type"], status: "pending" | "processing" | "success" | "failed") {
+function typeToDom(type: string = "", status: "pending" | "processing" | "success" | "failed") {
   switch (type) {
     case "chauffage":
       return <Heater className={`h-5 w-5 text-${statusToColor(status)}-500`} />
@@ -42,7 +43,7 @@ function typeToDom(type: Prestation["Type"], status: "pending" | "processing" | 
 
 const descriptionKey = ["Nom", "Type", "Prix", "Surface", "Chambres", "Salles_de_bain", "Garages"]
 
-export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
+export function CardProperty({ Property, Prestataire }: { Property: Property | undefined, Prestataire: Prestataire[]}) {
 
   const { toast } = useToast();
   
@@ -69,7 +70,7 @@ export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
               ". . ."
             `
           }}>
-          {Desc?.Bien && Object.entries(Desc.Bien).filter((val) => descriptionKey.includes(val[0].toString())).map(([key, value], index) => (
+          {Property && Object.entries(Property).filter((val) => descriptionKey.includes(val[0].toString())).map(([key, value], index) => (
             <div key={index} className="mb-4 pb-4 last:mb-0 last:pb-0" >
               <div className="w-full">
                 <Label htmlFor={key}>{key} : </Label>
@@ -96,13 +97,13 @@ export function CardDesc({ Desc }: { Desc: DescriptionBien | undefined }) {
         <CardContent className="grid gap-4">
 
           <div className="">
-            {Desc?.utilisateur.map((presta, index) => (
-              <Usercard user={presta as unknown as Utilisateur}>
+            {Prestataire.map((presta, index) => (
+              <Usercard user={presta as unknown as Prestataire}>
                 {typeToDom("peinture", "pending")}
                     <div className="space-y-1">
                       
                       <p className="text-sm font-medium leading-none">
-                        {presta.id}
+                        {presta.ID}
                       </p>
 
                       <p className="text-sm text-muted-foreground">

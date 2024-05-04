@@ -4,7 +4,6 @@ import { DatePickerWithRange } from "../../../ui/rangedate";
 
 import React, { useEffect, useState } from 'react';
 
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -24,15 +23,17 @@ import {
 } from "@/components/ui/select"
 import { Avatar, AvatarFallback, AvatarImage } from "../../../ui/avatar";
 import { DateRange } from "react-day-picker";
-import { Locataire, Reservation as ReservationType, Utilisateur } from "../../../customclass";
 import Usercard from "@/components/ui/usercard";
+import { Traveler } from "@/type/Traveler";
+import { Reservation as ReservationType } from "@/type/Reservation";
+import { User } from "@/type/User";
 
 type aggregate = {
   Reservation: ReservationType;
-  Locataire: Utilisateur;
+  Locataire: User;
 }
 
-function ToBox(agg:aggregate, styleCol: React.CSSProperties) {
+function ToBox(agg: aggregate, styleCol: React.CSSProperties) {
   console.log(agg);
   
   return (
@@ -61,7 +62,7 @@ function ToBox(agg:aggregate, styleCol: React.CSSProperties) {
       <CardContent className="p-6 grid gap-8 items-start" style={styleCol}>
         <div>
           <Label htmlFor="paye">Statut du paiement : </Label>
-          <Input id="paye" type="paye" defaultValue={agg.Reservation.Statut} readOnly/>
+          <Input id="paye" type="paye" defaultValue={agg.Reservation.Status} readOnly/>
         </div>
       </CardContent>
     </div>
@@ -77,16 +78,16 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
     if(ReservationVal === undefined) return;
 
     const dataFetch = async () => {
-      const data: Utilisateur[] = await (
+      const data: User[] = await (
           await fetch(
-              "http://localhost:2000/Utilisateurs"
+            `${process.env.LOCAL_PUBLIC_API_URL}/users`
           )
       ).json();
 
       const tmpAggregat = ReservationVal.map((res) => {
         return {
           Reservation: res,
-          Locataire: data.filter((user) => user.id === res.ID_Locataire).shift() || {} as Utilisateur
+          Locataire: data.filter((user) => user.ID === res.ID_tenant).shift() || {} as User
         } as aggregate
       });
 

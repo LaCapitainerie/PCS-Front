@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import { BadgeCheckIcon, BadgeXIcon, Hourglass, PackageSearchIcon } from "lucide-react"
-import { Housing } from "../customclass"
+import { Housing } from "../functions"
 
 
 

@@ -1,15 +1,15 @@
-import { Activity, CircleDot, DollarSign, Users } from "lucide-react"
+import { CircleDot, DollarSign, Users } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import { Utilisateur } from "@/components/customclass"
 import { useEffect, useState } from "react"
 import ReservationsBoard from "./reservations"
 import PrestationsBoard from "./prestations"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Usercard from "@/components/ui/usercard"
 import IssuesBoard from "./issues"
+import { User } from "@/type/User"
 
 export function Dashboard() {
   
@@ -22,25 +22,21 @@ export function Dashboard() {
     "overflow-y": "scroll",
     "overflow-x": "hidden"
   } as React.CSSProperties;
-
-  const toComparable = (...str: string[]) => str.join().normalize().toLowerCase();
   
 
   const [filterUser, setFilterUser] = useState<string>("");
   const [filterUserCount, setFilterUserCount] = useState<number>(5);
 
-  const [users, setUsers] = useState<Utilisateur[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: Utilisateur[] = await (
+            const data: User[] = await (
                 await fetch(
-                    "http://localhost:2000/Utilisateurs"
+                  `${process.env.LOCAL_PUBLIC_API_URL}/users`
                 )
             ).json();
 
-            //TODO: Same here
-            //setUsers(data.sort((a, b) => a.ID - b.ID).filter((user) => toComparable(user.Email, user.Nom, user.Prenom).includes(toComparable(filterUser))).slice(0, filterUserCount));
             setUsers(data);
         };
 

@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card"
 import { CalendarIcon } from "lucide-react";
-import { Utilisateur } from "../customclass";
+import { Utilisateur } from "../functions";
 import { ReactNode } from "react";
 
 const Usercard = ({user, children}: {user: Utilisateur | undefined, children: ReactNode}) => {

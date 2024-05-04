@@ -2,59 +2,57 @@
 
 import * as React from "react"
 import { CarouselPlugin } from "./Carroussel";
-import { CardDesc } from "./Cards";
-import { DescriptionBien, Photos, Utilisateur, Reservation as Res } from "../../../customclass";
+import { CardProperty } from "./Cards";
 import { Reservation } from "./Reservation";
 import Title from "../../../ui/title";
 import { useEffect, useState } from "react";
 import {Property} from "@/type/Property";
+import { Property_image } from "@/type/Property_image";
+import { Reservation as ReservationType } from "@/type/Reservation";
+import { Prestataire } from "@/type/Prestataire";
 
 
 
 
 const MainContent = ({house}: {house:Property | undefined}) => {
     
-    const [photos, setPhotos] = useState<Photos[]>([]);
+    const [photos, setPhotos] = useState<Property_image[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: Photos[] = await (
+            const data: Property_image[] = await (
                 await fetch(
-                    "http://localhost:2000/Photos"
+                    `${process.env.LOCAL_PUBLIC_API_URL}/property_image`
                 )
             ).json();
 
-            setPhotos(data.filter((photo) => photo.ID_Bien === house?.id));
+            setPhotos(data.filter((photo) => photo.ID_property === house?.id));
         };
 
         dataFetch();
     }, [house]);
 
-    const [Desc, setDesc] = useState<DescriptionBien>();
+    const [reservation, setReservation] = useState<ReservationType[]>([]);
+    const [prestataire, setPrestataire] = useState<Prestataire[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
-            const DescMaker = {} as DescriptionBien;
 
-            DescMaker.Bien = house? house : {} as Property;
-
-            const data2: Res[] = await (
+            const data2: ReservationType[] = await (
                 await fetch(
-                    "http://localhost:2000/Reservations"
+                    `${process.env.LOCAL_PUBLIC_API_URL}/reservation`
                 )
             ).json();
             
-            DescMaker.reservation = data2.filter((res) => res.ID_Housing === house?.id);
+            setReservation(data2.filter((res) => res.ID_property === house?.id));
 
-            const data3: Utilisateur[] = await (
+            const data3: Prestataire[] = await (
                 await fetch(
-                    "http://localhost:2000/Prestataires"
+                    `${process.env.LOCAL_PUBLIC_API_URL}/prestataires`
                 )
             ).json();
 
-            DescMaker.utilisateur = data3.filter((prest) => DescMaker.reservation.map((res) => res.ID_Prestataire).includes(prest.id));
-          
-            setDesc(DescMaker);
+            setPrestataire(data3.filter((prest) => reservation.map((res) => res.ID_lessor).includes(prest.ID)));
         };
 
         dataFetch();
@@ -67,9 +65,9 @@ const MainContent = ({house}: {house:Property | undefined}) => {
                 <CarouselPlugin images={photos} />
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
-                        <Title titre="Nom du bien" sous_titre={Desc?.Bien.description}/>
+                        <Title titre="Nom du bien" sous_titre={house?.description}/>
                         <div className="flex flex-row justify-around gap-2">
-                            <CardDesc Desc={Desc} />
+                            <CardProperty Prestataire={prestataire} Property={house} />
                         </div>
                     </div>
                 </div>
@@ -77,7 +75,7 @@ const MainContent = ({house}: {house:Property | undefined}) => {
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Réservations" sous_titre=""/>
                         <div className="flex flex-col justify-around gap-2">
-                            <Reservation ReservationVal={Desc?.reservation}/>
+                            <Reservation ReservationVal={reservation}/>
                         </div>
                     </div>
                 </div>

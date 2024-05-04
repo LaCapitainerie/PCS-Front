@@ -2,7 +2,7 @@ import { CheckIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence } from "lucide-react"
-import { DescriptionBien, Prestataire, Utilisateur } from "../../../customclass"
+import { DescriptionBien, Prestataire, Utilisateur } from "../../../functions"
 import Usercard from "@/components/ui/usercard"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 

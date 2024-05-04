@@ -2,7 +2,7 @@
 
 import React, { ReactNode, useState } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
-import { Utilisateur } from '../../customclass';
+import { Utilisateur } from '../../functions';
 import ContactList from '@/components/Layout/Locataire/Message/Contact';
 import MessageList from '@/components/Layout/Locataire/Message/Messages';
 import { Toaster } from '@/components/ui/toaster';

@@ -2,15 +2,12 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/com
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Reservation, Utilisateur } from "@/components/customclass";
 import { useEffect, useState } from "react";
 import Usercard from "@/components/ui/usercard";
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Copy } from "lucide-react";
-import { Calendar } from "@/components/ui/customcalendar";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import Calendrier from "../../Calendrier";
+import { Reservation } from "@/type/Reservation";
+import { User } from "@/type/User";
 
 const ReservationsBoard = () => {
 
@@ -20,7 +17,7 @@ const ReservationsBoard = () => {
         const dataFetch = async () => {
             const data: Reservation[] = await (
                 await fetch(
-                    "http://localhost:2000/Reservations"
+                  `${process.env.LOCAL_PUBLIC_API_URL}/reservations`
                 )
             ).json();
 
@@ -30,13 +27,13 @@ const ReservationsBoard = () => {
         dataFetch();
     }, []);
 
-    const [Utilisateurs, setUtilisateurs] = useState<Utilisateur[]>([]);
+    const [Utilisateurs, setUtilisateurs] = useState<User[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: Utilisateur[] = await (
+            const data: User[] = await (
                 await fetch(
-                    "http://localhost:2000/Utilisateurs"
+                  `${process.env.LOCAL_PUBLIC_API_URL}/users`
                 )
             ).json();
 
@@ -96,7 +93,7 @@ const ReservationsBoard = () => {
                 <TableBody>
                   {reservations.map((reservation) => {
 
-                    const tmpUser = Utilisateurs.find((user) => user.id === reservation.ID_Locataire);
+                    const tmpUser = Utilisateurs.find((user) => user.ID === reservation.ID_tenant);
 
                     const startDate = new Date(reservation.Date);
                     const endDate = addDays(new Date(reservation.Date), reservation.Duree);
@@ -108,7 +105,7 @@ const ReservationsBoard = () => {
 
 
                     return (
-                    <TableRow key={reservation.ID_Reservation}>
+                    <TableRow key={reservation.ID}>
                       <TableCell>
 
 
@@ -125,7 +122,7 @@ const ReservationsBoard = () => {
                         
                       </TableCell>
                       <TableCell className="hidden xl:table-column">
-                        {reservation.ID_Housing}
+                        {reservation.ID_property}
                       </TableCell>
                       <TableCell className="">
                         <Badge className="text-xs" variant="outline">
