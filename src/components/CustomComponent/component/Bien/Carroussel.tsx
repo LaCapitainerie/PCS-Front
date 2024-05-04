@@ -13,7 +13,7 @@ import { Property_image } from "@/type/Property_image"
 
 export function CarouselPlugin({ images }: { images: Property_image[] }) {
   const plugin = React.useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: true})
+    Autoplay({ delay: 3000, stopOnInteraction: true})
   )
   
 

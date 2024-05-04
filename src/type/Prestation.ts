@@ -7,4 +7,5 @@ export interface Prestation {
     Date: string;
     Description: string;
     Duree: number;
+    Prix: number;
 };

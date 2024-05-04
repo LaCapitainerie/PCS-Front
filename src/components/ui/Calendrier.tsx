@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar } from '../ui/customcalendar';
+import { Calendar } from './customcalendar';
 import Order from '../cavaservir/order';
 
 interface CalendrierProps {

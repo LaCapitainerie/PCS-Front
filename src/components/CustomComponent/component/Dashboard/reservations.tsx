@@ -4,9 +4,10 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Reservation, Utilisateur } from "@/components/functions";
 import { useEffect, useState } from "react";
 import Usercard from "@/components/ui/usercard";
+import { Reservation } from "@/type/Reservation";
+import { User } from "@/type/User";
 
 const ReservationsBoard = () => {
 
@@ -16,7 +17,7 @@ const ReservationsBoard = () => {
         const dataFetch = async () => {
             const data: Reservation[] = await (
                 await fetch(
-                    "http://localhost:2000/Reservations"
+                    "http://localhost:2000/reservation"
                 )
             ).json();
 
@@ -26,13 +27,13 @@ const ReservationsBoard = () => {
         dataFetch();
     }, []);
 
-    const [Utilisateurs, setUtilisateurs] = useState<Utilisateur[]>([]);
+    const [Utilisateurs, setUtilisateurs] = useState<User[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: Utilisateur[] = await (
+            const data: User[] = await (
                 await fetch(
-                    "http://localhost:2000/Utilisateurs"
+                    "http://localhost:2000/users"
                 )
             ).json();
 
@@ -84,7 +85,7 @@ const ReservationsBoard = () => {
                 <TableBody>
                   {reservations.map((reservation) => {
 
-                    const tmpUser = Utilisateurs.find((user) => user.id === reservation.ID_Locataire);
+                    const tmpUser = Utilisateurs.find((user) => user.ID === reservation.ID_Tenant);
 
                     const startDate = new Date(reservation.Date);
                     const endDate = addDays(new Date(reservation.Date), reservation.Duree);
@@ -96,7 +97,7 @@ const ReservationsBoard = () => {
 
 
                     return (
-                    <TableRow key={reservation.ID_Reservation}>
+                    <TableRow key={reservation.ID}>
                       <TableCell>
 
 
@@ -113,7 +114,7 @@ const ReservationsBoard = () => {
                         
                       </TableCell>
                       <TableCell className="hidden xl:table-column">
-                        {reservation.ID_Housing}
+                        {reservation.ID_property}
                       </TableCell>
                       <TableCell className="">
                         <Badge className="text-xs" variant="outline">

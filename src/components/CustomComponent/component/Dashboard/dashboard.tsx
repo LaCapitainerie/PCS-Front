@@ -3,13 +3,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import { Prestation, Reservation, Utilisateur } from "@/components/functions"
 import { useEffect, useState } from "react"
 import ReservationsBoard from "./reservations"
 import PrestationsBoard from "./prestations"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Usercard from "@/components/ui/usercard"
 import IssuesBoard from "./issues"
+import { User } from "@/type/User"
+import { Prestation } from "@/type/Prestation"
+import { Reservation } from "@/type/Reservation"
 
 export function Dashboard() {
   
@@ -29,18 +31,16 @@ export function Dashboard() {
   const [filterUser, setFilterUser] = useState<string>("");
   const [filterUserCount, setFilterUserCount] = useState<number>(5);
 
-  const [users, setUsers] = useState<Utilisateur[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
       const dataFetch = async () => {
-          const data: Utilisateur[] = await (
+          const data: User[] = await (
               await fetch(
-                  "http://localhost:2000/Utilisateurs"
+                  "http://localhost:2000/users"
               )
           ).json();
 
-          //TODO: Les id sont des string,dû au fait que ce sont des uuid, tu ne peux plus faire des soustractions avec des id dorénavant
-          //setUsers(data.sort((a, b) => a.id).filter((user) => toComparable(user.Email, user.Nom, user.Prenom).includes(toComparable(filterUser))).slice(0, filterUserCount));
           setUsers(data);
       };
 
@@ -55,7 +55,7 @@ export function Dashboard() {
       const dataFetch = async () => {
           const data: Prestation[] = await (
               await fetch(
-                  "http://localhost:2000/Housing"
+                  "http://localhost:2000/prestation"
               )
           ).json();
 
@@ -103,7 +103,7 @@ export function Dashboard() {
       const dataFetch = async () => {
           const data: Reservation[] = await (
               await fetch(
-                  "http://localhost:2000/Reservations"
+                  "http://localhost:2000/reservation"
               )
           ).json();
 
