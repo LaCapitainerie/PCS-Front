@@ -1,25 +1,74 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Copy, CreditCard, MoreVertical, Truck } from "lucide-react"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Separator } from "@/components/ui/separator"
 import { Pagination, PaginationContent, PaginationItem } from "../ui/pagination"
+import { Command } from "@/type/Command"
+import { useEffect } from "react"
+import { User } from "@/type/User"
+import React from "react"
+import { generatePDF } from "../CustomComponent/facture/invoice"
 
 
-const Order = () => {
+const Order = ({
+        day
+    }: React.HTMLAttributes<HTMLDivElement> & {day: Date | undefined}) => {
+
+    if (!day) return null;
+
+    const [order, setOrder] = React.useState<Command>();
+
+    const isSameDay = (date1:Date, date2:Date) => date1.getFullYear() === date2.getFullYear() &&
+    date1.getMonth() === date2.getMonth() &&
+    date1.getDate() === date2.getDate();
+
+    useEffect(() => {
+        const dataFetch = async () => {
+            const data: Command[] = await (
+                await fetch(
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/command`
+                )
+            ).json();
+
+            setOrder(data.find((command) => isSameDay(new Date(command.Date), day)) as Command);
+        };
+
+        dataFetch();
+    }, [day]);
+
+
+
+    const prixtotal = order?order.TJM * order.Duree:0
+    const [customer, setCustomer] = React.useState<User>();
+
+    useEffect(() => {
+        if (order) {
+            const dataFetch = async () => {
+                const data: User[] = await (
+                    await fetch(
+                        `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
+                    )
+                ).json();
+
+                console.log(data, order.ID_client);
+                
+    
+                setCustomer(
+                    data.find((user) => user.ID === order.ID_client) as User
+                );
+            }
+
+            dataFetch();
+        }
+    }, [order]);
+
     return (
-        <Card className="overflow-y-scroll h-full" x-chunk="dashboard-05-chunk-4">
+        <Card className="h-full" x-chunk="dashboard-05-chunk-4">
             <CardHeader className="flex flex-row items-start bg-muted/50">
             <div className="grid gap-0.5">
                 <CardTitle className="group flex items-center gap-2 text-lg">
-                Order Oe31b70H
+                Order {order?.ID?.split('-')[0]}
                 <Button
                     size="icon"
                     variant="outline"
@@ -29,7 +78,7 @@ const Order = () => {
                     <span className="sr-only">Copy Order ID</span>
                 </Button>
                 </CardTitle>
-                <CardDescription>Date: November 23, 2023</CardDescription>
+                <CardDescription>Date: {order?.Date}</CardDescription>
             </div>
             <div className="ml-auto flex items-center gap-1">
                 <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -47,7 +96,7 @@ const Order = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuItem>Edit</DropdownMenuItem>
-                    <DropdownMenuItem>Export</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => generatePDF({ commande: order })}>Export</DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Trash</DropdownMenuItem>
                 </DropdownMenuContent>
@@ -60,34 +109,30 @@ const Order = () => {
                 <ul className="grid gap-3">
                 <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                    Glimmer Lamps x <span>2</span>
+                    {order?.Products}
                     </span>
-                    <span>$250.00</span>
+                    <span>${order?.TJM}</span>
                 </li>
                 <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                    Aqua Filters x <span>1</span>
+                    Duree
                     </span>
-                    <span>$49.00</span>
+                    <span>x{order?.Duree}</span>
                 </li>
                 </ul>
                 <Separator className="my-2" />
                 <ul className="grid gap-3">
                 <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span>$299.00</span>
-                </li>
-                <li className="flex items-center justify-between">
-                    <span className="text-muted-foreground">Shipping</span>
-                    <span>$5.00</span>
+                    <span>${prixtotal}</span>
                 </li>
                 <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">Tax</span>
-                    <span>$25.00</span>
+                    <span>${prixtotal*.2}</span>
                 </li>
                 <li className="flex items-center justify-between font-semibold">
                     <span className="text-muted-foreground">Total</span>
-                    <span>$329.00</span>
+                    <span>${prixtotal*1.2}</span>
                 </li>
                 </ul>
             </div>
@@ -96,16 +141,15 @@ const Order = () => {
                 <div className="grid gap-3">
                 <div className="font-semibold">Shipping Information</div>
                 <address className="grid gap-0.5 not-italic text-muted-foreground">
-                    <span>Liam Johnson</span>
-                    <span>1234 Main St.</span>
-                    <span>Anytown, CA 12345</span>
+                    <span>{customer?.Prenom} {customer?.Nom}</span>
+                    <span>{order?.Shipping_info}</span>
                 </address>
                 </div>
-                <div className="grid auto-rows-max gap-3">
-                <div className="font-semibold">Billing Information</div>
-                <div className="text-muted-foreground">
-                    Same as shipping address
-                </div>
+                <div className="grid auto-rows-max gap-3 text-right">
+                    <div className="font-semibold">Billing Information</div>
+                    <div className="text-muted-foreground">
+                        Same as shipping address
+                    </div>
                 </div>
             </div>
             <Separator className="my-4" />
@@ -114,18 +158,18 @@ const Order = () => {
                 <dl className="grid gap-3">
                 <div className="flex items-center justify-between">
                     <dt className="text-muted-foreground">Customer</dt>
-                    <dd>Liam Johnson</dd>
+                    <dd>{customer?.Prenom} {customer?.Nom}</dd> 
                 </div>
                 <div className="flex items-center justify-between">
                     <dt className="text-muted-foreground">Email</dt>
                     <dd>
-                    <a href="mailto:">liam@acme.com</a>
+                    <a href="mailto:">{customer?.Email}</a>
                     </dd>
                 </div>
                 <div className="flex items-center justify-between">
                     <dt className="text-muted-foreground">Phone</dt>
                     <dd>
-                    <a href="tel:">+1 234 567 890</a>
+                    <a href="tel:">{customer?.Phone}</a>
                     </dd>
                 </div>
                 </dl>
@@ -146,7 +190,7 @@ const Order = () => {
             </CardContent>
             <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
             <div className="text-xs text-muted-foreground">
-                Updated <time dateTime="2023-11-23">November 23, 2023</time>
+                Updated <time dateTime="2023-11-23">{order?.Fait_le}</time>
             </div>
             <Pagination className="ml-auto mr-0 w-auto">
                 <PaginationContent>

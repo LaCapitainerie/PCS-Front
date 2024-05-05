@@ -15,6 +15,12 @@ import { Prestataire } from "@/type/Prestataire";
 
 
 const MainContent = ({house}: {house:Property | undefined}) => {
+
+    const [state, setState] = useState<Property | undefined>(house);
+    
+    useEffect(() => {
+        setState(house);
+    }, [house]);
     
     const [photos, setPhotos] = useState<Property_image[]>([]);
 
@@ -65,9 +71,9 @@ const MainContent = ({house}: {house:Property | undefined}) => {
                 <CarouselPlugin images={photos} />
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
-                        <Title titre="Nom du bien" sous_titre={house?.Description}/>
+                        <Title titre="Nom du bien" sous_titre={state?.Description}/>
                         <div className="flex flex-row justify-around gap-2">
-                            <CardProperty Prestataire={prestataire} Property={house} />
+                            <CardProperty Prestataire={prestataire} Property={state} />
                         </div>
                     </div>
                 </div>

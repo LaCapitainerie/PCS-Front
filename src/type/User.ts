@@ -8,4 +8,5 @@ export interface User {
     Avatar: string;
     Description: string;
     Joined: string;
+    Phone: string;
 };

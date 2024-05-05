@@ -1,18 +1,13 @@
-import { Activity, CalendarIcon, CircleDot, CreditCard, DollarSign, Users } from "lucide-react"
+import { DollarSign } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
-import { SetStateAction, useEffect, useState } from "react"
-import ReservationsBoard from "./reservations"
-import PrestationsBoard from "./prestations"
+import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Usercard from "@/components/ui/usercard"
-import IssuesBoard from "./issues"
 import { User } from "@/type/User"
-import { Prestation } from "@/type/Prestation"
-import { Reservation } from "@/type/Reservation"
-import { set } from "date-fns"
+import DataBoard from "./board"
 
 function MakeCard(name:string, currentPresta:string, ratioPresta:string, index:number) {
   return (
@@ -33,7 +28,7 @@ function MakeCard(name:string, currentPresta:string, ratioPresta:string, index:n
   )
 }
 
-interface cardProps {
+export interface cardProps {
   name: string;
   currentPresta: string;
   ratioPresta: string;
@@ -67,7 +62,7 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
       const dataFetch = async () => {
           const data: User[] = await (
               await fetch(
-                  "http://localhost:2000/users"
+                `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
               )
           ).json();
 
@@ -120,10 +115,7 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
         const thisMonthDollar:number = prestaThis.reduce((acc, house) => acc + house[column.valueColumn], 0);
 
         // Get the augment percentage of $ from the previous month to this month
-        const dollarAugmentNumber = ((thisMonthDollar - previousMonthDollar) / previousMonthDollar) * 100;
-
-        console.log(thisMonthDollar);
-        
+        const dollarAugmentNumber = ((thisMonthDollar - previousMonthDollar) / previousMonthDollar) * 100;        
 
         let newValuable = {
           name: column.name,
@@ -170,19 +162,19 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
           
         <Tabs defaultValue="Reservations" className="xl:col-span-2">
           <TabsList>
-            <TabsTrigger value="Reservations">Reservations</TabsTrigger>
-            <TabsTrigger value="Prestations">Prestations</TabsTrigger>
-            <TabsTrigger value="Issues">Issues</TabsTrigger>
+            {
+              cards.map((card, index) => (
+                <TabsTrigger value={card.name} key={index}>{card.name}</TabsTrigger>
+              ))
+            }
           </TabsList>
-          <TabsContent value="Reservations">
-            <ReservationsBoard />
-          </TabsContent>
-          <TabsContent value="Prestations">
-            <PrestationsBoard />
-          </TabsContent>
-          <TabsContent value="Issues">
-            <IssuesBoard />
-          </TabsContent>
+          {
+            Column.map((card, index) => (
+              <TabsContent value={card.name} key={index}>
+                <DataBoard card={card}/>
+              </TabsContent>
+            ))
+          }
         </Tabs>
 
 

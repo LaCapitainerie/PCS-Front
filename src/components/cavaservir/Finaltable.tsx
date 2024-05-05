@@ -1,11 +1,11 @@
+import { Prestation } from "@/type/Prestation";
 import { columns } from "./columns"
-import { Housing } from "../functions";
 import { DataTable } from "./data-table"
  
-async function getData(): Promise<Housing[]> {
+async function getData(): Promise<Prestation[]> {
     const data = await (
         await fetch(
-            "http://localhost:2000/Housing"
+          `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/prestations`
         )
     ).json();
 

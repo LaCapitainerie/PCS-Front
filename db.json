@@ -9,7 +9,8 @@
         "Type": "Admin",
         "Avatar": "https://github.com/BySajed.png",
         "Description": "0 Faute c'est promis !",
-        "Joined": "2019-01-01"
+        "Joined": "2019-01-01",
+        "Phone": "0562000000"
       },
       {
         "ID": "1",
@@ -20,7 +21,8 @@
         "Type": "Admin",
         "Avatar": "https://github.com/Skalefou.png",
         "Description": "Indisponible pour le moment. appelez la CIA.",
-        "Joined": "2019-01-01"
+        "Joined": "2019-01-01",
+        "Phone": "0161564000"
       },
       {
         "ID": "2",
@@ -31,7 +33,8 @@
         "Type": "Admin",
         "Avatar": "https://github.com/LaCapitainerie.png",
         "Description": "C'est moi qui gère tout ça !",
-        "Joined": "2019-01-01"
+        "Joined": "2019-01-01",
+        "Phone": "06065644800"
       },
       {
         "ID": "3",
@@ -42,7 +45,8 @@
         "Type": "Locataire",
         "Avatar": "https://randomuser.me/api/portraits",
         "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Joined": "2019-01-01"
+        "Joined": "2019-01-01",
+        "Phone": "06879797110"
       },
       {
         "ID": "4",
@@ -53,7 +57,8 @@
         "Type": "Admin",
         "Avatar": "https://randomuser.me/api/portraits",
         "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Joined": "2019-01-01"
+        "Joined": "2019-01-01",
+        "Phone": "0676841510"
       },
       {
         "ID": "5",
@@ -64,7 +69,8 @@
         "Type": "Prestataire",
         "Avatar": "https://randomuser.me/api/portraits",
         "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Joined": "2019-01-01"
+        "Joined": "2019-01-01",
+        "Phone": "0951748630"
       },
       {
         "ID": "6",
@@ -75,7 +81,8 @@
         "Type": "Locataire",
         "Avatar": "https://randomuser.me/api/portraits",
         "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Joined": "2019-01-01"
+        "Joined": "2019-01-01",
+        "Phone": "0167895170"
       }
     ],
     "prestataires": [
@@ -340,7 +347,7 @@
           "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
           "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933i.jpg"
       }
-  ],
+    ],
     "message": [
       {
         "ID": "0",
@@ -360,6 +367,23 @@
         "Message": "Bonjour, je suis disponible pour une visite demain.",
         "Lu": "true"
       }
+    ],
+    "command": [
+      {
+        "ID": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
+        "ID_client": "3",
+        "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+        "Date": "2024-05-05",
+        "Duree": 2,
+        "Shipping_info": "1 rue de la paix, 75000 Paris",
+        "Products": "Peinture",
+        "Description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "TJM": 50,
+        "Status": "En cours",
+        "Fait_le": "2024-05-05"
+      }
     ]
+
+
   }
   

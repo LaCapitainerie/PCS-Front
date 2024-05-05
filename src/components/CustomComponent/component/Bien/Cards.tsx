@@ -56,6 +56,9 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
 
   const [user, setUser] = useState<User[]>([]);
 
+  console.log(Property);
+  
+
   useEffect(() => {
     const dataFetch = async () => {
         const data: User[] = await (

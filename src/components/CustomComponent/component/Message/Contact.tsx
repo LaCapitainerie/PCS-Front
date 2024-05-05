@@ -46,8 +46,8 @@ const ContactList = ({
     const ContactListFiltered = (state: User[]) => {
         return (
             <div className="flex flex-col gap-2 py-4 pt-0">
-                {state.map((value) => <>
-                    <button className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => setUser(value)}>
+                {state.map((value, index) =>
+                    <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => setUser(value)}>
                         <div className="flex w-full flex-col gap-1">
                             <div className="flex items-center">
                                 <div className="flex flex-row items-center gap-2">
@@ -66,7 +66,7 @@ const ContactList = ({
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
                                 {value.Nom}</div>
                         </div>
-                    </button></>
+                    </button>
                 )}
             </div>
         )
@@ -85,10 +85,10 @@ const ContactList = ({
             <div className="flex flex-col gap-2 p-4 pt-0">
                 <Tabs defaultValue="Locataires" className="xl:col-span-2 w-full">
                     <TabsList className="w-full">
-                        <TabsTrigger value="Tous" className="w-full">Tous</TabsTrigger>
+                        <TabsTrigger key={-1} value="Tous" className="w-full">Tous</TabsTrigger>
                         {
-                            Categories.map((value) => (
-                                <TabsTrigger value={value} className="w-full">{value+"s"}</TabsTrigger>
+                            Categories.map((value, index) => (
+                                <TabsTrigger key={index} value={value} className="w-full">{value+"s"}</TabsTrigger>
                             ))
                         }
                     </TabsList>
@@ -96,8 +96,8 @@ const ContactList = ({
                         {ContactListFiltered(state)}
                     </TabsContent>
                     {
-                        Categories.map((value) => (
-                            <TabsContent value={value}>
+                        Categories.map((value, index) => (
+                            <TabsContent key={index} value={value}>
                                 {ContactListFiltered(state.filter((val) => val.Type === value))}
                             </TabsContent>
                         ))

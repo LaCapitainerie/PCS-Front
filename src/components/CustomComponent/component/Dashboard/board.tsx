@@ -1,27 +1,31 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, Table } from "@/components/ui/table";
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Usercard from "@/components/ui/usercard";
-import { Reservation } from "@/type/Reservation";
 import { User } from "@/type/User";
+import Calendrier from "../Calendrier/Calendrier";
+import { ValuableThing } from "@/components/CustomComponent/component/Dashboard/dashboard";
 
-const ReservationsBoard = () => {
+interface DataBoardProps {
+  children?: React.ReactNode;
+  card: ValuableThing;
+}
 
-    const [reservations, setReservations] = useState<Reservation[]>([]);
+const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
+
+    const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: Reservation[] = await (
+            const data: any[] = await (
                 await fetch(
-                    "http://localhost:2000/reservation"
+                  `${process.env.NEXT_PUBLIC_LOCAL_API_URL}${card.path}`
                 )
             ).json();
 
-            setReservations(data.sort((a, b) => new Date(b.Date).getTime() - new Date(a.Date).getTime()));
+            setData(data.sort((a, b) => new Date(b.Date).getTime() - new Date(a.Date).getTime()));
         };
 
         dataFetch();
@@ -33,7 +37,7 @@ const ReservationsBoard = () => {
         const dataFetch = async () => {
             const data: User[] = await (
                 await fetch(
-                    "http://localhost:2000/users"
+                  `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
                 )
             ).json();
 
@@ -53,23 +57,20 @@ const ReservationsBoard = () => {
         <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
-                <CardTitle>Reservations</CardTitle>
+                <CardTitle>Data</CardTitle>
                 <CardDescription>
                   Recent reservations from your store.
                 </CardDescription>
               </div>
               <Button asChild size="sm" className="ml-auto gap-1">
-                <Link href="#">
-                  View All
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
+                <Calendrier/>
               </Button>
             </CardHeader>
             <CardContent>
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Locataire</TableHead>
+                    <TableHead>{card.name}</TableHead>
                     <TableHead className="">
                       Bien
                     </TableHead>
@@ -83,21 +84,21 @@ const ReservationsBoard = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {reservations.map((reservation) => {
+                  {data.map((dataLoop) => {
 
-                    const tmpUser = Utilisateurs.find((user) => user.ID === reservation.ID_Tenant);
+                    const tmpUser = Utilisateurs.find((user) => user.ID === dataLoop.ID_Tenant);
 
-                    const startDate = new Date(reservation.Date);
-                    const endDate = addDays(new Date(reservation.Date), reservation.Duree);
+                    const startDate = new Date(dataLoop.Date);
+                    const endDate = addDays(new Date(dataLoop.Date), dataLoop.Duree);
 
-                    // Is reservation passed , today between start and end date , or is it in the future
+                    // Is dataLoop passed , today between start and end date , or is it in the future
                     const isToday = new Date() >= new Date(startDate) && new Date() <= endDate;
                     const isFuture = new Date() < startDate;
 
 
 
                     return (
-                    <TableRow key={reservation.ID}>
+                    <TableRow key={dataLoop.ID}>
                       <TableCell>
 
 
@@ -114,7 +115,7 @@ const ReservationsBoard = () => {
                         
                       </TableCell>
                       <TableCell className="hidden xl:table-column">
-                        {reservation.ID_property}
+                        {dataLoop.ID_property}
                       </TableCell>
                       <TableCell className="">
                         <Badge className="text-xs" variant="outline">
@@ -122,12 +123,12 @@ const ReservationsBoard = () => {
                         </Badge>
                       </TableCell>
                       <TableCell className="md:table-cell ">
-                        {(new Date(reservation.Date)).toDateString() + " - " + endDate.toDateString()}
+                        {(new Date(dataLoop.Date)).toDateString() + " - " + endDate.toDateString()}
                       </TableCell>
 
                       <TableCell className="text-right">
                         {
-                          new Intl.NumberFormat("fr-FR", { style: 'currency', currency: 'USD' }).format(reservation.Prix)
+                          new Intl.NumberFormat("fr-FR", { style: 'currency', currency: 'USD' }).format(dataLoop.Prix)
                         }
                       </TableCell>
                     </TableRow>)
@@ -139,4 +140,4 @@ const ReservationsBoard = () => {
     );
 }
 
-export default ReservationsBoard;
+export default DataBoard;

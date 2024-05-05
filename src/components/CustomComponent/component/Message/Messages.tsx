@@ -64,8 +64,8 @@ const MessageList = ({
 
             <div className="flex flex-col h-full justify-between">
                 <div className="flex flex-col gap-2 p-4 pt-0">
-                    {Messages.map((value) => 
-                        <div className={`flex ${value.ID_Destinataire == Me && "justify-end"}`}>
+                    {Messages.map((value, index) => 
+                        <div key={index} className={`flex ${value.ID_Destinataire == Me && "justify-end"}`}>
                             <button className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.ID_Destinataire == Me && "bg-accent"}`}>
                                 <div className="flex w-full flex-col gap-1">
                                     <div className="text-xs font-medium">{value.Date.toString()}</div>

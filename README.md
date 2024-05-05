@@ -22,7 +22,9 @@
 - [x] Aperçu de ses biens
     - [x] Détails, prestas associés, locataire
     - [x] Pouvoir les modifier (uniquement les détails)
-- [ ] Calendrier des dates importantes, avec option de verrouiller des dates
+- [ ] Calendrier des dates importantes
+    - [ ] Option de verrouiller des dates
+    - [x] Generer des factures
 - [ ] Système de messagerie
     - [x] Système de message
     - [x] Pouvoir échanger avec les **Locataires**
@@ -32,8 +34,9 @@
 ### Prestataires
 - [ ] Apercu de son compte
     - [ ] Modification de celui-ci
-- [ ] Calendrier des jours de travail
-    - [ ] Carte popup pour détail de mission (Locataire, commentaire, details)
+- [x] Calendrier des jours de travail
+    - [x] Carte popup pour détail de mission (Locataire, commentaire, details)
+    - [x] Generer des factures
 
 ### Admin
 - [ ] Dashboard
