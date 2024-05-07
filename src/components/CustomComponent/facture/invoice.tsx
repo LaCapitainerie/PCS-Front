@@ -21,7 +21,7 @@ export const PDF_invoice = ({ commande, client }: { commande?: Command, client?:
     "tjm": 50,
     "status": "En cours",
     "done": "2024-05-05"
-  } as Command;
+  } as unknown as Command;
 
   const clientInfo = client || {
     "id": "3",
@@ -40,9 +40,6 @@ export const PDF_invoice = ({ commande, client }: { commande?: Command, client?:
   const timeStamp = new Date().toISOString();
 
   const doc = new jsPDF();
-
-  doc.addFont('Arial', 'Arial', 'normal');
-  doc.setFont('Arial')
 
   // Set font size
   doc.setFontSize(48);

@@ -62,6 +62,7 @@ interface SideBarTypeDTO {
 }
 
 const Component = (index:number) => {
+
     const [state, setState] = useState<SidebarType[]>([]);
 
     useEffect(() => {
@@ -98,7 +99,6 @@ const Component = (index:number) => {
                         <TooltipContent side="right">{value.hover}</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
-            
             )}
         </>
     );

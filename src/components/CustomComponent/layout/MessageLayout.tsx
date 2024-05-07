@@ -9,7 +9,7 @@ import { User } from '@/type/User';
 
 interface MessageProps {
     children: ReactNode;
-    categories: User["Type"][];
+    categories: User["type"][];
 }
 
 const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {

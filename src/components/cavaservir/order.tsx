@@ -59,7 +59,7 @@ const Order = ({
     }, [order]);
 
     return (
-        <Card className="h-full" x-chunk="dashboard-05-chunk-4">
+        <Card className="h-full" x-chunk="dashboard-05-chunk-4" style={{width: '33%'}}>
             <CardHeader className="flex flex-row items-start bg-muted/50">
             <div className="grid gap-0.5">
                 <CardTitle className="group flex items-center gap-2 text-lg">
@@ -137,7 +137,7 @@ const Order = ({
                 <div className="font-semibold">Shipping Information</div>
                 <address className="grid gap-0.5 not-italic text-muted-foreground">
                     <span>{customer?.prenom} {customer?.nom}</span>
-                    <span>{order?.shipping_info}</span>
+                    <span>{order?.shippinginfo}</span>
                 </address>
                 </div>
                 <div className="grid auto-rows-max gap-3 text-right">

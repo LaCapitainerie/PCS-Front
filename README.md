@@ -8,7 +8,7 @@
     - [ ] Modification de celui-ci
 - [ ] Pouvoir reserver un bien
     - [x] Affichage des biens et des disponibilités
-    - [x] Affichage d'un **énooorme popup** pour sélection de date, personnes, préstations via multi selector
+    - [x] Affichage d'un **énooorme popup** pour sélection de date, personnes, prestations via multi selector
     - [ ] Ajout en bdd de la reservation
 
 - [x] Pouvoir échanger avec des **Bailleurs**

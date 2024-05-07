@@ -21,7 +21,7 @@ const Calendrier: React.FC<CalendrierProps> = ({children}) => {
             <DialogContent style={{maxWidth: '90%'}}>
                 <div className='flex flex-row justify-between' style={{maxHeight: '100%'}}>
                     <Calendar SetSelectedReservation={SelectedDay} style={{width: '66%'}}/>
-                    <Order day={Day}/>
+                    <Order day={Day} style={{width: '33%'}}/>
                 </div>
             </DialogContent>
         </Dialog>
