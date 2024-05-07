@@ -37,7 +37,7 @@ export const Embed = ( Embed : EmbedProps) => {
             console.log(EmbedCommand);
             
             return (
-                <div style={{maxWidth: '50%'}} className="border rounded-md flex flex-col justify-between w-fit min-w-40 min-h-40 m-4">
+                <div style={{maxWidth: '40%'}} className="border rounded-md flex flex-col justify-between w-fit min-w-40 min-h-40 m-4">
                     <div className="h-max">
                         <div className="mt-4 mx-4 uppercase font-bold flex flex-row gap-4">
                             {typeToDom(EmbedCommand.products.toLocaleLowerCase(), EmbedCommand.status)}
@@ -60,7 +60,7 @@ export const Embed = ( Embed : EmbedProps) => {
         case "issue":
             const EmbedIssue = Embed.EmbedType as Issue;
             return (
-                <div style={{maxWidth: '50%'}} className="border rounded-md flex flex-col justify-between w-fit min-w-40 min-h-40 m-4">
+                <div style={{maxWidth: '40%'}} className="border rounded-md flex flex-col justify-between w-fit min-w-40 min-h-40 m-4">
                     <div className="h-max">
                         <div className="mt-4 mx-4 uppercase font-bold flex flex-row gap-4">
                             <CircleDot color={EmbedIssue.status == "open"?"#238636":"#237A84"}/>

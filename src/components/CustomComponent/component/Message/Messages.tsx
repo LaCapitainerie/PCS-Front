@@ -143,7 +143,7 @@ const MessageList = ({
 
                         } else {
                             result =  (
-                                <div style={{maxWidth: '50%'}} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.iddestinataire == Me && "bg-accent"}`}>
+                                <div style={{maxWidth: '40%'}} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.iddestinataire == Me && "bg-accent"}`}>
                                     <div className="flex w-full flex-col gap-1">
                                         <div className="text-xs font-medium">{value.date.toString()}</div>
                                     </div>

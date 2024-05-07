@@ -8,13 +8,13 @@
     - [ ] Modification de celui-ci
 - [ ] Pouvoir reserver un bien
     - [x] Affichage des biens et des disponibilités
-    - [ ] Affichage d'un **énooorme popup** pour sélection de date, personnes, préstations via multi selector
+    - [x] Affichage d'un **énooorme popup** pour sélection de date, personnes, préstations via multi selector
+    - [ ] Ajout en bdd de la reservation
 
-- [ ] Pouvoir échanger avec des **Bailleurs**
+- [x] Pouvoir échanger avec des **Bailleurs**
     - [x] Système de message
-    - [ ] Envoyer un message lors qu'une demande de réservation
-        - [ ] pouvoir approuver ou non
-    - [ ] Envoyer un message pour chaque étape du paiement
+    - [x] Envoyer un message lors qu'une demande de réservation
+    - [x] Envoyer un message pour chaque étape du paiement
 
 ### Bailleur
 - [ ] Apercu de son compte
