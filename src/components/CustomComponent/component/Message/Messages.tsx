@@ -12,6 +12,7 @@ import { Message } from "@/type/Message";
 import { Embed } from "./Embed";
 import { Issue } from "@/type/Issue";
 import { Command } from "@/type/Command";
+import { toComparable } from "@/components/functions";
 
 export function ToastSimple() {
     const { toast } = useToast()
@@ -98,6 +99,9 @@ const MessageList = ({
 
         dataFetch();
     }, [CurrentUser]);
+
+    console.log(Issue, Messages.filter((m) => m.idembed), Command);
+    
     
     return (
         <div className="absolute right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%] h-full">
@@ -107,28 +111,55 @@ const MessageList = ({
 
             <div className="flex flex-col h-full justify-between">
                 <div className="flex flex-col gap-2 p-4 pt-0">
-                    {Messages.map((value, index) =>
-                        !(value.idembed && value.resourceType)?
-                            <div key={index} className={`flex ${value.iddestinataire == Me && "justify-end"}`}>
-                                <div className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.iddestinataire == Me && "bg-accent"}`}>
+                    {Messages.map((value, index) =>{
+
+                        var result = null;
+
+                        if (value.idembed != undefined && value.resourceType != undefined) {
+                            
+                            const EmbedType = {
+                                "command" : Command.find((c) => c.id == value.idembed),
+                                "issue": Issue.find((i) => i.id == value.idembed)
+                            }[toComparable(value.resourceType)];
+
+                            console.log(value.resourceType, Issue.find((i) => i.id == value.idembed), Command.find((c) => c.id == value.idembed), EmbedType);
+                            
+                            
+                            if(EmbedType == undefined) return (<></>);
+
+                            switch (value.resourceType) {
+                                case "Command":
+                                    result = <Embed key={index} Type={value.resourceType} EmbedType={EmbedType}/>
+                                    break;
+                            
+                                case "Issue":
+                                    result = <Embed key={index} Type={value.resourceType} EmbedType={EmbedType}/>
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
+
+                        } else {
+                            result =  (
+                                <div style={{maxWidth: '50%'}} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.iddestinataire == Me && "bg-accent"}`}>
                                     <div className="flex w-full flex-col gap-1">
                                         <div className="text-xs font-medium">{value.date.toString()}</div>
                                     </div>
                                     <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.message}</div>
                                 </div>
-                            </div>
-                        :
-                            <Embed Type={value.resourceType} EmbedType={
-                                (
-                                    value.resourceType=="Issue"?
-                                    Issue.find((i) => i.id == value.idembed):
-                                    Command.find((c) => c.id == value.idembed)
-                                )
-                                ||
-                                {id: "0", idclient: "0", description: "Not found", created: "2024-05-07", status: "open"} as Issue
-                            }/>
+                            )
 
-                    )}
+                        }
+
+                        return (
+                            <div key={index} className={`flex ${value.iddestinataire == Me && "justify-end"}`}>
+                                {result}
+                            </div>
+                        );
+
+                    })}
                 </div>
 
                 <div className="flex flex-row p-4 gap-4">

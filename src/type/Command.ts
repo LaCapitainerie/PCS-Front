@@ -8,6 +8,6 @@ export interface Command {
     products: string;
     description: string;
     tjm: number;
-    status: string;
+    status: "pending" | "processing" | "success" | "failed";
     done: string;
 };

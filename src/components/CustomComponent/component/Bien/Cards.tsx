@@ -26,7 +26,7 @@ function statusToColor(params: Prestation["status"]) {
 
 }
 
-function typeToDom(type: string = "", status: Prestation["status"]) {
+export function typeToDom(type: string = "", status: Prestation["status"]) {
   switch (type) {
     case "chauffage":
       return <Heater className={`h-5 w-5 text-${statusToColor(status)}-500`} />

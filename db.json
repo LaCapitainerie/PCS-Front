@@ -368,7 +368,7 @@
         "lu": "true",
 
         "idembed": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
-        "resourceType": "command"
+        "resourceType": "Command"
       },
       {
         "id": "3",
@@ -380,7 +380,7 @@
         "lu": "true",
 
         "idembed": "1",
-        "resourceType": "issue"
+        "resourceType": "Issue"
       },
       {
         "id": "4",
@@ -425,18 +425,18 @@
         "id": "0",
         "idclient": "3",
         "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-        "date": "2024-05-05",
+        "created": "2024-05-05",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "status": "En cours",
+        "status": "open",
         "done": "2024-05-05"
       },
       {
         "id": "1",
         "idclient": "6",
         "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-        "date": "2024-10-05",
+        "created": "2024-10-05",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "status": "En cours",
+        "status": "open",
         "done": "2024-10-05"
       }
     ]
