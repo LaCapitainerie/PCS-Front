@@ -20,7 +20,7 @@ function getIcon(type: string) {
 }
 
 interface PropertyTypeDTO {
-    Property: Property[];
+    property: Property[];
 }
 
 const BienImmo = ({
@@ -34,14 +34,14 @@ const BienImmo = ({
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: PropertyTypeDTO = await (
+            const data: Property[] = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/property`
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/property`
                 )
             ).json();
             
 
-            const biens = data.Property.filter((value: Property) => toComparable(value.name, value.description).includes(toComparable(filter)));
+            const biens = data.filter((value: Property) => toComparable(value.name, value.description).includes(toComparable(filter)));
 
             setHouse(biens[0]);
             setState(biens);
@@ -63,7 +63,7 @@ const BienImmo = ({
             <Separator className="my-2" />
 
             <div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <Input placeholder="Search" className="w-full p-4" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilter(event.target.value)}/>
+                <Input contrains={"text"} placeholder="Search" className="w-full p-4" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilter(event.target.value)}/>
             </div>
             <div className="flex flex-col gap-2 p-4 pt-0">
                 {state.map((value, index) => 

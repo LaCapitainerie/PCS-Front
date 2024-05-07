@@ -14,18 +14,18 @@ const Usercard = ({user, children}: {user: User | undefined, children: ReactNode
             <HoverCardContent className="w-80">
                 <div className="flex justify-between space-x-4">
                 <Avatar className="hidden h-9 w-9 sm:flex">
-                    <AvatarImage src={user?.Avatar} alt="Avatar" />
-                    <AvatarFallback>{user?.Nom[0]}{user?.Prenom[0]}</AvatarFallback>
+                    <AvatarImage src={user?.avatar} alt="Avatar" />
+                    <AvatarFallback>{user?.nom[0]}{user?.prenom[0]}</AvatarFallback>
                 </Avatar>
                 <div className="space-y-1">
-                    <h4 className="text-sm font-semibold">{user?.Username}</h4>
+                    <h4 className="text-sm font-semibold">{user?.username}</h4>
                     <p className="text-sm">
-                    {user?.Description}
+                    {user?.description}
                     </p>
                     <div className="flex items-center pt-2">
                     <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{" "}
                     <span className="text-xs text-muted-foreground">
-                        Joined {user?.Joined}
+                        Joined {user?.joined}
                     </span>
                     </div>
                 </div>

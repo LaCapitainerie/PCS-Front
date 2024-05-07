@@ -7,7 +7,7 @@ import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 import autoTable from "jspdf-autotable";
 
-export const PDF_intervention = ({ commande, client }: { commande?: Command, client?: User }) => {
+export const PDF_invoice = ({ commande, client }: { commande?: Command, client?: User }) => {
 
   const command = commande || {
     "id": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",

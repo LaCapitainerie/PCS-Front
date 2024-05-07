@@ -10,7 +10,7 @@ export interface Property {
     description: string;
     address: string;
     city: string;
-    zipCode: string;
+    zipcode: string;
     country: string;
     administrationvalidation: boolean;
     lessorid: string;

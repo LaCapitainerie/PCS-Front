@@ -9,6 +9,9 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast"
 import { User } from "@/type/User";
 import { Message } from "@/type/Message";
+import { Embed } from "./Embed";
+import { Issue } from "@/type/Issue";
+import { Command } from "@/type/Command";
 
 export function ToastSimple() {
     const { toast } = useToast()
@@ -25,7 +28,7 @@ export function ToastSimple() {
         Show Toast
       </Button>
     )
-  }
+}
 
 const MessageList = ({
     CurrentUser,
@@ -33,13 +36,16 @@ const MessageList = ({
 
     const { toast } = useToast();
     const [Messages, setMessages] = useState<Message[]>([]);
+    const [Issue, setIssue] = useState<Issue[]>([]);
+    const [Command, setCommand] = useState<Command[]>([]);
 
     // Temporary
     const Me = "3";
 
+    // Message
     useEffect(() => {
         const dataFetch = async () => {
-            const data = await (
+            const data: Message[] = await (
                 await fetch(
                     `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/message`
                 )
@@ -48,6 +54,44 @@ const MessageList = ({
             setMessages(
                 CurrentUser?
                 data.filter((value: Message) => [value.iddestinataire, value.idexpediteur].includes(CurrentUser.id) && [value.iddestinataire, value.idexpediteur].includes(Me)):
+                []
+            );
+        };
+
+        dataFetch();
+    }, [CurrentUser]);
+
+    // Issue
+    useEffect(() => {
+        const dataFetch = async () => {
+            const data: Issue[] = await (
+                await fetch(
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/issue`
+                )
+            ).json();
+            
+            setIssue(
+                CurrentUser?
+                data:
+                []
+            );
+        };
+
+        dataFetch();
+    }, [CurrentUser]);
+
+    // Command
+    useEffect(() => {
+        const dataFetch = async () => {
+            const data: Command[] = await (
+                await fetch(
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/command`
+                )
+            ).json();
+            
+            setCommand(
+                CurrentUser?
+                data:
                 []
             );
         };
@@ -63,15 +107,27 @@ const MessageList = ({
 
             <div className="flex flex-col h-full justify-between">
                 <div className="flex flex-col gap-2 p-4 pt-0">
-                    {Messages.map((value, index) => 
-                        <div key={index} className={`flex ${value.iddestinataire == Me && "justify-end"}`}>
-                            <button className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.iddestinataire == Me && "bg-accent"}`}>
-                                <div className="flex w-full flex-col gap-1">
-                                    <div className="text-xs font-medium">{value.date.toString()}</div>
+                    {Messages.map((value, index) =>
+                        !(value.idembed && value.resourceType)?
+                            <div key={index} className={`flex ${value.iddestinataire == Me && "justify-end"}`}>
+                                <div className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.iddestinataire == Me && "bg-accent"}`}>
+                                    <div className="flex w-full flex-col gap-1">
+                                        <div className="text-xs font-medium">{value.date.toString()}</div>
+                                    </div>
+                                    <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.message}</div>
                                 </div>
-                                <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.message}</div>
-                            </button>
-                        </div>
+                            </div>
+                        :
+                            <Embed Type={value.resourceType} EmbedType={
+                                (
+                                    value.resourceType=="Issue"?
+                                    Issue.find((i) => i.id == value.idembed):
+                                    Command.find((c) => c.id == value.idembed)
+                                )
+                                ||
+                                {id: "0", idclient: "0", description: "Not found", created: "2024-05-07", status: "open"} as Issue
+                            }/>
+
                     )}
                 </div>
 

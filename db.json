@@ -126,10 +126,10 @@
         "bathroom": 2,
         "garage": 0,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "adress": "",
-        "city": "",
-        "zipcode": "",
-        "country": "",
+        "address": "3 rue de la paix",
+        "city": "Paris",
+        "zipcode": "75000",
+        "country": "France",
         "administrationvalidation": false,
         "lessorid": "f3b2507f-3021-4f8e-836b-c15c5ee3a5a8"
       },
@@ -143,7 +143,7 @@
         "bathroom": 3,
         "garage": 2,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "adress": "",
+        "address": "",
         "city": "",
         "zipcode": "",
         "country": "",
@@ -160,7 +160,7 @@
         "bathroom": 4,
         "garage": 3,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "adress": "",
+        "address": "",
         "city": "",
         "zipcode": "",
         "country": "",
@@ -177,7 +177,7 @@
         "bathroom": 2,
         "garage": 0,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "adresss": "",
+        "address": "",
         "city": "",
         "zipcode": "",
         "country": "",
@@ -342,21 +342,54 @@
     "message": [
       {
         "id": "0",
-        "id_Expediteur": "3",
-        "id_Destinataire": "6",
-        "Date": "2024-05-05",
-        "Heure": "10:00:00",
-        "Message": "Bonjour, je suis intéressé par votre bien immobilier.",
-        "Lu": "true"
+        "idexpediteur": "3",
+        "iddestinataire": "6",
+        "date": "2024-05-05",
+        "heure": "10:00:00",
+        "message": "Bonjour, je suis intéressé par votre bien immobilier.",
+        "lu": "true"
       },
       {
         "id": "1",
-        "id_Expediteur": "6",
-        "id_Destinataire": "3",
-        "Date": "2024-05-05",
-        "Heure": "10:30:00",
-        "Message": "Bonjour, je suis disponible pour une visite demain.",
-        "Lu": "true"
+        "idexpediteur": "6",
+        "iddestinataire": "3",
+        "date": "2024-05-05",
+        "heure": "10:30:00",
+        "message": "Bonjour, je suis disponible pour une visite demain.",
+        "lu": "true"
+      },
+      {
+        "id": "2",
+        "idexpediteur": "3",
+        "iddestinataire": "6",
+        "date": "2024-05-05",
+        "heure": "11:00:00",
+        "message": "D'accord, à quelle heure ?",
+        "lu": "true",
+
+        "idembed": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
+        "resourceType": "command"
+      },
+      {
+        "id": "3",
+        "idexpediteur": "6",
+        "iddestinataire": "3",
+        "date": "2024-05-05",
+        "heure": "11:30:00",
+        "message": "14h00",
+        "lu": "true",
+
+        "idembed": "1",
+        "resourceType": "issue"
+      },
+      {
+        "id": "4",
+        "idexpediteur": "3",
+        "iddestinataire": "6",
+        "date": "2024-05-05",
+        "heure": "12:00:00",
+        "message": "D'accord, à demain.",
+        "lu": "true"
       }
     ],
     "command": [
@@ -383,6 +416,26 @@
         "products": "Reparation",
         "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
         "tjm": 100,
+        "status": "En cours",
+        "done": "2024-10-05"
+      }
+    ],
+    "issue": [
+      {
+        "id": "0",
+        "idclient": "3",
+        "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+        "date": "2024-05-05",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "status": "En cours",
+        "done": "2024-05-05"
+      },
+      {
+        "id": "1",
+        "idclient": "6",
+        "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+        "date": "2024-10-05",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
         "status": "En cours",
         "done": "2024-10-05"
       }

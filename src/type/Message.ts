@@ -5,4 +5,7 @@ export interface Message {
     date: string;
     message: string;
     lu: boolean;
+
+    idembed?: string;
+    resourceType?: "Command" | "Issue";
 };

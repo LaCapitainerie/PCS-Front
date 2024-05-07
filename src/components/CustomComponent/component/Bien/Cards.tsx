@@ -43,10 +43,10 @@ function typeToDom(type: string = "", status: Prestation["status"]) {
   }
 }
 
-const descriptionKey = ["Name", "Type", "Price", "Surface", "Room", "Bathroom", "Garage", "Address", "City"]
+const descriptionKey = ["type", "price", "surface", "room", "bathroom", "garage", "address", "city", "zipcode"]
 
 interface UserTypeDTO {
-  User: User[];
+  user: User[];
 }
 
 export function CardProperty({ Property, Prestataire }: { Property: Property | undefined, Prestataire: Prestataire[]}) {
@@ -57,7 +57,12 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
 
   const [user, setUser] = useState<User[]>([]);
 
-  console.log(Property);
+  function toTitleCase(str:string) {
+    return str.replace(/\w\S*/g, function(txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
+
   
 
   useEffect(() => {
@@ -75,7 +80,7 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
     };
 
     dataFetch();
-}, []);
+  }, []);
 
   return (<>
     <Card className="w-full">
@@ -98,11 +103,12 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
               ". . ."
             `
           }}>
-          {Property && Object.entries(Property).filter((val) => descriptionKey.includes(val[0].toString())).map(([key, value], index) => (
+
+          {Property && descriptionKey.map((key, index) => (
             <div key={index} className="mb-4 pb-4 last:mb-0 last:pb-0" >
               <div className="w-full">
-                <Label htmlFor={key}>{key} : </Label>
-                <Input id={key} type="text" defaultValue={value} readOnly={!edit}/>
+                <Label htmlFor={key}>{toTitleCase(key)} : </Label>
+                <Input id={key} type="text" defaultValue={Property ? Object.entries(Property).find((value, _index) => value[0] == key)?.[1] : ""} readOnly={!edit} />
               </div>
             </div>
           ))}
@@ -125,7 +131,7 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
         <CardContent className="grid gap-4">
 
           <div className="">
-            {user.map((presta, index) => (
+            {user.map((presta, _index) => (
               <Usercard user={presta as unknown as User}>
                 {typeToDom("peinture", "pending")}
                     <div className="space-y-1">
