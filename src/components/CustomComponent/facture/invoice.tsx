@@ -21,7 +21,7 @@ export const PDF_invoice = ({ commande, client }: { commande?: Command, client?:
     "tjm": 50,
     "status": "pending",
     "done": "2024-05-05"
-  } as Command;
+  } as unknown as Command;
 
   const clientInfo = client || {
     "id": "3",
