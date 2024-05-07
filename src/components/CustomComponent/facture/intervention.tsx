@@ -19,7 +19,7 @@ export const PDF_intervention = ({ commande, client }: { commande?: Command, cli
     "products": "Peinture",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
     "tjm": 50,
-    "status": "En cours",
+    "status": "pending",
     "done": "2024-05-05"
   } as Command;
 

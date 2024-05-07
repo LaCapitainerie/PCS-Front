@@ -19,9 +19,9 @@ export const PDF_invoice = ({ commande, client }: { commande?: Command, client?:
     "products": "Peinture",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
     "tjm": 50,
-    "status": "En cours",
+    "status": "pending",
     "done": "2024-05-05"
-  } as unknown as Command;
+  } as Command;
 
   const clientInfo = client || {
     "id": "3",
