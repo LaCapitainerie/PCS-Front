@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Calendar } from '../../../ui/customcalendar';
 import Order from '../../../cavaservir/order';
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
@@ -21,7 +21,7 @@ const Calendrier: React.FC<CalendrierProps> = ({children}) => {
             <DialogContent style={{maxWidth: '90%'}}>
                 <div className='flex flex-row justify-between' style={{maxHeight: '100%'}}>
                     <Calendar SetSelectedReservation={SelectedDay} style={{width: '66%'}}/>
-                    <Order day={Day}/>
+                    <Order day={Day} style={{width: '33%'}}/>
                 </div>
             </DialogContent>
         </Dialog>

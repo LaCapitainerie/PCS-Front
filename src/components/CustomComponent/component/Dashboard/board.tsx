@@ -63,7 +63,7 @@ const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
 
     return (
         <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
-            <CardHeader className="flex flex-row items-center">
+            <CardHeader className="flex flex-row items-center justify-between">
               <div className="grid gap-2">
                 <CardTitle>Data</CardTitle>
                 <CardDescription>
