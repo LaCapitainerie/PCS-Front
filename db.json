@@ -1,171 +1,171 @@
 {
     "users": [
       {
-        "ID": "0",
-        "Username": "BySajed",
-        "Nom": "Ben Youssef",
-        "Prenom": "Sajed",
-        "Email": "Sajed.Ben_Youssef@email.com",
-        "Type": "Admin",
-        "Avatar": "https://github.com/BySajed.png",
-        "Description": "0 Faute c'est promis !",
-        "Joined": "2019-01-01",
-        "Phone": "0562000000"
+        "id": "0",
+        "username": "BySajed",
+        "nom": "Ben Youssef",
+        "prenom": "Sajed",
+        "email": "Sajed.Ben_Youssef@email.com",
+        "type": "Admin",
+        "avatar": "https://github.com/BySajed.png",
+        "description": "0 Faute c'est promis !",
+        "joined": "2019-01-01",
+        "phone": "0562000000"
       },
       {
-        "ID": "1",
-        "Username": "Skalefou",
-        "Nom": "Poupard",
-        "Prenom": "Thomas",
-        "Email": "Thomas.Poupard@email.com",
-        "Type": "Admin",
-        "Avatar": "https://github.com/Skalefou.png",
-        "Description": "Indisponible pour le moment. appelez la CIA.",
-        "Joined": "2019-01-01",
-        "Phone": "0161564000"
+        "id": "1",
+        "username": "Skalefou",
+        "nom": "Poupard",
+        "prenom": "Thomas",
+        "email": "Thomas.Poupard@email.com",
+        "type": "Admin",
+        "avatar": "https://github.com/Skalefou.png",
+        "description": "Indisponible pour le moment. appelez la CIA.",
+        "joined": "2019-01-01",
+        "phone": "0161564000"
       },
       {
-        "ID": "2",
-        "Username": "LaCapitainerie",
-        "Nom": "Antreassian",
-        "Prenom": "Hugo",
-        "Email": "Hugo.Antreassian@gmail.com",
-        "Type": "Admin",
-        "Avatar": "https://github.com/LaCapitainerie.png",
-        "Description": "C'est moi qui gère tout ça !",
-        "Joined": "2019-01-01",
-        "Phone": "06065644800"
+        "id": "2",
+        "username": "LaCapitainerie",
+        "nom": "Antreassian",
+        "prenom": "Hugo",
+        "email": "Hugo.Antreassian@gmail.com",
+        "type": "Admin",
+        "avatar": "https://github.com/LaCapitainerie.png",
+        "description": "C'est moi qui gère tout ça !",
+        "joined": "2019-01-01",
+        "phone": "06065644800"
       },
       {
-        "ID": "3",
-        "Username": "Host Domain",
-        "Nom": "Host",
-        "Prenom": "Domain",
-        "Email": "domain.host@email.com",
-        "Type": "Locataire",
-        "Avatar": "https://randomuser.me/api/portraits",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Joined": "2019-01-01",
-        "Phone": "06879797110"
+        "id": "3",
+        "username": "Host Domain",
+        "nom": "Host",
+        "prenom": "Domain",
+        "email": "domain.host@email.com",
+        "type": "Locataire",
+        "avatar": "https://randomuser.me/api/portraits",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "joined": "2019-01-01",
+        "phone": "06879797110"
       },
       {
-        "ID": "4",
-        "Username": "Template",
-        "Nom": "Template",
-        "Prenom": "Template",
-        "Email": "template.template@email.com",
-        "Type": "Admin",
-        "Avatar": "https://randomuser.me/api/portraits",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Joined": "2019-01-01",
-        "Phone": "0676841510"
+        "id": "4",
+        "username": "Template",
+        "nom": "Template",
+        "prenom": "Template",
+        "email": "template.template@email.com",
+        "type": "Admin",
+        "avatar": "https://randomuser.me/api/portraits",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "joined": "2019-01-01",
+        "phone": "0676841510"
       },
       {
-        "ID": "5",
-        "Username": "John Doe",
-        "Nom": "Doe",
-        "Prenom": "John",
-        "Email": "john.doe@email.com",
-        "Type": "Prestataire",
-        "Avatar": "https://randomuser.me/api/portraits",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Joined": "2019-01-01",
-        "Phone": "0951748630"
+        "id": "5",
+        "username": "John Doe",
+        "nom": "Doe",
+        "prenom": "John",
+        "email": "john.doe@email.com",
+        "type": "Prestataire",
+        "avatar": "https://randomuser.me/api/portraits",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "joined": "2019-01-01",
+        "phone": "0951748630"
       },
       {
-        "ID": "6",
-        "Username": "Jean Dupont",
-        "Nom": "Dupont",
-        "Prenom": "Jean",
-        "Email": "jean.dupont@email.com",
-        "Type": "Locataire",
-        "Avatar": "https://randomuser.me/api/portraits",
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Joined": "2019-01-01",
-        "Phone": "0167895170"
+        "id": "6",
+        "username": "Jean Dupont",
+        "nom": "Dupont",
+        "prenom": "Jean",
+        "email": "jean.dupont@email.com",
+        "type": "Locataire",
+        "avatar": "https://randomuser.me/api/portraits",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "joined": "2019-01-01",
+        "phone": "0167895170"
       }
     ],
     "prestataires": [
       {
-        "ID": "0",
-        "ID_user": "7",
-        "Locataire": "Jacob",
-        "Type": "peinture",
-        "Prix": 20
+        "id": "0",
+        "iduser": "7",
+        "particulier": "Jacob",
+        "type": "peinture",
+        "prix": 20
       },
       {
-        "ID": "1",
-        "ID_user": "6",
+        "id": "1",
+        "iduser": "6",
         "particulier": "Ezekiel",
-        "Type": "reparation",
-        "Prix": 20
+        "type": "reparation",
+        "prix": 20
       },
       {
-        "ID": "2",
-        "ID_user": "5",
+        "id": "2",
+        "iduser": "5",
         "particulier": "Adolf",
-        "Type": "peinture",
-        "Prix": 20
+        "type": "peinture",
+        "prix": 20
       },
       {
-        "ID": "3",
-        "ID_user": "3",
+        "id": "3",
+        "iduser": "3",
         "particulier": "Himmler",
-        "Type": "peinture",
-        "Prix": 20
+        "type": "peinture",
+        "prix": 20
       }
     ],
     "property": [
       {
-        "ID": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-        "Name": "Appartement 1",
+        "id": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+        "name": "Appartement 1",
         "type": "Appartement",
-        "Price": 100000,
-        "Surface": 100,
-        "Room": 3,
-        "Bathroom": 2,
-        "Garage": 0,
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Adress": "",
-        "City": "",
-        "Zip_Code": "",
-        "Country": "",
-        "AdministrationValidation": false,
-        "Lessor_id": "f3b2507f-3021-4f8e-836b-c15c5ee3a5a8"
+        "price": 100000,
+        "surface": 100,
+        "room": 3,
+        "bathroom": 2,
+        "garage": 0,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "adress": "",
+        "city": "",
+        "zipcode": "",
+        "country": "",
+        "administrationvalidation": false,
+        "lessorid": "f3b2507f-3021-4f8e-836b-c15c5ee3a5a8"
       },
       {
-        "ID": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-        "Name": "Maison 1",
+        "id": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+        "name": "Maison 1",
         "type": "Maison",
-        "Price": 200000,
-        "Surface": 200,
-        "Room": 4,
-        "Bathroom": 3,
-        "Garage": 2,
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Adress": "",
-        "City": "",
-        "Zip_Code": "",
-        "Country": "",
-        "AdministrationValidation": true,
-        "Lessor_id": "1da0f550-9cc1-4881-95c2-ebeb78cb7df0"
+        "price": 200000,
+        "surface": 200,
+        "room": 4,
+        "bathroom": 3,
+        "garage": 2,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "adress": "",
+        "city": "",
+        "zipcode": "",
+        "country": "",
+        "administrationvalidation": true,
+        "lessorid": "1da0f550-9cc1-4881-95c2-ebeb78cb7df0"
       },
       {
-        "ID": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-        "Name": "Villa 1",
+        "id": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+        "name": "Villa 1",
         "type": "Villa",
-        "Price": 300000,
-        "Surface": 300,
-        "Room": 5,
-        "Bathroom": 4,
-        "Garage": 3,
-        "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "Adress": "",
-        "City": "",
-        "Zip_Code": "",
-        "Country": "",
-        "AdministrationValidation": true,
-        "Lessor_id": "647d216d-d534-4c7e-b1f1-0c2d815bd3f4"
+        "price": 300000,
+        "surface": 300,
+        "room": 5,
+        "bathroom": 4,
+        "garage": 3,
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "adress": "",
+        "city": "",
+        "zipcode": "",
+        "country": "",
+        "administrationvalidation": true,
+        "lessorid": "647d216d-d534-4c7e-b1f1-0c2d815bd3f4"
       },
       {
         "id": "0",
@@ -177,12 +177,12 @@
         "bathroom": 2,
         "garage": 0,
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "address": "",
+        "adresss": "",
         "city": "",
-        "zipCode": "",
+        "zipcode": "",
         "country": "",
-        "administrationValidation": false,
-        "lessorId": ""
+        "administrationvalidation": false,
+        "lessorid": ""
       },
       {
         "id": "1",
@@ -221,147 +221,138 @@
     ],
     "prestation": [
       {
-        "ID_Housing": "0",
-        "ID_Client": "0",
-        "ID_Bien_Immobilier": "0",
-        "Nom": "Hugo",
-        "Prenom": "Antreassian",
-        "Prestataire": "peinture",
+        "id": "0",
+        "idclient": "0",
+        "idprestataire": "0",
+        "idproperty": "0",
         "status": "Disponible",
-        "Type": "Appartement",
-        "Date": "2024-04-07",
-        "Heure": "14:00:00",
-        "Duree": "2",
-        "Prix": 50
+        "date": "2024-04-07",
+        "description": "",
+        "duree": "2",
+        "prix": 50
       },
       {
-        "ID_Housing": "1",
-        "ID_Client": "1",
-        "ID_Bien_Immobilier": "1",
-        "Nom": "Thomas",
-        "Prenom": "Poupard",
-        "Prestataire": "reparation",
-        "status": "Indisponible",
-        "Type": "Maison",
-        "Date": "2024-05-09",
-        "Heure": "10:00:00",
-        "Duree": "3",
-        "Prix": 100
+        "id": "1",
+        "idclient": "1",
+        "idprestataire": "1",
+        "idproperty": "1",
+        "status": "En Attente",
+        "date": "2024-05-09",
+        "description": "",
+        "duree": "3",
+        "prix": 50
       },
       {
-        "ID_Housing": "2",
-        "ID_Client": "2",
-        "ID_Bien_Immobilier": "2",
-        "Nom": "Sajed",
-        "Prenom": "Ben Youssef",
-        "Prestataire": "peinture",
+        "id": "2",
+        "idclient": "0",
+        "idprestataire": "2",
+        "idproperty": "2",
         "status": "Disponible",
-        "Type": "Villa",
-        "Date": "2024-05-12",
-        "Heure": "12:00:00",
-        "Duree": "4",
-        "Prix": 150
+        "date": "2024-05-12",
+        "description": "",
+        "duree": "4",
+        "prix": 50
       }
     ],
     "reservation": [
       {
-        "ID": "0",
-        "ID_Tenant": "3",
-        "ID_lessor": "0",
-        "ID_property": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-        "Status": "Valide",
-        "Date": "2024-04-07",
-        "Heure": "14:00:00",
-        "Description": "",
-        "Duree": "2",
-        "Prix": 50
+        "id": "0",
+        "idtenant": "3",
+        "idlessor": "0",
+        "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+        "status": "Valide",
+        "date": "2024-04-07",
+        "heure": "14:00:00",
+        "description": "",
+        "duree": "2",
+        "prix": 50
       },
       {
-        "ID": "1",
-        "ID_Tenant": "6",
-        "ID_lessor": "1",
-        "ID_property": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-        "Status": "En Attente",
-        "Date": "2024-05-09",
-        "Heure": "10:00:00",
-        "Description": "",
-        "Duree": "3",
-        "Prix": 50
+        "id": "1",
+        "idtenant": "6",
+        "idlessor": "1",
+        "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+        "status": "En Attente",
+        "date": "2024-05-09",
+        "heure": "10:00:00",
+        "description": "",
+        "duree": "3",
+        "prix": 50
       },
       {
-        "ID": "2",
-        "ID_Tenant": "3",
-        "ID_lessor": "2",
-        "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-        "Status": "Valide",
-        "Date": "2024-05-12",
-        "Heure": "12:00:00",
-        "Description": "",
-        "Duree": "4",
-        "Prix": 50
+        "id": "2",
+        "idtenant": "3",
+        "idlessor": "2",
+        "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+        "status": "Valide",
+        "date": "2024-05-12",
+        "heure": "10:00:00",
+        "description": "",
+        "duree": "4",
+        "prix": 50
       }
     ],
     "property_image": [
       {
-          "ID": 0,
-          "ID_property": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933a.jpg"
+          "id": 0,
+          "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933a.jpg"
       },
       {
-          "ID": 1,
-          "ID_property": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933b.jpg"
+          "id": 1,
+          "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933b.jpg"
       },
       {
-          "ID": 2,
-          "ID_property": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933c.jpg"
+          "id": 2,
+          "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933c.jpg"
       },
       {
-          "ID": 3,
-          "ID_property": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933d.jpg"
+          "id": 3,
+          "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933d.jpg"
       },
       {
-          "ID": 4,
-          "ID_property": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933e.jpg"
+          "id": 4,
+          "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933e.jpg"
       },
       {
-          "ID": 5,
-          "ID_property": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933f.jpg"
+          "id": 5,
+          "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933f.jpg"
       },
       {
-          "ID": 6,
-          "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933g.jpg"
+          "id": 6,
+          "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933g.jpg"
       },
       {
-          "ID": 7,
-          "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933h.jpg"
+          "id": 7,
+          "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933h.jpg"
       },
       {
-          "ID": 8,
-          "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-          "Image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933i.jpg"
+          "id": 8,
+          "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933i.jpg"
       }
     ],
     "message": [
       {
-        "ID": "0",
-        "ID_Expediteur": "3",
-        "ID_Destinataire": "6",
+        "id": "0",
+        "id_Expediteur": "3",
+        "id_Destinataire": "6",
         "Date": "2024-05-05",
         "Heure": "10:00:00",
         "Message": "Bonjour, je suis intéressé par votre bien immobilier.",
         "Lu": "true"
       },
       {
-        "ID": "1",
-        "ID_Expediteur": "6",
-        "ID_Destinataire": "3",
+        "id": "1",
+        "id_Expediteur": "6",
+        "id_Destinataire": "3",
         "Date": "2024-05-05",
         "Heure": "10:30:00",
         "Message": "Bonjour, je suis disponible pour une visite demain.",
@@ -370,33 +361,31 @@
     ],
     "command": [
       {
-        "ID": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
-        "ID_client": "3",
-        "ID_property": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-        "Date": "2024-05-05",
-        "Duree": 2,
-        "Shipping_info": "1 rue de la paix, 75000 Paris",
-        "Products": "Peinture",
-        "Description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "TJM": 50,
-        "Status": "En cours",
-        "Fait_le": "2024-05-05"
+        "id": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
+        "idclient": "3",
+        "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+        "date": "2024-05-05",
+        "duree": 2,
+        "shippinginfo": "1 rue de la paix, 75000 Paris",
+        "products": "Peinture",
+        "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "tjm": 50,
+        "status": "En cours",
+        "done": "2024-05-05"
       },
       {
-        "ID": "987a9c1f-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
-        "ID_client": "6",
-        "ID_property": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-        "Date": "2024-10-05",
-        "Duree": 3,
-        "Shipping_info": "1 rue de la paix, 75000 Paris",
-        "Products": "Reparation",
-        "Description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "TJM": 100,
-        "Status": "En cours",
-        "Fait_le": "2024-10-05"
+        "id": "987a9c1f-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
+        "idclient": "6",
+        "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+        "date": "2024-10-05",
+        "duree": 3,
+        "shippinginfo": "1 rue de la paix, 75000 Paris",
+        "products": "Reparation",
+        "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+        "tjm": 100,
+        "status": "En cours",
+        "done": "2024-10-05"
       }
     ]
-
-
   }
   
