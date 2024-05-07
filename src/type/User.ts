@@ -1,12 +1,12 @@
 export interface User {
-    ID: string;
-    Username: string;
-    Nom: string;
-    Prenom: string;
-    Email: string;
-    Type: "Bailleur" | "Locataire" | "Prestataire" | "Admin";
-    Avatar: string;
-    Description: string;
-    Joined: string;
-    Phone: string;
+    id: string;
+    username: string;
+    nom: string;
+    prenom: string;
+    email: string;
+    type: "Bailleur" | "Locataire" | "Prestataire" | "Admin";
+    avatar: string;
+    description: string;
+    joined: string;
+    phone: string;
 };

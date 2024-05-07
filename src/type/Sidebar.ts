@@ -1,7 +1,7 @@
 export interface Sidebar {
-    Href: string;
-    Hover: string;
-    Icon: string;
-    Id_tab: string;
-    Permission: number;
+    hover: string;
+    href: string;
+    icon: string;
+    id: string;
+    permission: number;
 };

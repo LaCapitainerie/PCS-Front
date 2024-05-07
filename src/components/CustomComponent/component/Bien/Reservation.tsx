@@ -40,15 +40,15 @@ function ToBox(agg: aggregate, styleCol: React.CSSProperties) {
           <Usercard user={agg.Locataire}>
             <div className="flex items-center gap-4 w-full">
               <Avatar className="hidden h-9 w-9 sm:flex">
-                <AvatarImage src={agg.Locataire.Avatar} alt="Avatar" />
-                <AvatarFallback>{agg.Locataire?.Nom[0] + agg.Locataire?.Prenom[0]}</AvatarFallback>
+                <AvatarImage src={agg.Locataire.avatar} alt="Avatar" />
+                <AvatarFallback>{agg.Locataire?.nom[0] + agg.Locataire?.prenom[0]}</AvatarFallback>
               </Avatar>
               <div className="grid gap-1">
                 <p className="text-sm font-medium leading-none">
-                  {agg.Locataire.Nom + " " + agg.Locataire.Prenom}
+                  {agg.Locataire.nom + " " + agg.Locataire.prenom}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {agg.Locataire.Email}
+                  {agg.Locataire.email}
                 </p>
               </div>
             </div>
@@ -59,7 +59,7 @@ function ToBox(agg: aggregate, styleCol: React.CSSProperties) {
       <CardContent className="p-6 grid gap-8 items-start" style={styleCol}>
         <div>
           <Label htmlFor="paye">Statut du paiement : </Label>
-          <Input id="paye" type="paye" defaultValue={agg.Reservation.Status} readOnly/>
+          <Input id="paye" type="paye" defaultValue={agg.Reservation.status} readOnly/>
         </div>
       </CardContent>
     </div>
@@ -85,7 +85,7 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
       const tmpAggregat = ReservationVal.map((res) => {        
         return {
           Reservation: res,
-          Locataire: data.filter((user) => user.ID === res.ID_Tenant)[0] || {} as User
+          Locataire: data.filter((user) => user.id === res.idtenant)[0] || {} as User
         } as aggregate
       });
 
@@ -115,13 +115,13 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Locataire :</Label>
               <div className="flex flex-row justify-between">
-                <Select disabled={aggregat.length == 0} onValueChange={(value) => setChoosen(aggregat[parseInt(value)])} defaultValue={aggregat.length > 0 ? aggregat[0].Locataire.Username :""}>
+                <Select disabled={aggregat.length == 0} onValueChange={(value) => setChoosen(aggregat[parseInt(value)])} defaultValue={aggregat.length > 0 ? aggregat[0].Locataire.username :""}>
                   <SelectTrigger>
                     <SelectValue placeholder={(aggregat.length > 0 && "Select a tenant") || "No tenant" }></SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {aggregat.map((value, index) => (
-                    <SelectItem value={index.toString()} key={index}>{value.Locataire.Username}</SelectItem>
+                    <SelectItem value={index.toString()} key={index}>{value.Locataire.username}</SelectItem>
                     ))}
                     
                   </SelectContent>

@@ -32,7 +32,7 @@ const MainContent = ({house}: {house:Property | undefined}) => {
                 )
             ).json();
 
-            setPhotos(data.filter((photo) => photo.ID_property == house?.ID));
+            setPhotos(data.filter((photo) => photo.idproperty == house?.id));
         };
 
         dataFetch();
@@ -50,7 +50,7 @@ const MainContent = ({house}: {house:Property | undefined}) => {
                 )
             ).json();
             
-            setReservation(data2.filter((res) => res.ID_property === house?.ID));
+            setReservation(data2.filter((res) => res.idproperty === house?.id));
 
             const data3: Prestataire[] = await (
                 await fetch(
@@ -58,7 +58,7 @@ const MainContent = ({house}: {house:Property | undefined}) => {
                 )
             ).json();
 
-            setPrestataire(data3.filter((prest) => reservation.map((res) => res.ID_lessor).includes(prest.ID)));
+            setPrestataire(data3.filter((prest) => reservation.map((res) => res.idlessor).includes(prest.id)));
         };
 
         dataFetch();
@@ -71,7 +71,7 @@ const MainContent = ({house}: {house:Property | undefined}) => {
                 <CarouselPlugin images={photos} />
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
-                        <Title titre="Nom du bien" sous_titre={state?.Description}/>
+                        <Title titre="Nom du bien" sous_titre={state?.description}/>
                         <div className="flex flex-row justify-around gap-2">
                             <CardProperty Prestataire={prestataire} Property={state} />
                         </div>

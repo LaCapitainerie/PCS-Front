@@ -10,8 +10,9 @@ import { useToast } from "@/components/ui/use-toast"
 import { Property } from "@/type/Property"
 import { Prestataire } from "@/type/Prestataire"
 import { User } from "@/type/User"
+import { Prestation } from "@/type/Prestation"
 
-function statusToColor(params: "pending" | "processing" | "success" | "failed") {
+function statusToColor(params: Prestation["status"]) {
   switch (params) {
     case "pending":
       return "yellow"
@@ -25,7 +26,7 @@ function statusToColor(params: "pending" | "processing" | "success" | "failed") 
 
 }
 
-function typeToDom(type: string = "", status: "pending" | "processing" | "success" | "failed") {
+function typeToDom(type: string = "", status: Prestation["status"]) {
   switch (type) {
     case "chauffage":
       return <Heater className={`h-5 w-5 text-${statusToColor(status)}-500`} />
@@ -68,7 +69,7 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
         ).json();
         
         
-        const user = data.filter((value: User) => Prestataire.map((val) => val.ID).includes(value.ID));
+        const user = data.filter((value: User) => Prestataire.map((val) => val.id).includes(value.id));
 
         setUser(user);
     };
@@ -130,11 +131,11 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
                     <div className="space-y-1">
                       
                       <p className="text-sm font-medium leading-none">
-                        {presta.ID}
+                        {presta.id}
                       </p>
 
                       <p className="text-sm text-muted-foreground">
-                        {presta.Type}
+                        {presta.type}
                       </p>
                     </div>
               </Usercard>

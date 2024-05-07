@@ -58,7 +58,7 @@ const icons = {
 };
 
 interface SideBarTypeDTO {
-    Sidebar: SidebarType[];
+    sidebar: SidebarType[];
 }
 
 const Component = (index:number) => {
@@ -70,9 +70,12 @@ const Component = (index:number) => {
                 await fetch(
                     `${process.env.NEXT_PUBLIC_API_URL}/sidebar`
                 )
-            ).json();            
+            ).json();
 
-            setState(data.Sidebar.filter((value: SidebarType) => value.Permission <= Me));
+            console.log(data);
+            
+
+            setState(data.sidebar.filter((value: SidebarType) => value.permission <= Me));
         };
 
         dataFetch();
@@ -81,18 +84,18 @@ const Component = (index:number) => {
     return (
         <>
             {state.map((value, i) =>
-                <TooltipProvider key={value.Id_tab}>
+                <TooltipProvider key={value.id}>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href={value.Href}
+                                href={value.href}
                                 className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                             >
-                                {React.createElement(icons[value.Icon as keyof typeof icons], { className: "h-5 w-5" })}
-                                <span className="sr-only">{value.Hover}</span>
+                                {React.createElement(icons[value.icon as keyof typeof icons], { className: "h-5 w-5" })}
+                                <span className="sr-only">{value.hover}</span>
                             </Link>
                         </TooltipTrigger>
-                        <TooltipContent side="right">{value.Hover}</TooltipContent>
+                        <TooltipContent side="right">{value.hover}</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
             

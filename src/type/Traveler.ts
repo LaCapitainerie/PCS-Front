@@ -1,4 +1,4 @@
 export interface Traveler {
-    ID: string;
-    ID_user: string;
+    id: string;
+    iduser: string;
 };

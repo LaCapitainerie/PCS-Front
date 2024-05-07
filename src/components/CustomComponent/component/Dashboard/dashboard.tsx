@@ -129,9 +129,9 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
 
         let tmpCurrentValuable = currentValuable;
 
-        if (tmpCurrentValuable.map((valuable) => valuable.name).includes(column.name)) { return; }
+        if (!tmpCurrentValuable.map((valuable) => valuable.name).includes(column.name)) { tmpCurrentValuable.push(newValuable); }
 
-        tmpCurrentValuable.push(newValuable);
+        
 
         setValuable(tmpCurrentValuable);
 
@@ -191,15 +191,15 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
                   <Usercard user={user}>
                     <div className="flex items-center gap-4 w-full">
                       <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src={user.Avatar} alt="Avatar" />
-                        <AvatarFallback>{user.Nom[0] + user.Prenom[0]}</AvatarFallback>
+                        <AvatarImage src={user.avatar} alt="Avatar" />
+                        <AvatarFallback>{user.nom[0] + user.prenom[0]}</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-1">
                         <p className="text-sm font-medium leading-none">
-                          {user.Nom + " " + user.Prenom}
+                          {user.nom + " " + user.prenom}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          {user.Email}
+                          {user.email}
                         </p>
                       </div>
                       <div className="ml-auto font-medium">+$Recettes</div>

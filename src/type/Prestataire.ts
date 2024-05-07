@@ -1,6 +1,6 @@
 export interface Prestataire {
-    ID: string;
-    ID_user: string;
-    Type: "reparation" | "peinture" | "jardinage" | "chauffage" | "electricite" | "conciergerie";
-    Prix: number;
+    id: string;
+    iduser: string;
+    type: "reparation" | "peinture" | "jardinage" | "chauffage" | "electricite" | "conciergerie";
+    prix: number;
 };

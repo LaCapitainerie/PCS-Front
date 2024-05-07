@@ -8,7 +8,7 @@ import { Command } from "@/type/Command"
 import { useEffect } from "react"
 import { User } from "@/type/User"
 import React from "react"
-import { generatePDF } from "../CustomComponent/facture/invoice"
+import { PDF_invoice } from "../CustomComponent/facture/invoice"
 
 
 const Order = ({
@@ -31,7 +31,7 @@ const Order = ({
                 )
             ).json();
 
-            setOrder(data.find((command) => isSameDay(new Date(command.Date), day)) as Command);
+            setOrder(data.find((command) => isSameDay(new Date(command.date), day)) as Command);
         };
 
         dataFetch();
@@ -39,28 +39,23 @@ const Order = ({
 
 
 
-    const prixtotal = order?order.TJM * order.Duree:0
+    const prixtotal = order?order.tjm * order.duree:0
     const [customer, setCustomer] = React.useState<User>();
 
     useEffect(() => {
-        if (order) {
-            const dataFetch = async () => {
-                const data: User[] = await (
-                    await fetch(
-                        `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
-                    )
-                ).json();
+        const dataFetch = async () => {
+            const data: User[] = await (
+                await fetch(
+                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
+                )
+            ).json();
 
-                console.log(data, order.ID_client);
-                
-    
-                setCustomer(
-                    data.find((user) => user.ID === order.ID_client) as User
-                );
-            }
-
-            dataFetch();
+            setCustomer(
+                data.find((user) => user.id === order?.idclient) as User
+            );
         }
+
+        dataFetch();
     }, [order]);
 
     return (
@@ -68,7 +63,7 @@ const Order = ({
             <CardHeader className="flex flex-row items-start bg-muted/50">
             <div className="grid gap-0.5">
                 <CardTitle className="group flex items-center gap-2 text-lg">
-                Order {order?.ID?.split('-')[0]}
+                Order {order?.id?.split('-')[0]}
                 <Button
                     size="icon"
                     variant="outline"
@@ -78,7 +73,7 @@ const Order = ({
                     <span className="sr-only">Copy Order ID</span>
                 </Button>
                 </CardTitle>
-                <CardDescription>Date: {order?.Date}</CardDescription>
+                <CardDescription>Date: {order?.date}</CardDescription>
             </div>
             <div className="ml-auto flex items-center gap-1">
                 <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -96,7 +91,7 @@ const Order = ({
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuItem>Edit</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => generatePDF({ commande: order })}>Export</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => PDF_invoice({ commande: order })}>Export</DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Trash</DropdownMenuItem>
                 </DropdownMenuContent>
@@ -109,15 +104,15 @@ const Order = ({
                 <ul className="grid gap-3">
                 <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                    {order?.Products}
+                    {order?.products}
                     </span>
-                    <span>${order?.TJM}</span>
+                    <span>${order?.tjm}</span>
                 </li>
                 <li className="flex items-center justify-between">
                     <span className="text-muted-foreground">
                     Duree
                     </span>
-                    <span>x{order?.Duree}</span>
+                    <span>x{order?.duree}</span>
                 </li>
                 </ul>
                 <Separator className="my-2" />
@@ -141,8 +136,8 @@ const Order = ({
                 <div className="grid gap-3">
                 <div className="font-semibold">Shipping Information</div>
                 <address className="grid gap-0.5 not-italic text-muted-foreground">
-                    <span>{customer?.Prenom} {customer?.Nom}</span>
-                    <span>{order?.Shipping_info}</span>
+                    <span>{customer?.prenom} {customer?.nom}</span>
+                    <span>{order?.shipping_info}</span>
                 </address>
                 </div>
                 <div className="grid auto-rows-max gap-3 text-right">
@@ -158,18 +153,18 @@ const Order = ({
                 <dl className="grid gap-3">
                 <div className="flex items-center justify-between">
                     <dt className="text-muted-foreground">Customer</dt>
-                    <dd>{customer?.Prenom} {customer?.Nom}</dd> 
+                    <dd>{customer?.prenom} {customer?.nom}</dd> 
                 </div>
                 <div className="flex items-center justify-between">
                     <dt className="text-muted-foreground">Email</dt>
                     <dd>
-                    <a href="mailto:">{customer?.Email}</a>
+                    <a href="mailto:">{customer?.email}</a>
                     </dd>
                 </div>
                 <div className="flex items-center justify-between">
                     <dt className="text-muted-foreground">Phone</dt>
                     <dd>
-                    <a href="tel:">{customer?.Phone}</a>
+                    <a href="tel:">{customer?.phone}</a>
                     </dd>
                 </div>
                 </dl>
@@ -190,7 +185,7 @@ const Order = ({
             </CardContent>
             <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
             <div className="text-xs text-muted-foreground">
-                Updated <time dateTime="2023-11-23">{order?.Fait_le}</time>
+                Updated <time dateTime="2023-11-23">{order?.done}</time>
             </div>
             <Pagination className="ml-auto mr-0 w-auto">
                 <PaginationContent>

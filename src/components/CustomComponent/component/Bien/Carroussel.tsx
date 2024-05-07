@@ -35,7 +35,7 @@ export function CarouselPlugin({ images }: { images: Property_image[] }) {
               <Card>
                 <CardContent className="flex items-center justify-center p-0">
                     <img
-                        src={photo.Image}
+                        src={photo.image}
                         alt={`Random Image ${index + 1}`}
                         className="w-full h-full object-cover rounded-lg max-h-96"
                     />

@@ -10,7 +10,7 @@ import { BadgeCheckIcon, BadgeXIcon, Hourglass, PackageSearchIcon } from "lucide
 // You can use a Zod schema here if you want.
 
 
-function getStatus(status:Prestation["Status"]) {
+function getStatus(status:Prestation["status"]) {
   switch (status) {
     case "pending":
       return <Hourglass className="h-5 w-5 text-grey-500"/>
@@ -29,7 +29,7 @@ export const columns: ColumnDef<Prestation>[] = [
     header: () => <div className="text-right">Status</div>,
     cell: ({ row }) => {
       const Status = row.getValue("status") as string;
-      const formatted = getStatus(Status as Prestation["Status"]);
+      const formatted = getStatus(Status as Prestation["status"]);
  
       return <>{formatted}</>;
     },

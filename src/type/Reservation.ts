@@ -1,11 +1,11 @@
 export interface Reservation {
-    ID: string;
-    ID_Tenant: string;
-    ID_lessor: string;
-    ID_property: string;
-    Status: "En attente" | "Acceptée" | "Refusée";
-    Date: string;
-    Description: string;
-    Duree: number;
-    Prix: number;
+    id: string;
+    idtenant: string;
+    idlessor: string;
+    idproperty: string;
+    status: "En attente" | "Acceptée" | "Refusée";
+    date: string;
+    description: string;
+    duree: number;
+    prix: number;
 };

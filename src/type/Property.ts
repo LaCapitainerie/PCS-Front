@@ -1,17 +1,17 @@
 export interface Property {
-    ID: string;
-    Name: string;
+    id: string;
+    name: string;
     type: "Maison" | "Appartement" | "Terrain" | "Villa";
-    Price: number;
-    Surface: number;
-    Room: number;
-    Bathroom: number;
-    Garage: number;
-    Description: string;
-    Address: string;
-    City: string;
-    ZipCode: string;
-    Country: string;
-    AdministrationValidation: boolean;
-    LessorId: string;
+    price: number;
+    surface: number;
+    room: number;
+    bathroom: number;
+    garage: number;
+    description: string;
+    address: string;
+    city: string;
+    zipCode: string;
+    country: string;
+    administrationvalidation: boolean;
+    lessorid: string;
 }

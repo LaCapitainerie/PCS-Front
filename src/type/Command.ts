@@ -1,13 +1,13 @@
 export interface Command {
-    ID: string;
-    ID_client: string;
-    ID_property: string;
-    Date: string;
-    Duree: number;
-    Shipping_info: string;
-    Products: string;
-    Description: string;
-    TJM: number;
-    Status: string;
-    Fait_le: string;
+    id: string;
+    idclient: string;
+    idproperty: string;
+    date: string;
+    duree: number;
+    shippinginfo: string;
+    products: string;
+    description: string;
+    tjm: number;
+    status: string;
+    done: string;
 };

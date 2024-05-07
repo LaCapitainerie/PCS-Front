@@ -13,9 +13,17 @@ interface DataBoardProps {
   card: ValuableThing;
 }
 
+interface dataProps {
+  idtenant: string;
+  idproperty: string;
+  date: string;
+  duree: number;
+  prix: number;
+}
+
 const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
 
-    const [data, setData] = useState<any[]>([]);
+    const [data, setData] = useState<dataProps[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
@@ -84,12 +92,12 @@ const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {data.map((dataLoop) => {
+                  {data.map((dataLoop, index) => {
 
-                    const tmpUser = Utilisateurs.find((user) => user.ID === dataLoop.ID_Tenant);
+                    const tmpUser = Utilisateurs.find((user) => user.id === dataLoop.idtenant);
 
-                    const startDate = new Date(dataLoop.Date);
-                    const endDate = addDays(new Date(dataLoop.Date), dataLoop.Duree);
+                    const startDate = new Date(dataLoop.date);
+                    const endDate = addDays(new Date(dataLoop.date), dataLoop.duree);
 
                     // Is dataLoop passed , today between start and end date , or is it in the future
                     const isToday = new Date() >= new Date(startDate) && new Date() <= endDate;
@@ -98,15 +106,15 @@ const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
 
 
                     return (
-                    <TableRow key={dataLoop.ID}>
+                    <TableRow key={index}>
                       <TableCell>
 
 
                       <Usercard user={tmpUser}>
                         <div>
-                          <div className="font-medium">{tmpUser?.Prenom} {tmpUser?.Nom}</div>
+                          <div className="font-medium">{tmpUser?.prenom} {tmpUser?.nom}</div>
                           <div className="hidden text-sm text-muted-foreground md:inline">
-                            {tmpUser?.Email}
+                            {tmpUser?.email}
                           </div>
                         </div>
                       </Usercard>
@@ -115,7 +123,7 @@ const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
                         
                       </TableCell>
                       <TableCell className="hidden xl:table-column">
-                        {dataLoop.ID_property}
+                        {dataLoop.idproperty}
                       </TableCell>
                       <TableCell className="">
                         <Badge className="text-xs" variant="outline">
@@ -123,12 +131,12 @@ const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
                         </Badge>
                       </TableCell>
                       <TableCell className="md:table-cell ">
-                        {(new Date(dataLoop.Date)).toDateString() + " - " + endDate.toDateString()}
+                        {(new Date(dataLoop.date)).toDateString() + " - " + endDate.toDateString()}
                       </TableCell>
 
                       <TableCell className="text-right">
                         {
-                          new Intl.NumberFormat("fr-FR", { style: 'currency', currency: 'USD' }).format(dataLoop.Prix)
+                          new Intl.NumberFormat("fr-FR", { style: 'currency', currency: 'USD' }).format(dataLoop.prix)
                         }
                       </TableCell>
                     </TableRow>)
