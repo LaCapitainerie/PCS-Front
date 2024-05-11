@@ -1,444 +1,443 @@
 {
-    "users": [
-      {
-        "id": "0",
-        "username": "BySajed",
-        "nom": "Ben Youssef",
-        "prenom": "Sajed",
-        "email": "Sajed.Ben_Youssef@email.com",
-        "type": "Admin",
-        "avatar": "https://github.com/BySajed.png",
-        "description": "0 Faute c'est promis !",
-        "joined": "2019-01-01",
-        "phone": "0562000000"
-      },
-      {
-        "id": "1",
-        "username": "Skalefou",
-        "nom": "Poupard",
-        "prenom": "Thomas",
-        "email": "Thomas.Poupard@email.com",
-        "type": "Admin",
-        "avatar": "https://github.com/Skalefou.png",
-        "description": "Indisponible pour le moment. appelez la CIA.",
-        "joined": "2019-01-01",
-        "phone": "0161564000"
-      },
-      {
-        "id": "2",
-        "username": "LaCapitainerie",
-        "nom": "Antreassian",
-        "prenom": "Hugo",
-        "email": "Hugo.Antreassian@gmail.com",
-        "type": "Admin",
-        "avatar": "https://github.com/LaCapitainerie.png",
-        "description": "C'est moi qui gère tout ça !",
-        "joined": "2019-01-01",
-        "phone": "06065644800"
-      },
-      {
-        "id": "3",
-        "username": "Host Domain",
-        "nom": "Host",
-        "prenom": "Domain",
-        "email": "domain.host@email.com",
-        "type": "Locataire",
-        "avatar": "https://randomuser.me/api/portraits",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "joined": "2019-01-01",
-        "phone": "06879797110"
-      },
-      {
-        "id": "4",
-        "username": "Template",
-        "nom": "Template",
-        "prenom": "Template",
-        "email": "template.template@email.com",
-        "type": "Admin",
-        "avatar": "https://randomuser.me/api/portraits",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "joined": "2019-01-01",
-        "phone": "0676841510"
-      },
-      {
-        "id": "5",
-        "username": "John Doe",
-        "nom": "Doe",
-        "prenom": "John",
-        "email": "john.doe@email.com",
-        "type": "Prestataire",
-        "avatar": "https://randomuser.me/api/portraits",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "joined": "2019-01-01",
-        "phone": "0951748630"
-      },
-      {
-        "id": "6",
-        "username": "Jean Dupont",
-        "nom": "Dupont",
-        "prenom": "Jean",
-        "email": "jean.dupont@email.com",
-        "type": "Locataire",
-        "avatar": "https://randomuser.me/api/portraits",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "joined": "2019-01-01",
-        "phone": "0167895170"
-      }
-    ],
-    "prestataires": [
-      {
-        "id": "0",
-        "iduser": "7",
-        "particulier": "Jacob",
-        "type": "peinture",
-        "prix": 20
-      },
-      {
-        "id": "1",
-        "iduser": "6",
-        "particulier": "Ezekiel",
-        "type": "reparation",
-        "prix": 20
-      },
-      {
-        "id": "2",
-        "iduser": "5",
-        "particulier": "Adolf",
-        "type": "peinture",
-        "prix": 20
-      },
-      {
-        "id": "3",
-        "iduser": "3",
-        "particulier": "Himmler",
-        "type": "peinture",
-        "prix": 20
-      }
-    ],
-    "property": [
-      {
-        "id": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-        "name": "Appartement 1",
-        "type": "Appartement",
-        "price": 100000,
-        "surface": 100,
-        "room": 3,
-        "bathroom": 2,
-        "garage": 0,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "address": "3 rue de la paix",
-        "city": "Paris",
-        "zipcode": "75000",
-        "country": "France",
-        "administrationvalidation": false,
-        "lessorid": "f3b2507f-3021-4f8e-836b-c15c5ee3a5a8"
-      },
-      {
-        "id": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-        "name": "Maison 1",
-        "type": "Maison",
-        "price": 200000,
-        "surface": 200,
-        "room": 4,
-        "bathroom": 3,
-        "garage": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "address": "",
-        "city": "",
-        "zipcode": "",
-        "country": "",
-        "administrationvalidation": true,
-        "lessorid": "1da0f550-9cc1-4881-95c2-ebeb78cb7df0"
-      },
-      {
-        "id": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-        "name": "Villa 1",
-        "type": "Villa",
-        "price": 300000,
-        "surface": 300,
-        "room": 5,
-        "bathroom": 4,
-        "garage": 3,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "address": "",
-        "city": "",
-        "zipcode": "",
-        "country": "",
-        "administrationvalidation": true,
-        "lessorid": "647d216d-d534-4c7e-b1f1-0c2d815bd3f4"
-      },
-      {
-        "id": "0",
-        "name": "Appartement 1",
-        "type": "Appartement",
-        "price": 100000,
-        "surface": 100,
-        "room": 3,
-        "bathroom": 2,
-        "garage": 0,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "address": "",
-        "city": "",
-        "zipcode": "",
-        "country": "",
-        "administrationvalidation": false,
-        "lessorid": ""
-      },
-      {
-        "id": "1",
-        "name": "Maison 1",
-        "type": "Maison",
-        "price": 200000,
-        "surface": 200,
-        "room": 4,
-        "bathroom": 3,
-        "garage": 2,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "address": "",
-        "city": "",
-        "zipCode": "",
-        "country": "",
-        "administrationValidation": true,
-        "lessorId": ""
-      },
-      {
-        "id": "2",
-        "name": "Villa 1",
-        "type": "Villa",
-        "price": 300000,
-        "surface": 300,
-        "room": 5,
-        "bathroom": 4,
-        "garage": 3,
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "address": "",
-        "city": "",
-        "zipCode": "",
-        "country": "",
-        "administrationValidation": true,
-        "lessorId": ""
-      }
-    ],
-    "prestation": [
-      {
-        "id": "0",
-        "idclient": "0",
-        "idprestataire": "0",
-        "idproperty": "0",
-        "status": "Disponible",
-        "date": "2024-04-07",
-        "description": "",
-        "duree": "2",
-        "prix": 50
-      },
-      {
-        "id": "1",
-        "idclient": "1",
-        "idprestataire": "1",
-        "idproperty": "1",
-        "status": "En Attente",
-        "date": "2024-05-09",
-        "description": "",
-        "duree": "3",
-        "prix": 50
-      },
-      {
-        "id": "2",
-        "idclient": "0",
-        "idprestataire": "2",
-        "idproperty": "2",
-        "status": "Disponible",
-        "date": "2024-05-12",
-        "description": "",
-        "duree": "4",
-        "prix": 50
-      }
-    ],
-    "reservation": [
-      {
-        "id": "0",
-        "idtenant": "3",
-        "idlessor": "0",
+  "users": [
+    {
+      "id": "0",
+      "username": "BySajed",
+      "nom": "Ben Youssef",
+      "prenom": "Sajed",
+      "email": "Sajed.Ben_Youssef@email.com",
+      "type": "Admin",
+      "avatar": "https://github.com/BySajed.png",
+      "description": "0 Faute c'est promis !",
+      "joined": "2019-01-01",
+      "phone": "0562000000"
+    },
+    {
+      "id": "1",
+      "username": "Skalefou",
+      "nom": "Poupard",
+      "prenom": "Thomas",
+      "email": "Thomas.Poupard@email.com",
+      "type": "Admin",
+      "avatar": "https://github.com/Skalefou.png",
+      "description": "Indisponible pour le moment. appelez la CIA.",
+      "joined": "2019-01-01",
+      "phone": "0161564000"
+    },
+    {
+      "id": "2",
+      "username": "LaCapitainerie",
+      "nom": "Antreassian",
+      "prenom": "Hugo",
+      "email": "Hugo.Antreassian@gmail.com",
+      "type": "Admin",
+      "avatar": "https://github.com/LaCapitainerie.png",
+      "description": "C'est moi qui gère tout ça !",
+      "joined": "2019-01-01",
+      "phone": "06065644800"
+    },
+    {
+      "id": "3",
+      "username": "Host Domain",
+      "nom": "Host",
+      "prenom": "Domain",
+      "email": "domain.host@email.com",
+      "type": "Locataire",
+      "avatar": "https://randomuser.me/api/portraits",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "joined": "2019-01-01",
+      "phone": "06879797110"
+    },
+    {
+      "id": "4",
+      "username": "Template",
+      "nom": "Template",
+      "prenom": "Template",
+      "email": "template.template@email.com",
+      "type": "Admin",
+      "avatar": "https://randomuser.me/api/portraits",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "joined": "2019-01-01",
+      "phone": "0676841510"
+    },
+    {
+      "id": "5",
+      "username": "John Doe",
+      "nom": "Doe",
+      "prenom": "John",
+      "email": "john.doe@email.com",
+      "type": "Prestataire",
+      "avatar": "https://randomuser.me/api/portraits",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "joined": "2019-01-01",
+      "phone": "0951748630"
+    },
+    {
+      "id": "6",
+      "username": "Jean Dupont",
+      "nom": "Dupont",
+      "prenom": "Jean",
+      "email": "jean.dupont@email.com",
+      "type": "Locataire",
+      "avatar": "https://randomuser.me/api/portraits",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "joined": "2019-01-01",
+      "phone": "0167895170"
+    }
+  ],
+  "prestataires": [
+    {
+      "id": "0",
+      "iduser": "7",
+      "particulier": "Jacob",
+      "type": "peinture",
+      "prix": 20
+    },
+    {
+      "id": "1",
+      "iduser": "6",
+      "particulier": "Ezekiel",
+      "type": "reparation",
+      "prix": 20
+    },
+    {
+      "id": "2",
+      "iduser": "5",
+      "particulier": "Adolf",
+      "type": "peinture",
+      "prix": 20
+    },
+    {
+      "id": "3",
+      "iduser": "3",
+      "particulier": "Himmler",
+      "type": "peinture",
+      "prix": 20
+    }
+  ],
+  "property": [
+    {
+      "id": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+      "name": "Appartement 1",
+      "type": "Appartement",
+      "price": 100000,
+      "surface": 100,
+      "room": 3,
+      "bathroom": 2,
+      "garage": 0,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "address": "3 rue de la paix",
+      "city": "Paris",
+      "zipcode": "75000",
+      "country": "France",
+      "administrationvalidation": false,
+      "lessorid": "f3b2507f-3021-4f8e-836b-c15c5ee3a5a8"
+    },
+    {
+      "id": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+      "name": "Maison 1",
+      "type": "Maison",
+      "price": 200000,
+      "surface": 200,
+      "room": 4,
+      "bathroom": 3,
+      "garage": 2,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "address": "",
+      "city": "",
+      "zipcode": "",
+      "country": "",
+      "administrationvalidation": true,
+      "lessorid": "1da0f550-9cc1-4881-95c2-ebeb78cb7df0"
+    },
+    {
+      "id": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+      "name": "Villa 1",
+      "type": "Villa",
+      "price": 300000,
+      "surface": 300,
+      "room": 5,
+      "bathroom": 4,
+      "garage": 3,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "address": "",
+      "city": "",
+      "zipcode": "",
+      "country": "",
+      "administrationvalidation": true,
+      "lessorid": "647d216d-d534-4c7e-b1f1-0c2d815bd3f4"
+    },
+    {
+      "id": "0",
+      "name": "Appartement 1",
+      "type": "Appartement",
+      "price": 100000,
+      "surface": 100,
+      "room": 3,
+      "bathroom": 2,
+      "garage": 0,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "address": "",
+      "city": "",
+      "zipcode": "",
+      "country": "",
+      "administrationvalidation": false,
+      "lessorid": ""
+    },
+    {
+      "id": "1",
+      "name": "Maison 1",
+      "type": "Maison",
+      "price": 200000,
+      "surface": 200,
+      "room": 4,
+      "bathroom": 3,
+      "garage": 2,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "address": "",
+      "city": "",
+      "zipCode": "",
+      "country": "",
+      "administrationValidation": true,
+      "lessorId": ""
+    },
+    {
+      "id": "2",
+      "name": "Villa 1",
+      "type": "Villa",
+      "price": 300000,
+      "surface": 300,
+      "room": 5,
+      "bathroom": 4,
+      "garage": 3,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "address": "",
+      "city": "",
+      "zipCode": "",
+      "country": "",
+      "administrationValidation": true,
+      "lessorId": ""
+    }
+  ],
+  "prestation": [
+    {
+      "id": "0",
+      "idclient": "0",
+      "idprestataire": "0",
+      "idproperty": "0",
+      "status": "Disponible",
+      "date": "2024-04-07",
+      "description": "",
+      "duree": "2",
+      "prix": 50
+    },
+    {
+      "id": "1",
+      "idclient": "1",
+      "idprestataire": "1",
+      "idproperty": "1",
+      "status": "En Attente",
+      "date": "2024-05-09",
+      "description": "",
+      "duree": "3",
+      "prix": 50
+    },
+    {
+      "id": "2",
+      "idclient": "0",
+      "idprestataire": "2",
+      "idproperty": "2",
+      "status": "Disponible",
+      "date": "2024-05-12",
+      "description": "",
+      "duree": "4",
+      "prix": 50
+    }
+  ],
+  "reservation": [
+    {
+      "id": "0",
+      "idtenant": "3",
+      "idlessor": "0",
+      "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+      "status": "Valide",
+      "date": "2024-04-07",
+      "heure": "14:00:00",
+      "description": "",
+      "duree": "2",
+      "prix": 50
+    },
+    {
+      "id": "1",
+      "idtenant": "6",
+      "idlessor": "1",
+      "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+      "status": "En Attente",
+      "date": "2024-05-09",
+      "heure": "10:00:00",
+      "description": "",
+      "duree": "3",
+      "prix": 50
+    },
+    {
+      "id": "2",
+      "idtenant": "3",
+      "idlessor": "2",
+      "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+      "status": "Valide",
+      "date": "2024-05-12",
+      "heure": "10:00:00",
+      "description": "",
+      "duree": "4",
+      "prix": 50
+    }
+  ],
+  "property_image": [
+    {
+        "id": 0,
         "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-        "status": "Valide",
-        "date": "2024-04-07",
-        "heure": "14:00:00",
-        "description": "",
-        "duree": "2",
-        "prix": 50
-      },
-      {
-        "id": "1",
-        "idtenant": "6",
-        "idlessor": "1",
+        "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933a.jpg"
+    },
+    {
+        "id": 1,
+        "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+        "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933b.jpg"
+    },
+    {
+        "id": 2,
+        "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
+        "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933c.jpg"
+    },
+    {
+        "id": 3,
         "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-        "status": "En Attente",
-        "date": "2024-05-09",
-        "heure": "10:00:00",
-        "description": "",
-        "duree": "3",
-        "prix": 50
-      },
-      {
-        "id": "2",
-        "idtenant": "3",
-        "idlessor": "2",
+        "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933d.jpg"
+    },
+    {
+        "id": 4,
+        "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+        "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933e.jpg"
+    },
+    {
+        "id": 5,
+        "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+        "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933f.jpg"
+    },
+    {
+        "id": 6,
         "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-        "status": "Valide",
-        "date": "2024-05-12",
-        "heure": "10:00:00",
-        "description": "",
-        "duree": "4",
-        "prix": 50
-      }
-    ],
-    "property_image": [
-      {
-          "id": 0,
-          "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933a.jpg"
-      },
-      {
-          "id": 1,
-          "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933b.jpg"
-      },
-      {
-          "id": 2,
-          "idproperty": "a2c4e6a1-d807-4a93-97c0-2c690fabe5e9",
-          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933c.jpg"
-      },
-      {
-          "id": 3,
-          "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933d.jpg"
-      },
-      {
-          "id": 4,
-          "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933e.jpg"
-      },
-      {
-          "id": 5,
-          "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933f.jpg"
-      },
-      {
-          "id": 6,
-          "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933g.jpg"
-      },
-      {
-          "id": 7,
-          "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933h.jpg"
-      },
-      {
-          "id": 8,
-          "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-          "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933i.jpg"
-      }
-    ],
-    "message": [
-      {
-        "id": "0",
-        "idexpediteur": "3",
-        "iddestinataire": "6",
-        "date": "2024-05-05",
-        "heure": "10:00:00",
-        "message": "Bonjour, je suis intéressé par votre bien immobilier.",
-        "lu": "true"
-      },
-      {
-        "id": "1",
-        "idexpediteur": "6",
-        "iddestinataire": "3",
-        "date": "2024-05-05",
-        "heure": "10:30:00",
-        "message": "Bonjour, je suis disponible pour une visite demain.",
-        "lu": "true"
-      },
-      {
-        "id": "2",
-        "idexpediteur": "3",
-        "iddestinataire": "6",
-        "date": "2024-05-05",
-        "heure": "11:00:00",
-        "message": "D'accord, à quelle heure ?",
-        "lu": "true",
+        "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933g.jpg"
+    },
+    {
+        "id": 7,
+        "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+        "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933h.jpg"
+    },
+    {
+        "id": 8,
+        "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+        "image": "https://media.immo-facile.com/office10/stepha_2104210854/catalog/images/pr_p/4/5/7/2/9/3/3/4572933i.jpg"
+    }
+  ],
+  "message": [
+    {
+      "id": "0",
+      "idexpediteur": "3",
+      "iddestinataire": "6",
+      "date": "2024-05-05",
+      "heure": "10:00:00",
+      "message": "Bonjour, je suis intéressé par votre bien immobilier.",
+      "lu": "true"
+    },
+    {
+      "id": "1",
+      "idexpediteur": "6",
+      "iddestinataire": "3",
+      "date": "2024-05-05",
+      "heure": "10:30:00",
+      "message": "Bonjour, je suis disponible pour une visite demain.",
+      "lu": "true"
+    },
+    {
+      "id": "2",
+      "idexpediteur": "3",
+      "iddestinataire": "6",
+      "date": "2024-05-05",
+      "heure": "11:00:00",
+      "message": "D'accord, à quelle heure ?",
+      "lu": "true",
 
-        "idembed": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
-        "resourceType": "Command"
-      },
-      {
-        "id": "3",
-        "idexpediteur": "6",
-        "iddestinataire": "3",
-        "date": "2024-05-05",
-        "heure": "11:30:00",
-        "message": "14h00",
-        "lu": "true",
+      "idembed": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
+      "resourceType": "Command"
+    },
+    {
+      "id": "3",
+      "idexpediteur": "6",
+      "iddestinataire": "3",
+      "date": "2024-05-05",
+      "heure": "11:30:00",
+      "message": "14h00",
+      "lu": "true",
 
-        "idembed": "1",
-        "resourceType": "Issue"
-      },
-      {
-        "id": "4",
-        "idexpediteur": "3",
-        "iddestinataire": "6",
-        "date": "2024-05-05",
-        "heure": "12:00:00",
-        "message": "D'accord, à demain.",
-        "lu": "true"
-      }
-    ],
-    "command": [
-      {
-        "id": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
-        "idclient": "3",
-        "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-        "date": "2024-05-05",
-        "duree": 2,
-        "shippinginfo": "1 rue de la paix, 75000 Paris",
-        "products": "Peinture",
-        "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "tjm": 50,
-        "status": "En cours",
-        "done": "2024-05-05"
-      },
-      {
-        "id": "987a9c1f-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
-        "idclient": "6",
-        "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-        "date": "2024-10-05",
-        "duree": 3,
-        "shippinginfo": "1 rue de la paix, 75000 Paris",
-        "products": "Reparation",
-        "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "tjm": 100,
-        "status": "En cours",
-        "done": "2024-10-05"
-      }
-    ],
-    "issue": [
-      {
-        "id": "0",
-        "idclient": "3",
-        "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
-        "created": "2024-05-05",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "status": "open",
-        "done": "2024-05-05"
-      },
-      {
-        "id": "1",
-        "idclient": "6",
-        "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
-        "created": "2024-10-05",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-        "status": "open",
-        "done": "2024-10-05"
-      }
-    ]
-  }
-  
+      "idembed": "1",
+      "resourceType": "Issue"
+    },
+    {
+      "id": "4",
+      "idexpediteur": "3",
+      "iddestinataire": "6",
+      "date": "2024-05-05",
+      "heure": "12:00:00",
+      "message": "D'accord, à demain.",
+      "lu": "true"
+    }
+  ],
+  "command": [
+    {
+      "id": "379b3b7b-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
+      "idclient": "3",
+      "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+      "date": "2024-05-05",
+      "duree": 2,
+      "shippinginfo": "1 rue de la paix, 75000 Paris",
+      "products": "Peinture",
+      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "tjm": 50,
+      "status": "En cours",
+      "done": "2024-05-05"
+    },
+    {
+      "id": "987a9c1f-1b3b-4b3b-8b3b-3b3b3b3b3b3b",
+      "idclient": "6",
+      "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+      "date": "2024-10-05",
+      "duree": 3,
+      "shippinginfo": "1 rue de la paix, 75000 Paris",
+      "products": "Reparation",
+      "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "tjm": 100,
+      "status": "En cours",
+      "done": "2024-10-05"
+    }
+  ],
+  "issue": [
+    {
+      "id": "0",
+      "idclient": "3",
+      "idproperty": "55ba9865-53d0-4b1b-bc64-580e313c7149",
+      "created": "2024-05-05",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "status": "open",
+      "done": "2024-05-05"
+    },
+    {
+      "id": "1",
+      "idclient": "6",
+      "idproperty": "7fd9e9a8-dc71-4a72-b4f7-c79c6769d5bb",
+      "created": "2024-10-05",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
+      "status": "open",
+      "done": "2024-10-05"
+    }
+  ]
+}

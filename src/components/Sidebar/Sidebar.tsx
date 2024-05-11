@@ -18,6 +18,7 @@ import {
     CalendarRangeIcon,
     MessagesSquareIcon,
     GaugeIcon,
+    User,
 } from "lucide-react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -43,18 +44,15 @@ import {
 
 import { useEffect, useState } from 'react';
 import { Button } from "../ui/button"
+import { toComparable } from "../functions";
 
 
 // Store the icons in an dictionary
 const icons = {
-    Home: Home,
-    LineChart: LineChart,
-    Package: Package,
-    ShoppingCart: ShoppingCart,
-    Users2: Users2,
-    Calendar: CalendarRangeIcon,
-    Msg: MessagesSquareIcon,
-    Gauge: GaugeIcon,
+    "home": Home,
+    "msg": MessagesSquareIcon,
+    "gauge": GaugeIcon,
+    "user": User,
 };
 
 interface SideBarTypeDTO {
@@ -92,7 +90,7 @@ const Component = (index:number) => {
                                 href={value.href}
                                 className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                             >
-                                {React.createElement(icons[value.icon as keyof typeof icons], { className: "h-5 w-5" })}
+                                {React.createElement(icons[toComparable(value.icon) as keyof typeof icons], { className: "h-5 w-5" })}
                                 <span className="sr-only">{value.hover}</span>
                             </Link>
                         </TooltipTrigger>
