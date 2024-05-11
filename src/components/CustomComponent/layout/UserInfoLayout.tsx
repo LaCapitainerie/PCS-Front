@@ -6,15 +6,16 @@ import { Toaster } from '@/components/ui/toaster';
 import MainContent from '../component/Profil/MainContent';
 
 interface LayoutProps {
-    children: ReactNode;
+    children?: ReactNode;
+    id: string;
 }
 
-const ProfilLayout: React.FC<LayoutProps> = ({ children }) => {
+const ProfilLayout: React.FC<LayoutProps> = ({ children, id }) => {
 
     return (
       <>
           <Sidebar index={0}/>
-          <MainContent/>
+          <MainContent id={id}/>
           <Toaster />
       </>
     );

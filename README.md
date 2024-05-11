@@ -5,6 +5,7 @@
 
 ### Locataire
 - [ ] Apercu de son compte
+    - [x] Pouvoir voir les informations d'un compte
     - [ ] Modification de celui-ci
 - [ ] Pouvoir reserver un bien
     - [x] Affichage des biens et des disponibilités
@@ -18,6 +19,7 @@
 
 ### Bailleur
 - [ ] Apercu de son compte
+    - [x] Pouvoir voir les informations d'un compte
     - [ ] Modification de celui-ci
 - [x] Aperçu de ses biens
     - [x] Détails, prestas associés, locataire
@@ -33,6 +35,7 @@
 
 ### Prestataires
 - [ ] Apercu de son compte
+    - [x] Pouvoir voir les informations d'un compte
     - [ ] Modification de celui-ci
 - [x] Calendrier des jours de travail
     - [x] Carte popup pour détail de mission (Locataire, commentaire, details)
