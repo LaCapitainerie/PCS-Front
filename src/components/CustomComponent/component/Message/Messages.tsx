@@ -105,7 +105,7 @@ const MessageList = ({
     
     return (
         <div className="absolute right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%] h-full">
-            <a className="py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">{CurrentUser?.prenom} {CurrentUser?.nom}</a>
+            <a className="py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">{CurrentUser?.firstName} {CurrentUser?.lastName}</a>
 
             <Separator className="my-2" />
 

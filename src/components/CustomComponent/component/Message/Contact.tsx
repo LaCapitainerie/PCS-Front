@@ -30,7 +30,7 @@ const ContactList = ({
                 )
             ).json();
 
-            setState(data.filter((value: User) => value.id !== ME && toComparable(value.nom, value.prenom, value.type).includes(toComparable(filter))));
+            setState(data.filter((value: User) => value.id !== ME && toComparable(value.lastName, value.firstName, value.type).includes(toComparable(filter))));
             setUser(state[0]);
         };
 
@@ -51,20 +51,20 @@ const ContactList = ({
                         <div className="flex w-full flex-col gap-1">
                             <div className="flex items-center">
                                 <div className="flex flex-row items-center gap-2">
-                                    <div className="font-semibold">{value.nom}</div>
+                                    <div className="font-semibold">{value.lastName}</div>
                                 </div>
                                 <div className="ml-auto text-xs text-foreground">{}</div>
                             </div>
                             <div className="text-xs font-medium">{value.type}</div>
                         </div>
-                        <div className="line-clamp-2 text-xs text-muted-foreground">{value.prenom}</div>
+                        <div className="line-clamp-2 text-xs text-muted-foreground">{value.firstName}</div>
                         <div className="flex items-center gap-2">
                             <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80">
                                 {value.type}</div>
                             <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                                {value.nom}</div>
+                                {value.lastName}</div>
                         </div>
                     </button>
                 )}

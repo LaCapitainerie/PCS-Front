@@ -23,7 +23,7 @@ const MainContent = ({ id }: MainContentProps) => {
                 )
             ).json();
             
-            const user = data.find((user) => id == user.username);
+            const user = data.find((user) => id == user.nickname);
             console.log(data);
             
 

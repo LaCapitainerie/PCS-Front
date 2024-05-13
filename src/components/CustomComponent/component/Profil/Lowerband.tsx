@@ -6,7 +6,6 @@ import BienCard from "./BienCard";
 import { User } from "@/type/User";
 import { Property } from "@/type/Property";
 import { useEffect, useState } from "react";
-import { Property_image } from "@/type/Property_image";
 
 interface LowerbandProps {
     children?: React.ReactNode;
@@ -42,8 +41,8 @@ const Lowerband = ({User}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps
                 </div>
                 <div className="border rounded-lg w-full h-full p-4">
                     <h1 className="text-2xl font-bold">Contact</h1>
-                    <p className="text-sm">{User.email}</p>
-                    <p className="text-sm">{User.phone}</p>
+                    <p className="text-sm">{User.mail}</p>
+                    <p className="text-sm">{User.phoneNumber}</p>
                 </div>
             </div>
             <Carousel className="w-full h-full p-4" opts={{loop: true}}>

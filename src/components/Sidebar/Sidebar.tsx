@@ -4,18 +4,13 @@
 const Me = 2;
 
 
-import { Sidebar as SidebarType} from "../../type/Sidebar";
+import { SideBarDTO, Sidebar as SidebarType} from "../../type/Sidebar";
 
 import * as React from "react"
 import Link from "next/link"
 import {
     Home,
-    LineChart,
-    Package,
     Settings,
-    ShoppingCart,
-    Users2,
-    CalendarRangeIcon,
     MessagesSquareIcon,
     GaugeIcon,
     User,
@@ -55,9 +50,7 @@ const icons = {
     "user": User,
 };
 
-interface SideBarTypeDTO {
-    sidebar: SidebarType[];
-}
+
 
 const Component = (index:number) => {
 
@@ -65,36 +58,41 @@ const Component = (index:number) => {
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: SideBarTypeDTO = await (
+            console.log( `${process.env.NEXT_PUBLIC_API_URL}/sidebar`);
+            const data: SideBarDTO = await (
                 await fetch(
                     `${process.env.NEXT_PUBLIC_API_URL}/sidebar`
                 )
             ).json();
 
-            console.log(data);
+            
+            console.log(data.Sidebar);
             
 
-            setState(data.sidebar.filter((value: SidebarType) => value.permission <= Me));
+            setState(data.Sidebar);
         };
 
         dataFetch();
     }, []);
 
+    console.log("state", state);
+    
+
     return (
         <>
             {state.map((value, i) =>
-                <TooltipProvider key={value.id}>
+                <TooltipProvider key={value.Id}>
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Link
-                                href={value.href}
+                                href={value.Href}
                                 className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                             >
-                                {React.createElement(icons[toComparable(value.icon) as keyof typeof icons], { className: "h-5 w-5" })}
-                                <span className="sr-only">{value.hover}</span>
+                                {React.createElement(icons[toComparable(value.Icon) as keyof typeof icons], { className: "h-5 w-5" })}
+                                <span className="sr-only">{value.Hover}</span>
                             </Link>
                         </TooltipTrigger>
-                        <TooltipContent side="right">{value.hover}</TooltipContent>
+                        <TooltipContent side="right">{value.Hover}</TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
             )}
@@ -124,7 +122,7 @@ const Sidebar = ({ index }: {index:number}) => {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    <DropdownMenuLabel><a href="/Profile">My Account</a></DropdownMenuLabel>
+                    <DropdownMenuLabel><a href={`/Profile?user=${'hugoa'}`}>My Account</a></DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Settings</DropdownMenuItem>
                     <DropdownMenuItem>Support</DropdownMenuItem>

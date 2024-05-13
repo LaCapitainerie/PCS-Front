@@ -136,7 +136,7 @@ const Order = ({
                 <div className="grid gap-3">
                 <div className="font-semibold">Shipping Information</div>
                 <address className="grid gap-0.5 not-italic text-muted-foreground">
-                    <span>{customer?.prenom} {customer?.nom}</span>
+                    <span>{customer?.firstName} {customer?.lastName}</span>
                     <span>{order?.shippinginfo}</span>
                 </address>
                 </div>
@@ -153,18 +153,18 @@ const Order = ({
                 <dl className="grid gap-3">
                 <div className="flex items-center justify-between">
                     <dt className="text-muted-foreground">Customer</dt>
-                    <dd>{customer?.prenom} {customer?.nom}</dd> 
+                    <dd>{customer?.firstName} {customer?.lastName}</dd> 
                 </div>
                 <div className="flex items-center justify-between">
                     <dt className="text-muted-foreground">Email</dt>
                     <dd>
-                    <a href="mailto:">{customer?.email}</a>
+                    <a href="mailto:">{customer?.mail}</a>
                     </dd>
                 </div>
                 <div className="flex items-center justify-between">
                     <dt className="text-muted-foreground">Phone</dt>
                     <dd>
-                    <a href="tel:">{customer?.phone}</a>
+                    <a href="tel:">{customer?.phoneNumber}</a>
                     </dd>
                 </div>
                 </dl>

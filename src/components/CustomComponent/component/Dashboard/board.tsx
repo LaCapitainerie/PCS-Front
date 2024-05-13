@@ -112,9 +112,9 @@ const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
 
                       <Usercard user={tmpUser}>
                         <div>
-                          <div className="font-medium">{tmpUser?.prenom} {tmpUser?.nom}</div>
+                          <div className="font-medium">{tmpUser?.firstName} {tmpUser?.lastName}</div>
                           <div className="hidden text-sm text-muted-foreground md:inline">
-                            {tmpUser?.email}
+                            {tmpUser?.mail}
                           </div>
                         </div>
                       </Usercard>

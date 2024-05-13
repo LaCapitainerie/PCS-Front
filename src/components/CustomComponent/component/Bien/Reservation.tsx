@@ -41,14 +41,14 @@ function ToBox(agg: aggregate, styleCol: React.CSSProperties) {
             <div className="flex items-center gap-4 w-full">
               <Avatar className="hidden h-9 w-9 sm:flex">
                 <AvatarImage src={agg.Locataire.avatar} alt="Avatar" />
-                <AvatarFallback>{agg.Locataire?.nom[0] + agg.Locataire?.prenom[0]}</AvatarFallback>
+                <AvatarFallback>{agg.Locataire?.lastName[0] + agg.Locataire?.firstName[0]}</AvatarFallback>
               </Avatar>
               <div className="grid gap-1">
                 <p className="text-sm font-medium leading-none">
-                  {agg.Locataire.nom + " " + agg.Locataire.prenom}
+                  {agg.Locataire.lastName + " " + agg.Locataire.firstName}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {agg.Locataire.email}
+                  {agg.Locataire.mail}
                 </p>
               </div>
             </div>
@@ -115,13 +115,13 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Locataire :</Label>
               <div className="flex flex-row justify-between">
-                <Select disabled={aggregat.length == 0} onValueChange={(value) => setChoosen(aggregat[parseInt(value)])} defaultValue={aggregat.length > 0 ? aggregat[0].Locataire.username :""}>
+                <Select disabled={aggregat.length == 0} onValueChange={(value) => setChoosen(aggregat[parseInt(value)])} defaultValue={aggregat.length > 0 ? aggregat[0].Locataire.nickname :""}>
                   <SelectTrigger>
                     <SelectValue placeholder={(aggregat.length > 0 && "Select a tenant") || "No tenant" }></SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {aggregat.map((value, index) => (
-                    <SelectItem value={index.toString()} key={index}>{value.Locataire.username}</SelectItem>
+                    <SelectItem value={index.toString()} key={index}>{value.Locataire.nickname}</SelectItem>
                     ))}
                     
                   </SelectContent>

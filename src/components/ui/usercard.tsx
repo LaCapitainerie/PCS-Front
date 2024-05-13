@@ -15,17 +15,17 @@ const Usercard = ({user, children}: {user: User | undefined, children: ReactNode
                 <div className="flex justify-between space-x-4">
                 <Avatar className="hidden h-9 w-9 sm:flex">
                     <AvatarImage src={user?.avatar} alt="Avatar" />
-                    <AvatarFallback>{user?.nom[0]}{user?.prenom[0]}</AvatarFallback>
+                    <AvatarFallback>{user?.lastName[0]}{user?.firstName[0]}</AvatarFallback>
                 </Avatar>
                 <div className="space-y-1">
-                    <h4 className="text-sm font-semibold">{user?.username}</h4>
+                    <h4 className="text-sm font-semibold">{user?.nickname}</h4>
                     <p className="text-sm">
                     {user?.description}
                     </p>
                     <div className="flex items-center pt-2">
                     <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{" "}
                     <span className="text-xs text-muted-foreground">
-                        Joined {user?.joined}
+                        Joined {user?.registerdate}
                     </span>
                     </div>
                 </div>

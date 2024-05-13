@@ -1,7 +1,11 @@
 export interface Sidebar {
-    hover: string;
-    href: string;
-    icon: string;
-    id: string;
-    permission: number;
+    Hover: string;
+    Href: string;
+    Icon: string;
+    Id: string;
+    Permission: number;
 };
+
+export interface SideBarDTO {
+    Sidebar: Sidebar[];
+}

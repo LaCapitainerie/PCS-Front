@@ -192,14 +192,14 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
                     <div className="flex items-center gap-4 w-full">
                       <Avatar className="hidden h-9 w-9 sm:flex">
                         <AvatarImage src={user.avatar} alt="Avatar" />
-                        <AvatarFallback>{user.nom[0] + user.prenom[0]}</AvatarFallback>
+                        <AvatarFallback>{user.lastName[0] + user.firstName[0]}</AvatarFallback>
                       </Avatar>
                       <div className="grid gap-1">
                         <p className="text-sm font-medium leading-none">
-                          {user.nom + " " + user.prenom}
+                          {user.lastName + " " + user.firstName}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          {user.email}
+                          {user.mail}
                         </p>
                       </div>
                       <div className="ml-auto font-medium">+$Recettes</div>

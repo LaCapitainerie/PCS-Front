@@ -25,15 +25,17 @@ export const PDF_invoice = ({ commande, client }: { commande?: Command, client?:
 
   const clientInfo = client || {
     "id": "3",
-    "username": "Host Domain",
-    "nom": "Host",
-    "prenom": "Domain",
-    "email": "domain.host@email.com",
-    "type": "Locataire",
-    "avatar": "https://randomuser.me/api/portraits",
+    "type": "client",
+    "mail": "mail@email.com",
+    "registerdate": new Date(),
+    "lastConnectionDate": new Date(),
+    "avatar": "https://media.discordapp.net/attachments/597782659430613002/1236698906780237874/image.png?ex=6638f51c&is=6637a39c&hm=a39eed4843b9fe556efc2817bd7403b711b09a3f3303311acf7c64cc23017da5&=&format=webp&quality=lossless&width=671&height=671",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
-    "joined": "2019-01-01",
-    "phone": "06879797110"
+    "firstName": "John",
+    "lastName": "Doe",
+    "phoneNumber": "0123456789",
+    "nickname": "JohnDoe",
+    "token": "token"
   } as User;
 
 
@@ -60,7 +62,7 @@ export const PDF_invoice = ({ commande, client }: { commande?: Command, client?:
   doc.setFont("helvetica", 'bold');
   doc.text(`INVOICE TO`, 10, 60);
   doc.setFont("helvetica", 'normal');
-  doc.text(`${clientInfo.nom} ${clientInfo.prenom}`, 10, 65);
+  doc.text(`${clientInfo.lastName} ${clientInfo.firstName}`, 10, 65);
   doc.text(`${command.shippinginfo.split(", ")[0]}`, 10, 70);
   doc.text(`${command.shippinginfo.split(", ")[1]}`, 10, 75);
 

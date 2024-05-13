@@ -1,12 +1,30 @@
 export interface User {
     id: string;
-    username: string;
-    nom: string;
-    prenom: string;
-    email: string;
-    type: "Bailleur" | "Locataire" | "Prestataire" | "Admin";
+    type: string;
+    mail: string;
+    password: string;
+    registerdate: string;
+    lastConnectionDate: string;
     avatar: string;
     description: string;
-    joined: string;
-    phone: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    nickname: string;
+    token: string;
+};
+
+export interface UserDTO {
+    id: User["id"];
+    type: User["type"];
+    mail: User["mail"];
+    registerdate: User["registerdate"];
+    lastConnectionDate: User["lastConnectionDate"];
+    avatar: User["avatar"];
+    description: User["description"];
+    firstName: User["firstName"];
+    lastName: User["lastName"];
+    phoneNumber: User["phoneNumber"];
+    nickname: User["nickname"];
+    token: User["token"];
 };
