@@ -6,6 +6,7 @@ import ContactList from '../component/Message/Contact';
 import MessageList from '../component/Message/Messages';
 import { Toaster } from '@/components/ui/toaster';
 import { User } from '@/type/User';
+import CookieConsent from '@/components/ui/cookie';
 
 interface MessageProps {
     children: ReactNode;
@@ -21,12 +22,13 @@ const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
 
 
     return (
-      <>
-          <Sidebar index={1}/>
-          <ContactList onUserChange={SelectedUser} Categories={categories}/>
-          <MessageList CurrentUser={User}/>
-          <Toaster />
-      </>
+        <>
+            <CookieConsent/>
+            <Sidebar index={1}/>
+            <ContactList onUserChange={SelectedUser} Categories={categories}/>
+            <MessageList CurrentUser={User}/>
+            <Toaster />
+        </>
     );
 }
 

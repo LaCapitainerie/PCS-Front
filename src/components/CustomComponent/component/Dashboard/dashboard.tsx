@@ -7,7 +7,8 @@ import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Usercard from "@/components/ui/usercard"
 import { User } from "@/type/User"
-import DataBoard from "./board"
+import DataBoard, { DefaultDashboard } from "./board"
+import RecentSales from "./recentsales"
 
 function MakeCard(name:string, currentPresta:string, ratioPresta:string, index:number) {
   return (
@@ -47,15 +48,6 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
     "padding-left": '3.5rem'
   } as React.CSSProperties;
 
-  const styleCol = {
-    "height": "27vh",
-    "overflow-y": "scroll",
-    "overflow-x": "hidden"
-  } as React.CSSProperties;
-
-  const [filterUser, setFilterUser] = useState<string>("");
-  const [filterUserCount, setFilterUserCount] = useState<number>(5);
-
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
@@ -70,7 +62,7 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
       };
 
       dataFetch();
-  }, [filterUser, filterUserCount]);
+  }, []);
 
   const [currentValuable, setValuable] = useState<cardProps[]>([]);
   const [cards, setCards] = useState<cardProps[]>([]);
@@ -144,22 +136,6 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
 
   }, []);
 
-  import { DollarSign } from "lucide-react"
-
-  import {
-    Card,
-    CardContent,
-    CardHeader,
-    CardTitle,
-  } from "@/components/ui/card"
-
-  export default function Component() {
-    return (
-      
-    )
-  }
-
-
   return (
     <div className="flex min-h-screen w-full flex-col left-[3.5rem]" style={stylePage}>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
@@ -182,75 +158,31 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
 
 
 
-        <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="h-full grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
           
-        <Tabs defaultValue="Reservations" className="xl:col-span-2">
-          <TabsList>
+          <Tabs defaultValue="Reservations" className="h-full xl:col-span-2">
+            <TabsList>
+              <TabsTrigger value={"default"} key={0}>default</TabsTrigger>
+              {
+                cards.map((card, index) => (
+                  <TabsTrigger value={card.name} key={index}>{card.name}</TabsTrigger>
+                ))
+              }
+            </TabsList>
+                <TabsContent value={"default"} key={0}>
+                  <DefaultDashboard/>
+                </TabsContent>
             {
-              cards.map((card, index) => (
-                <TabsTrigger value={card.name} key={index}>{card.name}</TabsTrigger>
+              Column.map((card, index) => (
+                <TabsContent value={card.name} key={index} className="h-full">
+                  <DataBoard card={card}/>
+                </TabsContent>
               ))
             }
-          </TabsList>
-          {
-            Column.map((card, index) => (
-              <TabsContent value={card.name} key={index}>
-                <DataBoard card={card}/>
-              </TabsContent>
-            ))
-          }
-        </Tabs>
+          </Tabs>
 
+          <RecentSales Sales={[]}/>
 
-          <Card x-chunk="dashboard-01-chunk-5">
-            <CardHeader>
-              <CardTitle>Accounts</CardTitle>
-            </CardHeader>
-            <div className="p-6 pt-0">
-              <Input type="email" placeholder="Search for users" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilterUser(event.target.value)}/>
-            </div>
-            <CardContent className="grid gap-8 items-start" style={styleCol}>
-              {users.map((user, index) => (
-                <div className="flex items-center gap-4" key={index}>
-                  <Usercard user={user}>
-                    <div className="flex items-center gap-4 w-full">
-                      <Avatar className="hidden h-9 w-9 sm:flex">
-                        <AvatarImage src={user.avatar} alt="Avatar" />
-                        <AvatarFallback>{user.lastName[0] + user.firstName[0]}</AvatarFallback>
-                      </Avatar>
-                      <div className="grid gap-1">
-                        <p className="text-sm font-medium leading-none">
-                          {user.lastName + " " + user.firstName}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {user.mail}
-                        </p>
-                      </div>
-                      <div className="ml-auto font-medium">+$Recettes</div>
-                    </div>
-                  </Usercard>
-                </div>
-              )
-                )
-              }
-            </CardContent>
-            <div className="p-6">
-              <Select defaultValue="5" value={filterUserCount.toString()} onValueChange={(value: string) => setFilterUserCount(parseInt(value))}>
-                <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Number per Page" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value={"3"}>3</SelectItem>
-                    <SelectItem value={"5"}>5</SelectItem>
-                    <SelectItem value={"10"}>10</SelectItem>
-                    <SelectItem value={"20"}>20</SelectItem>
-                    <SelectItem value={"50"}>50</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </div>
-          </Card>
         </div>
 
 

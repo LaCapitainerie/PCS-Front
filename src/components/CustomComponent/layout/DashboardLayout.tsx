@@ -3,6 +3,7 @@
 import React, { ReactNode } from 'react';
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { ValuableThing, Dashboard } from '../component/Dashboard/dashboard';
+import CookieConsent from '@/components/ui/cookie';
 
 interface DashBoardProps {
     children: ReactNode;
@@ -13,8 +14,9 @@ const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn }: {c
 
     return (
         <>
-          <Sidebar index={2}/>
-          <Dashboard Column={dataColumn}/>
+            <CookieConsent/>
+            <Sidebar index={2}/>
+            <Dashboard Column={dataColumn}/>
         </>
     );
 }

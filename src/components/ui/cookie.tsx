@@ -1,9 +1,8 @@
 "use client"
 
 import { CookieIcon } from "lucide-react";
-import { Button } from "./ui/button";
-import { CookieConsent } from "./components/cookie-consent";
-import { cn } from "./lib/utils";
+import { Button } from "./button";
+import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
 
 export default function CookieConsent({ demo = false, onAcceptCallback = () => { }, onDeclineCallback = () => { } }) {
