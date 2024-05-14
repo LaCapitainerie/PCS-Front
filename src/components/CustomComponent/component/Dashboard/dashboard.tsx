@@ -144,6 +144,21 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
 
   }, []);
 
+  import { DollarSign } from "lucide-react"
+
+  import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+  } from "@/components/ui/card"
+
+  export default function Component() {
+    return (
+      
+    )
+  }
+
 
   return (
     <div className="flex min-h-screen w-full flex-col left-[3.5rem]" style={stylePage}>
@@ -151,7 +166,16 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
         <div className={`grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-${cards.length}`}>
           {
             cards.map((card, index) => (
-              MakeCard(card.name, card.currentPresta, card.ratioPresta, index)
+              <Card key={index}>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">{card.name}</CardTitle>
+                  <DollarSign className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">${card.currentPresta}</div>
+                  <p className="text-xs text-muted-foreground">+{card.ratioPresta}% from last month</p>
+                </CardContent>
+              </Card>
             ))
           }
         </div>
