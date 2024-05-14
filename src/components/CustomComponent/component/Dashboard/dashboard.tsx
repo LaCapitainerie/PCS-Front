@@ -139,7 +139,7 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
   return (
     <div className="flex min-h-screen w-full flex-col left-[3.5rem]" style={stylePage}>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-        <div className={`grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-${cards.length}`}>
+        <div className={`grid gap-4` + (cards.length>1?`md:grid-cols-2 md:gap-8 lg:grid-cols-${cards.length}`:"")}>
           {
             cards.map((card, index) => (
               <Card key={index}>

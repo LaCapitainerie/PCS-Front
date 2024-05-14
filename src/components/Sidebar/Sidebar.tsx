@@ -40,6 +40,8 @@ import {
 import { useEffect, useState } from 'react';
 import { Button } from "../ui/button"
 import { toComparable } from "../functions";
+import { useCookies } from "next-client-cookies";
+import { User as UserType } from "@/type/User";
 
 
 // Store the icons in an dictionary
@@ -104,6 +106,20 @@ const Component = (index:number) => {
 
 const Sidebar = ({ index }: {index:number}) => {
     const { setTheme } = useTheme();
+
+    var user: UserType = {} as UserType;
+    
+    const cookies = useCookies();
+    const sessionid = cookies.get("user");
+
+
+    if (sessionid) {
+        user = JSON.parse(sessionid)
+        console.log(user);
+        
+    }
+
+    
     
     return (
         <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -116,7 +132,7 @@ const Sidebar = ({ index }: {index:number}) => {
                     className="overflow-hidden rounded-full"
                     >
                     <Avatar>
-                        <AvatarImage src="https://github.com/LaCapitainerie.png" />
+                        <AvatarImage src={user.avatar} />
                         <AvatarFallback>Avatar</AvatarFallback>
                     </Avatar>
                     </Button>

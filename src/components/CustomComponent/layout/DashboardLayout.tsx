@@ -6,11 +6,11 @@ import { ValuableThing, Dashboard } from '../component/Dashboard/dashboard';
 import CookieConsent from '@/components/ui/cookie';
 
 interface DashBoardProps {
-    children: ReactNode;
+    children?: ReactNode;
     dataColumn: ValuableThing[];
 }
 
-const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn }: {children:React.ReactNode, dataColumn:ValuableThing[]}) => {
+const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn }) => {
 
     return (
         <>

@@ -26,6 +26,10 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { toast } from "@/components/ui/use-toast"
+import { User, UserDTO } from "@/type/User";
+
+import { useCookies } from 'next-client-cookies';
+
 
 // {
 //   "type": "provider",
@@ -37,44 +41,44 @@ import { toast } from "@/components/ui/use-toast"
 // }
 
 const FormSchema = z.object({
-
-  mail: z.string({
-    required_error: "Please enter your email.",
+  mail: z.string().email({
     message: "Please enter a valid email.",
   }),
 
-  password: z.string({
-    required_error: "Please enter your password.",
+  password: z.string().min(1, {
+    message: "Please enter your password.",
   }),
 
-  firstName: z.string({
-    required_error: "Please enter your first name.",
+  firstName: z.string().min(1, {
+    message: "Please enter your first name.",
   }),
 
-  lastName: z.string({
-    required_error: "Please enter your last name.",
+  lastName: z.string().min(1, {
+    message: "Please enter your last name.",
   }),
 
-  phoneNumber: z.string({
-    required_error: "Please enter your phone number.",
+  phoneNumber: z.string().min(1, {
+    message: "Please enter your phone number.",
   }),
 
-  type: z
-    .string({
-      required_error: "Please select a role.",
-    })
+  type: z.string().min(1, {
+    message: "Please enter your type.",
+  }),
+});
 
-    .refine((value) => {
-      return ["Traveler", "Lessor", "Provider", "Admin"].includes(value)
-    }),
-})
+interface UserReturnDTO {
+  user: UserDTO;
+}
 
 export default function Signup() {
+
+  const cookies = useCookies();
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
       title: "You submitted the following values:",
       description: (
@@ -83,11 +87,40 @@ export default function Signup() {
         </pre>
       ),
     })
+
+    form.reset()
+
+    // Call your API endpoint here
+
+    console.log(`${process.env.NEXT_PUBLIC_LOCAL_API_URL}/user/register`);
+    
+
+    const retour: UserReturnDTO = await (
+      await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
+          {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+      )
+    ).json();
+
+    console.log(retour.user.type);
+
+    cookies.set('user', JSON.stringify(retour.user), {
+      path: '/',
+    });
+
+    // Redirect to the dashboard
+    window.location.href = `${retour.user.type}/dashboard`;
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full h-full space-y-6">
         <div className="h-full w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
           <div className="flex items-center justify-center py-12">
             <div className="mx-auto grid w-[350px] gap-6">
@@ -105,10 +138,12 @@ export default function Signup() {
                     name="mail"
                     render={({ field }) => (
                       <Input
-                        id="email"
+                        id="mail"
                         type="email"
                         placeholder="m@example.com"
                         required
+                        onChange={field.onChange}
+                        defaultValue={field.value}
                       />
                     )}
                   />
@@ -133,6 +168,8 @@ export default function Signup() {
                         type="password"
                         placeholder="*****"
                         required
+                        onChange={field.onChange}
+                        defaultValue={field.value}
                       />
                     )}
                   />
@@ -146,6 +183,8 @@ export default function Signup() {
                         type="text"
                         placeholder="John"
                         required
+                        onChange={field.onChange}
+                        defaultValue={field.value}
                       />
                     )}
                   />
@@ -159,6 +198,8 @@ export default function Signup() {
                         type="text"
                         placeholder="doe"
                         required
+                        onChange={field.onChange}
+                        defaultValue={field.value}
                       />
                     )}
                   />
@@ -172,6 +213,8 @@ export default function Signup() {
                         type="text"
                         placeholder="0623456789"
                         required
+                        onChange={field.onChange}
+                        defaultValue={field.value}
                       />
                     )}
                   />
@@ -189,10 +232,10 @@ export default function Signup() {
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent>
-                            <SelectItem value="Traveler">Traveler</SelectItem>
-                            <SelectItem value="Lessor">Lessor</SelectItem>
-                            <SelectItem value="Provider">Provider</SelectItem>
-                            <SelectItem value="Admin">Admin</SelectItem>
+                            <SelectItem value="traveler">Traveler</SelectItem>
+                            <SelectItem value="lessor">Lessor</SelectItem>
+                            <SelectItem value="provider">Provider</SelectItem>
+                            <SelectItem value="admin">Admin</SelectItem>
                           </SelectContent>
                         </Select>
                         <FormDescription>

@@ -19,7 +19,7 @@ export default function Bailleur() {
     ];
 
     return (
-        <Dashboard_Layout children={undefined} dataColumn={Columns}>
+        <Dashboard_Layout dataColumn={Columns}>
         </Dashboard_Layout>
     );
 }
