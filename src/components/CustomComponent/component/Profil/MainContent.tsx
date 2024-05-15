@@ -19,17 +19,19 @@ const MainContent = ({ id }: MainContentProps) => {
         const dataFetch = async () => {
             const data: User[] = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
+                    `${process.env.NEXT_PUBLIC_API_URL}/users`
                 )
             ).json();
             
-            const user = data.find((user) => id == user.nickname);            
+            const user = data.find((user) => id == user.id);
+            console.log(data, user, id);
+            
 
             setUser(user || {} as User);
         };
 
         dataFetch();
-    }, [id]);    
+    }, [id]);
 
     return (
         <div className="flex flex-col w-full h-full overflow-hidden" style={{paddingLeft: '3.5rem'}}>

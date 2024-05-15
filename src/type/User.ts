@@ -10,7 +10,6 @@ export interface User {
     firstName: string;
     lastName: string;
     phoneNumber: string;
-    nickname: string;
     token: string;
 };
 
@@ -38,6 +37,5 @@ export interface UserDTO {
     firstName: User["firstName"];
     lastName: User["lastName"];
     phoneNumber: User["phoneNumber"];
-    nickname: User["nickname"];
     token: User["token"];
 };

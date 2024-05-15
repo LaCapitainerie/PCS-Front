@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { Button } from "../ui/button"
 import { toComparable } from "../functions";
 import { useCookies } from "next-client-cookies";
-import { User as UserType } from "@/type/User";
+import { Token, User as UserType } from "@/type/User";
 
 
 // Store the icons in an dictionary
@@ -31,12 +31,7 @@ const RoleToPermission: Map<UserType["type"], number> = new Map([
     ["admin", 4]
 ]);
 
-const Component = (index: number) => {
-
-    const cookies = useCookies();
-    const me = cookies.get("user");
-    if(!me){ window.location.href = "/login"; return;}
-    const user = JSON.parse(me) as UserType;
+const Component = (user: UserType, index: number) => {
 
     const [state, setState] = useState<SidebarType[]>([]);
 
@@ -77,15 +72,12 @@ const Component = (index: number) => {
 const Sidebar = ({ index }: { index: number }) => {
     const { setTheme } = useTheme();
 
-    var user: UserType = {} as UserType;
-
     const cookies = useCookies();
-    const sessionid = cookies.get("user");
-
-
-    if (sessionid) {
-        user = JSON.parse(sessionid)
-    }
+    const me = cookies.get("user");
+    const token = cookies.get("token");
+    if(!me || !token){ window.location.href = "/login"; return;}
+    const user = JSON.parse(me) as UserType;
+    const decodeToken = JSON.parse(atob(token.split(".")[1])) as Token;
 
 
 
@@ -106,7 +98,7 @@ const Sidebar = ({ index }: { index: number }) => {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuLabel><a href={`/Profile?user=${user.nickname}`}>My Account</a></DropdownMenuLabel>
+                        <DropdownMenuLabel><a href={`/profile?user=${decodeToken.idUser}`}>My Account</a></DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>Settings</DropdownMenuItem>
                         <DropdownMenuItem>Support</DropdownMenuItem>
@@ -115,7 +107,7 @@ const Sidebar = ({ index }: { index: number }) => {
                     </DropdownMenuContent>
                 </DropdownMenu>
 
-                {Component(index)}
+                {Component(user, index)}
             </nav>
             <nav key={1} className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
                 <DropdownMenu>

@@ -37,7 +37,7 @@ const Lowerband = ({User}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps
             <div className="flex flex-col w-full justify-between gap-8 p-4">
                 <div className="border rounded-lg w-full h-full p-4">
                     <h1 className="text-2xl font-bold">Présentation</h1>
-                    <p className="text-sm">{User.description}</p>
+                    <p className="text-sm">{User.description || "no description was provided"}</p>
                 </div>
                 <div className="border rounded-lg w-full h-full p-4">
                     <h1 className="text-2xl font-bold">Contact</h1>
