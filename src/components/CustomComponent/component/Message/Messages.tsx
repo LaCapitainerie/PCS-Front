@@ -5,13 +5,9 @@ import * as React from "react"
 import { useEffect, useState } from 'react';
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { toast, useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/components/ui/use-toast"
 import { Token, User } from "@/type/User";
 import { Message } from "@/type/Message";
-import { CornerDownLeft, Mic, Paperclip } from "lucide-react"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import FileUploadDropzone from "./Filemessage";
 import { useCookies } from "next-client-cookies";
 import { Chat, Contact } from "@/type/Chat";
@@ -42,14 +38,21 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
 
     const [Messages, setMessages] = useState<Message[]>([]);
 
+    const Send = (msg: Message) => {
+        setMessages([...Messages, msg])
+
+        console.log("Send", msg);
+        console.log("Messages", Messages);
+        
+        
+    };
+
     const cookies = useCookies();
     const token = cookies.get("token");
     const me = cookies.get("user");
     if(!me || !token){ window.location.href = "/login"; return;}
     const user = JSON.parse(me) as User;
     const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
-
-    console.log("Contact", contact, contact?.chat.id, `${process.env.NEXT_PUBLIC_API_URL}/chat/${contact?.chat.id}`, "Authorization", token || "");
     
     // Message
     useEffect(() => {
@@ -74,10 +77,6 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
 
         dataFetch();
     }, [contact]);
-
-    console.log("Messages", Messages);
-    
-
 
     return (
         <div className="absolute right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%] h-full">
@@ -116,6 +115,9 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
 
                         // } else {
 
+                        console.log("Value", value);
+                        
+
                         result = (
                             <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== decodedToken.idUser && "bg-accent"}`}>
                                 <div className="flex w-full flex-col gap-1">
@@ -135,61 +137,12 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
                 </div>
 
                 <div className="flex flex-row p-4 gap-4">
-                    <FileUploadDropzone />
-                    
+                    <FileUploadDropzone token={token} user1={contact?.user1.id || ""} user2={contact?.user2.id || ""} sendFunction={Send}/>
                 </div>
             </div>
 
         </div>
     )
 }
-
-
-
-function Keyboard() {
-    return (
-        <form
-            className="w-full relative overflow-hidden rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring"
-        >
-            <Label htmlFor="message" className="sr-only">
-                Message
-            </Label>
-            <Textarea
-                id="message"
-                placeholder="Type your message here..."
-                className="min-h-12 resize-none border-0 p-3 shadow-none focus-visible:ring-0"
-            />
-
-
-            <div className="flex items-center p-3 pt-0">
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                                <Paperclip className="size-4" />
-                                <span className="sr-only">Attach file</span>
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="top">Attach File</TooltipContent>
-                    </Tooltip>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button variant="ghost" size="icon">
-                                <Mic className="size-4" />
-                                <span className="sr-only">Use Microphone</span>
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent side="top">Use Microphone</TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-                <Button type="submit" size="sm" className="ml-auto gap-1.5" onClick={() => { toast({ description: "Your message has been sent.", }) }}>
-                    Send Message
-                    <CornerDownLeft className="size-3.5" />
-                </Button>
-            </div>
-        </form>
-    )
-}
-
 
 export default MessageList;

@@ -10,16 +10,18 @@ import { DropzoneOptions } from "react-dropzone";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Form, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Form, FormField, FormItem } from "@/components/ui/form";
 
 // rest of the code...
 import { Button, buttonVariants } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input";
-import { CornerDownLeft, Paperclip, Send } from "lucide-react";
+import { CornerDownLeft, Paperclip } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
+import { User } from "@/type/User";
+import { Message, MessageDTO } from "@/type/Message";
 
 const CardForm = z.object({
     message: z.string().min(1),
@@ -37,7 +39,7 @@ const CardForm = z.object({
    
   type CardFormType = z.infer<typeof CardForm>;
    
-  const FileUploadDropzone = () => {
+  const FileUploadDropzone = ({token, user1, user2, sendFunction}: {token: User["token"], user1: string, user2:string, sendFunction: (msg: Message) => void}) => {
     const form = useForm<CardFormType>({
       resolver: zodResolver(CardForm),
       defaultValues: {
@@ -54,6 +56,41 @@ const CardForm = z.object({
    
     const onSubmit = (data: CardFormType) => {
         toast({ description: "Your message has been sent.", })
+
+        // Reset the form after submission
+        form.reset();
+
+        // Send the data to the server
+
+        const dataFetch = async () => {
+          const retour: MessageDTO = await (
+              await fetch(
+                  `${process.env.NEXT_PUBLIC_API_URL}/chat`,
+                  {
+                      method: "POST",
+                      headers: {
+                        "Authorization": token,
+                      },
+                      body: JSON.stringify({
+                        userId: [
+                          user1,
+                          user2
+                        ],
+                        message: [
+                          {
+                            content: data.message,
+                            type: "text"
+                          }
+                        ]
+                      })
+                  }
+              )
+          ).json();
+
+          sendFunction(retour.message);
+      };
+
+      dataFetch();
     };
    
     return (
