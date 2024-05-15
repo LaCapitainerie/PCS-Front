@@ -24,9 +24,19 @@ const icons = {
     "user": User,
 };
 
-
+const RoleToPermission: Map<UserType["type"], number> = new Map([
+    ["traveler", 1],
+    ["provider", 2],
+    ["lessor", 3],
+    ["admin", 4]
+]);
 
 const Component = (index: number) => {
+
+    const cookies = useCookies();
+    const me = cookies.get("user");
+    if(!me){ window.location.href = "/login"; return;}
+    const user = JSON.parse(me) as UserType;
 
     const [state, setState] = useState<SidebarType[]>([]);
 
@@ -38,7 +48,7 @@ const Component = (index: number) => {
                 )
             ).json();
 
-            setState(data.Sidebar);
+            setState(data.Sidebar.filter((value) => value.Permission == RoleToPermission.get(user.type)));
         };
 
         dataFetch();
