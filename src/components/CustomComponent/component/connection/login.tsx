@@ -43,8 +43,6 @@ export default function Login() {
   const cookies = useCookies();
   const currentUser = cookies.get("user");
 
-  console.log(currentUser);
-
   if (currentUser) {
     window.location.href = `${JSON.parse(currentUser).type}/dashboard`;
   }
@@ -67,8 +65,6 @@ export default function Login() {
 
     // Call your API endpoint here
 
-    console.log(`${process.env.NEXT_PUBLIC_API_URL}/user/login`);
-
     const retour: UserReturnDTO = await (
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
         method: "POST",
@@ -78,8 +74,6 @@ export default function Login() {
         },
       })
     ).json();
-
-    console.log(retour);
 
     cookies.set("token", JSON.stringify(retour.user.token), {
       path: "/",

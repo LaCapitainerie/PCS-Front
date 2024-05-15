@@ -56,8 +56,6 @@ const CardForm = z.object({
         toast({ description: "Your message has been sent.", })
     };
    
-    console.log(form.getValues("files"));
-   
     return (
       <Form {...form}>
         <form

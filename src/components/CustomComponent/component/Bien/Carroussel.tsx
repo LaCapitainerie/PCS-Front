@@ -37,7 +37,7 @@ export function CarouselPlugin({ images }: { images: Property_image[] }) {
                     <img
                         src={photo.image}
                         alt={`Random Image ${index + 1}`}
-                        className="w-full h-full object-cover rounded-lg max-h-96"
+                        className="rounded-lg"
                     />
                 </CardContent>
               </Card>

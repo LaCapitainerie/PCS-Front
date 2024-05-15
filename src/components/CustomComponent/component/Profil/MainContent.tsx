@@ -23,18 +23,13 @@ const MainContent = ({ id }: MainContentProps) => {
                 )
             ).json();
             
-            const user = data.find((user) => id == user.nickname);
-            console.log(data);
-            
+            const user = data.find((user) => id == user.nickname);            
 
             setUser(user || {} as User);
         };
 
         dataFetch();
-    }, [id]);
-
-    console.log(user);
-    
+    }, [id]);    
 
     return (
         <div className="flex flex-col w-full h-full overflow-hidden" style={{paddingLeft: '3.5rem'}}>

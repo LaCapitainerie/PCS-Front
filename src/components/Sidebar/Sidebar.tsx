@@ -60,25 +60,17 @@ const Component = (index:number) => {
 
     useEffect(() => {
         const dataFetch = async () => {
-            console.log( `${process.env.NEXT_PUBLIC_API_URL}/sidebar`);
             const data: SideBarDTO = await (
                 await fetch(
                     `${process.env.NEXT_PUBLIC_API_URL}/sidebar`
                 )
             ).json();
 
-            
-            console.log(data.Sidebar);
-            
-
             setState(data.Sidebar);
         };
 
         dataFetch();
-    }, []);
-
-    console.log("state", state);
-    
+    }, []);    
 
     return state.map((value, i) => (
         <TooltipProvider key={value.Id}>
@@ -110,9 +102,7 @@ const Sidebar = ({ index }: {index:number}) => {
 
 
     if (sessionid) {
-        user = JSON.parse(sessionid)
-        console.log(user);
-        
+        user = JSON.parse(sessionid)        
     }
 
     

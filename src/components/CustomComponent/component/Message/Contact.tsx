@@ -25,9 +25,6 @@ const ContactList = ({
     const cookies = useCookies();
     const token = cookies.get("token");
 
-    console.log("token", token);
-    
-
     const [chat, setChat] = useState<ContactList[]>([]);
     const [filter, setFilter] = useState<string>("");
 
@@ -41,7 +38,7 @@ const ContactList = ({
                         headers: {
                           "Authorization": token || "",
                         },
-                      }
+                    }
                             
                 )
             ).json() || {chat: []};
@@ -72,14 +69,8 @@ const ContactList = ({
 
         dataFetch();
     }, []);
-    
-
-    console.log("chat", chat);
 
     const ContactListFiltered = (state: User[]) => {
-
-
-
         return (
             <div className="flex flex-col gap-2 py-4 pt-0">
                 {state.map((value, index) =>

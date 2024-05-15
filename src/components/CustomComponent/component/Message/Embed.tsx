@@ -34,7 +34,6 @@ export const Embed = ( Embed : EmbedProps) => {
     switch (Embed.Type.toLocaleLowerCase()) {
         case "command":
             const EmbedCommand = Embed.EmbedType as Command;
-            console.log(EmbedCommand);
             
             return (
                 <div style={{maxWidth: '40%'}} className="border rounded-md flex flex-col justify-between w-fit min-w-40 min-h-40">
