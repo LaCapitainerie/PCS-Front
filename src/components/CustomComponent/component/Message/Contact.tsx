@@ -18,16 +18,14 @@ const ContactList = ({
     Categories
   }: React.HTMLAttributes<HTMLDivElement> & { setContact: (contact : Contact) => void , Categories: User["type"][]}) => {    
     
-    const cookies = useCookies();
-    const token = cookies.get("token");
-    const me = cookies.get("user");
-    if(!me || !token){ window.location.href = "/login"; return;}
-    const user = JSON.parse(me) as User;
-    const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
-
     const [chat, setChat] = useState<Contact[]>([]);
     const [filter, setFilter] = useState<string>("");
 
+    const cookies = useCookies();
+    const tokenT = cookies.get("token");
+
+    const decodedToken = JSON.parse(atob((tokenT as string).split(".")[1])) as Token;
+    
     useEffect(() => {
         const dataFetch = async () => {
             const data: ChatDTO = await (
@@ -36,29 +34,14 @@ const ContactList = ({
                     {
                         method: "GET",
                         headers: {
-                          "Authorization": token,
+                          "Authorization": tokenT || "",
                         },
                     }
                             
                 )
-            ).json() || {chat: []};
-
-            console.log();
-            
+            ).json() || {chat: []};           
 
             const chatPromise = data.chat.map(async (value) => {
-
-                // const user1: UserReturnDTO = await (
-                //     await fetch(
-                //         `${process.env.NEXT_PUBLIC_API_URL}/user/${value.userId[0]}`,
-                //     )
-                // ).json();
-
-                // const user2: UserReturnDTO = await (
-                //     await fetch(
-                //         `${process.env.NEXT_PUBLIC_API_URL}/user/${value.userId[1]}`,
-                //     )
-                // ).json();
 
                 return {
                     user1: {id: value.userId[0] == decodedToken.idUser ? value.userId[0] : value.userId[1]} as unknown as User,
@@ -73,7 +56,8 @@ const ContactList = ({
         };
 
         dataFetch();
-    }, []);
+    }, [filter]);
+
 
     const ContactListFiltered = (contacts: Contact[]) => {
         return (

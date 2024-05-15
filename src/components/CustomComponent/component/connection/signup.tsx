@@ -67,6 +67,7 @@ const FormSchema = z.object({
 });
 
 
+import { redirect } from 'next/navigation'
 
 export default function Signup() {
 
@@ -74,7 +75,7 @@ export default function Signup() {
   const currentUser = cookies.get("user");  
 
   if (currentUser) {
-    window.location.href = `${JSON.parse(currentUser).type}/dashboard`;
+    redirect(`${JSON.parse(currentUser).type}/dashboard`);
   }
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -117,7 +118,7 @@ export default function Signup() {
     });
 
     // Redirect to the dashboard
-    window.location.href = `${retour.user.type}/dashboard`;
+    redirect(`${retour.user.type}/dashboard`);
   }
 
   return (

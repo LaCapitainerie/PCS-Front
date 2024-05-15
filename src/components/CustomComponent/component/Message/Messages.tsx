@@ -34,6 +34,8 @@ export interface ChatDTO {
     chat: Chat;
 }
 
+import { redirect } from 'next/navigation'
+
 const MessageList = ({ contact }: { contact: Contact | undefined }) => {
 
     const [Messages, setMessages] = useState<Message[]>([]);
@@ -50,9 +52,6 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
     const cookies = useCookies();
     const token = cookies.get("token");
     const me = cookies.get("user");
-    if(!me || !token){ window.location.href = "/login"; return;}
-    const user = JSON.parse(me) as User;
-    const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
     
     // Message
     useEffect(() => {
@@ -63,7 +62,7 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
                     {
                         method: "GET",
                         headers: {
-                          "Authorization": token,
+                          "Authorization": token || "",
                         },
                     }
                 )
@@ -77,6 +76,12 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
 
         dataFetch();
     }, [contact]);
+
+    if(!me || !token){
+        
+        redirect("/login");
+    }
+    const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
 
     return (
         <div className="absolute right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%] h-full">

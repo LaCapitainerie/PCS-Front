@@ -1,5 +1,9 @@
+import Index_Layout from "@/components/CustomComponent/layout/IndexLayout";
+
 const home = () => {
-    return <div>Home</div>;
+    return (
+        <Index_Layout/>
+    );
 }
 
 export default home;
