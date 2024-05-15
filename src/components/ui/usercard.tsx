@@ -18,7 +18,7 @@ const Usercard = ({user, children}: {user: User | undefined, children: ReactNode
                     <AvatarFallback>{user?.lastName[0]}{user?.firstName[0]}</AvatarFallback>
                 </Avatar>
                 <div className="space-y-1">
-                    <h4 className="text-sm font-semibold">{user?.nickname}</h4>
+                    <h4 className="text-sm font-semibold">{user?.firstName} {user?.lastName}</h4>
                     <p className="text-sm">
                     {user?.description}
                     </p>

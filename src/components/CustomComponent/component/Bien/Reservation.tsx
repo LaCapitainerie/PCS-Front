@@ -115,13 +115,13 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Locataire :</Label>
               <div className="flex flex-row justify-between">
-                <Select disabled={aggregat.length == 0} onValueChange={(value) => setChoosen(aggregat[parseInt(value)])} defaultValue={aggregat.length > 0 ? aggregat[0].Locataire.nickname :""}>
+                <Select disabled={aggregat.length == 0} onValueChange={(value) => setChoosen(aggregat[parseInt(value)])} defaultValue={aggregat.length > 0 ? aggregat[0].Locataire.firstName :""}>
                   <SelectTrigger>
                     <SelectValue placeholder={(aggregat.length > 0 && "Select a tenant") || "No tenant" }></SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     {aggregat.map((value, index) => (
-                    <SelectItem value={index.toString()} key={index}>{value.Locataire.nickname}</SelectItem>
+                    <SelectItem value={index.toString()} key={index}>{value.Locataire.firstName} {value.Locataire.lastName}</SelectItem>
                     ))}
                     
                   </SelectContent>

@@ -14,7 +14,7 @@ import {
   FormField,
 } from "@/components/ui/form"
 import { toast } from "@/components/ui/use-toast"
-import { TokenDTO, UserReturnDTO } from "@/type/User";
+import { Token, TokenDTO, UserReturnDTO } from "@/type/User";
 
 import { useCookies } from 'next-client-cookies';
 
@@ -38,13 +38,14 @@ const FormSchema = z.object({
   })
 });
 
+import { redirect } from 'next/navigation'
 
 export default function Login() {
   const cookies = useCookies();
   const currentUser = cookies.get("user");
 
   if (currentUser) {
-    window.location.href = `${JSON.parse(currentUser).type}/dashboard`;
+    redirect(`${JSON.parse(currentUser).type}/dashboard`);
   }
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -83,7 +84,10 @@ export default function Login() {
       path: "/",
     });
 
-    window.location.href = `/profile?user=${JSON.parse(retour.user.token.split(".")[1]).id}`;
+    console.log(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
+    
+    
+    redirect(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
   }
 
   return (
