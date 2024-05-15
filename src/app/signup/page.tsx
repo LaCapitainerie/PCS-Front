@@ -1,10 +1,10 @@
 "use client"
 
-import CoLayout from "@/components/CustomComponent/layout/CoLayout";
+import SignupLayout from "@/components/CustomComponent/layout/SignupLayout";
 
 export default function PrestaPageBiens() {
 
     return (
-        <CoLayout/>
+        <SignupLayout/>
     );
 }

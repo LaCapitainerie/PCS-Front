@@ -80,25 +80,21 @@ const Component = (index:number) => {
     console.log("state", state);
     
 
-    return (
-        <>
-            {state.map((value, i) =>
-                <TooltipProvider key={value.Id}>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Link
-                                href={value.Href}
-                                className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
-                            >
-                                {React.createElement(icons[toComparable(value.Icon) as keyof typeof icons], { className: "h-5 w-5" })}
-                                <span className="sr-only">{value.Hover}</span>
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">{value.Hover}</TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-            )}
-        </>
+    return state.map((value, i) => (
+        <TooltipProvider key={value.Id}>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    <Link
+                        href={value.Href}
+                        className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
+                    >
+                        {React.createElement(icons[toComparable(value.Icon) as keyof typeof icons], { className: "h-5 w-5" })}
+                        <span className="sr-only">{value.Hover}</span>
+                    </Link>
+                </TooltipTrigger>
+                <TooltipContent side="right">{value.Hover}</TooltipContent>
+            </Tooltip>
+        </TooltipProvider>)
     );
 };
 
@@ -123,7 +119,7 @@ const Sidebar = ({ index }: {index:number}) => {
     
     return (
         <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
-            <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
+            <nav key={0} className="flex flex-col items-center gap-4 px-2 sm:py-4">
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button
@@ -138,7 +134,7 @@ const Sidebar = ({ index }: {index:number}) => {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    <DropdownMenuLabel><a href={`/Profile?user=${'hugoa'}`}>My Account</a></DropdownMenuLabel>
+                    <DropdownMenuLabel><a href={`/Profile?user=${user.nickname}`}>My Account</a></DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Settings</DropdownMenuItem>
                     <DropdownMenuItem>Support</DropdownMenuItem>
@@ -149,7 +145,7 @@ const Sidebar = ({ index }: {index:number}) => {
                 
                 { Component(index) }
             </nav>
-            <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
+            <nav key={1} className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" size="icon">

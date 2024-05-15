@@ -26,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { toast } from "@/components/ui/use-toast"
-import { User, UserDTO } from "@/type/User";
+import { User, UserDTO, UserReturnDTO } from "@/type/User";
 
 import { useCookies } from 'next-client-cookies';
 
@@ -66,13 +66,19 @@ const FormSchema = z.object({
   }),
 });
 
-interface UserReturnDTO {
-  user: UserDTO;
-}
+
 
 export default function Signup() {
 
   const cookies = useCookies();
+  const currentUser = cookies.get("user");
+
+  console.log(currentUser);
+  
+
+  if (currentUser) {
+    window.location.href = `${JSON.parse(currentUser).type}/dashboard`;
+  }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -92,7 +98,7 @@ export default function Signup() {
 
     // Call your API endpoint here
 
-    console.log(`${process.env.NEXT_PUBLIC_LOCAL_API_URL}/user/register`);
+    console.log(`${process.env.NEXT_PUBLIC_API_URL}/user/register`);
     
 
     const retour: UserReturnDTO = await (
@@ -114,6 +120,10 @@ export default function Signup() {
       path: '/',
     });
 
+    cookies.set('token', JSON.stringify(retour.user.token), {
+      path: '/',
+    });
+
     // Redirect to the dashboard
     window.location.href = `${retour.user.type}/dashboard`;
   }
@@ -132,7 +142,7 @@ export default function Signup() {
               </div>
               <div className="grid gap-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="mail">Email</Label>
                   <FormField
                     control={form.control}
                     name="mail"

@@ -12,14 +12,14 @@ import {
 import Usercard from "@/components/ui/usercard";
 import { Command } from "@/type/Command";
 import { User } from "@/type/User";
+import { ValuableThing } from "./dashboard";
   
-  export default function RecentSales({Sales}: {Sales: Command[]}) {
+  export default function RecentSales({card, Sales}: {card?: ValuableThing, Sales: Command[]}) {
 
-    const Commands: Command[] = [];
     const user = {} as User;
 
     return (
-      <Card>
+      <Card className="w-full ">
         <CardHeader>
           <CardTitle>Recent Sales</CardTitle>
         </CardHeader>

@@ -57,7 +57,7 @@ const BienImmo = ({
 
 
     return (
-        <div className="fixed inset-y-0 left-[3.5rem] z-0 hidden w-[30%] flex-col border-r bg-background sm:flex">
+        <div className="fixed inset-y-0 left-[3.5rem] z-0 w-[30%] flex-col border-r bg-background sm:flex">
             <a className="py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">Biens Immobiliers</a>
 
             <Separator className="my-2" />
@@ -65,7 +65,7 @@ const BienImmo = ({
             <div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <Input contrains={"text"} placeholder="Search" className="w-full p-4" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilter(event.target.value)}/>
             </div>
-            <div className="flex flex-col gap-2 p-4 pt-0">
+            <div className="flex flex-col gap-2 p-4 pt-0 overflow-y-scroll">
                 {state.map((value, index) => 
                     <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => setHouse(value)}>
                         <div className="flex w-full flex-col gap-1">

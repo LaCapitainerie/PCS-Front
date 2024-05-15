@@ -26,7 +26,7 @@ const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
             <CookieConsent/>
             <Sidebar index={1}/>
             <ContactList onUserChange={SelectedUser} Categories={categories}/>
-            <MessageList CurrentUser={User}/>
+            <MessageList CurrentUser={User} chatId={""}/>
             <Toaster />
         </>
     );

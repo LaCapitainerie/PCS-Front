@@ -158,9 +158,9 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
 
 
 
-        <div className="h-full grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="h-full w-full grid gap-4 md:gap-8">
           
-          <Tabs defaultValue="Reservations" className="h-full xl:col-span-2">
+          <Tabs defaultValue="default" className="h-full w-full">
             <TabsList>
               <TabsTrigger value={"default"} key={0}>default</TabsTrigger>
               {
@@ -169,19 +169,19 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
                 ))
               }
             </TabsList>
-                <TabsContent value={"default"} key={0}>
+                <TabsContent value={"default"} key={0} className="grid gap-8 w-full lg:grid-cols-3">
                   <DefaultDashboard/>
+                  <RecentSales Sales={[]}/>
                 </TabsContent>
             {
               Column.map((card, index) => (
-                <TabsContent value={card.name} key={index} className="h-full">
+                <TabsContent value={card.name} key={index}>
                   <DataBoard card={card}/>
                 </TabsContent>
               ))
             }
           </Tabs>
 
-          <RecentSales Sales={[]}/>
 
         </div>
 

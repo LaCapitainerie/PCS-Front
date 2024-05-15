@@ -7,47 +7,83 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User } from "@/type/User";
+import { User, UserDTO, UserReturnDTO } from "@/type/User";
+import { Chat, ChatDTO } from "@/type/Chat";
+import { useCookies } from "next-client-cookies";
 
-
+interface ContactList {
+    user1: User;
+    user2: User;
+    chat: Chat;
+}
 
 const ContactList = ({
     onUserChange,
     Categories
   }: React.HTMLAttributes<HTMLDivElement> & { onUserChange?: (user : User) => void , Categories: User["type"][]}) => {
-    const [state, setState] = useState<User[]>([]);
-    const [User, setUser] = useState<User>((state[0] || {}) as User);
-    const [filter, setFilter] = useState<string>("");
+    
+    const cookies = useCookies();
+    const token = cookies.get("token");
 
-    // Temporary
-    const ME = "3";
+    console.log("token", token);
+    
+
+    const [chat, setChat] = useState<ContactList[]>([]);
+    const [filter, setFilter] = useState<string>("");
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data = await (
+            const data: ChatDTO = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
+                    `${process.env.NEXT_PUBLIC_API_URL}/chat/allchatbyuser`,
+                    {
+                        method: "GET",
+                        headers: {
+                          "Authorization": token || "",
+                        },
+                      }
+                            
                 )
-            ).json();
+            ).json() || {chat: []};
 
-            setState(data.filter((value: User) => value.id !== ME && toComparable(value.lastName, value.firstName, value.type).includes(toComparable(filter))));
-            setUser(state[0]);
+            const chatPromise = data.chat.map(async (value) => {
+
+                const user1: UserReturnDTO = await (
+                    await fetch(
+                        `${process.env.NEXT_PUBLIC_API_URL}/user/${value.userId[0]}`,
+                    )
+                ).json();
+
+                const user2: UserReturnDTO = await (
+                    await fetch(
+                        `${process.env.NEXT_PUBLIC_API_URL}/user/${value.userId[1]}`,
+                    )
+                ).json();
+
+                return {
+                    user1: user1.user,
+                    user2: user2.user,
+                    chat: value
+                } as ContactList;
+            })
+            
+            setChat(await Promise.all(chatPromise));
         };
 
         dataFetch();
-    }, [filter]);
+    }, []);
     
-    
-    
-    useEffect(() => {
-        onUserChange?.(User);
-    }, [User, onUserChange]);
+
+    console.log("chat", chat);
 
     const ContactListFiltered = (state: User[]) => {
+
+
+
         return (
             <div className="flex flex-col gap-2 py-4 pt-0">
                 {state.map((value, index) =>
-                    <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => setUser(value)}>
+                    <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => {}}>
                         <div className="flex w-full flex-col gap-1">
                             <div className="flex items-center">
                                 <div className="flex flex-row items-center gap-2">
@@ -83,22 +119,26 @@ const ContactList = ({
             </div>
 
             <div className="flex flex-col gap-2 p-4 pt-0">
-                <Tabs defaultValue="Locataires" className="xl:col-span-2 w-full">
+                <Tabs defaultValue="All" className="xl:col-span-2 w-full" onValueChange={(e) => {
+                    // e === "All" ?
+                    // setUser(state[0]) :
+                    // setUser(state.filter((val) => val.type === e)[0]) 
+                }}>
                     <TabsList className="w-full">
-                        <TabsTrigger key={-1} value="Tous" className="w-full">Tous</TabsTrigger>
+                        <TabsTrigger key={-1} value="All" className="w-full">All</TabsTrigger>
                         {
                             Categories.map((value, index) => (
                                 <TabsTrigger key={index} value={value} className="w-full">{value+"s"}</TabsTrigger>
                             ))
                         }
                     </TabsList>
-                    <TabsContent value={"Tous"}>
-                        {ContactListFiltered(state)}
+                    <TabsContent value={"All"}>
+                        {ContactListFiltered(chat.map((val) => val.user1).concat(chat.map((val) => val.user2)).filter((val) => toComparable(val.firstName, val.lastName, val.nickname).includes(filter)))}
                     </TabsContent>
                     {
                         Categories.map((value, index) => (
                             <TabsContent key={index} value={value}>
-                                {ContactListFiltered(state.filter((val) => val.type === value))}
+                                {/* {ContactListFiltered(state.filter((val) => val.type === value))} */}
                             </TabsContent>
                         ))
                     }

@@ -152,7 +152,7 @@ const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
 
 export const DefaultDashboard = () => {
   return (
-    <Card className="h-full">
+    <Card className="h-full w-full col-span-2">
       <CardHeader className="px-7 flex flex-row justify-between">
         <div>
           <CardTitle>Orders</CardTitle>

@@ -38,7 +38,8 @@ export function ToastSimple() {
 
 const MessageList = ({
     CurrentUser,
-}: React.HTMLAttributes<HTMLDivElement> & { CurrentUser: User | undefined }) => {
+    chatId
+}: React.HTMLAttributes<HTMLDivElement> & { CurrentUser: User | undefined, chatId: string }) => {
 
     const [Messages, setMessages] = useState<Message[]>([]);
     const [Issue, setIssue] = useState<Issue[]>([]);
@@ -52,13 +53,13 @@ const MessageList = ({
         const dataFetch = async () => {
             const data: Message[] = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/message`
+                    `${process.env.NEXT_PUBLIC_API_URL}/chat/${chatId}`
                 )
             ).json();
 
             setMessages(
                 CurrentUser ?
-                    data.filter((value: Message) => [value.iddestinataire, value.idexpediteur].includes(CurrentUser.id) && [value.iddestinataire, value.idexpediteur].includes(Me)) :
+                    data :
                     []
             );
         };

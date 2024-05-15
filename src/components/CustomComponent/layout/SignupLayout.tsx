@@ -1,12 +1,12 @@
 import React, { ReactNode } from 'react';
 import { Toaster } from '@/components/ui/toaster';
-import Signup from '../component/connection/page';
+import Signup from '../component/connection/signup';
 
 interface LayoutProps {
     children?: ReactNode;
 }
 
-const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
+const SignupLayout: React.FC<LayoutProps> = ({ children }) => {
 
 
     return (
@@ -17,4 +17,4 @@ const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
     );
 }
 
-export default Bien_Layout;
+export default SignupLayout;

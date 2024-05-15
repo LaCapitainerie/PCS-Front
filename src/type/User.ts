@@ -1,6 +1,6 @@
 export interface User {
     id: string;
-    type: string;
+    type: "traveler" | "provider" | "lessor" | "admin";
     mail: string;
     password: string;
     registerdate: string;
@@ -13,6 +13,14 @@ export interface User {
     nickname: string;
     token: string;
 };
+
+export interface UserReturnDTO {
+    user: UserDTO;
+}
+
+export interface TokenDTO {
+    token: User["token"];
+}
 
 export interface UserDTO {
     id: User["id"];
