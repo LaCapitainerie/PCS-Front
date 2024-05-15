@@ -25,16 +25,16 @@ export const PDF_invoice = ({ commande, client }: { commande?: Command, client?:
 
   const clientInfo = client || {
     "id": "3",
-    "type": "client",
+    "type": "traveler",
     "mail": "mail@email.com",
-    "registerdate": new Date(),
-    "lastConnectionDate": new Date(),
+    "password": "password",
+    "registerdate": "2024-05-05",
+    "lastConnectionDate": "2024-05-05",
     "avatar": "https://media.discordapp.net/attachments/597782659430613002/1236698906780237874/image.png?ex=6638f51c&is=6637a39c&hm=a39eed4843b9fe556efc2817bd7403b711b09a3f3303311acf7c64cc23017da5&=&format=webp&quality=lossless&width=671&height=671",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nunc nec ultricies ultricies, nunc nunc.",
     "firstName": "John",
     "lastName": "Doe",
     "phoneNumber": "0123456789",
-    "nickname": "JohnDoe",
     "token": "token"
   } as User;
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Calendar } from '../../../ui/customcalendar';
 import Order from '../../../cavaservir/order';
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Button } from '@/components/ui/button';
 
 interface CalendrierProps {
     children?: React.ReactNode;
@@ -9,7 +10,7 @@ interface CalendrierProps {
 
 const Calendrier: React.FC<CalendrierProps> = ({children}) => {
 
-    const [Day, setDay] = useState<Date>();
+    const [Day, setDay] = useState<Date>(new Date());
 
     const SelectedDay = (Day: Date) => {
         setDay(Day);
@@ -17,7 +18,9 @@ const Calendrier: React.FC<CalendrierProps> = ({children}) => {
 
     return (
         <Dialog>
-            <DialogTrigger>View</DialogTrigger>
+            <DialogTrigger>
+                <Button variant="gooeyRight">View</Button>
+            </DialogTrigger>
             <DialogContent style={{maxWidth: '90%'}}>
                 <div className='flex flex-row justify-between' style={{maxHeight: '100%'}}>
                     <Calendar SetSelectedReservation={SelectedDay} style={{width: '66%'}}/>

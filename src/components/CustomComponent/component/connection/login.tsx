@@ -75,7 +75,7 @@ export default function Login() {
       })
     ).json();
 
-    cookies.set("token", JSON.stringify(retour.user.token), {
+    cookies.set("token", retour.user.token, {
       path: "/",
     });
 
@@ -83,8 +83,7 @@ export default function Login() {
       path: "/",
     });
 
-    // Redirect to the dashboard
-    // window.location.href = `${retour.type}/dashboard`;
+    window.location.href = `/profile?user=${JSON.parse(retour.user.token.split(".")[1]).id}`;
   }
 
   return (

@@ -24,7 +24,6 @@ const ContactList = ({
     if(!me || !token){ window.location.href = "/login"; return;}
     const user = JSON.parse(me) as User;
     const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
-    console.log("Decoded Token", decodedToken);
 
     const [chat, setChat] = useState<Contact[]>([]);
     const [filter, setFilter] = useState<string>("");
@@ -70,7 +69,7 @@ const ContactList = ({
 
             const finalChat = await Promise.all(chatPromise);
             
-            setChat(finalChat.filter((val) => toComparable(val.user2.firstName, val.user2.lastName, val.user2.nickname).includes(filter)));
+            setChat(finalChat.filter((val) => toComparable(val.user2.firstName, val.user2.lastName).includes(filter)));
         };
 
         dataFetch();

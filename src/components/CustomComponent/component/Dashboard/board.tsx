@@ -7,7 +7,6 @@ import Usercard from "@/components/ui/usercard";
 import { User } from "@/type/User";
 import Calendrier from "../Calendrier/Calendrier";
 import { ValuableThing } from "@/components/CustomComponent/component/Dashboard/dashboard";
-import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react";
 
 interface DataBoardProps {
   children?: React.ReactNode;
@@ -66,9 +65,9 @@ const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
         <Card className="h-full xl:col-span-2" x-chunk="dashboard-01-chunk-4">
             <CardHeader className="flex flex-row items-center justify-between">
               <div className="grid gap-2">
-                <CardTitle>Data</CardTitle>
+                <CardTitle className="capitalize">{card.name}</CardTitle>
                 <CardDescription>
-                  Recent reservations from your store.
+                  Recent {card.name.toLocaleLowerCase()} from your store.
                 </CardDescription>
               </div>
               <Button asChild size="sm" className="ml-auto gap-1">
@@ -152,13 +151,15 @@ const DataBoard: React.FC<DataBoardProps> = ({children, card}) => {
 
 export const DefaultDashboard = () => {
   return (
-    <Card className="h-full w-full col-span-2">
-      <CardHeader className="px-7 flex flex-row justify-between">
+    <Card className="h-full col-span-2" x-chunk="dashboard-01-chunk-4">
+        <CardHeader className="flex flex-row items-center justify-between">
         <div>
           <CardTitle>Orders</CardTitle>
           <CardDescription>Recent orders from your store.</CardDescription>
         </div>
-        <Button variant="gooeyRight">View</Button>
+        <Button asChild size="sm" className="ml-auto gap-1">
+          <Calendrier/>
+        </Button>
       </CardHeader>
       <CardContent>
         <Table>
@@ -187,124 +188,6 @@ export const DefaultDashboard = () => {
               </TableCell>
               <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
               <TableCell className="text-right">$250.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Olivia Smith</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  olivia@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Refund</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="outline">
-                  Declined
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
-              <TableCell className="text-right">$150.00</TableCell>
-            </TableRow>
-            {<TableRow>
-              <TableCell>
-                <div className="font-medium">Liam Johnson</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">
-                Sale
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">
-                2023-06-23
-              </TableCell>
-              <TableCell className="text-right">$250.00</TableCell>
-            </TableRow>}
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Noah Williams</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  noah@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">
-                Subscription
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-25</TableCell>
-              <TableCell className="text-right">$350.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Emma Brown</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  emma@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
-              <TableCell className="text-right">$450.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Liam Johnson</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  liam@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-23</TableCell>
-              <TableCell className="text-right">$250.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Olivia Smith</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  olivia@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Refund</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="outline">
-                  Declined
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-24</TableCell>
-              <TableCell className="text-right">$150.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <div className="font-medium">Emma Brown</div>
-                <div className="hidden text-sm text-muted-foreground md:inline">
-                  emma@example.com
-                </div>
-              </TableCell>
-              <TableCell className="hidden sm:table-cell">Sale</TableCell>
-              <TableCell className="hidden sm:table-cell">
-                <Badge className="text-xs" variant="secondary">
-                  Fulfilled
-                </Badge>
-              </TableCell>
-              <TableCell className="hidden md:table-cell">2023-06-26</TableCell>
-              <TableCell className="text-right">$450.00</TableCell>
             </TableRow>
           </TableBody>
         </Table>

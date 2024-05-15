@@ -43,10 +43,6 @@ export interface ValuableThing {
 }
 
 export function Dashboard({Column}: {Column: ValuableThing[]}) {
-  
-  const stylePage = {
-    "padding-left": '3.5rem'
-  } as React.CSSProperties;
 
   const [users, setUsers] = useState<User[]>([]);
 
@@ -137,7 +133,7 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
   }, []);
 
   return (
-    <div className="flex min-h-screen w-full flex-col left-[3.5rem]" style={stylePage}>
+    <div className="flex min-h-screen h-full w-full flex-col left-[3.5rem]" style={{paddingLeft: '3.5rem'}}>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className={`grid gap-4` + (cards.length>1?`md:grid-cols-2 md:gap-8 lg:grid-cols-${cards.length}`:"")}>
           {
@@ -160,8 +156,8 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
 
         <div className="h-full w-full grid gap-4 md:gap-8">
           
-          <Tabs defaultValue="default" className="h-full w-full">
-            <TabsList>
+          <Tabs defaultValue="default" className="flex flex-col h-full w-full">
+            <TabsList className="w-fit">
               <TabsTrigger value={"default"} key={0}>default</TabsTrigger>
               {
                 cards.map((card, index) => (
@@ -169,13 +165,15 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
                 ))
               }
             </TabsList>
-                <TabsContent value={"default"} key={0} className="grid gap-8 w-full lg:grid-cols-3">
-                  <DefaultDashboard/>
-                  <RecentSales Sales={[]}/>
+                <TabsContent value={"default"} key={0} className="h-full w-full">
+                  <div className="h-full w-full grid gap-8 lg:grid-cols-3">
+                    <DefaultDashboard/>
+                    <RecentSales Sales={[]}/>
+                  </div>
                 </TabsContent>
             {
               Column.map((card, index) => (
-                <TabsContent value={card.name} key={index}>
+                <TabsContent value={card.name} key={index+1} className="h-full">
                   <DataBoard card={card}/>
                 </TabsContent>
               ))

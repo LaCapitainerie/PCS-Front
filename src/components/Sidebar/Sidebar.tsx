@@ -3,7 +3,7 @@
 import { SideBarDTO, Sidebar as SidebarType } from "../../type/Sidebar";
 import * as React from "react"
 import Link from "next/link"
-import { Home, Settings, MessagesSquareIcon, GaugeIcon, User } from "lucide-react"
+import { Home, Settings, MessagesSquareIcon, GaugeIcon, User, Check } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
@@ -70,7 +70,7 @@ const Component = (user: UserType, index: number) => {
 
 
 const Sidebar = ({ index }: { index: number }) => {
-    const { setTheme } = useTheme();
+    const { theme, setTheme } = useTheme();
 
     const cookies = useCookies();
     const me = cookies.get("user");
@@ -100,10 +100,14 @@ const Sidebar = ({ index }: { index: number }) => {
                     <DropdownMenuContent align="end">
                         <DropdownMenuLabel><a href={`/profile?user=${decodeToken.idUser}`}>My Account</a></DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Settings</DropdownMenuItem>
-                        <DropdownMenuItem>Support</DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Logout</DropdownMenuItem>
+                        <DropdownMenuItem onClick={(e) => {
+                            cookies.remove("cookieConsent");
+                            cookies.remove("token");
+                            cookies.remove("user");
+                            window.location.href = "/login";
+                        }}>
+                            Logout
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
 
@@ -119,15 +123,13 @@ const Sidebar = ({ index }: { index: number }) => {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuItem onClick={() => setTheme("light")}>
-                            Light
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setTheme("dark")}>
-                            Dark
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setTheme("system")}>
-                            System
-                        </DropdownMenuItem>
+                        {
+                            ["light", "dark", "system"].map((value, i) => (
+                                <DropdownMenuItem key={i} onClick={() => setTheme(value)} className="capitalize justify-between">
+                                    {value} {theme == value ? <Check /> : ""}
+                                </DropdownMenuItem>
+                            ))
+                        }
                     </DropdownMenuContent>
                 </DropdownMenu>
                 <TooltipProvider>
