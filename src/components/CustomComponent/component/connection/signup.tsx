@@ -71,10 +71,7 @@ const FormSchema = z.object({
 export default function Signup() {
 
   const cookies = useCookies();
-  const currentUser = cookies.get("user");
-
-  console.log(currentUser);
-  
+  const currentUser = cookies.get("user");  
 
   if (currentUser) {
     window.location.href = `${JSON.parse(currentUser).type}/dashboard`;
@@ -96,10 +93,7 @@ export default function Signup() {
 
     form.reset()
 
-    // Call your API endpoint here
-
-    console.log(`${process.env.NEXT_PUBLIC_API_URL}/user/register`);
-    
+    // Call your API endpoint here    
 
     const retour: UserReturnDTO = await (
       await fetch(
@@ -113,8 +107,6 @@ export default function Signup() {
           }
       )
     ).json();
-
-    console.log(retour.user.type);
 
     cookies.set('user', JSON.stringify(retour.user), {
       path: '/',

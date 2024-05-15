@@ -105,8 +105,6 @@ const MessageList = ({
         dataFetch();
     }, [CurrentUser]);
 
-    console.log(Issue, Messages.filter((m) => m.idembed), Command);
-
 
     return (
         <div className="absolute right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%] h-full">
@@ -126,9 +124,6 @@ const MessageList = ({
                                 "command": Command.find((c) => c.id == value.idembed),
                                 "issue": Issue.find((i) => i.id == value.idembed)
                             }[toComparable(value.resourceType)];
-
-                            console.log(value.resourceType, Issue.find((i) => i.id == value.idembed), Command.find((c) => c.id == value.idembed), EmbedType);
-
 
                             if (EmbedType == undefined) return (<></>);
 

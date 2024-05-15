@@ -15,3 +15,7 @@ export interface Property {
     administrationvalidation: boolean;
     lessorid: string;
 }
+
+export interface PropertyDTO {
+    Property: Property[];
+}

@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input"
 import { HomeIcon, Hotel } from "lucide-react"
 import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
-import { Property } from "@/type/Property";
+import { Property, PropertyDTO } from "@/type/Property";
+import { useCookies } from "next-client-cookies";
 
 function getIcon(type: string) {
     
@@ -30,18 +31,24 @@ const BienImmo = ({
     const [house, setHouse] = useState<Property>({} as Property);
     const [filter, setFilter] = useState<string>("");
 
-
+    const cookies = useCookies();
+    const token = cookies.get("token");
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: Property[] = await (
+            const data: PropertyDTO = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/property`
+                    `${process.env.NEXT_PUBLIC_API_URL}/property`,
+                    {
+                        method: "GET",
+                        headers: {
+                          "Authorization": token || "",
+                        },
+                    }
                 )
             ).json();
             
-
-            const biens = data.filter((value: Property) => toComparable(value.name, value.description).includes(toComparable(filter)));
+            const biens = data.Property.filter((value: Property) => toComparable(value.name, value.description).includes(toComparable(filter)));
 
             setHouse(biens[0]);
             setState(biens);
