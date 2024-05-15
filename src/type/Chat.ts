@@ -1,3 +1,6 @@
+import { Message } from "./Message";
+import { User } from "./User";
+
 export interface Chat {
     id: string;
     view: boolean;
@@ -9,9 +12,15 @@ export interface Chat {
         chatId: string;
     };
     userId: string[];
-    message: null;
+    message: Message[];
 };
 
 export interface ChatDTO {
     chat: Chat[];
+}
+
+export interface Contact {
+    user1: User;
+    user2: User;
+    chat: Chat;
 }

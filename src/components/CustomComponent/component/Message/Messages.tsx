@@ -3,22 +3,18 @@
 import * as React from "react"
 
 import { useEffect, useState } from 'react';
-import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { toast, useToast } from "@/components/ui/use-toast"
 import { Token, User } from "@/type/User";
 import { Message } from "@/type/Message";
-import { Embed } from "./Embed";
-import { Issue } from "@/type/Issue";
-import { Command } from "@/type/Command";
-import { toComparable } from "@/components/functions";
 import { CornerDownLeft, Mic, Paperclip } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import FileUploadDropzone from "./Filemessage";
 import { useCookies } from "next-client-cookies";
+import { Chat, Contact } from "@/type/Chat";
 
 export function ToastSimple() {
     const { toast } = useToast()
@@ -37,10 +33,12 @@ export function ToastSimple() {
     )
 }
 
-const MessageList = ({
-    CurrentUser,
-    chatId
-}: React.HTMLAttributes<HTMLDivElement> & { CurrentUser: User | undefined, chatId: string }) => {
+
+export interface ChatDTO {
+    chat: Chat;
+}
+
+const MessageList = ({ contact }: { contact: Contact | undefined }) => {
 
     const [Messages, setMessages] = useState<Message[]>([]);
 
@@ -50,41 +48,46 @@ const MessageList = ({
     if(!me || !token){ window.location.href = "/login"; return;}
     const user = JSON.parse(me) as User;
     const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
-    console.log("Decoded Token", decodedToken);
 
+    console.log("Contact", contact, contact?.chat.id, `${process.env.NEXT_PUBLIC_API_URL}/chat/${contact?.chat.id}`, "Authorization", token || "");
+    
     // Message
     useEffect(() => {
         const dataFetch = async () => {
-            const data: Message[] = await (
+            const data: ChatDTO = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/chat/allchatbyuser${chatId}`,
+                    `${process.env.NEXT_PUBLIC_API_URL}/chat/${contact?.chat.id}`,
                     {
                         method: "GET",
                         headers: {
-                          "Authorization": token || "",
+                          "Authorization": token,
                         },
                     }
                 )
             ).json();
 
-            setMessages(
-                CurrentUser ? data : []
-            );
+            console.log("Data", data);
+            
+
+            setMessages(data?.chat?.message || []);
         };
 
         dataFetch();
-    }, [CurrentUser]);
+    }, [contact]);
+
+    console.log("Messages", Messages);
+    
 
 
     return (
         <div className="absolute right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%] h-full">
-            <a className="py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">{CurrentUser?.firstName} {CurrentUser?.lastName}</a>
+            <a className="py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">{contact?.user2?.firstName} {contact?.user2?.lastName}</a>
 
             <Separator className="my-2" />
 
             <div className="flex flex-col h-full justify-between">
                 <div className="flex flex-col gap-2 p-4 pt-0">
-                    {Messages.map((value, index) => {
+                    {contact && Messages.map((value, index) => {
 
                         var result = null;
 

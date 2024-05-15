@@ -8,19 +8,15 @@ import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Token, User, UserDTO, UserReturnDTO } from "@/type/User";
-import { Chat, ChatDTO } from "@/type/Chat";
+import { Chat, ChatDTO, Contact } from "@/type/Chat";
 import { useCookies } from "next-client-cookies";
 
-interface ContactList {
-    user1: User;
-    user2: User;
-    chat: Chat;
-}
+
 
 const ContactList = ({
-    onUserChange,
+    setContact,
     Categories
-  }: React.HTMLAttributes<HTMLDivElement> & { onUserChange?: (user : User) => void , Categories: User["type"][]}) => {    
+  }: React.HTMLAttributes<HTMLDivElement> & { setContact: (contact : Contact) => void , Categories: User["type"][]}) => {    
     
     const cookies = useCookies();
     const token = cookies.get("token");
@@ -30,7 +26,7 @@ const ContactList = ({
     const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
     console.log("Decoded Token", decodedToken);
 
-    const [chat, setChat] = useState<ContactList[]>([]);
+    const [chat, setChat] = useState<Contact[]>([]);
     const [filter, setFilter] = useState<string>("");
 
     useEffect(() => {
@@ -41,7 +37,7 @@ const ContactList = ({
                     {
                         method: "GET",
                         headers: {
-                          "Authorization": token || "",
+                          "Authorization": token,
                         },
                     }
                             
@@ -69,7 +65,7 @@ const ContactList = ({
                     user1: {id: value.userId[0] == decodedToken.idUser ? value.userId[0] : value.userId[1]} as unknown as User,
                     user2: {id: value.userId[0] == decodedToken.idUser ? value.userId[1] : value.userId[0]} as unknown as User,
                     chat: value
-                } as ContactList;
+                } as Contact;
             });
 
             const finalChat = await Promise.all(chatPromise);
@@ -80,28 +76,28 @@ const ContactList = ({
         dataFetch();
     }, []);
 
-    const ContactListFiltered = (state: User[]) => {
+    const ContactListFiltered = (contacts: Contact[]) => {
         return (
             <div className="flex flex-col gap-2 py-4 pt-0">
-                {state.map((value, index) =>
-                    <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => {}}>
+                {contacts.map((value, index) =>
+                    <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => {setContact(value)}}>
                         <div className="flex w-full flex-col gap-1">
                             <div className="flex items-center">
                                 <div className="flex flex-row items-center gap-2">
-                                    <div className="font-semibold">{value.id} {value.lastName}</div>
+                                    <div className="font-semibold">{value.user2.id} {value.user2.lastName}</div>
                                 </div>
                                 <div className="ml-auto text-xs text-foreground">{}</div>
                             </div>
-                            <div className="text-xs font-medium">{value.type}</div>
+                            <div className="text-xs font-medium">{value.user2.type}</div>
                         </div>
-                        <div className="line-clamp-2 text-xs text-muted-foreground">{value.firstName}</div>
+                        <div className="line-clamp-2 text-xs text-muted-foreground">{value.user2.firstName}</div>
                         <div className="flex items-center gap-2">
                             <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80">
-                                {value.type}</div>
+                                {value.user2.type}</div>
                             <div
                                 className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                                {value.lastName}</div>
+                                {value.user2.lastName}</div>
                         </div>
                     </button>
                 )}
@@ -134,7 +130,7 @@ const ContactList = ({
                         }
                     </TabsList>
                     <TabsContent value={"All"}>
-                        {ContactListFiltered(chat.map((val) => val.user2))}
+                        {ContactListFiltered(chat)}
                     </TabsContent>
                     {
                         Categories.map((value, index) => (

@@ -7,6 +7,7 @@ import MessageList from '../component/Message/Messages';
 import { Toaster } from '@/components/ui/toaster';
 import { User } from '@/type/User';
 import CookieConsent from '@/components/ui/cookie';
+import { Contact } from "@/type/Chat";
 
 interface MessageProps {
     children: ReactNode;
@@ -14,10 +15,10 @@ interface MessageProps {
 }
 
 const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
-    const [User, setUser] = useState<User>();
+    const [Contact, setContact] = useState<Contact>();
 
-    const SelectedUser = (User: User) => {
-        setUser(User);
+    const SelectedContact = (Contact: Contact) => {
+        setContact(Contact);
     };
 
 
@@ -25,8 +26,8 @@ const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
         <>
             <CookieConsent/>
             <Sidebar index={1}/>
-            <ContactList onUserChange={SelectedUser} Categories={categories}/>
-            <MessageList CurrentUser={User} chatId={""}/>
+            <ContactList setContact={SelectedContact} Categories={categories}/>
+            <MessageList contact={Contact}/>
             <Toaster />
         </>
     );
