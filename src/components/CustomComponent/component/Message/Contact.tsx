@@ -20,7 +20,7 @@ interface ContactList {
 const ContactList = ({
     onUserChange,
     Categories
-  }: React.HTMLAttributes<HTMLDivElement> & { onUserChange?: (user : User) => void , Categories: User["type"][]}) => {
+  }: React.HTMLAttributes<HTMLDivElement> & { onUserChange?: (user : User) => void , Categories: User["type"][]}) => {    
     
     const cookies = useCookies();
     const token = cookies.get("token");

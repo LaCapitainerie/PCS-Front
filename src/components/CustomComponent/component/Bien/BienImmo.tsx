@@ -27,7 +27,7 @@ interface PropertyTypeDTO {
 const BienImmo = ({
     onHouseChange,
   }: React.HTMLAttributes<HTMLDivElement> & { onHouseChange?: (house: Property) => void }) => {
-    const [state, setState] = useState<Property[]>([]);
+    const [Property, setProperty] = useState<Property[]>([]);
     const [house, setHouse] = useState<Property>({} as Property);
     const [filter, setFilter] = useState<string>("");
 
@@ -51,7 +51,7 @@ const BienImmo = ({
             const biens = data.Property.filter((value: Property) => toComparable(value.name, value.description).includes(toComparable(filter)));
 
             setHouse(biens[0]);
-            setState(biens);
+            setProperty(biens);
         };
 
         dataFetch();
@@ -73,7 +73,7 @@ const BienImmo = ({
                 <Input contrains={"text"} placeholder="Search" className="w-full p-4" onChange={(event: React.ChangeEvent<HTMLInputElement>) => setFilter(event.target.value)}/>
             </div>
             <div className="flex flex-col gap-2 p-4 pt-0 overflow-y-scroll">
-                {state.map((value, index) => 
+                {Property.map((value, index) => 
                     <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => setHouse(value)}>
                         <div className="flex w-full flex-col gap-1">
                             <div className="flex items-center">
