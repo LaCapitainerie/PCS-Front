@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { User, UserDTO, UserReturnDTO } from "@/type/User";
+import { Token, User, UserDTO, UserReturnDTO } from "@/type/User";
 import { Chat, ChatDTO } from "@/type/Chat";
 import { useCookies } from "next-client-cookies";
 
@@ -24,6 +24,11 @@ const ContactList = ({
     
     const cookies = useCookies();
     const token = cookies.get("token");
+    const me = cookies.get("user");
+    if(!me || !token){ window.location.href = "/login"; return;}
+    const user = JSON.parse(me) as User;
+    const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
+    console.log("Decoded Token", decodedToken);
 
     const [chat, setChat] = useState<ContactList[]>([]);
     const [filter, setFilter] = useState<string>("");
@@ -43,28 +48,33 @@ const ContactList = ({
                 )
             ).json() || {chat: []};
 
+            console.log();
+            
+
             const chatPromise = data.chat.map(async (value) => {
 
-                const user1: UserReturnDTO = await (
-                    await fetch(
-                        `${process.env.NEXT_PUBLIC_API_URL}/user/${value.userId[0]}`,
-                    )
-                ).json();
+                // const user1: UserReturnDTO = await (
+                //     await fetch(
+                //         `${process.env.NEXT_PUBLIC_API_URL}/user/${value.userId[0]}`,
+                //     )
+                // ).json();
 
-                const user2: UserReturnDTO = await (
-                    await fetch(
-                        `${process.env.NEXT_PUBLIC_API_URL}/user/${value.userId[1]}`,
-                    )
-                ).json();
+                // const user2: UserReturnDTO = await (
+                //     await fetch(
+                //         `${process.env.NEXT_PUBLIC_API_URL}/user/${value.userId[1]}`,
+                //     )
+                // ).json();
 
                 return {
-                    user1: user1.user,
-                    user2: user2.user,
+                    user1: {id: value.userId[0] == decodedToken.idUser ? value.userId[0] : value.userId[1]} as unknown as User,
+                    user2: {id: value.userId[0] == decodedToken.idUser ? value.userId[1] : value.userId[0]} as unknown as User,
                     chat: value
                 } as ContactList;
-            })
+            });
+
+            const finalChat = await Promise.all(chatPromise);
             
-            setChat(await Promise.all(chatPromise));
+            setChat(finalChat.filter((val) => toComparable(val.user2.firstName, val.user2.lastName, val.user2.nickname).includes(filter)));
         };
 
         dataFetch();
@@ -78,7 +88,7 @@ const ContactList = ({
                         <div className="flex w-full flex-col gap-1">
                             <div className="flex items-center">
                                 <div className="flex flex-row items-center gap-2">
-                                    <div className="font-semibold">{value.lastName}</div>
+                                    <div className="font-semibold">{value.id} {value.lastName}</div>
                                 </div>
                                 <div className="ml-auto text-xs text-foreground">{}</div>
                             </div>
@@ -124,7 +134,7 @@ const ContactList = ({
                         }
                     </TabsList>
                     <TabsContent value={"All"}>
-                        {ContactListFiltered(chat.map((val) => val.user1).concat(chat.map((val) => val.user2)).filter((val) => toComparable(val.firstName, val.lastName, val.nickname).includes(filter)))}
+                        {ContactListFiltered(chat.map((val) => val.user2))}
                     </TabsContent>
                     {
                         Categories.map((value, index) => (

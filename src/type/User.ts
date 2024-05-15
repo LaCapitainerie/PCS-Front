@@ -22,6 +22,11 @@ export interface TokenDTO {
     token: User["token"];
 }
 
+export interface Token {
+    idUser: User["id"];
+    exp: number;
+}
+
 export interface UserDTO {
     id: User["id"];
     type: User["type"];

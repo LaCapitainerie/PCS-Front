@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { toast, useToast } from "@/components/ui/use-toast"
-import { User } from "@/type/User";
+import { Token, User } from "@/type/User";
 import { Message } from "@/type/Message";
 import { Embed } from "./Embed";
 import { Issue } from "@/type/Issue";
@@ -18,6 +18,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import FileUploadDropzone from "./Filemessage";
+import { useCookies } from "next-client-cookies";
 
 export function ToastSimple() {
     const { toast } = useToast()
@@ -42,63 +43,32 @@ const MessageList = ({
 }: React.HTMLAttributes<HTMLDivElement> & { CurrentUser: User | undefined, chatId: string }) => {
 
     const [Messages, setMessages] = useState<Message[]>([]);
-    const [Issue, setIssue] = useState<Issue[]>([]);
-    const [Command, setCommand] = useState<Command[]>([]);
 
-    // Temporary
-    const Me = "3";
+    const cookies = useCookies();
+    const token = cookies.get("token");
+    const me = cookies.get("user");
+    if(!me || !token){ window.location.href = "/login"; return;}
+    const user = JSON.parse(me) as User;
+    const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
+    console.log("Decoded Token", decodedToken);
 
     // Message
     useEffect(() => {
         const dataFetch = async () => {
             const data: Message[] = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/chat/${chatId}`
+                    `${process.env.NEXT_PUBLIC_API_URL}/chat/allchatbyuser${chatId}`,
+                    {
+                        method: "GET",
+                        headers: {
+                          "Authorization": token || "",
+                        },
+                    }
                 )
             ).json();
 
             setMessages(
-                CurrentUser ?
-                    data :
-                    []
-            );
-        };
-
-        dataFetch();
-    }, [CurrentUser]);
-
-    // Issue
-    useEffect(() => {
-        const dataFetch = async () => {
-            const data: Issue[] = await (
-                await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/issue`
-                )
-            ).json();
-
-            setIssue(
-                CurrentUser ?
-                    data :
-                    []
-            );
-        };
-
-        dataFetch();
-    }, [CurrentUser]);
-
-    // Command
-    useEffect(() => {
-        const dataFetch = async () => {
-            const data: Command[] = await (
-                await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/command`
-                )
-            ).json();
-
-            setCommand(
-                CurrentUser ?
-                    data :
-                    []
+                CurrentUser ? data : []
             );
         };
 
@@ -118,43 +88,42 @@ const MessageList = ({
 
                         var result = null;
 
-                        if (value.idembed != undefined && value.resourceType != undefined) {
+                        // if (value.idembed != undefined && value.resourceType != undefined) {
 
-                            const EmbedType = {
-                                "command": Command.find((c) => c.id == value.idembed),
-                                "issue": Issue.find((i) => i.id == value.idembed)
-                            }[toComparable(value.resourceType)];
+                        //     const EmbedType = {
+                        //         "command": Command.find((c) => c.id == value.idembed),
+                        //         "issue": Issue.find((i) => i.id == value.idembed)
+                        //     }[toComparable(value.resourceType)];
 
-                            if (EmbedType == undefined) return (<></>);
+                        //     if (EmbedType == undefined) return (<></>);
 
-                            switch (value.resourceType) {
-                                case "Command":
-                                    result = <Embed key={index} Type={value.resourceType} EmbedType={EmbedType} />
-                                    break;
+                        //     switch (value.resourceType) {
+                        //         case "Command":
+                        //             result = <Embed key={index} Type={value.resourceType} EmbedType={EmbedType} />
+                        //             break;
 
-                                case "Issue":
-                                    result = <Embed key={index} Type={value.resourceType} EmbedType={EmbedType} />
-                                    break;
+                        //         case "Issue":
+                        //             result = <Embed key={index} Type={value.resourceType} EmbedType={EmbedType} />
+                        //             break;
 
-                                default:
-                                    break;
-                            }
+                        //         default:
+                        //             break;
+                        //     }
 
 
-                        } else {
-                            result = (
-                                <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.iddestinataire == Me && "bg-accent"}`}>
-                                    <div className="flex w-full flex-col gap-1">
-                                        <div className="text-xs font-medium">{value.date.toString()}</div>
-                                    </div>
-                                    <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.message}</div>
+                        // } else {
+
+                        result = (
+                            <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== decodedToken.idUser && "bg-accent"}`}>
+                                <div className="flex w-full flex-col gap-1">
+                                    <div className="text-xs font-medium">{value.date.toString()}</div>
                                 </div>
-                            )
-
-                        }
+                                <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.content}</div>
+                            </div>
+                        )
 
                         return (
-                            <div key={index} className={`flex ${value.iddestinataire == Me && "justify-end"}`}>
+                            <div key={index} className={`flex ${value.userId == decodedToken.idUser && "justify-end"}`}>
                                 {result}
                             </div>
                         );
