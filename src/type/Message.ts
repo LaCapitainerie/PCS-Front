@@ -7,6 +7,10 @@ export interface Message {
     chatId: string;
 };
 
+export interface MessageDTO {
+    message: Message;
+};
+
 // export interface Message {
 //     id: string;
 //     idexpediteur: string;
