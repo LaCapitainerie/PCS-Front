@@ -7,8 +7,8 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Token, User, UserDTO, UserReturnDTO } from "@/type/User";
-import { Chat, ChatDTO, Contact } from "@/type/Chat";
+import { Token, User } from "@/type/User";
+import { ChatDTO, Contact } from "@/type/Chat";
 import { useCookies } from "next-client-cookies";
 
 
@@ -39,7 +39,7 @@ const ContactList = ({
                     }
                             
                 )
-            ).json() || {chat: []};           
+            ).json() || {chat: []};
 
             const chatPromise = data.chat.map(async (value) => {
 
