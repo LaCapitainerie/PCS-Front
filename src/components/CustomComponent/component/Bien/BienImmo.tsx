@@ -36,7 +36,7 @@ const BienImmo = ({
         const dataFetch = async () => {
             const data: Property[] = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/property`
+                    `${process.env.NEXT_PUBLIC_API_URL}/property`
                 )
             ).json();
             
