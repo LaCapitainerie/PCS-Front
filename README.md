@@ -1,7 +1,7 @@
 ### Accueil
-- [ ] Page d'accueil
-    - [ ] Pouvoir rechercher un bien directement
-    - [ ] Présentation du site
+- [x] Page d'accueil
+    - [x] Pouvoir rechercher un bien directement
+    - [x] Présentation du site
 
 ### Locataire
 - [ ] Apercu de son compte
