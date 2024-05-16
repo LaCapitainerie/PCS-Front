@@ -6,25 +6,6 @@ import { User } from "@/type/User"
 import DataBoard, { DefaultDashboard } from "./board"
 import RecentSales from "./recentsales"
 
-function MakeCard(name:string, currentPresta:string, ratioPresta:string, index:number) {
-  return (
-    <Card x-chunk={`dashboard-01-chunk-${index}`} key={index}>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">
-          {name}
-        </CardTitle>
-        <DollarSign className="h-4 w-4 text-muted-foreground" />
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">{currentPresta}$</div>
-        <p className="text-xs text-muted-foreground">
-          {ratioPresta == "not enought data"?ratioPresta:`+${ratioPresta}%`} from last month
-        </p>
-      </CardContent>
-    </Card>
-  )
-}
-
 export interface cardProps {
   name: string;
   currentPresta: string;
@@ -39,22 +20,6 @@ export interface ValuableThing {
 }
 
 export function Dashboard({Column}: {Column: ValuableThing[]}) {
-
-  const [users, setUsers] = useState<User[]>([]);
-
-  useEffect(() => {
-      const dataFetch = async () => {
-          const data: User[] = await (
-              await fetch(
-                `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
-              )
-          ).json();
-
-          setUsers(data);
-      };
-
-      dataFetch();
-  }, []);
 
   const [currentValuable, setValuable] = useState<cardProps[]>([]);
   const [cards, setCards] = useState<cardProps[]>([]);

@@ -56,6 +56,11 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
     // Message
     useEffect(() => {
         const dataFetch = async () => {
+            if (contact?.chat.id == undefined){
+                setMessages([]);
+                return;
+            };
+
             const data: ChatDTO = await (
                 await fetch(
                     `${process.env.NEXT_PUBLIC_API_URL}/chat/${contact?.chat.id}`,
@@ -118,10 +123,7 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
                         //     }
 
 
-                        // } else {
-
-                        console.log("Value", value);
-                        
+                        // } else {                        
 
                         result = (
                             <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== decodedToken.idUser && "bg-accent"}`}>
