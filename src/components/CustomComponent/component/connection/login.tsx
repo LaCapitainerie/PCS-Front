@@ -92,9 +92,9 @@ export default function Login() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full h-full space-y-6">
-        <div className="h-full w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-          <div className="flex items-center justify-center py-12">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="overflow-y-hidden w-full h-screen space-y-6">
+        <div className="h-screen w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+          <div className="h-screen flex items-center justify-center py-12">
             <div className="mx-auto grid w-[350px] gap-6">
               <div className="grid gap-2 text-center">
                 <h1 className="text-3xl font-bold">Login</h1>
@@ -157,9 +157,9 @@ export default function Login() {
               </div>
             </div>
           </div>
-          <div className="hidden bg-muted lg:block">
+          <div className="h-screen hidden bg-muted lg:block">
             <img
-              src="https://media.discordapp.net/attachments/597782659430613002/1240054056442007552/sciana-za-lozkiem-20-pomyslow-do-sypialni-piekne-inspiracje-5.webp?ex=664529d6&is=6643d856&hm=785cf56fa6238725f80eab7c159ab8f3d29f04c51b5ff0811d1fc6e683f9ff93&=&format=webp"
+              src="https://media.discordapp.net/attachments/597782659430613002/1240054056442007552/sciana-za-lozkiem-20-pomyslow-do-sypialni-piekne-inspiracje-5.webp?ex=66472416&is=6645d296&hm=d72b289f7ce67f4099ed5afed3b374ea72152abc1918ab7b3d5b6ecd69a01f06&=&format=webp&width=702&height=468"
               alt="Image"
               width="1920"
               height="1080"

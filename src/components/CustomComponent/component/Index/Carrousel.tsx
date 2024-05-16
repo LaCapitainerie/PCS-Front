@@ -51,8 +51,6 @@ export function CarouselSize() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselNext/>
-                <CarouselPrevious/>
             </Carousel>
         </div>
     )
