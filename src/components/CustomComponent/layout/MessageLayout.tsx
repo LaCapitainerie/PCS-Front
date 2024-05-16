@@ -8,7 +8,6 @@ import { Toaster } from '@/components/ui/toaster';
 import { User } from '@/type/User';
 import CookieConsent from '@/components/ui/cookie';
 import { Contact } from "@/type/Chat";
-import { CookiesProvider } from 'next-client-cookies';
 
 interface MessageProps {
     children: ReactNode;
@@ -25,13 +24,11 @@ const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
 
     return (
         <>
-            <CookiesProvider value={[]}>
-                <CookieConsent/>
-                <Sidebar index={1}/>
-                <ContactList setContact={SelectedContact} Categories={categories}/>
-                <MessageList contact={Contact}/>
-                <Toaster />
-            </CookiesProvider>
+            <CookieConsent/>
+            <Sidebar index={1}/>
+            <ContactList setContact={SelectedContact} Categories={categories}/>
+            <MessageList contact={Contact}/>
+            <Toaster />
         </>
     );
 }

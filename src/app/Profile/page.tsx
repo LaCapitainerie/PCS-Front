@@ -1,16 +1,18 @@
-import ProfilLayout from "@/components/CustomComponent/layout/UserInfoLayout";
-import { Suspense } from 'react'
+"use client"
 
-function SearchBarFallback() {
-    return <>placeholder</>
-}
+import ProfilLayout from "@/components/CustomComponent/layout/UserInfoLayout";
+import { useSearchParams } from 'next/navigation'
 
 export default function PrestaPageBiens() {
 
+    const params = useSearchParams()
+    const search = params.get('user')
 
-    return (
-    <Suspense fallback={<SearchBarFallback />}>
-        <ProfilLayout>
-        </ProfilLayout>
-    </Suspense>)
+    if (search) {
+        return (
+            <ProfilLayout id={search}>
+                <></>
+            </ProfilLayout>
+        );
+    };
 }

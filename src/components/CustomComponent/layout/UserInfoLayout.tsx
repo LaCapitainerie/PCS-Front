@@ -5,26 +5,20 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import { Toaster } from '@/components/ui/toaster';
 import MainContent from '../component/Profil/MainContent';
 import CookieConsent from '@/components/ui/cookie';
-import { CookiesProvider } from 'next-client-cookies';
-import { useSearchParams } from 'next/navigation';
 
 interface LayoutProps {
     children?: ReactNode;
+    id: string;
 }
 
-const ProfilLayout: React.FC<LayoutProps> = ({ children }) => {
-
-    const params = useSearchParams()
-    const search = params.get('user')
+const ProfilLayout: React.FC<LayoutProps> = ({ children, id }) => {
 
     return (
         <>
-            <CookiesProvider value={[]}>
-                <CookieConsent/>
-                <Sidebar index={0}/>
-                <MainContent id={search || ""}/>
-                <Toaster />
-            </CookiesProvider>
+            <CookieConsent/>
+            <Sidebar index={0}/>
+            <MainContent id={id}/>
+            <Toaster />
         </>
     );
 }
