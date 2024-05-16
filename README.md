@@ -48,8 +48,8 @@
         - [x] Informations Réservations (argent rapporté, croissance)
         - [x] Informations Issues (argent rapporté, croissance)
         - [x] Informations Utilisateurs (argent rapporté, croissance)
-    - [ ] Overview des Reservations, Prestations et Issues
-        - [ ] Pouvoir ouvrir une popup des details
+    - [x] Overview des Reservations, Prestations et Issues
+        - [x] Pouvoir ouvrir une popup des details
 
     - [ ] Overview Utilisateurs
         - [ ] Pouvoir effectuer des actions admins dessus

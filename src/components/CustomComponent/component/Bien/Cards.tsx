@@ -131,8 +131,8 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
         <CardContent className="grid gap-4">
 
           <div className="">
-            {user.map((presta, _index) => (
-              <Usercard user={presta as unknown as User}>
+            {user.map((presta, index) => (
+              <Usercard user={presta as unknown as User} key={index}>
                 {typeToDom("peinture", "pending")}
                     <div className="space-y-1">
                       

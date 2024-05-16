@@ -7,6 +7,7 @@ import MainContent from '../component/Bien/MainContent';
 import { Toaster } from '@/components/ui/toaster';
 import {Property} from "@/type/Property";
 import CookieConsent from '@/components/ui/cookie';
+import { CookiesProvider } from 'next-client-cookies';
 
 interface LayoutProps {
     children: ReactNode;
@@ -22,11 +23,13 @@ const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
 
     return (
         <>
-            <CookieConsent/>
-            <Sidebar index={0}/>
-            <BienImmo onHouseChange={SelectedHouse}/>
-            <MainContent house={House}/>
-            <Toaster />
+            <CookiesProvider value={[]}>
+                <CookieConsent/>
+                <Sidebar index={0}/>
+                <BienImmo onHouseChange={SelectedHouse}/>
+                <MainContent house={House}/>
+                <Toaster />
+            </CookiesProvider>
         </>
     );
 }

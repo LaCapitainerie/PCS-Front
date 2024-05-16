@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import * as React from "react"
 import { Castle, Dog, Home, Tent } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 export function MainScreen() {
   
@@ -36,7 +37,7 @@ export function MainScreen() {
                 <img 
                     alt="logo"
                     className="w-8 h-8 rounded-lg object-cover"
-                    src="https://raw.githubusercontent.com/LaCapitainerie/Media-PCS/main/PetitLogo.png?token=GHSAT0AAAAAACOEC4IELBADBQRB77F4DGZKZSFE26Q"
+                    src="https://media.discordapp.net/attachments/597782659430613002/1240634715304890399/PetitLogo.png?ex=6647469e&is=6645f51e&hm=8c1a9e0ed74f2db3433556609f074423a43db351b808038da01e1a9272ef1cba&=&format=webp&quality=lossless"
                 />
                 Paris Caretaker Services
             </div>
@@ -61,13 +62,24 @@ export function MainScreen() {
         </div>
 
 
-        <div className="">
+        <div className="grid">
             <img
                 src={"https://images.pexels.com/photos/454880/pexels-photo-454880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"}
                 alt={"background image"}
                 className="w-full object-cover rounded-md"
                 style={{maxHeight: '45rem'}}
             />
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[40%] text-center">
+                <div className="text-6xl font-bold text-white">
+                    Trouvez votre prochaine aventure
+                </div>
+                <div className="text-2xl text-white">
+                    Découvrez des logements et des expériences uniques
+                </div>
+                <div className="flex flex-row justify-center gap-4 mt-4">
+                    <Input placeholder="Rechercher un bien" className="w-1/2"/>
+                </div>
+            </div>
         </div>
 
 
