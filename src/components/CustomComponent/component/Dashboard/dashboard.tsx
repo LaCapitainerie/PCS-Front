@@ -96,22 +96,30 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
   return (
     <div className="flex min-h-screen h-full w-full flex-col left-[3.5rem]" style={{paddingLeft: '3.5rem'}}>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-        <div className={`grid gap-4` + (cards.length>1?`md:grid-cols-2 md:gap-8 lg:grid-cols-${cards.length}`:"")}>
-          {
-            cards.map((card, index) => (
-              <Card key={index}>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">{card.name}</CardTitle>
-                  <DollarSign className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">${card.currentPresta}</div>
-                  <p className="text-xs text-muted-foreground">+{card.ratioPresta}% from last month</p>
-                </CardContent>
-              </Card>
-            ))
-          }
-        </div>
+        
+        {
+          cards.length > 0 ?
+
+            <div className={`grid gap-4` + (cards.length>1?`md:grid-cols-2 md:gap-8 lg:grid-cols-${cards.length}`:"")}>
+              {
+                cards.map((card, index) => (
+                  <Card key={index}>
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-medium">{card.name}</CardTitle>
+                      <DollarSign className="h-4 w-4 text-muted-foreground" />
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold">${card.currentPresta}</div>
+                      <p className="text-xs text-muted-foreground">+{card.ratioPresta}% from last month</p>
+                    </CardContent>
+                  </Card>
+                ))
+              }
+            </div> :
+            ""
+        }
+        
+        
 
 
 
@@ -127,7 +135,7 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
               }
             </TabsList>
                 <TabsContent value={"default"} key={0} className="h-full w-full">
-                  <div className="h-full w-full grid gap-8 lg:grid-cols-3">
+                  <div className="h-full w-full grid gap-y-8 gap-x-0 grid-cols-1 grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 lg:gap-y-0 lg:gap-x-8">
                     <DefaultDashboard/>
                     <RecentSales Sales={[]}/>
                   </div>
