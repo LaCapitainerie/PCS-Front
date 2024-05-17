@@ -29,12 +29,9 @@ export function ToastSimple() {
     )
 }
 
-
 export interface ChatDTO {
     chat: Chat;
 }
-
-import { redirect } from 'next/navigation'
 
 const MessageList = ({ contact }: { contact: Contact | undefined }) => {
 
@@ -83,8 +80,8 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
     }, [contact]);
 
     if(!me || !token){
-        
-        redirect("/login");
+        window.location.assign("/login");
+        return;
     }
     const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;
 

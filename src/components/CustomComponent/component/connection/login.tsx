@@ -38,14 +38,12 @@ const FormSchema = z.object({
   })
 });
 
-import { redirect } from 'next/navigation'
-
 export default function Login() {
   const cookies = useCookies();
   const currentUser = cookies.get("user");
 
-  if (currentUser) {
-    redirect(`${JSON.parse(currentUser).type}/dashboard`);
+  if (currentUser && currentUser !== "undefined") {
+    window.location.assign(`${JSON.parse(currentUser).type}/dashboard`);
   }
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -76,18 +74,7 @@ export default function Login() {
       })
     ).json();
 
-    cookies.set("token", retour.user.token, {
-      path: "/",
-    });
-
-    cookies.set("user", JSON.stringify(retour.user), {
-      path: "/",
-    });
-
-    console.log(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
-    
-    
-    redirect(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
+    window.location.assign(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
   }
 
   return (

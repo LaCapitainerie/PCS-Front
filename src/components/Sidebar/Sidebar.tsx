@@ -14,8 +14,6 @@ import { Button } from "../ui/button"
 import { toComparable } from "../functions";
 import { useCookies } from "next-client-cookies";
 import { Token, User as UserType } from "@/type/User";
-import { redirect } from "next/navigation";
-
 
 // Store the icons in an dictionary
 const icons = {
@@ -75,8 +73,9 @@ const Sidebar = ({ index }: { index: number }) => {
     const me = cookies.get("user");
     const token = cookies.get("token");
     if(!me || !token){
-        redirect("/login");
-    }
+        window.location.assign("/login");
+        return;
+    };
     const user = JSON.parse(me) as UserType;
     const decodeToken = JSON.parse(atob(token.split(".")[1])) as Token;
 
@@ -105,7 +104,7 @@ const Sidebar = ({ index }: { index: number }) => {
                             cookies.remove("cookieConsent");
                             cookies.remove("token");
                             cookies.remove("user");
-                            redirect("/login");
+                            window.location.assign("/login");
                         }}>
                             Logout
                         </DropdownMenuItem>

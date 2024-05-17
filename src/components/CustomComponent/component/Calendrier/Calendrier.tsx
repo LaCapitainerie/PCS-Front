@@ -21,7 +21,7 @@ const Calendrier: React.FC<CalendrierProps> = ({children}) => {
             <DialogTrigger>
                 <Button variant="gooeyRight">View</Button>
             </DialogTrigger>
-            <DialogContent style={{maxWidth: '90%'}}>
+            <DialogContent style={{maxWidth: '90vw', width: '90vw', height: '90vh'}}>
                 <div className='flex flex-row justify-between' style={{maxHeight: '100%'}}>
                     <Calendar SetSelectedReservation={SelectedDay} style={{width: '66%'}}/>
                     <Order day={Day} style={{width: '33%'}}/>

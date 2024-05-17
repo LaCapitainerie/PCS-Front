@@ -66,16 +66,13 @@ const FormSchema = z.object({
   }),
 });
 
-
-import { redirect } from 'next/navigation'
-
 export default function Signup() {
 
   const cookies = useCookies();
   const currentUser = cookies.get("user");  
 
   if (currentUser) {
-    redirect(`${JSON.parse(currentUser).type}/dashboard`);
+    window.location.assign(`${JSON.parse(currentUser).type}/dashboard`);
   }
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -117,8 +114,8 @@ export default function Signup() {
       path: '/',
     });
 
-    // Redirect to the dashboard
-    redirect(`${retour.user.type}/dashboard`);
+    // Go to the dashboard
+    window.location.assign(`${retour.user.type}/dashboard`);
   }
 
   return (
