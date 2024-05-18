@@ -14,6 +14,7 @@ export interface User {
 };
 
 export interface UserReturnDTO {
+    error: any;
     user: UserDTO;
 }
 

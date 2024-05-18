@@ -80,7 +80,11 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
     }, [contact]);
 
     if(!me || !token){
-        window.location.assign("/login");
+        console.log("Redirecting to login");
+        console.log("Token", token);
+        console.log("User", me);
+        
+        // window.location.assign("/login");
         return;
     }
     const decodedToken = JSON.parse(atob(token.split(".")[1])) as Token;

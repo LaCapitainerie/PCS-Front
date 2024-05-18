@@ -73,7 +73,11 @@ const Sidebar = ({ index }: { index: number }) => {
     const me = cookies.get("user");
     const token = cookies.get("token");
     if(!me || !token){
-        window.location.assign("/login");
+        console.log("Redirecting to login");
+        console.log("Token", token);
+        console.log("User", me);
+        
+        // window.location.assign("/login");
         return;
     };
     const user = JSON.parse(me) as UserType;

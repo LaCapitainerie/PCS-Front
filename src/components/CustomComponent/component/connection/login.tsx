@@ -74,6 +74,22 @@ export default function Login() {
       })
     ).json();
 
+    if (retour.error) {
+      toast({
+        title: "Error",
+        description: retour.error,
+      });
+      return;
+    }
+
+    cookies.set("token", retour.user.token, {
+      path: "/",
+    });
+
+    cookies.set("user", JSON.stringify(retour.user), {
+      path: "/",
+    });
+    
     window.location.assign(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
   }
 
