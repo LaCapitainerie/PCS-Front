@@ -19,7 +19,7 @@ const Calendrier: React.FC<CalendrierProps> = ({children}) => {
     return (
         <Dialog>
             <DialogTrigger>
-                <Button variant="gooeyRight">View</Button>
+                <div>View</div>
             </DialogTrigger>
             <DialogContent style={{maxWidth: '90vw', width: '90vw', height: '90vh'}}>
                 <div className='flex flex-row justify-between' style={{maxHeight: '100%'}}>
