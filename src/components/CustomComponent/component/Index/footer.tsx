@@ -8,7 +8,7 @@ export function Footer() {
                         <img 
                             alt="logo"
                             className="w-32 h-32 rounded-lg object-cover"
-                            src="https://media.discordapp.net/attachments/597782659430613002/1240634715304890399/PetitLogo.png?ex=6647469e&is=6645f51e&hm=8c1a9e0ed74f2db3433556609f074423a43db351b808038da01e1a9272ef1cba&=&format=webp&quality=lossless"
+                            src={`${process.env.NEXT_PUBLIC_ICON_URL}`}
                         />
                     </div>
                     <div className="flex flex-col justify-center">
