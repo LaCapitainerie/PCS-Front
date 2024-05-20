@@ -13,8 +13,7 @@ import {
   Form,
   FormField,
 } from "@/components/ui/form"
-import { toast } from "@/components/ui/use-toast"
-import { Token, TokenDTO, UserReturnDTO } from "@/type/User";
+import { Token, UserReturnDTO } from "@/type/User";
 
 import { useCookies } from 'next-client-cookies';
 

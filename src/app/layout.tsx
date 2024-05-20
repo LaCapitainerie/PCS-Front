@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Paris Caretaker Services",
   description: "Le site PCS",
   icons: {
-    icon: '/logo.ico',
+    icon: '/icon',
   },
 };
 
