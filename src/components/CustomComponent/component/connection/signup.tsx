@@ -25,9 +25,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { UserReturnDTO } from "@/type/User";
+import { Token, UserReturnDTO } from "@/type/User";
 import { useCookies } from 'next-client-cookies';
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@/components/ui/input-otp";
+import StepperComp from "./stepper";
 
 
 // {
@@ -112,6 +113,10 @@ export default function Signup() {
     cookies.set('token', JSON.stringify(retour.user.token), {
       path: '/',
     });
+
+    localStorage.setItem('token', retour.user.token);
+
+    localStorage.setItem('user', (JSON.parse(atob(retour.user.token.split('.')[1])).idUser));
 
     // Go to the dashboard
     window.location.assign(`${retour.user.type}/dashboard`);

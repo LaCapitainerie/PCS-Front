@@ -15,7 +15,7 @@ export interface Property {
     images: string[];
     country: string;
     administrationvalidation: boolean;
-    userid: string;
+    lessorId: string;
 }
 
 export interface PropertyDTO {

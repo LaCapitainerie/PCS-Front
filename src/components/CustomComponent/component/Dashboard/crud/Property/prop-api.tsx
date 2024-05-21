@@ -1,23 +1,9 @@
-import { PropertyDTO } from '@/type/Property'
+import { Property, PropertyDTO } from '@/type/Property'
 import { Prop } from './prop_schem'
 
-const props: Prop[] = [{
-  name: 'Appartement 1',
-  type: "flat",
-  price: 1000,
-  surface: 100,
-  room: 3,
-  description: 'description',
-  address: 'address',
-  bathroom: 0,
-  garage: 0,
-  images: [],
-}]
+const props: { [id: string]: Prop } = {}
 
 export const fetchProps = async () => {
-
-  console.log("token", localStorage.getItem('token'), "url", `${process.env.NEXT_PUBLIC_API_URL}/property`);
-  
   const retour: PropertyDTO = await (
     await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/property`,
@@ -30,29 +16,20 @@ export const fetchProps = async () => {
     )
   ).json();
 
-  const props = retour.Property
-
+  retour.Property.forEach(element => {
+    props[element.id] = element;
+  });
 
   return {
     total: props.length,
-    props: props.map((prop, id) => (
-      { id,
+    props: Object.values(props).map((prop, id) => (
+      { 
+        id: prop.id,
         name: prop.name,
         type: prop.type,
-        price: prop.price,
-        surface: prop.surface,
-        room: prop.room,
         description: prop.description,
         address: prop.address,
-        city: prop.city,
-        zip_code: prop.zipcode,
-        bathroom: prop.bathroom,
-        garage: prop.garage,
-        position: prop.position,
         images: prop.images,
-        country: prop.country,
-        administration_validation: prop.administrationvalidation,
-        user_id: prop.userid
       }
     )),
   }
@@ -61,26 +38,64 @@ export const fetchProps = async () => {
 
 export const createProp = async (prop: Prop) => {
 
+  const propToCreate = {
+    name: prop.name,
+    type: prop.type,
+    description: prop.description,
+    address: prop.address,
+    images: prop.images,
+
+    lessorId: "1",
+    
+    administrationvalidation: true,
+    city: "Paris",
+    country: "France",
+    garage: 0,
+    position: {latitute: 0, longitude: 0},
+    price: 0,
+    room: 0,
+    surface: 0,
+    zipcode: "75000",
+  } as Property
+
+  console.log("Creating :", prop as Property);
+  
+
+  const retour: PropertyDTO = await (
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/property`,
+      {
+        method: "POST",
+        body: JSON.stringify(prop as Property),
+        headers: {
+          "Authorization": localStorage.getItem('token') || "",
+        },
+      }
+    )
+  ).json();
+
   await sleep(1000)
-  if (props.find((u) => u.name === prop.name)) {
+  if (Object.values(props).find((u) => u.name === prop.name)) {
     throw new Error('Propname already exists')
   }
-  props.push(prop)
+
+  console.log("Added :", retour.Property);
+  
+  props[prop.id] = prop
 }
 
-export const readProp = async (id: number) => {
+export const readProp = async (id: string) => {
   await sleep(500)
   return props[id]! // TODO: handle undefined
 }
 
-export const updateProp = async (id: number, prop: Prop) => {
+export const updateProp = async (id: string, prop: Prop) => {
   await sleep(1000)
   props[id] = prop
 }
 
-export const deleteProp = async (id: number) => {
+export const deleteProp = async (id: string) => {
   await sleep(1000)
-  props.splice(id, 1)
 }
 
 function sleep(ms: number) {

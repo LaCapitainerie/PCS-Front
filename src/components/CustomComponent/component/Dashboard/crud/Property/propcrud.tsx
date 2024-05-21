@@ -19,24 +19,12 @@ export const PropCrudView = createCrudView<Prop, PropSummary>({name: 'empty'})({
   ListComponent: createCrudList({
     columns: () => [
       {
-        accessorKey: 'id',
-        accessorFn: ({ id }) => id,
-      },
-      {
         accessorKey: 'name',
         accessorFn: ({ name }) => name,
       },
       {
         accessorKey: 'type',
         accessorFn: ({ type }) => type,
-      },
-      {
-        accessorKey: 'price',
-        accessorFn: ({ price }) => price,
-      },
-      {
-        accessorKey: 'surface',
-        accessorFn: ({ surface }) => surface,
       },
       {
         accessorKey: 'address',

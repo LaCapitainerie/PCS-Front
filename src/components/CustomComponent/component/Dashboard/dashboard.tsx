@@ -2,10 +2,8 @@ import { DollarSign } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import DataBoard from "./board"
 import RecentSales from "./recentsales"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import { PropCrudView } from "./crud/Property/propcrud"
 import { CRUD, CrudVariant } from "./crud/Crud"
 const queryClient = new QueryClient()
 
@@ -128,7 +126,7 @@ export function Dashboard({Column, CustomOnes}: {Column: ValuableThing[], Custom
 
         <div className="h-full w-full grid gap-4 md:gap-8">
           
-          <Tabs defaultValue="default" className="flex flex-col h-full w-full">
+          <Tabs defaultValue={CustomOnes[0]} className="flex flex-col h-full w-full">
             <TabsList className="w-fit">
               {
                 CustomOnes.map((value, index) => (
