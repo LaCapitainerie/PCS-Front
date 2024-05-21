@@ -10,12 +10,15 @@ export interface Property {
     description: string;
     address: string;
     city: string;
-    zipcode: string;
-    position: {latitute: number, longitude: number};
+    zipCode: string;
+    position: {
+        latitute: number,
+        longitude: number
+    };
     images: string[];
     country: string;
-    administrationvalidation: boolean;
-    lessorId: string;
+    administrationValidation: boolean;
+    userId: string;
 }
 
 export interface PropertyDTO {

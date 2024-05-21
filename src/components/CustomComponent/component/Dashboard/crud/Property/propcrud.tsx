@@ -11,7 +11,7 @@ export const PropCrudView = createCrudView<Prop, PropSummary>({name: 'empty'})({
     create: createProp,
     read: ({ id }) => readProp(id),
     update: (prop, { id }) => updateProp(id, prop),
-    delete: ({ id }) => deleteProp(id),
+    delete: (prop) => deleteProp(prop),
   },
   getId: ({ id }) => id,
   listToDataSource: (list) => list.props,
@@ -27,8 +27,20 @@ export const PropCrudView = createCrudView<Prop, PropSummary>({name: 'empty'})({
         accessorFn: ({ type }) => type,
       },
       {
+        accessorKey: 'description',
+        accessorFn: ({ description }) => description,
+      },
+      {
         accessorKey: 'address',
         accessorFn: ({ address }) => address,
+      },
+      {
+        accessorKey: 'price',
+        accessorFn: ({ price }) => price,
+      },
+      {
+        accessorKey: 'surface',
+        accessorFn: ({ surface }) => surface,
       },
     ],
   }),

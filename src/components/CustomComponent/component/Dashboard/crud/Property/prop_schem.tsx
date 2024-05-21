@@ -34,7 +34,16 @@ export const propSchema = z.object({
   images: z.array(z.string()),
 })
 
-export type Prop = z.infer<typeof propSchema> & { id: Property['id']};
+// This is the type of the data that will be passed to the form
+// & the type of the data that won't be passed to the form
+export type Prop = z.infer<typeof propSchema> & {
+  id: Property['id']
+  price: Property['price']
+  surface: Property['surface']
+  room: Property['room']
+  bathroom: Property['bathroom']
+  garage: Property['garage']
+};
 
 export type PropSummary = {
   id: Property['id']
@@ -42,5 +51,6 @@ export type PropSummary = {
   type: Property["type"]
   description: Property["description"]
   address: Property["address"]
-  images: Property["images"]
+  price: Property['price']
+  surface: Property['surface']
 }

@@ -97,9 +97,18 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
 
             <div className="flex flex-col h-full justify-between">
                 <div className="flex flex-col gap-2 p-4 pt-0">
-                    {contact && Messages.map((value, index) => {
-
-                        var result = null;
+                    {contact && Messages.map((value, index) => 
+                        <div key={index} className={`flex ${value.userId == decodedToken.idUser && "justify-end"}`}>
+                            {
+                                <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== decodedToken.idUser && "bg-accent"}`}>
+                                    <div className="flex w-full flex-col gap-1">
+                                        <div className="text-xs font-medium">{value.date.toString()}</div>
+                                    </div>
+                                    <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.content}</div>
+                                </div>
+                            }
+                        </div>
+                        
 
                         // if (value.idembed != undefined && value.resourceType != undefined) {
 
@@ -124,24 +133,10 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
                         //     }
 
 
-                        // } else {                        
+                        // } else {
+                        
 
-                        result = (
-                            <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== decodedToken.idUser && "bg-accent"}`}>
-                                <div className="flex w-full flex-col gap-1">
-                                    <div className="text-xs font-medium">{value.date.toString()}</div>
-                                </div>
-                                <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.content}</div>
-                            </div>
-                        )
-
-                        return (
-                            <div key={index} className={`flex ${value.userId == decodedToken.idUser && "justify-end"}`}>
-                                {result}
-                            </div>
-                        );
-
-                    })}
+                    )}
                 </div>
 
                 <div className="flex flex-row p-4 gap-4">
