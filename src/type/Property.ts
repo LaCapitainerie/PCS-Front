@@ -1,7 +1,7 @@
 export interface Property {
     id: string;
     name: string;
-    type: "Maison" | "Appartement" | "Terrain" | "Villa";
+    type: "Maison" | "Appartement";
     price: number;
     surface: number;
     room: number;
@@ -11,9 +11,11 @@ export interface Property {
     address: string;
     city: string;
     zipcode: string;
+    position: {latitute: number, longitude: number};
+    images: string[];
     country: string;
     administrationvalidation: boolean;
-    lessorid: string;
+    userid: string;
 }
 
 export interface PropertyDTO {

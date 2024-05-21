@@ -1,3 +1,4 @@
+import { CrudVariant } from "@/components/CustomComponent/component/Dashboard/crud/Crud";
 import { ValuableThing } from "@/components/CustomComponent/component/Dashboard/dashboard";
 import Dashboard_Layout from "@/components/CustomComponent/layout/DashboardLayout";
 
@@ -17,9 +18,11 @@ export default function Bailleur() {
             dateColumn: 'Date',
         }
     ];
+    
+    const CustomOnes:CrudVariant[] = ["Properties", "Users"]
 
     return (
-        <Dashboard_Layout dataColumn={Columns}>
+        <Dashboard_Layout dataColumn={Columns} customOnes={CustomOnes} >
         </Dashboard_Layout>
     );
 }

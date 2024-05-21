@@ -25,12 +25,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { toast } from "@/components/ui/use-toast"
-import { User, UserDTO, UserReturnDTO } from "@/type/User";
-
+import { UserReturnDTO } from "@/type/User";
 import { useCookies } from 'next-client-cookies';
-import StepperVariants from "./stepper";
-import StepperComp from "./stepper";
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@/components/ui/input-otp";
 
 

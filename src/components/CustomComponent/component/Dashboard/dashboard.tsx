@@ -2,9 +2,12 @@ import { DollarSign } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { User } from "@/type/User"
-import DataBoard, { DefaultDashboard } from "./board"
+import DataBoard from "./board"
 import RecentSales from "./recentsales"
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { PropCrudView } from "./crud/Property/propcrud"
+import { CRUD, CrudVariant } from "./crud/Crud"
+const queryClient = new QueryClient()
 
 export interface cardProps {
   name: string;
@@ -19,7 +22,7 @@ export interface ValuableThing {
   dateColumn: string;
 }
 
-export function Dashboard({Column}: {Column: ValuableThing[]}) {
+export function Dashboard({Column, CustomOnes}: {Column: ValuableThing[], CustomOnes: CrudVariant[]}) {
 
   const [currentValuable, setValuable] = useState<cardProps[]>([]);
   const [cards, setCards] = useState<cardProps[]>([]);
@@ -127,32 +130,30 @@ export function Dashboard({Column}: {Column: ValuableThing[]}) {
           
           <Tabs defaultValue="default" className="flex flex-col h-full w-full">
             <TabsList className="w-fit">
-              <TabsTrigger value={"default"} key={0}>default</TabsTrigger>
               {
-                cards.map((card, index) => (
-                  <TabsTrigger value={card.name} key={index}>{card.name}</TabsTrigger>
+                CustomOnes.map((value, index) => (
+                    <TabsTrigger value={CustomOnes[index]} key={index+1}>{CustomOnes[index]}</TabsTrigger>
                 ))
               }
             </TabsList>
-                <TabsContent value={"default"} key={0} className="h-full w-full">
-                  <div className="h-full w-full grid gap-y-8 gap-x-0 grid-cols-1 grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 lg:gap-y-0 lg:gap-x-8">
-                    <DefaultDashboard/>
-                    <RecentSales Sales={[]}/>
-                  </div>
-                </TabsContent>
             {
-              Column.map((card, index) => (
-                <TabsContent value={card.name} key={index+1} className="h-full">
-                  <DataBoard card={card}/>
-                </TabsContent>
-              ))
+              CustomOnes.map((value, index) => (
+                  <TabsContent value={CustomOnes[index]} key={index+1} className="h-full">
+                    <div className="h-full w-full grid gap-y-8 gap-x-0 grid-cols-1 grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 lg:gap-y-0 lg:gap-x-8">
+                      <div className="col-span-2">
+                        <QueryClientProvider client={queryClient}>
+                          <CRUD variant={value}/>
+                        </QueryClientProvider>
+                      </div>
+
+                      <RecentSales Sales={[]}/>
+                    </div>
+                  </TabsContent>
+                ))
             }
           </Tabs>
 
-
         </div>
-
-
 
       </main>
     </div>
