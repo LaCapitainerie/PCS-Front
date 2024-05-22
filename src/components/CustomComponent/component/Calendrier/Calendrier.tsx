@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar } from '../../../ui/customcalendar';
-import Order from '../../../cavaservir/order';
+/*import Order from '../../../cavaservir/order';*/
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button';
 
@@ -24,7 +24,10 @@ const Calendrier: React.FC<CalendrierProps> = ({children}) => {
             <DialogContent style={{maxWidth: '90vw', width: '90vw', height: '90vh'}}>
                 <div className='flex flex-row justify-between' style={{maxHeight: '100%'}}>
                     <Calendar SetSelectedReservation={SelectedDay} style={{width: '66%'}}/>
-                    <Order day={Day} style={{width: '33%'}}/>
+                    {
+                        //TODO: Order non trouvé lors du build nextjs
+                        /*<Order day={Day} style={{width: '33%'}}/>*/
+                    }
                 </div>
             </DialogContent>
         </Dialog>

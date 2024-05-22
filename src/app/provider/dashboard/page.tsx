@@ -1,3 +1,4 @@
+import {CookiesProvider} from "next-client-cookies/server";
 import { ValuableThing } from "@/components/CustomComponent/component/Dashboard/dashboard";
 import Dashboard_Layout from "@/components/CustomComponent/layout/DashboardLayout";
 

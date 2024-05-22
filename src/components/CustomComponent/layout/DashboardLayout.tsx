@@ -13,12 +13,11 @@ interface DashBoardProps {
 }
 
 const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, customOnes }) => {
-
     return (
         <>
             <CookieConsent/>
             <Sidebar index={2}/>
-            <Dashboard Column={dataColumn} CustomOnes={customOnes}/>
+            <Dashboard Column={dataColumn} CustomOnes={customOnes ?? []}/>
         </>
     );
 }

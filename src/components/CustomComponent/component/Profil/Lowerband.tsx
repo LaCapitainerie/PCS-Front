@@ -24,7 +24,7 @@ const Lowerband = ({User}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps
                 )
             ).json();
 
-            setProperty(data.filter((propertyTMP) => propertyTMP.lessorid == User.id));
+            setProperty(data.filter((propertyTMP) => propertyTMP.userId == User.id));
         };
 
         dataFetch();

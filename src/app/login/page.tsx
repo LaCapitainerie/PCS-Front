@@ -1,5 +1,6 @@
 "use client"
 
+import {CookiesProvider} from "next-client-cookies/server";
 import LoginLayout from "@/components/CustomComponent/layout/LoginLayout";
 
 // {
@@ -14,6 +15,8 @@ import LoginLayout from "@/components/CustomComponent/layout/LoginLayout";
 
 export default function Login() {
   return (
-    <LoginLayout/>
+    <CookiesProvider>
+      <LoginLayout/>
+    </CookiesProvider>
   )
 }

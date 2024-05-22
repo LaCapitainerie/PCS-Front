@@ -1,5 +1,6 @@
 "use client"
 
+import {CookiesProvider} from "next-client-cookies/server";
 import ProfilLayout from "@/components/CustomComponent/layout/UserInfoLayout";
 import { useSearchParams } from 'next/navigation'
 
@@ -10,9 +11,11 @@ export default function PrestaPageBiens() {
 
     if (search) {
         return (
-            <ProfilLayout id={search}>
-                <></>
-            </ProfilLayout>
+            <CookiesProvider>
+                <ProfilLayout id={search}>
+                 <></>
+                </ProfilLayout>
+            </CookiesProvider>
         );
     };
 }

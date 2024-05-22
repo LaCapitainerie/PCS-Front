@@ -1,6 +1,7 @@
 import { CrudVariant } from "@/components/CustomComponent/component/Dashboard/crud/Crud";
 import { ValuableThing } from "@/components/CustomComponent/component/Dashboard/dashboard";
 import Dashboard_Layout from "@/components/CustomComponent/layout/DashboardLayout";
+import { CookiesProvider } from "next-client-cookies";
 
 export default function Bailleur() {
     
@@ -22,7 +23,9 @@ export default function Bailleur() {
     const CustomOnes:CrudVariant[] = ["Properties", "Users"]
 
     return (
-        <Dashboard_Layout dataColumn={Columns} customOnes={CustomOnes} >
-        </Dashboard_Layout>
+        <CookiesProvider>
+            <Dashboard_Layout dataColumn={Columns} customOnes={CustomOnes} >
+            </Dashboard_Layout>
+        </CookiesProvider>
     );
 }
