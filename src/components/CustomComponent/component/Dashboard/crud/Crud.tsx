@@ -1,7 +1,6 @@
 import { PropCrudView } from "./Property/propcrud";
-import { UserCrudView } from "./User/usercrud"
 
-export type CrudVariant = "Properties" | "Users";
+export type CrudVariant = "Properties";
 
 interface CrudBoardProps {
     children?: React.ReactNode;
@@ -13,7 +12,5 @@ export const CRUD: React.FC<CrudBoardProps> = ({children, variant}) => {
         case "Properties":
             return <PropCrudView/>;
 
-        case "Users":
-            return <UserCrudView/>;
     };
 };

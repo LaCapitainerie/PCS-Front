@@ -1,7 +1,7 @@
 import { Property } from '@/type/Property'
 import z from 'zod'
 
-export const propSchema = z.object({
+export const Schema = z.object({
   name: z
     .string({
       required_error: 'Name is required.',
@@ -36,7 +36,7 @@ export const propSchema = z.object({
 
 // This is the type of the data that will be passed to the form
 // & the type of the data that won't be passed to the form
-export type Prop = z.infer<typeof propSchema> & {
+export type ObjectType = z.infer<typeof Schema> & {
   id: Property['id']
   price: Property['price']
   surface: Property['surface']
@@ -45,7 +45,7 @@ export type Prop = z.infer<typeof propSchema> & {
   garage: Property['garage']
 };
 
-export type PropSummary = {
+export type ObjectSummary = {
   id: Property['id']
   name: Property['name']
   type: Property["type"]

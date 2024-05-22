@@ -9,7 +9,7 @@ import { CrudVariant } from '../component/Dashboard/crud/Crud';
 interface DashBoardProps {
     children?: ReactNode;
     dataColumn: ValuableThing[];
-    customOnes?: CrudVariant[];
+    customOnes: CrudVariant[];
 }
 
 const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, customOnes }) => {

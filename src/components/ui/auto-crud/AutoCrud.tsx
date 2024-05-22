@@ -46,7 +46,7 @@ export const createCrudView =
         createOrUpdate.reset()
       }
       const dataSource = list.data && listToDataSource(list.data)
-      const selected = dataSource?.find((item) => String(getId(item)) === selectedId)
+      const selected = dataSource?.find((item, i) => String(getId(item)) === selectedId || String(i) === selectedId)
       const selectedItem = useQuery({
         queryKey: ['crud', name, 'selected', selectedId],
         queryFn: () => action.read(selected!),

@@ -1,12 +1,16 @@
-import { Property, PropertyDTO } from '@/type/Property'
-import { Prop, PropSummary } from './prop_schem'
+import { Property } from '@/type/Property'
+import { ObjectType, ObjectSummary } from './prop_schem'
 
-const props: { [id: string]: Prop } = {}
 
-export const fetchProps = async () => {
-  const retour: PropertyDTO = await (
+const props: { [id: string]: ObjectType } = {}
+const path = `${process.env.NEXT_PUBLIC_API_URL}/property`
+interface ObjectDTO { Property: Property[] }
+
+
+export const fetchData = async () => {
+  const retour: ObjectDTO = await (
     await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/property`,
+      `${path}`,
       {
         method: "GET",
         headers: {
@@ -26,8 +30,7 @@ export const fetchProps = async () => {
   }
 }
 
-
-export const createProp = async (prop: Prop) => {
+export const createData = async (prop: ObjectType) => {
 
   const propToCreate = {
     name: prop.name,
@@ -46,10 +49,10 @@ export const createProp = async (prop: Prop) => {
     country: "France",
     administrationValidation: true,
     userId: localStorage.getItem("user"),
-  } as Property
+  }
 
   await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/property`,
+    `${path}`,
     {
       method: "POST",
       body: JSON.stringify(propToCreate),
@@ -60,17 +63,32 @@ export const createProp = async (prop: Prop) => {
   )
 }
 
-export const readProp = async (id: string) => {
+export const readData = async (id: string) => {
   return props[id]! // TODO: handle undefined
 }
 
-export const updateProp = async (id: string, prop: Prop) => {
-  props[id] = prop
+export const updateData = async (id: string, data: ObjectType) => {
+  props[id] = data
+
+  console.log("UPDATE", data);
+  console.log(props, id);
+  
+  
+  await fetch(
+    `${path}/${id}`,
+    {
+      method: "UPDATE",
+      body: JSON.stringify(data),
+      headers: {
+        "Authorization": localStorage.getItem('token') || "",
+      },
+    }
+  )
 }
 
-export const deleteProp = async (id: PropSummary) => {
+export const deleteData = async (id: ObjectSummary) => {
   await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/property/${(id as any).original.id}`,
+    `${path}/${(id as any).original.id}`,
     {
       method: "DELETE",
       headers: {
