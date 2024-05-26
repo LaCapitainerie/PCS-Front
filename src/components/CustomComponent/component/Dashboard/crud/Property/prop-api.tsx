@@ -1,5 +1,6 @@
 import { Property } from '@/type/Property'
 import { ObjectType, ObjectSummary } from './prop_schem'
+import { useToast } from '@/components/ui/use-toast'
 
 
 const props: { [id: string]: ObjectType } = {}
@@ -18,7 +19,7 @@ export const fetchData = async () => {
         },
       }
     )
-  ).json();
+  ).json();  
 
   retour.Property.forEach(element => {
     props[element.id] = element;
@@ -87,7 +88,7 @@ export const updateData = async (id: string, data: ObjectType) => {
 }
 
 export const deleteData = async (id: ObjectSummary) => {
-  await fetch(
+  const result = await fetch(
     `${path}/${(id as any).original.id}`,
     {
       method: "DELETE",
@@ -95,5 +96,23 @@ export const deleteData = async (id: ObjectSummary) => {
         "Authorization": localStorage.getItem('token') || "",
       },
     }
-  ) 
+  )
+
+  if (result.status !== 200) {
+    throw new Error("Failed to delete")
+  }
+
+  const { toast } = useToast()
+
+  toast({
+    title: "Deleted",
+    description: (
+      <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+        <code className="text-white">{JSON.stringify(id, null, 2)}</code>
+      </pre>
+    ),
+  });
+
+  
+  delete props[(id as any).original.id]
 }

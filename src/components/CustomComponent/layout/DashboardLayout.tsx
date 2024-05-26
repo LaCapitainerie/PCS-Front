@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import { ValuableThing, Dashboard } from '../component/Dashboard/dashboard';
 import CookieConsent from '@/components/ui/cookie';
 import { CrudVariant } from '../component/Dashboard/crud/Crud';
+import { Toaster } from '@/components/ui/toaster';
 
 interface DashBoardProps {
     children?: ReactNode;
@@ -19,6 +20,7 @@ const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, cust
             <CookieConsent/>
             <Sidebar index={2}/>
             <Dashboard Column={dataColumn} CustomOnes={customOnes}/>
+            <Toaster />
         </>
     );
 }
