@@ -9,9 +9,9 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
-import { Property_image } from "@/type/Property_image"
+import { Property } from "@/type/Property"
 
-export function CarouselPlugin({ images }: { images: Property_image[] }) {
+export function CarouselPlugin({ images }: { images: Property["images"] | undefined}) {
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true})
   )
@@ -29,13 +29,14 @@ export function CarouselPlugin({ images }: { images: Property_image[] }) {
       }}
     >
       <CarouselContent className="h-full">
-        {images.map((photo, index) => (
+        {images?.map((photo, index) => (
           <CarouselItem className="h-full" key={index}>
             <div className="p-1">
               <Card>
                 <CardContent className="flex items-center justify-center p-0">
                     <img
-                        src={photo.image}
+                        src={photo}
+                        onError={(e) => { e.currentTarget.src = "https://i.imgur.com/1kH8tiQ.png" }}
                         alt={`Random Image ${index + 1}`}
                         className="rounded-lg"
                     />
