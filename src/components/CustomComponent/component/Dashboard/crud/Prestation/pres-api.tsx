@@ -1,5 +1,5 @@
 import { Property } from '@/type/Property'
-import { ObjectType, ObjectSummary } from './prop_schem'
+import { ObjectType, ObjectSummary } from './pres_schem'
 import { useToast } from '@/components/ui/use-toast'
 
 

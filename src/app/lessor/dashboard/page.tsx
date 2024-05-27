@@ -5,17 +5,11 @@ import Dashboard_Layout from "@/components/CustomComponent/layout/DashboardLayou
 export default function Bailleur() {
     
     const Columns: ValuableThing[] = [
-        // {
-        //     name: 'Prestations',
-        //     path: '/prestation',
-        //     valueColumn: 'Prix',
-        //     dateColumn: 'Date',
-        // },
         {
             name: 'Reservations',
-            path: '/reservation',
-            valueColumn: 'Prix',
-            dateColumn: 'Date',
+            path: '/service/all',
+            valueColumn: 'price',
+            dateColumn: 'date',
         }
     ];
     

@@ -32,7 +32,7 @@ export function Dashboard({Column, CustomOnes}: {Column: ValuableThing[], Custom
 
         const data: any[] = await (
           await fetch(
-            `${process.env.NEXT_PUBLIC_LOCAL_API_URL}${column.path}`
+            `${process.env.NEXT_PUBLIC_API_URL}${column.path}`
           )
         ).json();
 
