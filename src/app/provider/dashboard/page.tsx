@@ -6,7 +6,7 @@ export default function Bailleur() {
     const Columns: ValuableThing[] = [];
 
     return (
-        <Dashboard_Layout dataColumn={Columns}>
+        <Dashboard_Layout dataColumn={Columns} customOnes={["Prestations"]}>
         </Dashboard_Layout>
     );
 }

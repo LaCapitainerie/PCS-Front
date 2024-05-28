@@ -4,7 +4,7 @@ import { createCrudList } from '@/components/ui/auto-crud/createCrudList'
 import { createData, deleteData, fetchData, readData, updateData } from './pres-api'
 import { Schema, type ObjectType, type ObjectSummary } from './pres_schem'
 
-export const PresCrudView = createCrudView<ObjectType, ObjectSummary>({name: 'empty'})({
+export const PresCrudView = createCrudView<ObjectType, ObjectSummary>({description: 'empty'})({
   name: 'Prestations',
   action: {
     list: fetchData,
@@ -14,12 +14,12 @@ export const PresCrudView = createCrudView<ObjectType, ObjectSummary>({name: 'em
     delete: (pres) => deleteData(pres),
   },
   getId: ({ id }) => id,
-  listToDataSource: (list) => list.pres,
+  listToDataSource: (list) => list.props,
   FormComponent: createAutoForm({ schema: Schema }),
   ListComponent: createCrudList({
     columns: () => [
       {
-        accessorKey: 'Customer',
+        accessorKey: 'Target',
         accessorFn: ({ targetCustomer }) => targetCustomer,
       },
       {
