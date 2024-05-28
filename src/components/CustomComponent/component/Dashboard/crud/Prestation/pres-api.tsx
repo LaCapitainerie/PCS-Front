@@ -4,7 +4,7 @@ import { useToast } from '@/components/ui/use-toast'
 
 
 const props: { [id: string]: ObjectType } = {}
-const path = `${process.env.NEXT_PUBLIC_API_URL}/services`
+const path = `${process.env.NEXT_PUBLIC_API_URL}/service`
 const fetchPath = `/all`
 const createPath = `/management`
 const updatePath = `/management`
@@ -24,6 +24,9 @@ export const fetchData = async () => {
       }
     )
   ).json();  
+
+  console.log("retour", retour);
+  
 
   retour.service.forEach(element => {
     props[element.id] = element;

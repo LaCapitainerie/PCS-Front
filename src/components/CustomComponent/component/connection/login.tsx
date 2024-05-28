@@ -82,6 +82,8 @@ export default function Login() {
     }
 
     localStorage.setItem("token", retour.user.token);
+    
+    localStorage.setItem('user', (JSON.parse(atob(retour.user.token.split('.')[1])).idUser));
 
     cookies.set("token", retour.user.token, {
       path: "/",

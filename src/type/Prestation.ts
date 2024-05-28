@@ -1,7 +1,7 @@
 export interface Prestation {
     id: string;
     price: number;
-    targetCustomer: string;
+    targetCustomer: "traveler" | "lessor";
     address: string;
     city: string;
     zipCode: string;

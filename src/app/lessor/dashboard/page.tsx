@@ -5,12 +5,12 @@ import Dashboard_Layout from "@/components/CustomComponent/layout/DashboardLayou
 export default function Bailleur() {
     
     const Columns: ValuableThing[] = [
-        {
-            name: 'Reservations',
-            path: '/service/all',
-            valueColumn: 'price',
-            dateColumn: 'date',
-        }
+        // {
+        //     name: 'Reservations',
+        //     path: '/service/all',
+        //     valueColumn: 'price',
+        //     dateColumn: 'date',
+        // }
     ];
     
     const CustomOnes:CrudVariant[] = ["Properties", "Prestations"]
