@@ -81,6 +81,8 @@ export default function Login() {
       return;
     }
 
+    localStorage.setItem("token", retour.user.token);
+
     cookies.set("token", retour.user.token, {
       path: "/",
     });
