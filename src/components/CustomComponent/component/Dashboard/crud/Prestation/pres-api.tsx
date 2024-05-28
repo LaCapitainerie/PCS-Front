@@ -1,15 +1,15 @@
-import { Property } from '@/type/Property'
-import { ObjectType, ObjectSummary } from './prop_schem'
+import { Prestation } from '@/type/Prestation'
+import { ObjectType, ObjectSummary } from './pres_schem'
 import { useToast } from '@/components/ui/use-toast'
 
 
 const props: { [id: string]: ObjectType } = {}
-const path = `${process.env.NEXT_PUBLIC_API_URL}/property`
-const fetchPath = ``
-const createPath = ``
-const updatePath = ``
-const deletePath = ``
-interface ObjectDTO { Property: Property[] }
+const path = `${process.env.NEXT_PUBLIC_API_URL}/services`
+const fetchPath = `/all`
+const createPath = `/management`
+const updatePath = `/management`
+const deletePath = `/management`
+interface ObjectDTO { service: Prestation[] }
 
 
 export const fetchData = async () => {
@@ -25,7 +25,7 @@ export const fetchData = async () => {
     )
   ).json();  
 
-  retour.Property.forEach(element => {
+  retour.service.forEach(element => {
     props[element.id] = element;
   });
 
@@ -37,30 +37,11 @@ export const fetchData = async () => {
 
 export const createData = async (prop: ObjectType) => {
 
-  const propToCreate = {
-    name: prop.name,
-    type: prop.type,
-    price: 120,
-    surface: 200,
-    room: 1,
-    bathroom: 1,
-    garage: 1,
-    description: prop.description,
-    address: prop.address,
-    city: "Paris",
-    zipCode: "75000",
-    position: {latitute: 0, longitude: 0},
-    images: prop.images,
-    country: "France",
-    administrationValidation: true,
-    userId: localStorage.getItem("user"),
-  }
-
   await fetch(
     `${path}${createPath}`,
     {
       method: "POST",
-      body: JSON.stringify(propToCreate),
+      body: JSON.stringify(prop),
       headers: {
         "Authorization": localStorage.getItem('token') || "",
       },
@@ -74,10 +55,6 @@ export const readData = async (id: string) => {
 
 export const updateData = async (id: string, data: ObjectType) => {
   props[id] = data
-
-  console.log("UPDATE", data);
-  console.log(props, id);
-  
   
   await fetch(
     `${path}${updatePath}/${id}`,

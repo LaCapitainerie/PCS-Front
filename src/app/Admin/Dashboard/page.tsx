@@ -3,20 +3,7 @@ import Dashboard_Layout from "@/components/CustomComponent/layout/DashboardLayou
 
 export default function Admin() {
     
-    const Columns: ValuableThing[] = [
-        {
-            name: 'Prestations',
-            path: '/prestation',
-            valueColumn: 'Prix',
-            dateColumn: 'Date',
-        },
-        {
-            name: 'Reservations',
-            path: '/reservation',
-            valueColumn: 'Prix',
-            dateColumn: 'Date',
-        }
-    ];
+    const Columns: ValuableThing[] = [];
 
     return (
         <Dashboard_Layout dataColumn={Columns}>
