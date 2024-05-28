@@ -4,43 +4,43 @@ import { createCrudList } from '@/components/ui/auto-crud/createCrudList'
 import { createData, deleteData, fetchData, readData, updateData } from './pres-api'
 import { Schema, type ObjectType, type ObjectSummary } from './pres_schem'
 
-export const PropCrudView = createCrudView<ObjectType, ObjectSummary>({name: 'empty'})({
-  name: 'Property',
+export const PresCrudView = createCrudView<ObjectType, ObjectSummary>({name: 'empty'})({
+  name: 'Prestations',
   action: {
     list: fetchData,
     create: createData,
     read: ({ id }) => readData(id),
-    update: (prop, { id }) => updateData(id, prop),
-    delete: (prop) => deleteData(prop),
+    update: (pres, { id }) => updateData(id, pres),
+    delete: (pres) => deleteData(pres),
   },
   getId: ({ id }) => id,
-  listToDataSource: (list) => list.props,
+  listToDataSource: (list) => list.pres,
   FormComponent: createAutoForm({ schema: Schema }),
   ListComponent: createCrudList({
     columns: () => [
       {
-        accessorKey: 'name',
-        accessorFn: ({ name }) => name,
+        accessorKey: 'Customer',
+        accessorFn: ({ targetCustomer }) => targetCustomer,
       },
       {
-        accessorKey: 'type',
-        accessorFn: ({ type }) => type,
-      },
-      {
-        accessorKey: 'description',
-        accessorFn: ({ description }) => description,
-      },
-      {
-        accessorKey: 'address',
+        accessorKey: 'Address',
         accessorFn: ({ address }) => address,
       },
       {
-        accessorKey: 'price',
+        accessorKey: 'City',
+        accessorFn: ({ city }) => city,
+      },
+      {
+        accessorKey: 'Price',
         accessorFn: ({ price }) => price,
       },
       {
-        accessorKey: 'surface',
-        accessorFn: ({ surface }) => surface,
+        accessorKey: 'Range',
+        accessorFn: ({ rangeAction }) => rangeAction,
+      },
+      {
+        accessorKey: 'Description',
+        accessorFn: ({ description }) => description,
       },
     ],
   }),

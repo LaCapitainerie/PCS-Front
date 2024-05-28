@@ -5,13 +5,17 @@ import { useToast } from '@/components/ui/use-toast'
 
 const props: { [id: string]: ObjectType } = {}
 const path = `${process.env.NEXT_PUBLIC_API_URL}/property`
+const fetchPath = ``
+const createPath = ``
+const updatePath = ``
+const deletePath = ``
 interface ObjectDTO { Property: Property[] }
 
 
 export const fetchData = async () => {
   const retour: ObjectDTO = await (
     await fetch(
-      `${path}`,
+      `${path}${fetchPath}`,
       {
         method: "GET",
         headers: {
@@ -53,7 +57,7 @@ export const createData = async (prop: ObjectType) => {
   }
 
   await fetch(
-    `${path}`,
+    `${path}${createPath}`,
     {
       method: "POST",
       body: JSON.stringify(propToCreate),
@@ -76,7 +80,7 @@ export const updateData = async (id: string, data: ObjectType) => {
   
   
   await fetch(
-    `${path}/${id}`,
+    `${path}${updatePath}/${id}`,
     {
       method: "PUT",
       body: JSON.stringify(data),
@@ -89,7 +93,7 @@ export const updateData = async (id: string, data: ObjectType) => {
 
 export const deleteData = async (id: ObjectSummary) => {
   const result = await fetch(
-    `${path}/${(id as any).original.id}`,
+    `${path}${deletePath}/${(id as any).original.id}`,
     {
       method: "DELETE",
       headers: {

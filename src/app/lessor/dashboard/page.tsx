@@ -13,7 +13,7 @@ export default function Bailleur() {
         }
     ];
     
-    const CustomOnes:CrudVariant[] = ["Properties"]
+    const CustomOnes:CrudVariant[] = ["Properties", "Prestations"]
 
     return (
         <Dashboard_Layout dataColumn={Columns} customOnes={CustomOnes} >
