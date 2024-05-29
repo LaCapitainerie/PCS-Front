@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export interface Prestation {
     id: string;
     price: number;
@@ -12,6 +14,9 @@ export interface Prestation {
     description: string;
     providerId: string;
     userId: string;
+    _user: User;
+
+    status: "pending" | "accepted" | "refused" | "done";
 };
 
 export interface PrestationDTO {

@@ -25,10 +25,10 @@ const Positivenumber = (e: React.ChangeEvent<HTMLInputElement>) => {
 const Tel = (e: React.ChangeEvent<HTMLInputElement>) => {
   let val = e.target.value.replace(/\D/g, '');
   var result = '';
-    for (var i = 0; i < val.length; i += 2) {
-        result += val.slice(i, i + 2) + ' ';
-    }
-    e.target.value = result.trim();
+  for (var i = 0; i < val.length; i += 2) {
+    result += val.slice(i, i + 2) + ' ';
+  }
+  e.target.value = result.trim().substring(0, 14);
 }
 
 const InputType = {
@@ -58,8 +58,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
         onChange={
           (e) => {
-            if(contrains){InputType[contrains](e)};
-            if(props.onChange){props.onChange(e)}
+            if (contrains) { InputType[contrains](e) };
+            if (props.onChange) { props.onChange(e) }
           }
         }
       />

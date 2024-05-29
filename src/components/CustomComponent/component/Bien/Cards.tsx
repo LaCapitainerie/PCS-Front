@@ -16,11 +16,11 @@ function statusToColor(params: Prestation["status"]) {
   switch (params) {
     case "pending":
       return "yellow"
-    case "processing":
+    case "accepted":
       return "blue"
-    case "success":
+    case "done":
       return "green"
-    case "failed":
+    case "refused":
       return "red"
   }
 
@@ -49,38 +49,17 @@ interface UserTypeDTO {
   user: User[];
 }
 
-export function CardProperty({ Property, Prestataire }: { Property: Property | undefined, Prestataire: Prestataire[]}) {
+export function CardProperty({ Property }: { Property: Property | undefined, Prestataire: Prestataire[]}) {
 
   const { toast } = useToast();
   
   const [edit, setEdit] = useState<boolean>(false);
-
-  const [user, setUser] = useState<User[]>([]);
 
   function toTitleCase(str:string) {
     return str.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   }
-
-  
-
-  useEffect(() => {
-    const dataFetch = async () => {
-        const data: User[] = await (
-            await fetch(
-                `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
-            )
-        ).json();
-        
-        
-        const user = data.filter((value: User) => Prestataire.map((val) => val.id).includes(value.id));
-
-        setUser(user);
-    };
-
-    dataFetch();
-  }, []);
 
   return (<>
     <Card className="w-full">
@@ -131,7 +110,7 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
         <CardContent className="grid gap-4">
 
           <div className="">
-            {user.map((presta, index) => (
+            {/* {user.map((presta, index) => (
               <Usercard user={presta as unknown as User} key={index}>
                 {typeToDom("peinture", "pending")}
                     <div className="space-y-1">
@@ -145,7 +124,7 @@ export function CardProperty({ Property, Prestataire }: { Property: Property | u
                       </p>
                     </div>
               </Usercard>
-            ))}
+            ))} */}
           </div>
         </CardContent>
       </div>

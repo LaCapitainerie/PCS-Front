@@ -124,9 +124,9 @@ export function Dashboard({Column, CustomOnes}: {Column: ValuableThing[], Custom
 
 
 
-        <div className="h-full w-full grid gap-4 md:gap-8">
+        <div className="h-full w-full grid gap-y-8 gap-x-0 grid-cols-1 grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 lg:gap-y-0 lg:gap-x-8">
           
-          <Tabs defaultValue={CustomOnes[0]} className="flex flex-col h-full w-full">
+          <Tabs defaultValue={CustomOnes[0]} className="flex flex-col h-full w-full col-span-2">
             <TabsList className="w-fit">
               {
                 CustomOnes.map((value, index) => (
@@ -136,21 +136,16 @@ export function Dashboard({Column, CustomOnes}: {Column: ValuableThing[], Custom
             </TabsList>
             {
               CustomOnes.map((value, index) => (
-                  <TabsContent value={CustomOnes[index]} key={index+1} className="h-full">
-                    <div className="h-full w-full grid gap-y-8 gap-x-0 grid-cols-1 grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 lg:gap-y-0 lg:gap-x-8">
-                      <div className="col-span-2">
-                        <QueryClientProvider client={queryClient}>
-                          <CRUD variant={value}/>
-                        </QueryClientProvider>
-                      </div>
-
-                      <RecentSales Sales={[]}/>
-                    </div>
+                  <TabsContent value={CustomOnes[index]} key={index+1}>
+                      <QueryClientProvider client={queryClient}>
+                        <CRUD variant={value}/>
+                      </QueryClientProvider>
                   </TabsContent>
                 ))
             }
           </Tabs>
 
+          <RecentSales/>
         </div>
 
       </main>

@@ -7,13 +7,10 @@ import * as React from "react";
 import { z } from "zod";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { AutoFormSubmit } from "@/components/ui/auto-form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "@/components/ui/use-toast";
-import { Form, FormField } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
+import EditForm from "./Edit";
 
 interface UpperbandProps {
     children?: React.ReactNode;
@@ -28,47 +25,55 @@ const Upperband = ({ children, User }: React.HTMLAttributes<HTMLDivElement> & Up
 
     const Schema = z.object({
         avatar: z.string().default(User.avatar),
-        firstName: z.string().default(User.firstName),
-        lastName: z.string().default(User.lastName),
-        nickname: z.string().default(User.nickname),
-        mail: z.string().default(User.mail),
-        phoneNumber: z.string().default(User.phoneNumber),
+        // firstName: z.string().default(User.firstName),
+        // lastName: z.string().default(User.lastName),
+        // nickname: z.string().default(User.nickname),
+        // mail: z.string().default(User.mail),
+        // phoneNumber: z.string().default(User.phoneNumber),
     })
 
     const form = useForm<z.infer<typeof Schema>>({
         resolver: zodResolver(Schema),
     })
 
-    async function onSubmit(data: z.infer<typeof Schema>) {
-
+    const onSubmit = (data: any) => {
         console.log(data);
+        // Here you can handle your form submission logic
+        // For example, you can send a POST request to your server with the form data
+    };
+
+    // async function onSubmit(data: z.infer<typeof Schema>) {
+
+    //     console.log(data);
         
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
-        })
+    //     toast({
+    //         title: "You submitted the following values:",
+    //         description: (
+    //             <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+    //                 <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+    //             </pre>
+    //         ),
+    //     })
 
-        form.reset()
+    //     form.reset()
 
 
-        const retour: any = await (
-            await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/user/management/${User.id}`,
-                {
-                    method: "PUT",
-                    body: JSON.stringify(data),
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `${localStorage.getItem("token")}`,
-                    },
-                }
-            )
-        ).json();
-    }
+    //     const retour: any = await (
+    //         await fetch(
+    //             `${process.env.NEXT_PUBLIC_API_URL}/user/management/${User.id}`,
+    //             {
+    //                 method: "PUT",
+    //                 body: JSON.stringify(data),
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                     "Authorization": `${localStorage.getItem("token")}`,
+    //                 },
+    //             }
+    //         )
+    //     ).json();
+    // }
+
+    const { register, handleSubmit } = useForm();
 
     return (
         <div className="flex flex-col w-full" style={{ height: '33%' }}>
@@ -100,106 +105,8 @@ const Upperband = ({ children, User }: React.HTMLAttributes<HTMLDivElement> & Up
                                     </DialogDescription>
                                 </DialogHeader>
                                 <div className="grid gap-4 py-4">
-                                    <Form {...form}>
-                                        <form onSubmit={form.handleSubmit(onSubmit)} className="overflow-y-hidden w-full space-y-6">
-                                            <div className="mx-auto grid w-[350px] gap-6">
-                                                <div className="grid gap-4">
-                                                    <Label htmlFor="avatar">Avatar</Label>
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="avatar"
-                                                        render={({ field }) => (
-                                                            <Input
-                                                                id="avatar"
-                                                                type="text"
-                                                                placeholder="https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png"
-                                                                required
-                                                                onChange={field.onChange}
-                                                                defaultValue={User.avatar}
-                                                            />
-                                                        )}
-                                                    />
-                                                    <Label htmlFor="firstName">First Name</Label>
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="firstName"
-                                                        render={({ field }) => (
-                                                            <Input
-                                                                id="firstName"
-                                                                type="text"
-                                                                placeholder="John"
-                                                                required
-                                                                onChange={field.onChange}
-                                                                defaultValue={User.firstName}
-                                                            />
-                                                        )}
-                                                    />
-                                                    <Label htmlFor="lastName">Last Name</Label>
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="lastName"
-                                                        render={({ field }) => (
-                                                            <Input
-                                                                id="lastName"
-                                                                type="text"
-                                                                placeholder="Doe"
-                                                                required
-                                                                onChange={field.onChange}
-                                                                defaultValue={User.lastName}
-                                                            />
-                                                        )}
-                                                    />
-                                                    <Label htmlFor="nickname">Nickname</Label>
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="nickname"
-                                                        render={({ field }) => (
-                                                            <Input
-                                                                id="nickname"
-                                                                type="text"
-                                                                placeholder="JD"
-                                                                required
-                                                                onChange={field.onChange}
-                                                                defaultValue={User.nickname}
-                                                            />
-                                                        )}
-                                                    />
-                                                    <Label htmlFor="mail">Mail</Label>
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="mail"
-                                                        render={({ field }) => (
-                                                            <Input
-                                                                id="mail"
-                                                                type="email"
-                                                                placeholder=""
-                                                                required
-                                                                onChange={field.onChange}
-                                                                defaultValue={User.mail}
-                                                            />
-                                                        )}
-                                                    />
-                                                    <Label htmlFor="phoneNumber">Phone Number</Label>
-                                                    <FormField
-                                                        control={form.control}
-                                                        name="phoneNumber"
-                                                        render={({ field }) => (
-                                                            <Input
-                                                                id="phoneNumber"
-                                                                type="text"
-                                                                placeholder="0623456789"
-                                                                required
-                                                                onChange={field.onChange}
-                                                                defaultValue={User.phoneNumber}
-                                                            />
-                                                        )}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </Form>
+                                    <EditForm user={User}/>
                                 </div>
-                                <Button type="submit" className="w-full">Modify</Button>
                             </DialogContent>
                         </Dialog>
                     </div>

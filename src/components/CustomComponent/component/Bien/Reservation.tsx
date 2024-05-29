@@ -155,7 +155,7 @@ const Reservation = ( { ReservationVal }: { ReservationVal: ReservationType[] | 
   return (
     <>
       <DatePickerWithRange id="date" onDateChange={handleDateChange} />
-      <CardWithForm DateVal={selectedDate} ReservationVal={ReservationVal}/>
+      {/* <CardWithForm DateVal={selectedDate} ReservationVal={ReservationVal}/> */}
     </>
   );
 };

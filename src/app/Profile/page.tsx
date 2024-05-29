@@ -1,6 +1,6 @@
 "use client"
 
-import ProfilLayout from "@/components/CustomComponent/layout/UserInfoLayout";
+import ProfilLayout from "@/components/CustomComponent/layout/ProfileLayout";
 import { useSearchParams } from 'next/navigation'
 
 export default function PrestaPageBiens() {
