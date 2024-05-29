@@ -5,7 +5,7 @@ import Upperband from "./Upperband";
 import Lowerband from "./Lowerband";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
-import { User } from "@/type/User";
+import { User, UserReturnDTO } from "@/type/User";
 
 interface MainContentProps {
     children?: React.ReactNode;
@@ -17,14 +17,15 @@ const MainContent = ({ id }: MainContentProps) => {
     const [user, setUser] = useState({} as User);
     useEffect(() => {
         const dataFetch = async () => {
-            const data: User[] = await (
+            const data: UserReturnDTO = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/users`
+                    `${process.env.NEXT_PUBLIC_API_URL}/user/id/${id}`
                 )
             ).json();
             
-            const user = data.find((user) => id == user.id);
-            console.log(data, user, id);
+            const user = data.user as User;   
+            
+            console.log(user);
             
 
             setUser(user || {} as User);

@@ -4,7 +4,7 @@ import * as React from "react"
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import BienCard from "./BienCard";
 import { User } from "@/type/User";
-import { Property } from "@/type/Property";
+import { Property, PropertyDTO } from "@/type/Property";
 import { useEffect, useState } from "react";
 
 interface LowerbandProps {
@@ -18,13 +18,19 @@ const Lowerband = ({User}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: Property[] = await (
+            const data: PropertyDTO = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/property`
+                    `${process.env.NEXT_PUBLIC_API_URL}/property`,
+                    {
+                        method: "GET",
+                        headers: {
+                          "Authorization": localStorage.getItem("token") || "",
+                        },
+                    }
                 )
-            ).json();
+            ).json();            
 
-            setProperty(data.filter((propertyTMP) => propertyTMP.lessorid == User.id));
+            setProperty(data.Property);
         };
 
         dataFetch();

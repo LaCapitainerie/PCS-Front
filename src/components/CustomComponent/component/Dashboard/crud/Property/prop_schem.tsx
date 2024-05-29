@@ -31,7 +31,7 @@ export const Schema = z.object({
       message: 'Address must be at least 10 characters.',
     }),
 
-  images: z.array(z.string()),
+    images: z.array(z.string()),
 })
 
 // This is the type of the data that will be passed to the form
@@ -43,6 +43,7 @@ export type ObjectType = z.infer<typeof Schema> & {
   room: Property['room']
   bathroom: Property['bathroom']
   garage: Property['garage']
+  images: Property['images']
 };
 
 export type ObjectSummary = {
@@ -53,4 +54,5 @@ export type ObjectSummary = {
   address: Property["address"]
   price: Property['price']
   surface: Property['surface']
+  images: Property['images']
 }

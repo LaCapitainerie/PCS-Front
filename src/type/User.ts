@@ -9,6 +9,7 @@ export interface User {
     description: string;
     firstName: string;
     lastName: string;
+    nickname: string;
     phoneNumber: string;
     token: string;
 };
