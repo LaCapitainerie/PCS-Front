@@ -55,6 +55,9 @@ export function CardProperty({ Property }: { Property: Property | undefined, Pre
   
   const [edit, setEdit] = useState<boolean>(false);
 
+  console.log(Property);
+  
+
   function toTitleCase(str:string) {
     return str.replace(/\w\S*/g, function(txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -66,6 +69,11 @@ export function CardProperty({ Property }: { Property: Property | undefined, Pre
       <CardHeader>
         <div className="flex flex-row justify-between">
           <CardTitle className="">Details du bien</CardTitle>
+          {
+            Property?.userId == localStorage.getItem('user') ?
+            "" :
+            ""
+          }
           <Button variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
             {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
           </Button>

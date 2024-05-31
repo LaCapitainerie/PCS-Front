@@ -15,18 +15,6 @@ import {
 } from "@/components/ui/form"
 import { Token, UserReturnDTO } from "@/type/User";
 
-import { useCookies } from 'next-client-cookies';
-
-
-// {
-//   "type": "provider",
-//   "mail": "thomas.poupard@outlook.com",
-//   "password": "ElThomas123!",
-//   "firstName": "Thomas",
-//   "lastName": "Poupard",
-//   "phoneNumber": "0623456789"
-// }
-
 const FormSchema = z.object({
   mail: z.string().email({
     message: "Please enter a valid email.",
@@ -38,12 +26,6 @@ const FormSchema = z.object({
 });
 
 export default function Login() {
-  const cookies = useCookies();
-  const currentUser = cookies.get("user");
-
-  if (currentUser && currentUser !== "undefined") {
-    window.location.assign(`${JSON.parse(currentUser).type}/dashboard`);
-  }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -83,15 +65,9 @@ export default function Login() {
 
     localStorage.setItem("token", retour.user.token);
     
-    localStorage.setItem('user', (JSON.parse(atob(retour.user.token.split('.')[1])).idUser));
+    localStorage.setItem('user', JSON.stringify(retour.user));
 
-    cookies.set("token", retour.user.token, {
-      path: "/",
-    });
-
-    cookies.set("user", JSON.stringify(retour.user), {
-      path: "/",
-    });
+    localStorage.setItem('id', retour.user.id);
     
     window.location.assign(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
   }

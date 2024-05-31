@@ -12,7 +12,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { useEffect, useState } from 'react';
 import { Button } from "../ui/button"
 import { toComparable } from "../functions";
-import { useCookies } from "next-client-cookies";
 import { Token, User as UserType } from "@/type/User";
 
 // Store the icons in an dictionary
@@ -69,21 +68,13 @@ const Component = (user: UserType, index: number) => {
 const Sidebar = ({ index }: { index: number }) => {
     const { theme, setTheme } = useTheme();
 
-    const cookies = useCookies();
-    const me = cookies.get("user");
-    const token = cookies.get("token");
-    if(!me || !token){
-        console.log("Redirecting to login");
-        console.log("Token", token);
-        console.log("User", me);
-        
-        // window.location.assign("/login");
+    if(!localStorage.getItem("user")){
+        console.log("Redirecting to login");        
+        window.location.assign("/login");
         return;
     };
-    const user = JSON.parse(me) as UserType;
-    const decodeToken = JSON.parse(atob(token.split(".")[1])) as Token;
 
-
+    const user = JSON.parse(localStorage.getItem("user") as string) as UserType;
 
     return (
         <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -102,12 +93,10 @@ const Sidebar = ({ index }: { index: number }) => {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuLabel><a href={`/profile?user=${decodeToken.idUser}`}>My Account</a></DropdownMenuLabel>
+                        <DropdownMenuLabel><a href={`/profile?user=${user.id}`}>My Account</a></DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={(e) => {
-                            cookies.remove("cookieConsent");
-                            cookies.remove("token");
-                            cookies.remove("user");
+                            localStorage.clear();
                             window.location.assign("/login");
                         }}>
                             Logout

@@ -4,12 +4,8 @@ import * as React from "react"
 import { Castle, Dog, Home, Tent } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { User } from "@/type/User";
-import { useCookies } from "next-client-cookies";
-import { tree } from "next/dist/build/templates/app-page";
 
 export function MainScreen() {
-
-    const cookies = useCookies();
 
     const Icons = [
         {
@@ -34,11 +30,8 @@ export function MainScreen() {
         }
     ]
 
-    const self = JSON.parse(cookies.get("user") || "{}") as User;
+    const self = JSON.parse(localStorage.getItem("user") || "{}") as User;
     const default_profile = "https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png";
-
-    console.log("User", self);
-    console.log(self.firstName?true:false)
 
     return (
         <div className="flex flex-col justify-between gap-4 p-4">

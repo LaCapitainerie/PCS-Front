@@ -26,7 +26,6 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Token, UserReturnDTO } from "@/type/User";
-import { useCookies } from 'next-client-cookies';
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@/components/ui/input-otp";
 import StepperComp from "./stepper";
 
@@ -68,13 +67,6 @@ const FormSchema = z.object({
 
 export default function Signup() {
 
-  const cookies = useCookies();
-  const currentUser = cookies.get("user");
-
-  if (currentUser) {
-    window.location.assign(`${JSON.parse(currentUser).type}/dashboard`);
-  }
-
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
@@ -106,17 +98,11 @@ export default function Signup() {
       )
     ).json();
 
-    cookies.set('user', JSON.stringify(retour.user), {
-      path: '/',
-    });
+    localStorage.setItem("token", retour.user.token);
+    
+    localStorage.setItem('user', JSON.stringify(retour.user));
 
-    cookies.set('token', JSON.stringify(retour.user.token), {
-      path: '/',
-    });
-
-    localStorage.setItem('token', retour.user.token);
-
-    localStorage.setItem('user', (JSON.parse(atob(retour.user.token.split('.')[1])).idUser));
+    localStorage.setItem('id', retour.user.id);
 
     // Go to the dashboard
     window.location.assign(`${retour.user.type}/dashboard`);
@@ -216,6 +202,7 @@ export default function Signup() {
                           required
                           onChange={field.onChange}
                           defaultValue={field.value}
+                          contrains="tel"
                         />
                       )}
                     />

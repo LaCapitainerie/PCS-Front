@@ -9,9 +9,6 @@ import { toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Token, User } from "@/type/User";
 import { ChatDTO, Contact } from "@/type/Chat";
-import { useCookies } from "next-client-cookies";
-
-
 
 const ContactList = ({
     setContact,
@@ -20,11 +17,6 @@ const ContactList = ({
     
     const [chat, setChat] = useState<Contact[]>([]);
     const [filter, setFilter] = useState<string>("");
-
-    const cookies = useCookies();
-    const tokenT = cookies.get("token");
-
-    const decodedToken = JSON.parse(atob((tokenT as string).split(".")[1])) as Token;
     
     useEffect(() => {
         const dataFetch = async () => {
@@ -34,7 +26,7 @@ const ContactList = ({
                     {
                         method: "GET",
                         headers: {
-                          "Authorization": tokenT || "",
+                          "Authorization": localStorage.getItem("token") || "",
                         },
                     }
                             
@@ -44,8 +36,8 @@ const ContactList = ({
             const chatPromise = data.chat.map(async (value) => {
 
                 return {
-                    user1: {id: value.userId[0] == decodedToken.idUser ? value.userId[0] : value.userId[1]} as unknown as User,
-                    user2: {id: value.userId[0] == decodedToken.idUser ? value.userId[1] : value.userId[0]} as unknown as User,
+                    user1: {id: value.userId[0] == localStorage.getItem("id") ? value.userId[0] : value.userId[1]} as unknown as User,
+                    user2: {id: value.userId[0] == localStorage.getItem("id") ? value.userId[1] : value.userId[0]} as unknown as User,
                     chat: value
                 } as Contact;
             });
