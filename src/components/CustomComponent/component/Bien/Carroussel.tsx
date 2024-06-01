@@ -11,11 +11,10 @@ import {
 } from "@/components/ui/carousel"
 import { Property } from "@/type/Property"
 
-export function CarouselPlugin({ images }: { images: Property["images"] | undefined}) {
+export function CarouselPlugin({ images }: { images: Property["images"]}) {
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true})
   )
-  
 
   return (
     <Carousel
@@ -29,7 +28,8 @@ export function CarouselPlugin({ images }: { images: Property["images"] | undefi
       }}
     >
       <CarouselContent className="h-full">
-        {images?.map((photo, index) => (
+        {(images?.length > 0 ? images : ["void.null"])?.map((photo, index) => (
+          
           <CarouselItem className="h-full" key={index}>
             <div className="p-1">
               <Card>

@@ -53,7 +53,7 @@ const Component = (user: UserType, index: number) => {
                 <TooltipTrigger asChild>
                     <Link
                         href={value.Href}
-                        className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
+                        className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index || true ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                     >
                         {React.createElement(icons[toComparable(value.Icon) as keyof typeof icons], { className: "h-5 w-5" })}
                         <span className="sr-only">{value.Hover}</span>

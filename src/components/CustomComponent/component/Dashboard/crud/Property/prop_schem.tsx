@@ -31,7 +31,13 @@ export const Schema = z.object({
       message: 'Address must be at least 10 characters.',
     }),
 
-    images: z.array(z.string()),
+    urls: z
+      .array(
+        z.object({
+          url: z.string(),
+        })
+      )
+      .describe("Urls to the images")
 })
 
 // This is the type of the data that will be passed to the form

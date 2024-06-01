@@ -67,38 +67,22 @@ function ToBox(agg: aggregate, styleCol: React.CSSProperties) {
 }
 
 export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | null, ReservationVal: ReservationType[] | undefined}) {
-
-  const [choosen, setChoosen] = useState<aggregate | undefined>(undefined);
-  const [aggregat, setAggregat] = useState<aggregate[]>([]);
+  const [reservations, setReservations] = useState<ReservationType[]>(ReservationVal || []);
 
   useEffect(() => {
-    if(ReservationVal === undefined) return;
-
     const dataFetch = async () => {
-      const data: User[] = await (
-          await fetch(
-            `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
-          )
+      // /service/all
+      const data: ReservationType[] = await (
+        await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/service/all`
+        )
       ).json();
-      
 
-      const tmpAggregat = ReservationVal.map((res) => {        
-        return {
-          Reservation: res,
-          Locataire: data.filter((user) => user.id === res.idtenant)[0] || {} as User
-        } as aggregate
-      });
-
-      setAggregat( tmpAggregat );
+      setReservations(data);
     };
 
     dataFetch();
   }, [ReservationVal]);
-
-  useEffect(() => {
-    if(aggregat.length == 0) return;
-    setChoosen(aggregat[0]);
-  }, [aggregat]);
 
   return (
     <Card className="w-full">
@@ -111,11 +95,11 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
       <CardContent>
         <form>
 
-          <div className="grid w-full items-center gap-4">
+          {/* <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Locataire :</Label>
               <div className="flex flex-row justify-between">
-                <Select disabled={aggregat.length == 0} onValueChange={(value) => setChoosen(aggregat[parseInt(value)])} defaultValue={aggregat.length > 0 ? aggregat[0].Locataire.firstName :""}>
+                <Select disabled={reservations.length == 0} onValueChange={(value) => setChoosen(aggregat[parseInt(value)])} defaultValue={aggregat.length > 0 ? aggregat[0].Locataire.firstName :""}>
                   <SelectTrigger>
                     <SelectValue placeholder={(aggregat.length > 0 && "Select a tenant") || "No tenant" }></SelectValue>
                   </SelectTrigger>
@@ -130,7 +114,7 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
             </div>
           </div>
 
-          {choosen?.Locataire && ToBox(choosen, {gridTemplateColumns: "auto 1fr"})}
+          {choosen?.Locataire && ToBox(choosen, {gridTemplateColumns: "auto 1fr"})} */}
 
 
         </form>
@@ -155,7 +139,7 @@ const Reservation = ( { ReservationVal }: { ReservationVal: ReservationType[] | 
   return (
     <>
       <DatePickerWithRange id="date" onDateChange={handleDateChange} />
-      {/* <CardWithForm DateVal={selectedDate} ReservationVal={ReservationVal}/> */}
+      <CardWithForm DateVal={selectedDate} ReservationVal={ReservationVal}/>
     </>
   );
 };

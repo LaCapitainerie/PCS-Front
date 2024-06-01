@@ -1,16 +1,17 @@
+"use client"
+
 import { CheckIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
 import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence, Check } from "lucide-react"
-import Usercard from "@/components/ui/usercard"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
 import { Property } from "@/type/Property"
 import { Prestataire } from "@/type/Prestataire"
 import { User } from "@/type/User"
-import { Prestation } from "@/type/Prestation"
+import { Prestation, PrestationDTO } from "@/type/Prestation"
 
 function statusToColor(params: Prestation["status"]) {
   switch (params) {
@@ -55,8 +56,22 @@ export function CardProperty({ Property }: { Property: Property | undefined, Pre
   
   const [edit, setEdit] = useState<boolean>(false);
 
-  console.log(Property);
-  
+  const [presta, setPresta] = useState<Prestation[]>([]);
+
+  useEffect(() => {
+    const dataFetch = async () => {
+
+        const data: PrestationDTO = await (
+            await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/service/all`
+            )
+        ).json();
+        
+        setPresta(data.service);
+    };
+
+    dataFetch();
+  }, [Property]);
 
   function toTitleCase(str:string) {
     return str.replace(/\w\S*/g, function(txt) {
@@ -70,13 +85,13 @@ export function CardProperty({ Property }: { Property: Property | undefined, Pre
         <div className="flex flex-row justify-between">
           <CardTitle className="">Details du bien</CardTitle>
           {
-            Property?.userId == localStorage.getItem('user') ?
-            "" :
+            Property?.userId == localStorage.getItem('id') ?
+            <Button variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
+              {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
+            </Button> :
             ""
           }
-          <Button variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
-            {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
-          </Button>
+          
         </div>
       </CardHeader>
       <CardContent className="grid gap-4">
