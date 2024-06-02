@@ -1,7 +1,7 @@
 import { createCrudView } from '@/components/ui/auto-crud/AutoCrud'
 import { createAutoForm } from '@/components/ui/auto-crud/createAutoForm'
 import { createCrudList } from '@/components/ui/auto-crud/createCrudList'
-import { createData, deleteData, fetchData, readData, updateData } from './pres-api'
+import { createData, use_deleteData, fetchData, readData, updateData } from './pres-api'
 import { Schema, type ObjectType, type ObjectSummary } from './pres_schem'
 
 export const PresCrudView = createCrudView<ObjectType, ObjectSummary>({description: 'empty'})({
@@ -11,7 +11,7 @@ export const PresCrudView = createCrudView<ObjectType, ObjectSummary>({descripti
     create: createData,
     read: ({ id }) => readData(id),
     update: (pres, { id }) => updateData(id, pres),
-    delete: (pres) => deleteData(pres),
+    delete: (pres) => use_deleteData(pres),
   },
   getId: ({ id }) => id,
   listToDataSource: (list) => list.props,

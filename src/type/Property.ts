@@ -15,6 +15,7 @@ export interface Property {
         latitute: number,
         longitude: number
     };
+    urls?: {url: string}[]
     images: string[];
     country: string;
     administrationValidation: boolean;

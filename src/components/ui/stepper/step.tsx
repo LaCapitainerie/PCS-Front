@@ -55,6 +55,8 @@ const Step = React.forwardRef<HTMLLIElement, StepProps>(
 			onClickStep,
 		};
 
+		Step.displayName = 'Step';
+
 		const renderStep = () => {
 			switch (isVertical) {
 				case true:
@@ -62,7 +64,7 @@ const Step = React.forwardRef<HTMLLIElement, StepProps>(
 						<VerticalStep ref={ref} {...sharedProps}>
 							{children}
 						</VerticalStep>
-					);
+					)
 				default:
 					return <HorizontalStep ref={ref} {...sharedProps} />;
 			}

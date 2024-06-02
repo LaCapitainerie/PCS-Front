@@ -61,6 +61,8 @@ const StepIcon = React.forwardRef<HTMLDivElement, StepIconProps>(
 			[CustomCheckIcon],
 		);
 
+		StepIcon.displayName = 'StepIcon';
+
 		return React.useMemo(() => {
 			if (isCompletedStep) {
 				if (isError && isKeepError) {

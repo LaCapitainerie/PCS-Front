@@ -6,7 +6,7 @@ export default function Admin() {
     const Columns: ValuableThing[] = [];
 
     return (
-        <Dashboard_Layout dataColumn={Columns}>
+        <Dashboard_Layout dataColumn={Columns} customOnes={[]}>
         </Dashboard_Layout>
     );
 }

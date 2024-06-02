@@ -124,6 +124,8 @@ Stepper.defaultProps = {
 	responsive: true,
 };
 
+Stepper.displayName = 'Stepper';
+
 const VerticalContent = ({ children }: { children: React.ReactNode }) => {
 	const { activeStep } = useStepper();
 

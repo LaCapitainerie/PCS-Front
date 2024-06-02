@@ -45,7 +45,7 @@ const Component = (user: UserType, index: number) => {
         };
 
         dataFetch();
-    }, []);
+    }, [user.type]);
 
     return state.map((value, i) => (
         <TooltipProvider key={i}>

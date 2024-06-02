@@ -92,7 +92,7 @@ export function Dashboard({Column, CustomOnes}: {Column: ValuableThing[], Custom
     
     setCards(currentValuable);
 
-  }, []);
+  }, [Column, currentValuable]);
 
   return (
     <div className="flex min-h-screen h-full w-full flex-col left-[3.5rem]" style={{paddingLeft: '3.5rem'}}>

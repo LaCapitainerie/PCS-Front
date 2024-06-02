@@ -71,7 +71,7 @@ export const updateData = async (id: string, data: ObjectType) => {
   )
 }
 
-export const deleteData = async (id: ObjectSummary) => {
+export const use_deleteData = async (id: ObjectSummary) => {
   const result = await fetch(
     `${path}${deletePath}/${(id as any).original.id}`,
     {
@@ -86,16 +86,16 @@ export const deleteData = async (id: ObjectSummary) => {
     throw new Error("Failed to delete")
   }
 
-  const { toast } = useToast()
+  // const { toast } = useToast()
 
-  toast({
-    title: "Deleted",
-    description: (
-      <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-        <code className="text-white">{JSON.stringify(id, null, 2)}</code>
-      </pre>
-    ),
-  });
+  // toast({
+  //   title: "Deleted",
+  //   description: (
+  //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+  //       <code className="text-white">{JSON.stringify(id, null, 2)}</code>
+  //     </pre>
+  //   ),
+  // });
 
   
   delete props[(id as any).original.id]

@@ -10,6 +10,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel"
 import { Property } from "@/type/Property"
+import Image from "next/image"
 
 export function CarouselPlugin({ images }: { images: Property["images"]}) {
   const plugin = React.useRef(
@@ -29,21 +30,22 @@ export function CarouselPlugin({ images }: { images: Property["images"]}) {
     >
       <CarouselContent className="h-full">
         {(images?.length > 0 ? images : ["void.null"])?.map((photo, index) => (
-          
-          <CarouselItem className="h-full" key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex items-center justify-center p-0">
-                    <img
-                        src={photo}
-                        onError={(e) => { e.currentTarget.src = "https://i.imgur.com/1kH8tiQ.png" }}
-                        alt={`Random Image ${index + 1}`}
-                        className="rounded-lg"
-                    />
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
+          photo !== "void.null" ? (
+            <CarouselItem className="h-full" key={index}>
+              <div className="p-1">
+                <Card>
+                  <CardContent className="flex items-center justify-center p-0 overflow-hidden " style={{maxHeight: '400px'}}>
+                      <img
+                          src={photo !== "void.null" ? photo : "https://i.imgur.com/1kH8tiQ.png"}
+                          onError={(e) => { e.currentTarget.src = "https://i.imgur.com/1kH8tiQ.png" }}
+                          alt={`Random Image ${index + 1}`}
+                          className="rounded-lg"
+                      />
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ) : null
         ))}
       </CarouselContent>
     </Carousel>

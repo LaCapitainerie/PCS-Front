@@ -40,6 +40,8 @@ const HorizontalStep = React.forwardRef<HTMLDivElement, StepSharedProps>(
 
 		const opacity = hasVisited ? 1 : 0.8;
 
+		HorizontalStep.displayName = "HorizontalStep";
+
 		const active =
 			variant === "line" ? isCompletedStep || isCurrentStep : isCompletedStep;
 

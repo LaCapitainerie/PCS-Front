@@ -82,6 +82,8 @@ const VerticalStep = React.forwardRef<HTMLDivElement, VerticalStepProps>(
 		const checkIcon = checkIconProp || checkIconContext;
 		const errorIcon = errorIconProp || errorIconContext;
 
+		VerticalStep.displayName = 'VerticalStep';
+
 		const renderChildren = () => {
 			if (!expandVerticalSteps) {
 				return (

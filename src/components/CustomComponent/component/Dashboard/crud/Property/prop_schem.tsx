@@ -31,13 +31,53 @@ export const Schema = z.object({
       message: 'Address must be at least 10 characters.',
     }),
 
-    urls: z
-      .array(
-        z.object({
-          url: z.string(),
-        })
-      )
-      .describe("Urls to the images")
+  price: z
+    .number({
+      required_error: 'Price is required.',
+    })
+    .min(1, {
+      message: 'Price must be at least 1.',
+    }),
+
+  surface: z
+    .number({
+      required_error: 'Surface is required.',
+    })
+    .min(1, {
+      message: 'Surface must be at least 1.',
+    }),
+
+  room: z
+    .number({
+      required_error: 'Room is required.',
+    })
+    .min(1, {
+      message: 'Room must be at least 1.',
+    }),
+
+  bathroom: z
+    .number({
+      required_error: 'Bathroom is required.',
+    })
+    .min(1, {
+      message: 'Bathroom must be at least 1.',
+    }),
+
+  garage: z
+    .number({
+      required_error: 'Garage is required.',
+    })
+    .min(1, {
+      message: 'Garage must be at least 1.',
+    }),
+
+  urls: z
+    .array(
+      z.object({
+        url: z.string(),
+      })
+    )
+    .describe("Urls to the images")
 })
 
 // This is the type of the data that will be passed to the form
@@ -49,6 +89,7 @@ export type ObjectType = z.infer<typeof Schema> & {
   room: Property['room']
   bathroom: Property['bathroom']
   garage: Property['garage']
+  urls?: {url: string}[] | undefined
   images: Property['images']
 };
 
