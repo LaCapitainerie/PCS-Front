@@ -5,7 +5,7 @@ import { Castle, Dog, Home, Tent } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { User } from "@/type/User";
 
-export function MainScreen() {
+export function MainScreen({ self }: { self: User }) {
 
     const Icons = [
         {
@@ -30,7 +30,6 @@ export function MainScreen() {
         }
     ]
 
-    const self = JSON.parse(localStorage.getItem("user") || "{}") as User;
     const default_profile = "https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png";
 
     return (

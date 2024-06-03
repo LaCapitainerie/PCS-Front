@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import RecentSales from "./recentsales"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { CRUD, CrudVariant } from "./crud/Crud"
+import { User } from "@/type/User"
 const queryClient = new QueryClient()
 
 export interface cardProps {
@@ -20,7 +21,7 @@ export interface ValuableThing {
   dateColumn: string;
 }
 
-export function Dashboard({Column, CustomOnes}: {Column: ValuableThing[], CustomOnes: CrudVariant[]}) {
+export function Dashboard({Column, CustomOnes, Token}: {Column: ValuableThing[], CustomOnes: CrudVariant[], Token: User["token"]}) {
 
   const [currentValuable, setValuable] = useState<cardProps[]>([]);
   const [cards, setCards] = useState<cardProps[]>([]);
@@ -129,7 +130,7 @@ export function Dashboard({Column, CustomOnes}: {Column: ValuableThing[], Custom
           <Tabs defaultValue={CustomOnes[0]} className="flex flex-col h-full w-full col-span-2">
             <TabsList className="w-fit">
               {
-                CustomOnes.map((value, index) => (
+                CustomOnes.map((_, index) => (
                     <TabsTrigger value={CustomOnes[index]} key={index+1}>{CustomOnes[index]}</TabsTrigger>
                 ))
               }
@@ -138,14 +139,14 @@ export function Dashboard({Column, CustomOnes}: {Column: ValuableThing[], Custom
               CustomOnes.map((value, index) => (
                   <TabsContent value={CustomOnes[index]} key={index+1}>
                       <QueryClientProvider client={queryClient}>
-                        <CRUD variant={value}/>
+                        <CRUD variant={value} token={Token}/>
                       </QueryClientProvider>
                   </TabsContent>
                 ))
             }
           </Tabs>
 
-          <RecentSales/>
+          <RecentSales token={Token}/>
         </div>
 
       </main>

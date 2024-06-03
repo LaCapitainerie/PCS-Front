@@ -23,7 +23,7 @@ const FormSchema = z.object({
 });
 
 
-export default function EditForm({user}: {user: User}) {
+export default function EditForm({user, token}: {user: User, token: User["token"]}) {
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -49,7 +49,7 @@ export default function EditForm({user}: {user: User}) {
                     body: JSON.stringify(data),
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `${localStorage.getItem("token")}`,
+                        "Authorization": token,
                     },
                 }
             )

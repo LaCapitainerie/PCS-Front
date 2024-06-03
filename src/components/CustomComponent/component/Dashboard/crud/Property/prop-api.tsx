@@ -1,6 +1,7 @@
 import { Property } from '@/type/Property'
 import { ObjectType, ObjectSummary } from './prop_schem'
 import { useToast } from '@/components/ui/use-toast'
+import { User } from '@/type/User'
 
 
 const props: { [id: string]: ObjectType } = {}
@@ -12,14 +13,14 @@ const deletePath = ``
 interface ObjectDTO { Property: Property[] }
 
 
-export const fetchData = async () => {
+export const fetchData = async (token: User["token"]) => {
   const retour: ObjectDTO = await (
     await fetch(
       `${path}${fetchPath}`,
       {
         method: "GET",
         headers: {
-          "Authorization": localStorage.getItem('token') || "",
+          "Authorization": token,
         },
       }
     )
@@ -35,34 +36,15 @@ export const fetchData = async () => {
   }
 }
 
-export const createData = async (prop: ObjectType) => {
-
-  const propToCreate = {
-    name: prop.name,
-    type: prop.type,
-    price: 120,
-    surface: 200,
-    room: 1,
-    bathroom: 1,
-    garage: 1,
-    description: prop.description,
-    address: prop.address,
-    city: "Paris",
-    zipCode: "75000",
-    position: {latitute: 0, longitude: 0},
-    images: prop.images,
-    country: "France",
-    administrationValidation: true,
-    userId: localStorage.getItem("user"),
-  }
+export const createData = async (prop: ObjectType, token: User["token"]) => {
 
   await fetch(
     `${path}${createPath}`,
     {
       method: "POST",
-      body: JSON.stringify(propToCreate),
+      body: JSON.stringify(prop),
       headers: {
-        "Authorization": localStorage.getItem('token') || "",
+        "Authorization": token,
       },
     }
   )
@@ -72,7 +54,7 @@ export const readData = async (id: string) => {
   return props[id]! // TODO: handle undefined
 }
 
-export const updateData = async (id: string, data: ObjectType) => {
+export const updateData = async (id: string, data: ObjectType, token: User["token"]) => {
   
   data.images = data.urls.map((image) => { return image.url })
   delete (data as any).urls
@@ -89,19 +71,19 @@ export const updateData = async (id: string, data: ObjectType) => {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
-        "Authorization": localStorage.getItem('token') || "",
+        "Authorization": token,
       },
     }
   )
 }
 
-export const use_deleteData = async (id: ObjectSummary) => {
+export const use_deleteData = async (id: ObjectSummary, token: User["token"]) => {
   const result = await fetch(
     `${path}${deletePath}/${(id as any).original.id}`,
     {
       method: "DELETE",
       headers: {
-        "Authorization": localStorage.getItem('token') || "",
+        "Authorization": token,
       },
     }
   )

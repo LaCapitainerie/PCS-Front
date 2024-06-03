@@ -15,13 +15,14 @@ import EditForm from "./Edit";
 interface UpperbandProps {
     children?: React.ReactNode;
     User: User;
+    token: User["token"];
 }
 
 
 
 
 
-const Upperband = ({ children, User }: React.HTMLAttributes<HTMLDivElement> & UpperbandProps) => {
+const Upperband = ({ children, User, token }: React.HTMLAttributes<HTMLDivElement> & UpperbandProps) => {
 
     const Schema = z.object({
         avatar: z.string().default(User.avatar),
@@ -66,7 +67,7 @@ const Upperband = ({ children, User }: React.HTMLAttributes<HTMLDivElement> & Up
     //                 body: JSON.stringify(data),
     //                 headers: {
     //                     "Content-Type": "application/json",
-    //                     "Authorization": `${localStorage.getItem("token")}`,
+    //                     "Authorization": token,
     //                 },
     //             }
     //         )
@@ -105,7 +106,7 @@ const Upperband = ({ children, User }: React.HTMLAttributes<HTMLDivElement> & Up
                                     </DialogDescription>
                                 </DialogHeader>
                                 <div className="grid gap-4 py-4">
-                                    <EditForm user={User}/>
+                                    <EditForm user={User} token={token}/>
                                 </div>
                             </DialogContent>
                         </Dialog>

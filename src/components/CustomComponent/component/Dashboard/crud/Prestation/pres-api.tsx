@@ -1,6 +1,6 @@
 import { Prestation } from '@/type/Prestation'
 import { ObjectType, ObjectSummary } from './pres_schem'
-import { useToast } from '@/components/ui/use-toast'
+import { User } from '@/type/User'
 
 
 const props: { [id: string]: ObjectType } = {}
@@ -12,14 +12,14 @@ const deletePath = `/management`
 interface ObjectDTO { service: Prestation[] }
 
 
-export const fetchData = async () => {
+export const fetchData = async (token: User["token"]) => {
   const retour: ObjectDTO = await (
     await fetch(
       `${path}${fetchPath}`,
       {
         method: "GET",
         headers: {
-          "Authorization": localStorage.getItem('token') || "",
+          "Authorization": token,
         },
       }
     )
@@ -38,7 +38,7 @@ export const fetchData = async () => {
   }
 }
 
-export const createData = async (prop: ObjectType) => {
+export const createData = async (prop: ObjectType, token: User["token"]) => {
 
   await fetch(
     `${path}${createPath}`,
@@ -46,7 +46,7 @@ export const createData = async (prop: ObjectType) => {
       method: "POST",
       body: JSON.stringify(prop),
       headers: {
-        "Authorization": localStorage.getItem('token') || "",
+        "Authorization": token,
       },
     }
   )
@@ -56,7 +56,7 @@ export const readData = async (id: string) => {
   return props[id]! // TODO: handle undefined
 }
 
-export const updateData = async (id: string, data: ObjectType) => {
+export const updateData = async (id: string, data: ObjectType, token: User["token"]) => {
   props[id] = data
   
   await fetch(
@@ -65,19 +65,19 @@ export const updateData = async (id: string, data: ObjectType) => {
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
-        "Authorization": localStorage.getItem('token') || "",
+        "Authorization": token,
       },
     }
   )
 }
 
-export const use_deleteData = async (id: ObjectSummary) => {
+export const use_deleteData = async (id: ObjectSummary, token: User["token"]) => {
   const result = await fetch(
     `${path}${deletePath}/${(id as any).original.id}`,
     {
       method: "DELETE",
       headers: {
-        "Authorization": localStorage.getItem('token') || "",
+        "Authorization": token,
       },
     }
   )

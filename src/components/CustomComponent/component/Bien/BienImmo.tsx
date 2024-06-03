@@ -8,6 +8,7 @@ import { HomeIcon, Hotel } from "lucide-react"
 import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
 import { Property, PropertyDTO } from "@/type/Property";
+import { User } from "@/type/User";
 
 function getIcon(type: string) {
     
@@ -24,8 +25,8 @@ interface PropertyTypeDTO {
 }
 
 const BienImmo = ({
-    onHouseChange,
-  }: React.HTMLAttributes<HTMLDivElement> & { onHouseChange?: (house: Property) => void }) => {
+    onHouseChange, token
+  }: React.HTMLAttributes<HTMLDivElement> & { onHouseChange?: (house: Property) => void, token: User["token"] }) => {
     const [Property, setProperty] = useState<Property[]>([]);
     const [house, setHouse] = useState<Property>({} as Property);
     const [filter, setFilter] = useState<string>("");
@@ -38,7 +39,7 @@ const BienImmo = ({
                     {
                         method: "GET",
                         headers: {
-                          "Authorization": localStorage.getItem("token") || "",
+                          "Authorization": token,
                         },
                     }
                 )

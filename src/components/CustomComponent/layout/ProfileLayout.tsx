@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import { Toaster } from '@/components/ui/toaster';
 import MainContent from '../component/Profil/MainContent';
 import CookieConsent from '@/components/ui/cookie';
+import { User } from '@/type/User';
 
 interface LayoutProps {
     children?: ReactNode;
@@ -13,11 +14,15 @@ interface LayoutProps {
 
 const ProfilLayout: React.FC<LayoutProps> = ({ children, id }) => {
 
+    const user = JSON.parse(window.localStorage.getItem('user') || "") as User;
+    const user_id = user.id;
+    const token = user.token;
+
     return (
         <>
             <CookieConsent/>
-            <Sidebar index={0}/>
-            <MainContent id={id}/>
+            <Sidebar user={user}/>
+            <MainContent id={id} token={token}/>
             <Toaster />
         </>
     );

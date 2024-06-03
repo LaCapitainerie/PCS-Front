@@ -7,6 +7,7 @@ import MainContent from '../component/Bien/MainContent';
 import { Toaster } from '@/components/ui/toaster';
 import {Property} from "@/type/Property";
 import CookieConsent from '@/components/ui/cookie';
+import { User } from '@/type/User';
 
 interface LayoutProps {
     children: ReactNode;
@@ -19,13 +20,16 @@ const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
         setHouse(house);
     };
 
+    const user = JSON.parse(window.localStorage.getItem('user') || "") as User;
+    const id = user.id;
+    const token = user.token;
 
     return (
         <>
             <CookieConsent/>
-            <Sidebar index={0}/>
-            <BienImmo onHouseChange={SelectedHouse}/>
-            <MainContent house={House}/>
+            <Sidebar user={user}/>
+            <BienImmo onHouseChange={SelectedHouse} token={token}/>
+            <MainContent house={House} User_id={id}/>
             <Toaster />
         </>
     );

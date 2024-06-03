@@ -29,7 +29,7 @@ const RoleToPermission: Map<UserType["type"], number> = new Map([
     ["admin", 4]
 ]);
 
-const Component = (user: UserType, index: number) => {
+const Component = (user: UserType) => {
 
     const [state, setState] = useState<SidebarType[]>([]);
 
@@ -53,7 +53,7 @@ const Component = (user: UserType, index: number) => {
                 <TooltipTrigger asChild>
                     <Link
                         href={value.Href}
-                        className={`flex h-9 w-9 items-center justify-center rounded-lg text-${i != index || true ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
+                        className={`flex h-9 w-9 items-center justify-center rounded-lg text-${ true ? 'muted' : '' }-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                     >
                         {React.createElement(icons[toComparable(value.Icon) as keyof typeof icons], { className: "h-5 w-5" })}
                         <span className="sr-only">{value.Hover}</span>
@@ -65,16 +65,8 @@ const Component = (user: UserType, index: number) => {
     );
 };
 
-const Sidebar = ({ index }: { index: number }) => {
+const Sidebar = ({ user }: { user: UserType }) => {
     const { theme, setTheme } = useTheme();
-
-    if(!localStorage.getItem("user")){
-        console.log("Redirecting to login");        
-        window.location.assign("/login");
-        return;
-    };
-
-    const user = JSON.parse(localStorage.getItem("user") as string) as UserType;
 
     return (
         <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -96,15 +88,17 @@ const Sidebar = ({ index }: { index: number }) => {
                         <DropdownMenuLabel><a href={`/profile?user=${user.id}`}>My Account</a></DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={(e) => {
-                            localStorage.clear();
-                            window.location.assign("/login");
+                            if(window){
+                                window.localStorage.clear();
+                                window.location.assign("/login");
+                            }
                         }}>
                             Logout
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
 
-                {Component(user, index)}
+                {Component(user)}
             </nav>
             <nav key={1} className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
                 <DropdownMenu>

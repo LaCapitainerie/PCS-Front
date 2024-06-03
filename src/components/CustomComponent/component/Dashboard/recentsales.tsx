@@ -2,9 +2,10 @@ import { Avatar, AvatarFallback, AvatarImage, } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle, } from "@/components/ui/card"
 import Usercard from "@/components/ui/usercard";
 import { PrestationDTO } from "@/type/Prestation";
+import { User } from "@/type/User";
 import { use, useEffect, useState } from "react";
 
-export default function RecentSales() {
+export default function RecentSales({token}: {token: User["token"]}) {
 
   const [retour, setRetour] = useState<PrestationDTO>({service: []});
 
@@ -16,7 +17,7 @@ export default function RecentSales() {
           {
             method: "GET",
             headers: {
-              "Authorization": localStorage.getItem('token') || "",
+              "Authorization": token,
             },
           }
         )

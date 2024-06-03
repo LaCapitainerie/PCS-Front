@@ -12,8 +12,10 @@ import { ChatDTO, Contact } from "@/type/Chat";
 
 const ContactList = ({
     setContact,
-    Categories
-  }: React.HTMLAttributes<HTMLDivElement> & { setContact: (contact : Contact) => void , Categories: User["type"][]}) => {    
+    Categories,
+    token,
+    user_id
+  }: React.HTMLAttributes<HTMLDivElement> & { setContact: (contact : Contact) => void , Categories: User["type"][], token: User["token"], user_id: User["id"]}) => {    
     
     const [chat, setChat] = useState<Contact[]>([]);
     const [filter, setFilter] = useState<string>("");
@@ -26,7 +28,7 @@ const ContactList = ({
                     {
                         method: "GET",
                         headers: {
-                          "Authorization": localStorage.getItem("token") || "",
+                          "Authorization": token,
                         },
                     }
                             
@@ -36,8 +38,8 @@ const ContactList = ({
             const chatPromise = data.chat.map(async (value) => {
 
                 return {
-                    user1: {id: value.userId[0] == localStorage.getItem("id") ? value.userId[0] : value.userId[1]} as unknown as User,
-                    user2: {id: value.userId[0] == localStorage.getItem("id") ? value.userId[1] : value.userId[0]} as unknown as User,
+                    user1: {id: value.userId[0] == user_id ? value.userId[0] : value.userId[1]} as unknown as User,
+                    user2: {id: value.userId[0] == user_id ? value.userId[1] : value.userId[0]} as unknown as User,
                     chat: value
                 } as Contact;
             });

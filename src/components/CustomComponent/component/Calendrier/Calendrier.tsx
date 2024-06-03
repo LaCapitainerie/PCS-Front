@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar } from '../../../ui/customcalendar';
-import Order from '../../../cavaservir/order';
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
-import { Button } from '@/components/ui/button';
+import Order from './Order';
 
 interface CalendrierProps {
     children?: React.ReactNode;

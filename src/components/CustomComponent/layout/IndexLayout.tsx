@@ -7,6 +7,7 @@ import { Separator } from '@/components/ui/separator';
 import { CarouselSize } from '../component/Index/Carrousel';
 import Pricing from '../component/Index/Pricing';
 import { Footer } from '../component/Index/footer';
+import { User } from '@/type/User';
 
 interface IndexProps {
     children?: ReactNode;
@@ -14,10 +15,14 @@ interface IndexProps {
 
 const Index_Layout: React.FC<IndexProps> = ({ children }) => {
 
+    const user = JSON.parse(window.localStorage.getItem('user') || "") as User;
+    const id = user.id;
+    const token = user.token;
+
     return (
         <div className='flex flex-col gap-8'>
             <CookieConsent/>
-            <MainScreen/>
+            <MainScreen self={user}/>
             <Separator/>
             <CarouselSize/>
             <Separator/>

@@ -10,9 +10,10 @@ import { useEffect, useState } from "react";
 interface LowerbandProps {
     children?: React.ReactNode;
     User: User;
+    token: User["token"];
 }
 
-const Lowerband = ({User}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps) => {
+const Lowerband = ({User, token}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps) => {
 
     const [property, setProperty] = useState<Property[]>([]);
 
@@ -24,7 +25,7 @@ const Lowerband = ({User}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps
                     {
                         method: "GET",
                         headers: {
-                          "Authorization": localStorage.getItem("token") || "",
+                          "Authorization": token,
                         },
                     }
                 )

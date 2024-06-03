@@ -9,9 +9,10 @@ import { useEffect, useState } from "react";
 import {Property} from "@/type/Property";
 import { Reservation as ReservationType } from "@/type/Reservation";
 import { Prestataire } from "@/type/Prestataire";
+import { User } from "@/type/User";
 
 
-const MainContent = ({house}: {house:Property | undefined}) => {
+const MainContent = ({house, User_id}: {house:Property | undefined, User_id: User["id"]}) => {
 
     const [state, setState] = useState<Property | undefined>(house);
     
@@ -49,12 +50,12 @@ const MainContent = ({house}: {house:Property | undefined}) => {
 
         <div className="absolute w-fit right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%]">
             <main className="w-full h-full flex flex-col">
-                <CarouselPlugin images={house?.images}/>
+                <CarouselPlugin images={house?.images || []}/>
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Nom du bien" sous_titre={state?.description}/>
                         <div className="flex flex-row justify-around gap-2">
-                            <CardProperty Prestataire={prestataire} Property={state} />
+                            <CardProperty Prestataire={prestataire} Property={state} User_id={User_id} />
                         </div>
                     </div>
                 </div>

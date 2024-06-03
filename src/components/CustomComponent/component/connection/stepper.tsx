@@ -8,7 +8,7 @@ import {
 	useStepper,
 } from "@/components/ui/stepper/";
 import { Button } from "@/components/ui/button";
-import sendOTP from "./otp";
+// import sendOTP from "./otp";
 
 
 export default function StepperComp({children, steps}: {children: React.ReactNode[], steps: StepItem[]}) {

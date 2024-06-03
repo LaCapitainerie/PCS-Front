@@ -6,6 +6,7 @@ import { ValuableThing, Dashboard } from '../component/Dashboard/dashboard';
 import CookieConsent from '@/components/ui/cookie';
 import { CrudVariant } from '../component/Dashboard/crud/Crud';
 import { Toaster } from '@/components/ui/toaster';
+import { User } from '@/type/User';
 
 interface DashBoardProps {
     children?: ReactNode;
@@ -15,11 +16,15 @@ interface DashBoardProps {
 
 const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, customOnes }) => {
 
+    const user = JSON.parse(window.localStorage.getItem('user') || "") as User;
+    const id = user.id;
+    const token = user.token;
+
     return (
         <>
             <CookieConsent/>
-            <Sidebar index={2}/>
-            <Dashboard Column={dataColumn} CustomOnes={customOnes}/>
+            <Sidebar user={user}/>
+            <Dashboard Column={dataColumn} CustomOnes={customOnes} Token={token}/>
             <Toaster />
         </>
     );

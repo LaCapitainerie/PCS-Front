@@ -50,7 +50,7 @@ interface UserTypeDTO {
   user: User[];
 }
 
-export function CardProperty({ Property }: { Property: Property | undefined, Prestataire: Prestataire[]}) {
+export function CardProperty({ Property, User_id }: { Property: Property | undefined, Prestataire: Prestataire[], User_id: User["id"] }) {
 
   const { toast } = useToast();
   
@@ -85,7 +85,7 @@ export function CardProperty({ Property }: { Property: Property | undefined, Pre
         <div className="flex flex-row justify-between">
           <CardTitle className="">Details du bien</CardTitle>
           {
-            Property?.userId == localStorage.getItem('id') ?
+            Property?.userId == User_id ?
             <Button variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
               {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
             </Button> :

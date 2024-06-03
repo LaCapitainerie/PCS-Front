@@ -32,7 +32,7 @@ export interface ChatDTO {
     chat: Chat;
 }
 
-const MessageList = ({ contact }: { contact: Contact | undefined }) => {
+const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined, token: User["token"], user_id: User["id"] }) => {
 
     const [Messages, setMessages] = useState<Message[]>([]);
 
@@ -59,7 +59,7 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
                     {
                         method: "GET",
                         headers: {
-                          "Authorization": localStorage.getItem("token") || "",
+                          "Authorization": token,
                         },
                     }
                 )
@@ -83,9 +83,9 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
             <div className="flex flex-col h-full justify-between">
                 <div className="flex flex-col gap-2 p-4 pt-0">
                     {contact && Messages.map((value, index) => 
-                        <div key={index} className={`flex ${value.userId == localStorage.getItem("id") && "justify-end"}`}>
+                        <div key={index} className={`flex ${value.userId == user_id && "justify-end"}`}>
                             {
-                                <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== localStorage.getItem("id") && "bg-accent"}`}>
+                                <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== user_id && "bg-accent"}`}>
                                     <div className="flex w-full flex-col gap-1">
                                         <div className="text-xs font-medium">{value.date.toString()}</div>
                                     </div>
@@ -125,7 +125,7 @@ const MessageList = ({ contact }: { contact: Contact | undefined }) => {
                 </div>
 
                 <div className="flex flex-row p-4 gap-4">
-                    <FileUploadDropzone token={localStorage.getItem("token") as string} user1={contact?.user1.id || ""} user2={contact?.user2.id || ""} sendFunction={Send}/>
+                    <FileUploadDropzone token={token} user1={contact?.user1.id || ""} user2={contact?.user2.id || ""} sendFunction={Send}/>
                 </div>
             </div>
 

@@ -10,9 +10,10 @@ import { User, UserReturnDTO } from "@/type/User";
 interface MainContentProps {
     children?: React.ReactNode;
     id: string;
+    token: User["token"];
 }
 
-const MainContent = ({ id }: MainContentProps) => {
+const MainContent = ({ id, token }: MainContentProps) => {
 
     const [user, setUser] = useState({} as User);
     useEffect(() => {
@@ -36,9 +37,9 @@ const MainContent = ({ id }: MainContentProps) => {
 
     return (
         <div className="flex flex-col w-full h-full overflow-hidden" style={{paddingLeft: '3.5rem'}}>
-            <Upperband User={user} style={{height: '33%'}}/>
+            <Upperband User={user} style={{ height: '33%' }} token={token}/>
             <Separator/>
-            <Lowerband User={user} style={{height: '66%'}}/>
+            <Lowerband User={user} style={{ height: '66%' }} token={token}/>
         </div>
         
     )
