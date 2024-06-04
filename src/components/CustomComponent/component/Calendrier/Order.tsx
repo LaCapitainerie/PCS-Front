@@ -6,14 +6,15 @@ import { Separator } from "@/components/ui/separator"
 import { Pagination, PaginationContent, PaginationItem } from "@/components/ui/pagination"
 import { Command } from "@/type/Command"
 import { useEffect } from "react"
-import { User } from "@/type/User"
+import { User, UserDTO, UserReturnDTO } from "@/type/User"
 import React from "react"
 import { PDF_invoice } from "../../facture/invoice"
 
 
 const Order = ({
-        day
-    }: React.HTMLAttributes<HTMLDivElement> & {day: Date}) => {
+        day,
+        token
+    }: React.HTMLAttributes<HTMLDivElement> & {day: Date, token: User["token"]}) => {
 
     const [order, setOrder] = React.useState<Command>();
 
@@ -42,15 +43,18 @@ const Order = ({
 
     useEffect(() => {
         const dataFetch = async () => {
-            const data: User[] = await (
+            const data: UserDTO = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/users`
+                    `${process.env.NEXT_PUBLIC_API_URL}/user/id/${order?.idclient}`,
+                    {
+                        headers: {
+                            Authorization: token
+                        }
+                    }
                 )
             ).json();
 
-            setCustomer(
-                data.find((user) => user.id === order?.idclient) as User
-            );
+            setCustomer(data.user);
         }
 
         dataFetch();

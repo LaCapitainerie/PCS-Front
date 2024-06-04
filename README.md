@@ -4,9 +4,9 @@
     - [x] Présentation du site
 
 ### Locataire
-- [ ] Apercu de son compte
+- [x] Apercu de son compte
     - [x] Pouvoir voir les informations d'un compte
-    - [ ] Modification de celui-ci
+    - [x] Modification de celui-ci
 - [ ] Pouvoir reserver un bien
     - [x] Affichage des biens et des disponibilités
     - [x] Affichage d'un **énooorme popup** pour sélection de date, personnes, prestations via multi selector
@@ -18,9 +18,9 @@
     - [x] Envoyer un message pour chaque étape du paiement
 
 ### Bailleur
-- [ ] Apercu de son compte
+- [x] Apercu de son compte
     - [x] Pouvoir voir les informations d'un compte
-    - [ ] Modification de celui-ci
+    - [x] Modification de celui-ci
 - [x] Aperçu de ses biens
     - [x] Détails, prestas associés, locataire
     - [x] Pouvoir les modifier (uniquement les détails)
@@ -34,9 +34,9 @@
     - [ ] Notification push sur téléphone
 
 ### Prestataires
-- [ ] Apercu de son compte
+- [x] Apercu de son compte
     - [x] Pouvoir voir les informations d'un compte
-    - [ ] Modification de celui-ci
+    - [x] Modification de celui-ci
 - [x] Calendrier des jours de travail
     - [x] Carte popup pour détail de mission (Locataire, commentaire, details)
     - [x] Generer des factures
@@ -51,9 +51,4 @@
     - [x] Overview des Reservations, Prestations et Issues
         - [x] Pouvoir ouvrir une popup des details
 
-    - [ ] Overview Utilisateurs
-        - [ ] Pouvoir effectuer des actions admins dessus
-            - [ ] Bloquer accès au site
-            - [ ] Bloquer certaines capacités
-            - [ ] Voir les discussions Réportés
-            - [ ] Shut down le compte
+    - [ ] Crud Utilisateur

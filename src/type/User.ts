@@ -29,15 +29,5 @@ export interface Token {
 }
 
 export interface UserDTO {
-    id: User["id"];
-    type: User["type"];
-    mail: User["mail"];
-    registerdate: User["registerdate"];
-    lastConnectionDate: User["lastConnectionDate"];
-    avatar: User["avatar"];
-    description: User["description"];
-    firstName: User["firstName"];
-    lastName: User["lastName"];
-    phoneNumber: User["phoneNumber"];
-    token: User["token"];
+    user: User;
 };

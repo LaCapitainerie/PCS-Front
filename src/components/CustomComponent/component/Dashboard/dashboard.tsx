@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import RecentSales from "./recentsales"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import { CRUD, CrudVariant } from "./crud/Crud"
+import CRUD, { CrudVariant } from "./crud/Crud"
 import { User } from "@/type/User"
 const queryClient = new QueryClient()
 
@@ -137,12 +137,14 @@ export function Dashboard({Column, CustomOnes, Token}: {Column: ValuableThing[],
             </TabsList>
             {
               CustomOnes.map((value, index) => (
-                  <TabsContent value={CustomOnes[index]} key={index+1}>
-                      <QueryClientProvider client={queryClient}>
-                        <CRUD variant={value} token={Token}/>
-                      </QueryClientProvider>
-                  </TabsContent>
-                ))
+                <TabsContent value={CustomOnes[index]} key={index+1}>
+                  <QueryClientProvider client={queryClient}>
+                    <>
+                      {CRUD({variant: value, token: Token})}
+                    </>
+                  </QueryClientProvider>
+                </TabsContent>
+              ))
             }
           </Tabs>
 

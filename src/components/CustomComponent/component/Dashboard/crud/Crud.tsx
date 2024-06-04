@@ -10,7 +10,7 @@ interface CrudBoardProps {
     token: User["token"]
   }
 
-export const CRUD = ({children, variant, token}: CrudBoardProps) => {
+export default ({children, variant, token}: CrudBoardProps) => {
     
     switch (variant) {
         case "Properties":
