@@ -3,6 +3,7 @@
 import * as React from "react"
 import { User } from "@/type/User";
 import LessorVitrine from "./Role/Lessor";
+import ProviderVitrine from "./Role/Provider";
 
 interface LowerbandProps {
     children?: React.ReactNode;
@@ -11,6 +12,9 @@ interface LowerbandProps {
 }
 
 const Lowerband = ({User, token}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps) => {
+
+    console.log(User.type);
+    
 
     return (
         <div className="flex flex-row justify-around w-full p-4" style={{height: '66%'}}>
@@ -29,6 +33,9 @@ const Lowerband = ({User, token}: React.HTMLAttributes<HTMLDivElement> & Lowerba
                 // switch on user type
                 User.type === "lessor" &&
                 <LessorVitrine User={User} token={token} />
+                ||
+                User.type === "provider" &&
+                <ProviderVitrine User={User} token={token} />
             }
         </div>
     )
