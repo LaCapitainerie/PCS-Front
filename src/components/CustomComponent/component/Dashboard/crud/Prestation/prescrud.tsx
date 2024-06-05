@@ -5,14 +5,14 @@ import { createData, use_deleteData, fetchData, readData, updateData } from './p
 import { Schema, type ObjectType, type ObjectSummary } from './pres_schem'
 import { User } from '@/type/User'
 
-export const PresCrudView = ({token}: {token: User["token"]}) => createCrudView<ObjectType, ObjectSummary>({description: 'empty'})({
+export const PresCrudView = createCrudView<ObjectType, ObjectSummary>({description: 'empty'})({
   name: 'Prestations',
   action: {
-    list: () => fetchData(token),
-    create: (payload) => createData(payload, token),
+    list: () => fetchData(),
+    create: (payload) => createData(payload, ),
     read: ({ id }) => readData(id),
-    update: (pres, { id }) => updateData(id, pres, token),
-    delete: (pres) => use_deleteData(pres, token),
+    update: (pres, { id }) => updateData(id, pres, ),
+    delete: (pres) => use_deleteData(pres, ),
   },
   getId: ({ id }) => id,
   listToDataSource: (list) => list.props,

@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Token, UserReturnDTO } from "@/type/User";
+import { Token, UserDTO } from "@/type/User";
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@/components/ui/input-otp";
 import StepperComp from "./stepper";
 
@@ -85,7 +85,7 @@ export default function Signup() {
 
     // Call your API endpoint here    
 
-    const retour: UserReturnDTO = await (
+    const retour: UserDTO = await (
       await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
         {

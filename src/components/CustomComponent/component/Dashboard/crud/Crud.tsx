@@ -14,9 +14,9 @@ export default ({children, variant, token}: CrudBoardProps) => {
     
     switch (variant) {
         case "Properties":
-            return PropCrudView({token: token});
+            return <PropCrudView/>;
 
         case "Prestations":
-            return PresCrudView({token: token});
+            return <PresCrudView/>;
     };
 };

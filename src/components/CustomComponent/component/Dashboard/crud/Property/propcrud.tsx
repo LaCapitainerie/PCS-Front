@@ -3,16 +3,15 @@ import { createAutoForm } from '@/components/ui/auto-crud/createAutoForm'
 import { createCrudList } from '@/components/ui/auto-crud/createCrudList'
 import { createData, use_deleteData, fetchData, readData, updateData } from './prop-api'
 import { Schema, type ObjectType, type ObjectSummary } from './prop_schem'
-import { User } from '@/type/User'
 
-export const PropCrudView = ({token}: {token: User["token"]}) => createCrudView<ObjectType, ObjectSummary>({name: 'empty'})({
+export const PropCrudView = createCrudView<ObjectType, ObjectSummary>({name: 'empty'})({
   name: 'Property',
   action: {
-    list: () => fetchData(token),
-    create: (payload) => createData(payload, token),
+    list: () => fetchData(),
+    create: (payload) => createData(payload, ),
     read: ({ id }) => readData(id),
-    update: (prop, { id }) => updateData(id, prop, token),
-    delete: (prop) => use_deleteData(prop, token),
+    update: (prop, { id }) => updateData(id, prop, ),
+    delete: (prop) => use_deleteData(prop, ),
   },
   getId: ({ id }) => id,
   listToDataSource: (list) => list.props,

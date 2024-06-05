@@ -9,7 +9,7 @@ import { User } from '@/type/User';
 
 interface LayoutProps {
     children?: ReactNode;
-    id: string;
+    id: User["id"];
 }
 
 const ProfilLayout: React.FC<LayoutProps> = ({ children, id }) => {
@@ -22,7 +22,7 @@ const ProfilLayout: React.FC<LayoutProps> = ({ children, id }) => {
         <>
             <CookieConsent/>
             <Sidebar user={user}/>
-            <MainContent id={id} token={token}/>
+            <MainContent id={id} token={token} myid={user_id}/>
             <Toaster />
         </>
     );

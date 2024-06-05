@@ -1,11 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import BienCard from "./BienCard";
 import { User } from "@/type/User";
-import { Property, PropertyDTO } from "@/type/Property";
-import { useEffect, useState } from "react";
+import LessorVitrine from "./Role/Lessor";
 
 interface LowerbandProps {
     children?: React.ReactNode;
@@ -14,30 +11,6 @@ interface LowerbandProps {
 }
 
 const Lowerband = ({User, token}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps) => {
-
-    const [property, setProperty] = useState<Property[]>([]);
-
-    useEffect(() => {
-        const dataFetch = async () => {
-            const data: PropertyDTO = await (
-                await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/property`,
-                    {
-                        method: "GET",
-                        headers: {
-                          "Authorization": token,
-                        },
-                    }
-                )
-            ).json();            
-
-            setProperty(data.Property);
-        };
-
-        dataFetch();
-    }, [User]);
-
-
 
     return (
         <div className="flex flex-row justify-around w-full p-4" style={{height: '66%'}}>
@@ -52,18 +25,15 @@ const Lowerband = ({User, token}: React.HTMLAttributes<HTMLDivElement> & Lowerba
                     <p className="text-sm">{User.phoneNumber}</p>
                 </div>
             </div>
-            <Carousel className="w-full h-full p-4" opts={{loop: true}}>
-                <CarouselContent className="h-full">
-                    {property.map((property_value, index) => (
-                        <CarouselItem key={index} className="basis-full xl:basis-1/2" >
-                            <BienCard property={property_value}/>
-                        </CarouselItem>
-                    ))}
-                </CarouselContent>
-            </Carousel>
+            {
+                // switch on user type
+                User.type === "lessor" &&
+                <LessorVitrine User={User} token={token} />
+            }
         </div>
-        
     )
+
+    
 };
 
 

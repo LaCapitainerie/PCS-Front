@@ -16,13 +16,14 @@ interface UpperbandProps {
     children?: React.ReactNode;
     User: User;
     token: User["token"];
+    myid: User["id"];
 }
 
 
 
 
 
-const Upperband = ({ children, User, token }: React.HTMLAttributes<HTMLDivElement> & UpperbandProps) => {
+const Upperband = ({ children, User, token, myid }: React.HTMLAttributes<HTMLDivElement> & UpperbandProps) => {
 
     const Schema = z.object({
         avatar: z.string().default(User.avatar),
@@ -74,7 +75,7 @@ const Upperband = ({ children, User, token }: React.HTMLAttributes<HTMLDivElemen
     //     ).json();
     // }
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm();    
 
     return (
         <div className="flex flex-col w-full" style={{ height: '33%' }}>
@@ -94,22 +95,24 @@ const Upperband = ({ children, User, token }: React.HTMLAttributes<HTMLDivElemen
                             <div className="flex flex-row gap-4 text-center items-center"><Phone /><p className="text-sm">{User?.phoneNumber || "no phone number was provided"}</p></div>
                         </div>
 
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button variant="outline">Edit Profile <Edit/></Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:max-w-[425px]">
-                                <DialogHeader>
-                                    <DialogTitle>Edit profile</DialogTitle>
-                                    <DialogDescription>
-                                        Make changes to your profile here. Click save when you&apos;re done.
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <div className="grid gap-4 py-4">
-                                    <EditForm user={User} token={token}/>
-                                </div>
-                            </DialogContent>
-                        </Dialog>
+                        {
+                            User.id == myid ? <Dialog>
+                                    <DialogTrigger asChild>
+                                        <Button variant="outline">Edit Profile <Edit/></Button>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[425px]">
+                                        <DialogHeader>
+                                            <DialogTitle>Edit profile</DialogTitle>
+                                            <DialogDescription>
+                                                Make changes to your profile here. Click save when you&apos;re done.
+                                            </DialogDescription>
+                                        </DialogHeader>
+                                        <div className="grid gap-4 py-4">
+                                            <EditForm user={User} token={token}/>
+                                        </div>
+                                    </DialogContent>
+                                </Dialog> : <></>
+                        }
                     </div>
                 </div>
             </div>
