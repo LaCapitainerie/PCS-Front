@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Form, FormField} from "@/components/ui/form"
-import { User, UserReturnDTO } from "@/type/User";
+import { User, UserDTO } from "@/type/User";
 import { toast } from "@/components/ui/use-toast";
 
 

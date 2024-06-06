@@ -1,8 +1,7 @@
 "use client"
 
 import { Property } from '@/type/Property';
-import { Property_image } from '@/type/Property_image';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode } from 'react';
 
 interface LayoutProps {
     children?: ReactNode

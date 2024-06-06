@@ -7,7 +7,6 @@ import MainContent from '../component/Profil/MainContent';
 import CookieConsent from '@/components/ui/cookie';
 import { User } from "@/type/User";
 import { useSearchParams } from 'next/navigation'
-import { Suspense } from 'react'
 
 function Search(): User["id"] {
     
@@ -37,7 +36,7 @@ const ProfilLayout: React.FC<LayoutProps> = ({ children }) => {
         <>
             <CookieConsent/>
             <Sidebar user={user}/>
-            <MainContent id={id} token={token} myid={user.id}/>
+            <MainContent id={id} token={user.token} myid={user.id}/>
             <Toaster />
         </>
     );
