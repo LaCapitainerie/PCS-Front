@@ -1,6 +1,5 @@
 import { Property } from '@/type/Property'
 import { ObjectType, ObjectSummary } from './prop_schem'
-import { useToast } from '@/components/ui/use-toast'
 import { User } from '@/type/User'
 
 
@@ -13,14 +12,14 @@ const deletePath = ``
 interface ObjectDTO { Property: Property[] }
 
 
-export const fetchData = async (token: User["token"]) => {
+export const fetchData = async (token?: User["token"]) => {
   const retour: ObjectDTO = await (
     await fetch(
       `${path}${fetchPath}`,
       {
         method: "GET",
         headers: {
-          "Authorization": token,
+          "Authorization": localStorage.getItem("token")!,
         },
       }
     )
@@ -36,7 +35,7 @@ export const fetchData = async (token: User["token"]) => {
   }
 }
 
-export const createData = async (prop: ObjectType, token: User["token"]) => {
+export const createData = async (prop: ObjectType, token?: User["token"]) => {
 
   await fetch(
     `${path}${createPath}`,
@@ -44,7 +43,7 @@ export const createData = async (prop: ObjectType, token: User["token"]) => {
       method: "POST",
       body: JSON.stringify(prop),
       headers: {
-        "Authorization": token,
+        "Authorization": localStorage.getItem("token")!,
       },
     }
   )
@@ -54,7 +53,7 @@ export const readData = async (id: string) => {
   return props[id]! // TODO: handle undefined
 }
 
-export const updateData = async (id: string, data: ObjectType, token: User["token"]) => {
+export const updateData = async (id: string, data: ObjectType, token?: User["token"]) => {
   
   data.images = data.urls.map((image) => { return image.url })
   delete (data as any).urls
@@ -71,19 +70,19 @@ export const updateData = async (id: string, data: ObjectType, token: User["toke
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
-        "Authorization": token,
+        "Authorization": localStorage.getItem("token")!,
       },
     }
   )
 }
 
-export const use_deleteData = async (id: ObjectSummary, token: User["token"]) => {
+export const use_deleteData = async (id: ObjectSummary, token?: User["token"]) => {
   const result = await fetch(
     `${path}${deletePath}/${(id as any).original.id}`,
     {
       method: "DELETE",
       headers: {
-        "Authorization": token,
+        "Authorization": localStorage.getItem("token")!,
       },
     }
   )

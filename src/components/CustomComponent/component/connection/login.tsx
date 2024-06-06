@@ -13,7 +13,7 @@ import {
   Form,
   FormField,
 } from "@/components/ui/form"
-import { UserDTO } from "@/type/User";
+import { Token, UserDTO } from "@/type/User";
 
 const FormSchema = z.object({
   mail: z.string().email({
@@ -54,7 +54,6 @@ export default function Login() {
         },
       })
     ).json();
-    
     if(typeof window !== "undefined"){
       window.localStorage.setItem('user', JSON.stringify(retour.user));
       window.location.assign(`/profile?user=${retour.user.id}`);
