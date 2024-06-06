@@ -21,16 +21,20 @@ const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
         setContact(Contact);
     };
 
-    const user = JSON.parse(window.localStorage.getItem('user') || "") as User;
-    const id = user.id;
-    const token = user.token;
+    var getUserfromLocalStorage = "{}";
+    
+    if (typeof window !== 'undefined') {
+        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+    };
+
+    const user = JSON.parse(getUserfromLocalStorage) as User;
 
     return (
         <>
             <CookieConsent/>
             <Sidebar user={user}/>
-            <ContactList setContact={SelectedContact} Categories={categories} token={token} user_id={id}/>
-            <MessageList contact={Contact} token={token} user_id={id}/>
+            <ContactList setContact={SelectedContact} Categories={categories} token={user.token} user_id={user.id}/>
+            <MessageList contact={Contact} token={user.token} user_id={user.id}/>
             <Toaster />
         </>
     );

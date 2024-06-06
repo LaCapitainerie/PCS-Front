@@ -39,7 +39,7 @@ export default function EditForm({user, token}: {user: User, token: User["token"
 
         form.reset()
 
-        const retour: UserReturnDTO = await (
+        const retour: UserDTO = await (
             await fetch(
                 `${process.env.NEXT_PUBLIC_API_URL}/user/management/${user.id}`,
                 {

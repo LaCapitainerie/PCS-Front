@@ -16,15 +16,19 @@ interface DashBoardProps {
 
 const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, customOnes }) => {
 
-    const user = JSON.parse(window.localStorage.getItem('user') || "") as User;
-    const id = user.id;
-    const token = user.token;
+    var getUserfromLocalStorage = "{}";
+    
+    if (typeof window !== 'undefined') {
+        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+    };
+
+    const user = JSON.parse(getUserfromLocalStorage) as User;
 
     return (
         <>
             <CookieConsent/>
             <Sidebar user={user}/>
-            <Dashboard Column={dataColumn} CustomOnes={customOnes} Token={token}/>
+            <Dashboard Column={dataColumn} CustomOnes={customOnes} Token={user.token}/>
             <Toaster />
         </>
     );

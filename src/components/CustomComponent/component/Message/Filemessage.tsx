@@ -25,16 +25,16 @@ import { Message, MessageDTO } from "@/type/Message";
 
 const CardForm = z.object({
     message: z.string().min(1),
-    files: z
-      .array(
-        z.instanceof(File).refine((file) => file.size < 4 * 1024 * 1024, {
-          message: "File size must be less than 4MB",
-        })
-      )
-      .max(5, {
-        message: "Maximum 5 files are allowed",
-      })
-      .nullable(),
+    // files: z
+    //   .array(
+    //     z.instanceof(File).refine((file) => file.size < 4 * 1024 * 1024, {
+    //       message: "File size must be less than 4MB",
+    //     })
+    //   )
+    //   .max(5, {
+    //     message: "Maximum 5 files are allowed",
+    //   })
+    //   .nullable(),
   });
    
   type CardFormType = z.infer<typeof CardForm>;
@@ -44,7 +44,7 @@ const CardForm = z.object({
       resolver: zodResolver(CardForm),
       defaultValues: {
         message: "",
-        files: null,
+        // files: null,
       },
     });
    
@@ -108,10 +108,10 @@ const CardForm = z.object({
             )}
           <div
             className={`w-full flex items-start gap-x-2 rounded-md outline outline-1 outline-border px-2 pb-1 ${
-              form.watch("files") !== null ? "pt-4" : "pt-2"
-            }`}
+              // form.watch("files") !== null ? "pt-4" : "pt-2"
+            "pt-2"}`}
           >
-            <FormField
+            {/* <FormField
               control={form.control}
               name="files"
               render={({ field }) => (
@@ -159,7 +159,7 @@ const CardForm = z.object({
                   </FileUploader>
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name="message"

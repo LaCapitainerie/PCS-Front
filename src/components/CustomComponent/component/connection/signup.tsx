@@ -98,11 +98,9 @@ export default function Signup() {
       )
     ).json();
 
-    if(window){
-      window.localStorage.setItem("token", retour.user.token);
+    if(typeof window !== "undefined"){
       window.localStorage.setItem('user', JSON.stringify(retour.user));
-      window.localStorage.setItem('id', retour.user.id);
-      window.location.assign(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
+      window.location.assign(`/profile?user=${retour.user.id}`);
     }
   }
 
