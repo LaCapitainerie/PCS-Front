@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator"
 import { Pagination, PaginationContent, PaginationItem } from "@/components/ui/pagination"
 import { Command } from "@/type/Command"
 import { useEffect } from "react"
-import { User, UserDTO, UserReturnDTO } from "@/type/User"
+import { User, UserDTO } from "@/type/User"
 import React from "react"
 import { PDF_invoice } from "../../facture/invoice"
 

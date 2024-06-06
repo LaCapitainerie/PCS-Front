@@ -20,7 +20,8 @@ export default function RootLayout({
 }>) {
   return (
       <>
-      <html lang="fr" suppressHydrationWarning>
+        <html lang="fr" suppressHydrationWarning>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
         <head />
         <body className={`${inter.className} h-screen`}>
           <ThemeProvider

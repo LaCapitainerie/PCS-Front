@@ -5,14 +5,23 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import { Toaster } from '@/components/ui/toaster';
 import MainContent from '../component/Profil/MainContent';
 import CookieConsent from '@/components/ui/cookie';
-import { User } from '@/type/User';
+import { User } from "@/type/User";
+import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
+
+function Search(): User["id"] {
+    
+    const params = useSearchParams()
+    const search = params.get('user')
+   
+    return search || "";
+}
 
 interface LayoutProps {
     children?: ReactNode;
-    id: string;
 }
 
-const ProfilLayout: React.FC<LayoutProps> = ({ children, id }) => {
+const ProfilLayout: React.FC<LayoutProps> = ({ children }) => {
 
     var getUserfromLocalStorage = "{}";
     
@@ -21,6 +30,8 @@ const ProfilLayout: React.FC<LayoutProps> = ({ children, id }) => {
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
+
+    const id = Search();
 
     return (
         <>

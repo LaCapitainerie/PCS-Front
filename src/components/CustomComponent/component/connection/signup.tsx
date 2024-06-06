@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Token, UserReturnDTO } from "@/type/User";
+import { UserDTO } from "@/type/User";
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@/components/ui/input-otp";
 import StepperComp from "./stepper";
 
@@ -85,7 +85,7 @@ export default function Signup() {
 
     // Call your API endpoint here    
 
-    const retour: UserReturnDTO = await (
+    const retour: UserDTO = await (
       await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
         {
@@ -98,11 +98,9 @@ export default function Signup() {
       )
     ).json();
 
-    if(window){
-      window.localStorage.setItem("token", retour.user.token);
+    if(typeof window !== "undefined"){
       window.localStorage.setItem('user', JSON.stringify(retour.user));
-      window.localStorage.setItem('id', retour.user.id);
-      window.location.assign(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
+      window.location.assign(`/profile?user=${retour.user.id}`);
     }
   }
 

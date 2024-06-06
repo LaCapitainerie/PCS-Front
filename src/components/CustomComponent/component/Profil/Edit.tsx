@@ -9,7 +9,7 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { User, UserReturnDTO } from "@/type/User";
+import { User, UserDTO } from "@/type/User";
 import { toast } from "@/components/ui/use-toast";
 
 
@@ -41,7 +41,7 @@ export default function EditForm({user, token}: {user: User, token: User["token"
 
         form.reset()
 
-        const retour: UserReturnDTO = await (
+        const retour: UserDTO = await (
             await fetch(
                 `${process.env.NEXT_PUBLIC_API_URL}/user/management/${user.id}`,
                 {

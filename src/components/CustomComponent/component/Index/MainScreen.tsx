@@ -30,7 +30,7 @@ export function MainScreen({ self }: { self: User }) {
         }
     ]
 
-    const default_profile = "https://www.366icons.com/media/01/profile-avatar-account-icon-16699.png";
+    const default_profile = "https://i.imgur.com/y4N10Rt.png";
 
     return (
         <div className="flex flex-col justify-between gap-4 p-4">

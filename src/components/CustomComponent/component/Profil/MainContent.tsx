@@ -5,7 +5,7 @@ import Upperband from "./Upperband";
 import Lowerband from "./Lowerband";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
-import { User, UserReturnDTO } from "@/type/User";
+import { User, UserDTO } from "@/type/User";
 
 interface MainContentProps {
     children?: React.ReactNode;
@@ -18,7 +18,7 @@ const MainContent = ({ id, token }: MainContentProps) => {
     const [user, setUser] = useState({} as User);
     useEffect(() => {
         const dataFetch = async () => {
-            const data: UserReturnDTO = await (
+            const data: UserDTO = await (
                 await fetch(
                     `${process.env.NEXT_PUBLIC_API_URL}/user/id/${id}`
                 )

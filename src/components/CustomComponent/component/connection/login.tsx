@@ -13,7 +13,7 @@ import {
   Form,
   FormField,
 } from "@/components/ui/form"
-import { Token, UserReturnDTO } from "@/type/User";
+import { UserDTO } from "@/type/User";
 
 const FormSchema = z.object({
   mail: z.string().email({
@@ -45,7 +45,7 @@ export default function Login() {
 
     // Call your API endpoint here
 
-    const retour: UserReturnDTO = await (
+    const retour: UserDTO = await (
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
         method: "POST",
         body: JSON.stringify(data),
@@ -54,19 +54,10 @@ export default function Login() {
         },
       })
     ).json();
-
-    if (retour.error) {
-      // toast({
-      //   title: "Error",
-      //   description: retour.error,
-      // });
-      return;
-    }
-    if(window){
-      window.localStorage.setItem("token", retour.user.token);
+    
+    if(typeof window !== "undefined"){
       window.localStorage.setItem('user', JSON.stringify(retour.user));
-      window.localStorage.setItem('id', retour.user.id);
-      window.location.assign(`/profile?user=${(JSON.parse(atob(retour.user.token.split(".")[1])) as Token).idUser}`);
+      window.location.assign(`/profile?user=${retour.user.id}`);
     }
   }
 

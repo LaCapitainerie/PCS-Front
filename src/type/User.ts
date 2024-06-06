@@ -12,11 +12,6 @@ export interface User {
     nickname: string;
     phoneNumber: string;
     token: string;
-};
-
-export interface UserReturnDTO {
-    error: any;
-    user: UserDTO;
 }
 
 export interface TokenDTO {
