@@ -27,15 +27,13 @@ const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
-    const id = user.id;
-    const token = user.token;
 
     return (
         <>
             <CookieConsent/>
             <Sidebar user={user}/>
-            <BienImmo onHouseChange={SelectedHouse} token={token}/>
-            <MainContent house={House} User_id={id}/>
+            <BienImmo onHouseChange={SelectedHouse} token={user.token}/>
+            <MainContent house={House} User_id={user.id}/>
             <Toaster />
         </>
     );

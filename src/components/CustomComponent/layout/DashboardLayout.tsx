@@ -23,14 +23,12 @@ const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, cust
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
-    const id = user.id;
-    const token = user.token;
 
     return (
         <>
             <CookieConsent/>
             <Sidebar user={user}/>
-            <Dashboard Column={dataColumn} CustomOnes={customOnes} Token={token}/>
+            <Dashboard Column={dataColumn} CustomOnes={customOnes} Token={user.token}/>
             <Toaster />
         </>
     );

@@ -22,8 +22,6 @@ const Index_Layout: React.FC<IndexProps> = ({ children }) => {
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
-    const id = user.id;
-    const token = user.token;
 
     return (
         <div className='flex flex-col gap-8'>

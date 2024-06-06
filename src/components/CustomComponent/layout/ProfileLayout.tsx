@@ -21,14 +21,12 @@ const ProfilLayout: React.FC<LayoutProps> = ({ children, id }) => {
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
-    const user_id = user.id;
-    const token = user.token;
 
     return (
         <>
             <CookieConsent/>
             <Sidebar user={user}/>
-            <MainContent id={id} token={token}/>
+            <MainContent id={id} token={user.token}/>
             <Toaster />
         </>
     );
