@@ -14,7 +14,13 @@ interface LayoutProps {
 
 const ProfilLayout: React.FC<LayoutProps> = ({ children, id }) => {
 
-    const user = JSON.parse(window.localStorage.getItem('user') || "") as User;
+    var getUserfromLocalStorage = "{}";
+    
+    if (typeof window !== 'undefined') {
+        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+    };
+
+    const user = JSON.parse(getUserfromLocalStorage) as User;
     const user_id = user.id;
     const token = user.token;
 

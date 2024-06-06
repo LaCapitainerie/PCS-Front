@@ -21,7 +21,13 @@ const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
         setContact(Contact);
     };
 
-    const user = JSON.parse(window.localStorage.getItem('user') || "") as User;
+    var getUserfromLocalStorage = "{}";
+    
+    if (typeof window !== 'undefined') {
+        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+    };
+
+    const user = JSON.parse(getUserfromLocalStorage) as User;
     const id = user.id;
     const token = user.token;
 
