@@ -25,7 +25,7 @@ const ProfilLayout: React.FC<LayoutProps> = ({ children }) => {
     var getUserfromLocalStorage = "{}";
     
     if (typeof window !== 'undefined') {
-        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+        getUserfromLocalStorage = localStorage.getItem("user") || "{}";
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;

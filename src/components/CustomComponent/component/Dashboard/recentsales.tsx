@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, } from "@/components/ui/card"
 import Usercard from "@/components/ui/usercard";
 import { PrestationDTO } from "@/type/Prestation";
 import { User } from "@/type/User";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function RecentSales({token}: {token: User["token"]}) {
 
@@ -23,7 +23,7 @@ export default function RecentSales({token}: {token: User["token"]}) {
         )
       ).json();
 
-      setRetour(retourDTO);
+      setRetour(retourDTO || {service: []});
     };
 
     dataFetch();
@@ -38,13 +38,13 @@ export default function RecentSales({token}: {token: User["token"]}) {
         <CardTitle>Recent Sales</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-8">
-        {retour.service.map((prestation, index) => (
+        {retour?.service?.map((prestation, index) => (
           <div className="flex items-center gap-4" key={index}>
             <Usercard user={prestation._user}>
               <div className="flex items-center gap-4 w-full">
                 <Avatar className="hidden h-9 w-9 sm:flex">
                   <AvatarImage src={prestation._user?.avatar} alt="Avatar" />
-                  <AvatarFallback>{prestation._user?.lastName[0] + prestation._user?.firstName[0]}</AvatarFallback>
+                  <AvatarFallback>{prestation.userId || (prestation._user?.lastName[0] + prestation._user?.firstName[0])}</AvatarFallback>
                 </Avatar>
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">

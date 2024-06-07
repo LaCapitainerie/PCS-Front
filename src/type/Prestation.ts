@@ -17,6 +17,8 @@ export interface Prestation {
     _user: User;
 
     status: "pending" | "accepted" | "refused" | "done";
+    idStripe: string;
+    name: string;
 };
 
 export interface PrestationDTO {
