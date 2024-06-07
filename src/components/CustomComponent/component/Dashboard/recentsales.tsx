@@ -29,9 +29,6 @@ export default function RecentSales({token}: {token: User["token"]}) {
     dataFetch();
   }, []);
   
-
-  console.log("retour", retour);
-  
   return (
     <Card className="w-full ">
       <CardHeader>

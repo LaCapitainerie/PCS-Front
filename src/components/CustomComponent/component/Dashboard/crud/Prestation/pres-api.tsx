@@ -23,11 +23,8 @@ export const fetchData = async (token?: User["token"]) => {
         },
       }
     )
-  ).json();  
-
-  console.log("retour", retour);
+  ).json();
   
-
   retour.service.forEach(element => {
     props[element.id] = element;
   });
