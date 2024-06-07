@@ -14,6 +14,7 @@ export interface Prestation {
     description: string;
     providerId: string;
     userId: string;
+    date: string;
     _user: User;
 
     status: "pending" | "accepted" | "refused" | "done";
