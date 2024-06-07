@@ -123,10 +123,6 @@ export function Dashboard({Column, CustomOnes, Token}: {Column: ValuableThing[],
             ""
         }
         
-        
-
-
-
         <div className={`h-full w-full grid gap-y-8 gap-x-0 grid-cols-1 grid-rows-2 lg:grid-cols-${tab=='Issues'?1:3} lg:grid-rows-1 lg:gap-y-0 lg:gap-x-8`}>
           
           <Tabs onValueChange={(e) => setTab(e as CrudVariant)} defaultValue={CustomOnes[0]} className={`flex flex-col h-full w-full col-span-2`}>
