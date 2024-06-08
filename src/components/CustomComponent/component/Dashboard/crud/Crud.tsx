@@ -21,6 +21,6 @@ export default ({children, variant, token}: CrudBoardProps) => {
             return <PresCrudView/>;
 
         case "Issues":
-            return <KanbanBoard/>
+            return <KanbanBoard token={token}/>
     };
 };

@@ -7,15 +7,10 @@ import { cva } from "class-variance-authority";
 import { GripVertical } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ColumnId } from "./KanbanBoard";
-
-export interface Task {
-  id: UniqueIdentifier;
-  columnId: ColumnId;
-  content: string;
-}
+import { Issue } from "@/type/Issue";
 
 interface TaskCardProps {
-  task: Task;
+  task: Issue;
   isOverlay?: boolean;
 }
 
@@ -23,7 +18,7 @@ export type TaskType = "Task";
 
 export interface TaskDragData {
   type: TaskType;
-  task: Task;
+  task: Issue;
 }
 
 export function TaskCard({ task, isOverlay }: TaskCardProps) {
@@ -82,7 +77,7 @@ export function TaskCard({ task, isOverlay }: TaskCardProps) {
         </Badge>
       </CardHeader>
       <CardContent className="px-3 pt-3 pb-6 text-left whitespace-pre-wrap">
-        {task.content}
+        {task.description}
       </CardContent>
     </Card>
   );
