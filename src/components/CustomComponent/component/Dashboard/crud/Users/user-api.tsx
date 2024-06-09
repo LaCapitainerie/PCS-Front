@@ -1,15 +1,14 @@
-import { Prestation } from '@/type/Prestation'
-import { ObjectType, ObjectSummary } from './pres_schem'
+import { ObjectType, ObjectSummary } from './user_schem'
 import { User } from '@/type/User'
 
 
 const props: { [id: string]: ObjectType } = {}
-const path = `${process.env.NEXT_PUBLIC_API_URL}/service`
+const path = `${process.env.NEXT_PUBLIC_API_URL}/user`
 const fetchPath = `/all`
-const createPath = `/management`
+const createPath = `/register`
 const updatePath = `/management`
 const deletePath = `/management`
-interface ObjectDTO { service: Prestation[] }
+interface ObjectDTO { users: User[] }
 
 
 export const fetchData = async (token?: User["token"]) => {
@@ -23,13 +22,13 @@ export const fetchData = async (token?: User["token"]) => {
         },
       }
     )
-  ).json();  
+  ).json();
 
-  console.log("retour", retour);
+  console.log("FETCH", retour);
   
 
-  retour.service.forEach(element => {
-    props[element.id] = element;
+  retour.users.forEach(element => {
+    props[element.id] = element as ObjectType;
   });
 
   return {
@@ -56,8 +55,13 @@ export const readData = async (id: string) => {
   return props[id]! // TODO: handle undefined
 }
 
-export const updateData = async (id: string, data: ObjectType, token?: User["token"]) => {
+export const updateData = async (id: string, data: ObjectType, token?: User["token"]) => {  
+
   props[id] = data
+
+  console.log("UPDATE", data);
+  console.log(props, id);
+  
   
   await fetch(
     `${path}${updatePath}/${id}`,
