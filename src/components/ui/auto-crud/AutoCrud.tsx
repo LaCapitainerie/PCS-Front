@@ -5,7 +5,6 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import toast from 'react-hot-toast'
 import { Alert, AlertTitle, AlertDescription } from '../alert'
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
-import { User } from '@/type/User'
 
 const CREATE_INDICATOR = '_create_new_'
 
