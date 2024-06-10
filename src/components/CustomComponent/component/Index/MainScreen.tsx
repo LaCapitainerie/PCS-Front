@@ -9,24 +9,24 @@ export function MainScreen({ self }: { self: User }) {
 
     const Icons = [
         {
-            "name": "Cabins",
+            "name": "Auberges",
             "icon": <Home size={24} />,
-            "description": "Cozy Cabin around you"
+            "description": "Pour des échanges chaleureux"
         },
         {
-            "name": "Campsite",
+            "name": "Camping",
             "icon": <Tent size={24} />,
-            "description": "Great spots for camping"
+            "description": "Pour des nuits à la belle étoile"
         },
         {
-            "name": "Entire Home",
+            "name": "Maisons",
             "icon": <Castle size={24} />,
-            "description": "Privacy is yours"
+            "description": "Votre vie privée vous appartient"
         },
         {
-            "name": "Pet Friendly",
+            "name": "Avec animaux de compagnie",
             "icon": <Dog size={24} />,
-            "description": "Take your cuties with yourself"
+            "description": "Prenez vos amis poilus avec vous"
         }
     ]
 
