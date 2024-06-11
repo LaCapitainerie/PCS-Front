@@ -2,7 +2,9 @@
 
 import React, {Suspense} from 'react';
 import {useSearchParams} from "next/navigation";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
+
+const tokenUser: string = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiI1ZmIzYjVjZS04NGUxLTQzZjAtODkwZi0zNjMyZGJiMmQ3NDEiLCJleHAiOjE3NDkyNTgwMTF9.qa9Ln5WkVnAf4_CQdjTP7OL0X6AqThjaYr3-dK67Ry8lgAOovc1PPY_0GhX_i-l0i_R9LIOZbM_NVgjnpqGsBA"
 
 function VerifyParam(): string {
     const router = useRouter();
@@ -17,12 +19,37 @@ function VerifyParam(): string {
     return idReservation || "";
 }
 
-function valideReservation(id: string) {
+async function valideReservation(id: string) {
+    async function onSubmit() {
+        const link= `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/validation/${id}`
+        try {
+            const response = await fetch(link, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `${tokenUser}`,
+                },
+            });
 
+            if (!response.ok) {
+                throw new Error('La requête a échoué');
+            }
+
+            const data = await response.json();
+
+            console.log(data);
+        } catch (error) {
+            console.error('Erreur lors de la requête:', error);
+        }
+
+    }
+    await onSubmit()
 }
 export default function SuccessPage() {
-    VerifyParam();
 
+    console.log("Salut");
+    const id = VerifyParam();
+    console.log(id);
+    valideReservation(id);
 
 
     return (

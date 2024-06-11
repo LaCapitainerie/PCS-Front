@@ -12,13 +12,13 @@ const quantity= 3;
 const tokenUser: string = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiI1ZmIzYjVjZS04NGUxLTQzZjAtODkwZi0zNjMyZGJiMmQ3NDEiLCJleHAiOjE3NDkyNTgwMTF9.qa9Ln5WkVnAf4_CQdjTP7OL0X6AqThjaYr3-dK67Ry8lgAOovc1PPY_0GhX_i-l0i_R9LIOZbM_NVgjnpqGsBA"
 let serviceA: Prestation = {};
 serviceA.id = "6fe75cbd-f288-4b8e-9922-a8d0dc40e9ad";
-serviceA.date = "2024-09-10T00:00:00Z";
+serviceA.date = "2024-09-29T00:00:00Z";
 
 const reservationCommand: ReservationCommand = {
     travelerId: "5fb3b5ce-84e1-43f0-890f-3632dbb2d741",
     propertyId: "15e31706-4201-49ed-b808-69e353c20632",
-    beginDate: "2024-09-07T00:00:00Z",
-    endDate: "2024-09-14T00:00:00Z",
+    beginDate: "2024-09-28T00:00:00Z",
+    endDate: "2024-09-30T00:00:00Z",
     service : [
         serviceA
     ]
