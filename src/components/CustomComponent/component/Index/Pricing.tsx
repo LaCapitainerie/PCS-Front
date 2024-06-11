@@ -66,7 +66,7 @@ const PricingCard = ({ isYearly, title, monthlyPrice, yearlyPrice, description, 
           <CardTitle className="text-zinc-700 dark:text-zinc-300 text-lg">{title}</CardTitle>
         )}
         <div className="flex gap-0.5">
-          <h3 className="text-3xl font-bold">{yearlyPrice && isYearly ? "$" + yearlyPrice : monthlyPrice ? "$" + monthlyPrice : "Custom"}</h3>
+          <h3 className="text-3xl font-bold">{yearlyPrice && isYearly ? "€" + yearlyPrice : monthlyPrice ? "€" + monthlyPrice : "Gratuit"}</h3>
           <span className="flex flex-col justify-end text-sm mb-1">{yearlyPrice && isYearly ? "/year" : monthlyPrice ? "/month" : null}</span>
         </div>
         <CardDescription className="pt-1.5 h-12">{description}</CardDescription>
@@ -89,7 +89,7 @@ const PricingCard = ({ isYearly, title, monthlyPrice, yearlyPrice, description, 
 const CheckItem = ({ text }: { text: string }) => (
   <div className="flex gap-2">
     <CheckCircle2 size={18} className="my-auto text-green-400" />
-    <p className="pt-0.5 text-zinc-700 dark:text-zinc-300 text-sm">{text}</p>
+    <p className="pt-0.5 text-zinc-700 dark:text-zinc-300 text-sm break-words" style={{maxWidth: '75%'}}>{text}</p>
   </div>
 )
 
