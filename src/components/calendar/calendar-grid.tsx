@@ -2,6 +2,8 @@ import {
 	type DateDuration,
 	endOfMonth,
 	getWeeksInMonth,
+	CalendarDate,
+	getLocalTimeZone,
 } from "@internationalized/date";
 import { useCalendarGrid } from "@react-aria/calendar";
 import { useLocale } from "@react-aria/i18n";
@@ -11,9 +13,11 @@ import { CalendarCell } from "./calendar-cell";
 export function CalendarGrid({
 	state,
 	offset = {},
+	ImpossiblesValues,
 }: {
 	state: CalendarState;
 	offset?: DateDuration;
+	ImpossiblesValues: CalendarDate[];
 }) {
 	const { locale } = useLocale();
 	const startDate = state.visibleRange.start.add(offset);
@@ -35,7 +39,7 @@ export function CalendarGrid({
 			<thead {...headerProps}>
 				<tr>
 					{weekDays.map((day, index) => (
-						<th key={index} className="uppercase text-xs text-gray-11 pb-4">
+						<th key={index} className={`uppercase text-xs text-gray-11 pb-4`}>
 							{day}
 						</th>
 					))}
@@ -49,12 +53,16 @@ export function CalendarGrid({
 								return <td key={index} />;
 							}
 
+							const Imap = ImpossiblesValues.map((v) => v.toDate(getLocalTimeZone()).getDate());
+							const dDate = date.toDate(getLocalTimeZone()).getDate()
+
 							return (
 								<CalendarCell
 									key={index}
 									state={state}
 									date={date}
 									currentMonth={startDate}
+									disallowed={Imap.includes(dDate)}
 								/>
 							);
 						})}

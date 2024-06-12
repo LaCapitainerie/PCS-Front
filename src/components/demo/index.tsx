@@ -3,7 +3,7 @@
 import { Calendar } from "@/components/calendar";
 
 import {
-	type CalendarDate,
+	CalendarDate,
 	getLocalTimeZone,
 	getWeeksInMonth,
 	today,
@@ -76,9 +76,6 @@ export function Demo() {
 
 	const showForm = !!dateParam && !!slotParam;
 
-	console.log(today(getLocalTimeZone()));
-	
-
 	return (
 		<div className="w-full px-8 py-6 rounded-md max-w-max mx-auto">
 			<div className="flex gap-6">
@@ -91,10 +88,14 @@ export function Demo() {
 					<>
 						<Calendar
 							minValue={today(getLocalTimeZone()).add({ days: 1 })}
-							defaultValue={today(getLocalTimeZone())}
+							defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
 							value={date}
 							onChange={handleChangeDate}
 							onFocusChange={(focused) => setFocusedDate(focused)}
+							ImpossiblesValues={[
+								new CalendarDate(2024, 6, 20),
+								new CalendarDate(2024, 6, 21),
+							]}
 						/>
 						<RightPanel
 							{...{ date, timeZone, weeksInMonth, handleChangeAvailableTime }}

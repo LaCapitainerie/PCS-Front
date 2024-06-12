@@ -15,14 +15,16 @@ export function CalendarCell({
 	state,
 	date,
 	currentMonth,
+	disallowed,
 }: {
 	state: CalendarState;
 	date: CalendarDate;
 	currentMonth: CalendarDate;
+	disallowed: boolean;
 }) {
 	const ref = useRef<HTMLDivElement>(null);
 	const { cellProps, buttonProps, isSelected, isDisabled, formattedDate } =
-		useCalendarCell({ date }, state, ref);
+		useCalendarCell({ date, isDisabled: disallowed}, state, ref);
 
 	const isOutsideMonth = !isSameMonth(currentMonth, date);
 
@@ -45,7 +47,7 @@ export function CalendarCell({
 					className={cn(
 						"size-full rounded-md flex items-center justify-center",
 						"text-gray-12 text-sm font-semibold",
-						isDisabled
+						isDisabled || disallowed
 							? isDateToday
 								? "cursor-defaut"
 								: "text-gray-8 cursor-defaut"
@@ -56,7 +58,7 @@ export function CalendarCell({
 						// Darker selection background for the start and end.
 						isSelected && "bg-gray-12 text-gray-1",
 						// Hover state for non-selected cells.
-						!isSelected && !isDisabled && "hover:ring-2 hover:ring-gray-12",
+						!isSelected && !isDisabled && !disallowed && "hover:ring-2 hover:ring-gray-12",
 						// isDateToday && "bg-gray-1 text-primary ring-0 ring-offset-0",
 					)}
 				>

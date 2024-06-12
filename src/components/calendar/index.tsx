@@ -1,6 +1,6 @@
 "use client";
 
-import { createCalendar } from "@internationalized/date";
+import { CalendarDate, createCalendar } from "@internationalized/date";
 import {
 	type CalendarProps,
 	type DateValue,
@@ -11,7 +11,8 @@ import { useCalendarState } from "@react-stately/calendar";
 import { CalendarGrid } from "./calendar-grid";
 import { CalendarHeader } from "./calendar-header";
 
-export function Calendar(props: CalendarProps<DateValue>) {
+export function Calendar(props: CalendarProps<DateValue> & { ImpossiblesValues: CalendarDate[] }) {
+  	const { ImpossiblesValues } = props;
 	const { locale } = useLocale();
 	const state = useCalendarState({
 		...props,
@@ -34,7 +35,7 @@ export function Calendar(props: CalendarProps<DateValue>) {
 				nextButtonProps={nextButtonProps}
 			/>
 			<div className="flex gap-8">
-				<CalendarGrid state={state} />
+				<CalendarGrid state={state} ImpossiblesValues={ImpossiblesValues} />
 			</div>
 		</div>
 	);
