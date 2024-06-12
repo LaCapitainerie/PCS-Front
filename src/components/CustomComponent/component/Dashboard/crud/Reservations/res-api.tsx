@@ -9,7 +9,7 @@ const path = `${process.env.NEXT_PUBLIC_API_URL}/reservation/property`
 const fetchPath = `/allreservation`
 const createPath = `/`
 const updatePath = `/`
-const deletePath = `/`
+const deletePath = `/annulation`
 interface ObjectDTO { reservation: ReservationDTO[]; }
 
 
@@ -77,7 +77,7 @@ export const updateData = async (id: string, data: ObjectType, token?: User["tok
   )
 }
 
-export const use_deleteData = async (id: ObjectSummary, token?: User["token"]) => {
+export const deleteData = async (id: ObjectSummary) => {
   const result = await fetch(
     `${path}${deletePath}/${(id as any).original.id}`,
     {

@@ -1,7 +1,7 @@
 import { createCrudView } from '@/components/ui/auto-crud/AutoCrud'
 import { createAutoForm } from '@/components/ui/auto-crud/createAutoForm'
 import { createCrudList } from '@/components/ui/auto-crud/createCrudList'
-import { createData, use_deleteData, fetchData, readData, updateData } from './res-api'
+import { createData, deleteData, fetchData, readData, updateData } from './res-api'
 import { Schema, type ObjectType, type ObjectSummary } from './res_schem'
 import { Property } from '@/type/Property'
 
@@ -15,15 +15,15 @@ export const ReservationCrudView: React.FC<ReservationCrudViewProps> = ({ proper
     name: 'ReservationCrudView',
     action: {
       list: () => fetchData(propertyID),
-      create: (payload) => createData(payload),
       read: ({ id }) => readData(id),
       update: (prop, { id }) => updateData(id, prop),
-      delete: (prop) => use_deleteData(prop),
+      delete: (prop) => deleteData(prop),
     },
     getId: ({ id }) => id,
     listToDataSource: (list) => list.props,
     FormComponent: createAutoForm({ schema: Schema }),
     ListComponent: createCrudList({
+      mode: 'allow',
       columns: () => [
         {
           accessorKey: 'name',
