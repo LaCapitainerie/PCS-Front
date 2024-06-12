@@ -17,6 +17,7 @@ export const UserCrudView = createCrudView<ObjectType, ObjectSummary>({firstName
   listToDataSource: (list) => list.props,
   FormComponent: createAutoForm({ schema: Schema }),
   ListComponent: createCrudList({
+    mode: 'make',
     columns: () => [
       {
         accessorKey: 'name',

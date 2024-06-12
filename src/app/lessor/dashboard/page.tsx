@@ -13,7 +13,7 @@ export default function Bailleur() {
         // }
     ];
     
-    const Cruds:CrudVariant[] = ["Properties", "Prestations", "Issues", "Users"]
+    const Cruds:CrudVariant[] = ["Properties", "Reservations"]
 
     return (
         <Dashboard_Layout dataColumn={Columns} customOnes={Cruds} >

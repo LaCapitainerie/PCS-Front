@@ -29,7 +29,7 @@ export const createCrudView =
       })
       const createOrUpdate = useMutation({
         mutationFn: (data: TFormData) => {
-          if (selectedId === CREATE_INDICATOR) {
+          if (selectedId === CREATE_INDICATOR && action.create) {
             return action.create(data)
           }
           return action.update(data, selected!)

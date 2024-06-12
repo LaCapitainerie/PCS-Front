@@ -18,6 +18,7 @@ export const PresCrudView = createCrudView<ObjectType, ObjectSummary>({descripti
   listToDataSource: (list) => list.props,
   FormComponent: createAutoForm({ schema: Schema }),
   ListComponent: createCrudList({
+    mode: 'make',
     columns: () => [
       {
         accessorKey: 'Target',

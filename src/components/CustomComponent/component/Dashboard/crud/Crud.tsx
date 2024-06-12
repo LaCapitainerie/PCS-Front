@@ -3,8 +3,10 @@ import { PresCrudView } from "./Prestation/prescrud";
 import { PropCrudView } from "./Property/propcrud";
 import { KanbanBoard } from "../../Issue/KanbanBoard";
 import { UserCrudView } from "./Users/usercrud";
+import { ReservationCrudView } from "./Reservations/rescrud";
+import React from "react";
 
-export type CrudVariant = "Properties" | "Prestations" | "Users" | "Issues";
+export type CrudVariant = "Properties" | "Prestations" | "Reservations" | "Users" | "Issues";
 
 interface CrudBoardProps {
     children?: React.ReactNode;
@@ -20,6 +22,9 @@ export default ({children, variant, token}: CrudBoardProps) => {
 
         case "Prestations":
             return <PresCrudView/>;
+
+        case "Reservations":
+            return <ReservationCrudView variant={variant}/>;
 
         case "Users":
             return <UserCrudView/>;

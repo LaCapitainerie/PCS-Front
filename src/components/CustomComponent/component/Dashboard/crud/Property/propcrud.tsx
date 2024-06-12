@@ -8,7 +8,7 @@ export const PropCrudView = createCrudView<ObjectType, ObjectSummary>({name: 'em
   name: 'Property',
   action: {
     list: () => fetchData(),
-    create: (payload) => createData(payload, ),
+    //create: (payload) => createData(payload, ),
     read: ({ id }) => readData(id),
     update: (prop, { id }) => updateData(id, prop, ),
     delete: (prop) => use_deleteData(prop, ),
@@ -17,6 +17,7 @@ export const PropCrudView = createCrudView<ObjectType, ObjectSummary>({name: 'em
   listToDataSource: (list) => list.props,
   FormComponent: createAutoForm({ schema: Schema }),
   ListComponent: createCrudList({
+    mode: 'make',
     columns: () => [
       {
         accessorKey: 'name',
