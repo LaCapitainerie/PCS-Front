@@ -2,6 +2,7 @@ import { ReservationDTO } from '@/type/Reservation'
 import { ObjectType, ObjectSummary } from './res_schem'
 import { User } from '@/type/User'
 import { Property } from '@/type/Property'
+import { Service, ServiceDTO } from '@/type/Service'
 
 
 const props: { [id: string]: ObjectType } = {}
@@ -10,33 +11,41 @@ const fetchPath = `/allreservation`
 const createPath = `/`
 const updatePath = `/`
 const deletePath = `/annulation`
-interface ObjectDTO { reservation: ReservationDTO[]; }
+interface ObjectDTO { service: Service[]; }
 
 
 export const fetchData = async (propertyID?: Property["id"]) => {
-  const retour: ObjectDTO = await (
-    await fetch(
-      `${path}${fetchPath}/${propertyID}`,
-      {
-        method: "GET",
-        headers: {
-          "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
-        },
-      }
-    )
-  ).json();
-
-  console.log("FETCH", retour);
+  try {
+    const retour: ObjectDTO = await (
+      await fetch(
+        `${path}${fetchPath}/${propertyID}`,
+        {
+          method: "GET",
+          headers: {
+            "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+          },
+        }
+      )
+    ).json();  
   
-
-  retour.reservation.forEach(element => {
-    //props[element.id] = element as ObjectType;
-  });
-
-  return {
-    total: props.length,
-    props: Object.values(props),
+    console.log
+    (retour, propertyID);
+  
+    retour.service.forEach(element => {
+      props[element.id] = element as ObjectType;
+    });
+  
+    return {
+      total: props.length,
+      props: Object.values(props),
+    }
+  } catch (error) {
+    return {
+      total: 0,
+      props: [],
+    }
   }
+  
 }
 
 export const createData = async (prop: ObjectType, token?: User["token"]) => {

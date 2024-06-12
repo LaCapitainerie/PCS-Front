@@ -5,19 +5,20 @@ import z from 'zod'
 // This is used to validate the data that will be passed to the form
 
 export const Schema = z.object({
-  id: z.string(),
-  type: z.enum(["traveler", "provider", "lessor", "admin"]),
-  mail: z.string(),
-  password: z.string(),
-  registerdate: z.string(),
-  lastConnectionDate: z.string(),
-  avatar: z.string(),
+  address: z.string(),
+  city: z.string(),
+  country: z.string(),
   description: z.string(),
-  firstName: z.string(),
-  lastName: z.string(),
-  nickname: z.string(),
-  phoneNumber: z.string(),
-  token: z.string(),
+  id: z.string(),
+  idStripe: z.string(),
+  lat: z.number(),
+  lon: z.number(),
+  name: z.string(),
+  price: z.number(),
+  providerId: z.string(),
+  rangeAction: z.number(),
+  targetCustomer: z.string(),
+  zipCode: z.string(),
 });
 
 
@@ -29,16 +30,9 @@ export type ObjectType = z.infer<typeof Schema> & {
 
 export type ObjectSummary = {
   id: User["id"];
-  type: User["type"];
-  mail: User["mail"];
-  password: User["password"];
-  registerdate: User["registerdate"];
-  lastConnectionDate: User["lastConnectionDate"];
-  avatar: User["avatar"];
-  description: User["description"];
-  firstName: User["firstName"];
-  lastName: User["lastName"];
-  nickname: User["nickname"];
-  phoneNumber: User["phoneNumber"];
-  token: User["token"];
+  name: ObjectType["name"];
+  targetCustomer: ObjectType["targetCustomer"];
+  address: ObjectType["address"];
+  city: ObjectType["city"];
+  price: ObjectType["price"];
 };

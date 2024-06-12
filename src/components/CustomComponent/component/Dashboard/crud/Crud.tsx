@@ -24,7 +24,7 @@ export default ({children, variant, token}: CrudBoardProps) => {
             return <PresCrudView/>;
 
         case "Reservations":
-            return <ReservationCrudView propertyID={"15e31706-4201-49ed-b808-69e353c20632"}/>;
+            return <ReservationCrudView variant={variant}/>;
 
         case "Users":
             return <UserCrudView/>;
