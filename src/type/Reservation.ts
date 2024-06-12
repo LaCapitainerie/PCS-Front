@@ -17,7 +17,9 @@ export interface Bill {
 };
 
 export interface ReservationDTO {
-    reservation: Reservation;
-    bill: Bill;
-    service: ServiceDTO[];
+    reservations: {
+        reservation: Reservation;
+        bill: Bill;
+        service: ServiceDTO[];
+    }[];
 };

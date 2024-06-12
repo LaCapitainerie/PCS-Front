@@ -1,8 +1,7 @@
-import { ReservationDTO } from '@/type/Reservation'
 import { ObjectType, ObjectSummary } from './res_schem'
 import { User } from '@/type/User'
 import { Property } from '@/type/Property'
-import { Service, ServiceDTO } from '@/type/Service'
+import { PrestationDTO } from '@/type/Prestation'
 
 
 const props: { [id: string]: ObjectType } = {}
@@ -11,7 +10,7 @@ const fetchPath = `/allreservation`
 const createPath = `/`
 const updatePath = `/`
 const deletePath = `/annulation`
-interface ObjectDTO { service: Service[]; }
+interface ObjectDTO { prestation: PrestationDTO[]; }
 
 
 export const fetchData = async (propertyID?: Property["id"]) => {
@@ -28,11 +27,10 @@ export const fetchData = async (propertyID?: Property["id"]) => {
       )
     ).json();  
   
-    console.log
-    (retour, propertyID);
+    console.log(retour.prestation, propertyID);
   
-    retour.service.forEach(element => {
-      props[element.id] = element as ObjectType;
+    retour.prestation.forEach(element => {
+      // props[element.id] = element as ObjectType;
     });
   
     return {

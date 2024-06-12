@@ -15,12 +15,15 @@ import { useLocale } from "@react-aria/i18n";
 import { CalendarIcon, Clock4 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { timeZones } from "./time-zones";
+import { Reservation } from "@/type/Reservation";
 
 export function LeftPanel({
+	Reservations,
 	showForm,
 	timeZone,
 	setTimeZone,
 }: {
+	Reservations: Reservation[];
 	showForm: boolean | null;
 	timeZone: string;
 	setTimeZone: (timeZone: string) => void;

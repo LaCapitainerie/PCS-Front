@@ -15,8 +15,15 @@ import * as React from "react";
 import { FormPanel } from "./form-panel";
 import { LeftPanel } from "./left-panel";
 import { RightPanel } from "./right-panel";
+import { Prestation, PrestationDTO } from "@/type/Prestation";
+import { Property } from "@/type/Property";
+import { Reservation, ReservationDTO } from "@/type/Reservation";
 
-export function Demo() {
+interface DemoProps {
+	property: Property;
+}
+
+export function Demo({property}: DemoProps) {
 	const router = useRouter();
 	const { locale } = useLocale();
 
@@ -32,6 +39,26 @@ export function Demo() {
 
 	const weeksInMonth = getWeeksInMonth(focusedDate as DateValue, locale);
 
+	const [selectedReservation, setSelectedReservation] = React.useState<Reservation[]>([]);
+	const [allReservations, setAllReservations] = React.useState<Reservation[]>([]);
+
+	// Get list of all reservations with fetch
+	React.useEffect(() => {
+        const dataFetch = async () => {
+            const data: ReservationDTO = await (
+                await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/allreservation/${property.id}`,
+                )
+            ).json();
+
+            setAllReservations(data.reservations.map((reservation: any) => reservation.reservation));
+        };
+
+        dataFetch();
+    }, [property]);
+
+
+
 	const handleChangeDate = (date: DateValue) => {
 		setDate(date as CalendarDate);
 		const url = new URL(window.location.href);
@@ -40,7 +67,20 @@ export function Demo() {
 			date.toDate(timeZone).toISOString().split("T")[0],
 		);
 		router.push(url.toString());
+
+		setSelectedReservation(
+			// If the date is between the beginDate and endDate of a reservation, we add it to the selectedReservation
+			allReservations.filter((reservation) => {
+				const beginDate = new Date(reservation.beginDate);
+				const endDate = new Date(reservation.endDate);
+				const currentDate = date.toDate(timeZone);
+
+				return currentDate >= beginDate && currentDate <= endDate;
+			}),
+		);
 	};
+
+
 
 	const handleChangeAvailableTime = (time: string) => {
 		const timeValue = time.split(":").join(" ");
@@ -80,6 +120,7 @@ export function Demo() {
 		<div className="w-full px-8 py-6 rounded-md max-w-max mx-auto">
 			<div className="flex gap-6">
 				<LeftPanel
+					Reservations={selectedReservation}
 					showForm={showForm}
 					timeZone={timeZone}
 					setTimeZone={setTimeZone}
