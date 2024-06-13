@@ -1,3 +1,5 @@
+"use client"
+
 import {
 	Select,
 	SelectContent,
@@ -16,6 +18,8 @@ import { CalendarIcon, Clock4 } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { timeZones } from "./time-zones";
 import { Reservation } from "@/type/Reservation";
+import { Property } from "@/type/Property";
+import { useState } from "react";
 
 export function LeftPanel({
 	Reservations,
@@ -32,6 +36,9 @@ export function LeftPanel({
 
 	const searchParams = useSearchParams();
 	const slotParam = searchParams.get("slot");
+
+
+	const [reservation, setReservation] = useState<Reservation | undefined>(undefined);
 
 	return (
 		<div className="flex flex-col gap-4 w-[280px] border-r pr-6">
@@ -92,7 +99,7 @@ export function LeftPanel({
 						</Tooltip>
 					</TooltipProvider>
 				</div>
-				<Select value={timeZone} onValueChange={setTimeZone}>
+				{/* <Select value={timeZone} onValueChange={setTimeZone}>
 					<SelectTrigger className="w-fit">
 						<SelectValue placeholder="Select time zone">
 							{timeZone.replace(/_/g, " ").split("(")[0].trim()}
@@ -106,6 +113,24 @@ export function LeftPanel({
 								className="dark:focus:bg-gray-2"
 							>
 								{timeZone.label.replace(/_/g, " ")}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select> */}
+				<Select value={timeZone} onValueChange={(e) => setReservation(Reservations.find((r) => r.travelerId === e))} disabled={Reservations.length == 0}>
+					<SelectTrigger className="w-fit">
+						<SelectValue placeholder="Select a Property">
+							{Reservations.length == 0 ? "No reservation on this day" : "Select a Property"}
+						</SelectValue>
+					</SelectTrigger>
+					<SelectContent className="w-fit dark:bg-gray-5">
+						{Reservations.map((res, index) => (
+							<SelectItem
+								key={index}
+								value={res.travelerId}
+								className="dark:focus:bg-gray-2"
+							>
+								{res.travelerId}
 							</SelectItem>
 						))}
 					</SelectContent>

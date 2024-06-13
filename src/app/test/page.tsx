@@ -19,7 +19,7 @@ export default function Admin() {
 
     return (
         <>
-            <Calendar property={prop} token={user.token}/>
+            <Calendar property={prop} token={user.token} mode={"lessor"}/>
         </>
     );
 }

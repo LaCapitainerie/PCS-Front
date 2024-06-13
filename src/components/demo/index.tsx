@@ -26,6 +26,7 @@ import { TakenValues } from "../calendar/calendar-grid";
 interface CalendarProps {
 	property: Property;
 	token: User["token"];
+	mode: "lessor" | "traveler";
 }
 
 function Search(): [string | null, string | null] {
@@ -37,7 +38,7 @@ function Search(): [string | null, string | null] {
 	return [dateParam, slotParam];
 }
 
-export default function CalendarLayout({property, token}: CalendarProps) {
+export default function CalendarLayout({property, token, mode}: CalendarProps) {
 	const router = useRouter();
 	const { locale } = useLocale();
 
@@ -58,24 +59,26 @@ export default function CalendarLayout({property, token}: CalendarProps) {
 	React.useEffect(() => {
         const dataFetch = async () => {
 			try {
-				const data: ReservationDTO = await (
-					await fetch(
-						`${process.env.NEXT_PUBLIC_API_URL}/property/allreservation/${property.id}`,
-						{
-							method: "GET",
-							headers: {
-								"Content-Type": "application/json",
-								"Authorization": token
-							},
-						}
-					)
-				).json();
+				// const data: ReservationDTO = await (
+				// 	await fetch(
+				// 		`${process.env.NEXT_PUBLIC_API_URL}/property/allreservation/${property.id}`,
+				// 		{
+				// 			method: "GET",
+				// 			headers: {
+				// 				"Content-Type": "application/json",
+				// 				"Authorization": token
+				// 			},
+				// 		}
+				// 	)
+				// ).json();
 	
-				setAllReservations(
-					data.reservation.map(
-						(reservation: any) => reservation.reservation));
+				// setAllReservations(
+				// 	data.reservation.map(
+				// 		(reservation: any) => reservation.reservation));
 			} catch (error) {
 				console.error("Error fetching data", error);
+			} finally {
+				console.log("Data fetched");
 
 				setAllReservations([
 					{
@@ -83,29 +86,26 @@ export default function CalendarLayout({property, token}: CalendarProps) {
 						endDate: "2024-06-24 23:59:59",
 						annulation: false,
 						propertyId: "",
-						travelerId: ""
+						travelerId: "1111-1111-1111-1111"
 					} as Reservation,
 					{
 						beginDate: "2024-06-22 00:00:00",
 						endDate: "2024-06-27 23:59:59",
 						annulation: false,
 						propertyId: "",
-						travelerId: ""
+						travelerId: "2222-2222-2222-2222"
 					} as Reservation,
 					{
 						beginDate: "2024-06-23 00:00:00",
 						endDate: "2024-06-25 23:59:59",
 						annulation: false,
 						propertyId: "",
-						travelerId: ""
+						travelerId: "3333-3333-3333-3333"
 					} as Reservation
 				])
-				console.log("allReservations", allReservations);
-
-
-			} finally {
-				console.log("Data fetched");
 				
+				
+				console.log("allReservations", allReservations);
 			}
         };
 
@@ -218,6 +218,7 @@ export default function CalendarLayout({property, token}: CalendarProps) {
 									return getDaysArray(beginDate, endDate, colors[index % colors.length]);
 								})
 							}
+							mode={mode}
 						/>
 						<RightPanel
 							{...{ date, timeZone, weeksInMonth, handleChangeAvailableTime }}

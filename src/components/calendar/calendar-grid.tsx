@@ -19,10 +19,12 @@ export function CalendarGrid({
 	state,
 	offset = {},
 	TakenValues,
+	mode,
 }: {
 	state: CalendarState;
 	offset?: DateDuration;
 	TakenValues: TakenValues[][];
+	mode: "lessor" | "traveler";
 }) {
 	const { locale } = useLocale();
 	const startDate = state.visibleRange.start.add(offset);
@@ -62,16 +64,15 @@ export function CalendarGrid({
 							
 							const dDate = date.toDate(getLocalTimeZone()).getDate()
 							
-							console.log(`Imap ${index}`, Imap.filter((e) => e.day === dDate).map((e) => e.color));
-
 							return (
 								<CalendarCell
 									key={index}
 									state={state}
 									date={date}
 									currentMonth={startDate}
-									disallowed={ false && Imap.map((e) => e.day).includes(dDate)}
-									colors={Imap.filter((e) => e.day === dDate).map((e) => e.color)}
+									disallowed={ mode == "traveler" && Imap.map((e) => e.day).includes(dDate)}
+									colors={mode == "lessor" ? Imap.filter((e) => e.day === dDate).map((e) => e.color) : []}
+									mode={mode}
 								/>
 							);
 						})}

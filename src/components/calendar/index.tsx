@@ -11,8 +11,8 @@ import { useCalendarState } from "@react-stately/calendar";
 import { CalendarGrid, TakenValues } from "./calendar-grid";
 import { CalendarHeader } from "./calendar-header";
 
-export function Calendar(props: CalendarProps<DateValue> & { TakenValues: TakenValues[][] }) {
-  	const { TakenValues } = props;
+export function Calendar(props: CalendarProps<DateValue> & { TakenValues: TakenValues[][], mode: "lessor" | "traveler"}) {
+  	const { TakenValues, mode } = props;
 	const { locale } = useLocale();
 	const state = useCalendarState({
 		...props,
@@ -35,7 +35,7 @@ export function Calendar(props: CalendarProps<DateValue> & { TakenValues: TakenV
 				nextButtonProps={nextButtonProps}
 			/>
 			<div className="flex gap-8">
-				<CalendarGrid state={state} TakenValues={TakenValues} />
+				<CalendarGrid state={state} TakenValues={TakenValues} mode={mode}/>
 			</div>
 		</div>
 	);

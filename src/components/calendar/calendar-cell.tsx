@@ -16,13 +16,15 @@ export function CalendarCell({
 	date,
 	currentMonth,
 	disallowed,
-	colors
+	colors,
+	mode,
 }: {
 	state: CalendarState;
 	date: CalendarDate;
 	currentMonth: CalendarDate;
 	disallowed: boolean;
 	colors: string[];
+	mode: "lessor" | "traveler";
 }) {
 	const ref = useRef<HTMLDivElement>(null);
 	const { cellProps, buttonProps, isSelected, isDisabled, formattedDate } =
@@ -76,7 +78,7 @@ export function CalendarCell({
 								/>
 							</>
 						)}
-						{colors.map((c, index) => (
+						{mode === "lessor" ? colors.map((c, index) => (
 							<div key={index}
 								className={cn(
 									"size-1.5 bg-" + c + "-1 rounded-full",
@@ -85,7 +87,7 @@ export function CalendarCell({
 
 								style={{backgroundColor: c}}
 							/>
-						))}
+						)): ""}
 					</div>
 				</div>
 			</div>
