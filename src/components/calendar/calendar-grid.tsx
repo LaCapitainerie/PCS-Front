@@ -11,7 +11,7 @@ import type { CalendarState } from "@react-stately/calendar";
 import { CalendarCell } from "./calendar-cell";
 
 export interface TakenValues {
-	day: number;
+	day: string;
 	color: string;
 };
 
@@ -62,7 +62,9 @@ export function CalendarGrid({
 
 							const Imap = TakenValues.flat()
 							
-							const dDate = date.toDate(getLocalTimeZone()).getDate()
+							const dDate = date.toDate(getLocalTimeZone())
+
+							const dayString = `${date.year}-${date.month}-${date.day}`;
 							
 							return (
 								<CalendarCell
@@ -70,8 +72,8 @@ export function CalendarGrid({
 									state={state}
 									date={date}
 									currentMonth={startDate}
-									disallowed={ mode == "traveler" && Imap.map((e) => e.day).includes(dDate)}
-									colors={mode == "lessor" ? Imap.filter((e) => e.day === dDate).map((e) => e.color) : []}
+									disallowed={ mode == "traveler" && Imap.map((e) => e.day).includes(dayString)}
+									colors={mode == "lessor" ? Imap.filter((e) => e.day === dayString).map((e) => e.color) : []}
 									mode={mode}
 								/>
 							);

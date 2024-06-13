@@ -17,9 +17,10 @@ import { LeftPanel } from "./left-panel";
 import { RightPanel } from "./right-panel";
 import { Prestation, PrestationDTO } from "@/type/Prestation";
 import { Property } from "@/type/Property";
-import { Reservation, ReservationDTO } from "@/type/Reservation";
+import { Bill, Reservation, ReservationDTO } from "@/type/Reservation";
 import { User } from "@/type/User";
 import { TakenValues } from "../calendar/calendar-grid";
+import { Service } from "@/type/Service";
 
 
 
@@ -59,50 +60,54 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 	React.useEffect(() => {
         const dataFetch = async () => {
 			try {
-				// const data: ReservationDTO = await (
-				// 	await fetch(
-				// 		`${process.env.NEXT_PUBLIC_API_URL}/property/allreservation/${property.id}`,
-				// 		{
-				// 			method: "GET",
-				// 			headers: {
-				// 				"Content-Type": "application/json",
-				// 				"Authorization": token
-				// 			},
-				// 		}
-				// 	)
-				// ).json();
+				const data: ReservationDTO = await (
+					await fetch(
+						`${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${property.id}`,
+						{
+							method: "GET",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+							},
+						}
+					)
+				).json();
+
+				console.log();
+				
 	
-				// setAllReservations(
-				// 	data.reservation.map(
-				// 		(reservation: any) => reservation.reservation));
+				setAllReservations(
+					data.reservation);
+
+				
 			} catch (error) {
 				console.error("Error fetching data", error);
 			} finally {
 				console.log("Data fetched");
 
-				setAllReservations([
-					{
-						beginDate: "2024-06-20 00:00:00",
-						endDate: "2024-06-24 23:59:59",
-						annulation: false,
-						propertyId: "",
-						travelerId: "1111-1111-1111-1111"
-					} as Reservation,
-					{
-						beginDate: "2024-06-22 00:00:00",
-						endDate: "2024-06-27 23:59:59",
-						annulation: false,
-						propertyId: "",
-						travelerId: "2222-2222-2222-2222"
-					} as Reservation,
-					{
-						beginDate: "2024-06-23 00:00:00",
-						endDate: "2024-06-25 23:59:59",
-						annulation: false,
-						propertyId: "",
-						travelerId: "3333-3333-3333-3333"
-					} as Reservation
-				])
+				// setAllReservations([
+				// 	{
+				// 		beginDate: "2024-06-20 00:00:00",
+				// 		endDate: "2024-06-24 23:59:59",
+				// 		annulation: false,
+				// 		propertyId: "",
+				// 		travelerId: "1111-1111-1111-1111"
+				// 	} as Reservation,
+				// 	{
+				// 		beginDate: "2024-06-22 00:00:00",
+				// 		endDate: "2024-06-27 23:59:59",
+				// 		annulation: false,
+				// 		propertyId: "",
+				// 		travelerId: "2222-2222-2222-2222"
+				// 	} as Reservation,
+				// 	{
+				// 		beginDate: "2024-06-23 00:00:00",
+				// 		endDate: "2024-06-25 23:59:59",
+				// 		annulation: false,
+				// 		propertyId: "",
+				// 		travelerId: "3333-3333-3333-3333"
+				// 	} as Reservation
+				// ])
 				
 				
 				console.log("allReservations", allReservations);
@@ -174,7 +179,7 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 		const arr: TakenValues[] = [];
 		for(const dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
 			arr.push({
-				day: new Date(dt).getDate(),
+				day: dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate(),
 				color: color
 			});
 		}
@@ -212,6 +217,7 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 							onFocusChange={(focused) => setFocusedDate(focused)}
 							TakenValues={
 								allReservations.map((reservation, index) => {
+									
 									const beginDate = new Date(reservation.beginDate);
 									const endDate = new Date(reservation.endDate);
 

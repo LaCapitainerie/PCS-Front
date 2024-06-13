@@ -1,4 +1,4 @@
-import { ServiceDTO } from "./Service";
+import { Service, ServiceDTO } from "./Service";
 
 export interface Reservation {
     travelerId: string;
@@ -6,6 +6,9 @@ export interface Reservation {
     beginDate: string;
     endDate: string;
     annulation: boolean;
+
+    bill: Bill;
+    service: Service[];
 };
 
 export interface Bill {
@@ -17,9 +20,5 @@ export interface Bill {
 };
 
 export interface ReservationDTO {
-    reservation: {
-        reservation: Reservation;
-        bill: Bill;
-        service: ServiceDTO[];
-    }[];
+    reservation: Reservation[];
 };

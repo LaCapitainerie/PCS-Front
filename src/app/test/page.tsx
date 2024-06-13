@@ -6,7 +6,7 @@ import { User } from "@/type/User";
 export default function Admin() {
 
     const prop = {
-        id: "280bf0d1-8df8-432a-9271-2a80d17ad1a2"
+        id: "15e31706-4201-49ed-b808-69e353c20632"
     } as Property;
 
     var getUserfromLocalStorage = "{}";
