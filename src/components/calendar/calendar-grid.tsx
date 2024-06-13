@@ -10,14 +10,19 @@ import { useLocale } from "@react-aria/i18n";
 import type { CalendarState } from "@react-stately/calendar";
 import { CalendarCell } from "./calendar-cell";
 
+export interface TakenValues {
+	day: number;
+	color: string;
+};
+
 export function CalendarGrid({
 	state,
 	offset = {},
-	ImpossiblesValues,
+	TakenValues,
 }: {
 	state: CalendarState;
 	offset?: DateDuration;
-	ImpossiblesValues: CalendarDate[];
+	TakenValues: TakenValues[][];
 }) {
 	const { locale } = useLocale();
 	const startDate = state.visibleRange.start.add(offset);
@@ -46,15 +51,18 @@ export function CalendarGrid({
 				</tr>
 			</thead>
 			<tbody>
-				{[...new Array(weeksInMonth).keys()].map((weekIndex) => (
+				{[...new Array(weeksInMonth).keys()].map((weekIndex, index) => (
 					<tr key={weekIndex}>
 						{state.getDatesInWeek(weekIndex, startDate).map((date, index) => {
 							if (!date) {
 								return <td key={index} />;
 							}
 
-							const Imap = ImpossiblesValues.map((v) => v.toDate(getLocalTimeZone()).getDate());
+							const Imap = TakenValues.flat()
+							
 							const dDate = date.toDate(getLocalTimeZone()).getDate()
+							
+							console.log(`Imap ${index}`, Imap.filter((e) => e.day === dDate).map((e) => e.color));
 
 							return (
 								<CalendarCell
@@ -62,7 +70,8 @@ export function CalendarGrid({
 									state={state}
 									date={date}
 									currentMonth={startDate}
-									disallowed={Imap.includes(dDate)}
+									disallowed={ false && Imap.map((e) => e.day).includes(dDate)}
+									colors={Imap.filter((e) => e.day === dDate).map((e) => e.color)}
 								/>
 							);
 						})}

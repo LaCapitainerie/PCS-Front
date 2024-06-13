@@ -18,20 +18,32 @@ import { RightPanel } from "./right-panel";
 import { Prestation, PrestationDTO } from "@/type/Prestation";
 import { Property } from "@/type/Property";
 import { Reservation, ReservationDTO } from "@/type/Reservation";
+import { User } from "@/type/User";
+import { TakenValues } from "../calendar/calendar-grid";
 
-interface DemoProps {
+
+
+interface CalendarProps {
 	property: Property;
+	token: User["token"];
 }
 
-export function Demo({property}: DemoProps) {
-	const router = useRouter();
-	const { locale } = useLocale();
-
+function Search(): [string | null, string | null] {
+    
 	const searchParams = useSearchParams();
 	const dateParam = searchParams.get("date");
 	const slotParam = searchParams.get("slot");
 
-	const [timeZone, setTimeZone] = React.useState("America/New_York");
+	return [dateParam, slotParam];
+}
+
+export default function CalendarLayout({property, token}: CalendarProps) {
+	const router = useRouter();
+	const { locale } = useLocale();
+
+	const [dateParam, slotParam] = Search();
+
+	const [timeZone, setTimeZone] = React.useState("UTC");
 	const [date, setDate] = React.useState(today(getLocalTimeZone()));
 	const [focusedDate, setFocusedDate] = React.useState<CalendarDate | null>(
 		date,
@@ -45,13 +57,56 @@ export function Demo({property}: DemoProps) {
 	// Get list of all reservations with fetch
 	React.useEffect(() => {
         const dataFetch = async () => {
-            const data: ReservationDTO = await (
-                await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/allreservation/${property.id}`,
-                )
-            ).json();
+			try {
+				const data: ReservationDTO = await (
+					await fetch(
+						`${process.env.NEXT_PUBLIC_API_URL}/property/allreservation/${property.id}`,
+						{
+							method: "GET",
+							headers: {
+								"Content-Type": "application/json",
+								"Authorization": token
+							},
+						}
+					)
+				).json();
+	
+				setAllReservations(
+					data.reservation.map(
+						(reservation: any) => reservation.reservation));
+			} catch (error) {
+				console.error("Error fetching data", error);
 
-            setAllReservations(data.reservations.map((reservation: any) => reservation.reservation));
+				setAllReservations([
+					{
+						beginDate: "2024-06-20 00:00:00",
+						endDate: "2024-06-24 23:59:59",
+						annulation: false,
+						propertyId: "",
+						travelerId: ""
+					} as Reservation,
+					{
+						beginDate: "2024-06-22 00:00:00",
+						endDate: "2024-06-27 23:59:59",
+						annulation: false,
+						propertyId: "",
+						travelerId: ""
+					} as Reservation,
+					{
+						beginDate: "2024-06-23 00:00:00",
+						endDate: "2024-06-25 23:59:59",
+						annulation: false,
+						propertyId: "",
+						travelerId: ""
+					} as Reservation
+				])
+				console.log("allReservations", allReservations);
+
+
+			} finally {
+				console.log("Data fetched");
+				
+			}
         };
 
         dataFetch();
@@ -76,7 +131,7 @@ export function Demo({property}: DemoProps) {
 				const currentDate = date.toDate(timeZone);
 
 				return currentDate >= beginDate && currentDate <= endDate;
-			}),
+			})
 		);
 	};
 
@@ -114,7 +169,29 @@ export function Demo({property}: DemoProps) {
 		router.push(url.toString());
 	};
 
+	
+	const getDaysArray = function(start: Date, end: Date, color: typeof colors[number]) {
+		const arr: TakenValues[] = [];
+		for(const dt=new Date(start); dt<=new Date(end); dt.setDate(dt.getDate()+1)){
+			arr.push({
+				day: new Date(dt).getDate(),
+				color: color
+			});
+		}
+		return arr;
+	};
+
+
 	const showForm = !!dateParam && !!slotParam;
+
+
+	const colors = [
+		"#264653",
+		"#2a9d8f",
+		"#e9c46a",
+		"#f4a261",
+		"#e76f51",
+	]
 
 	return (
 		<div className="w-full px-8 py-6 rounded-md max-w-max mx-auto">
@@ -133,10 +210,14 @@ export function Demo({property}: DemoProps) {
 							value={date}
 							onChange={handleChangeDate}
 							onFocusChange={(focused) => setFocusedDate(focused)}
-							ImpossiblesValues={[
-								new CalendarDate(2024, 6, 20),
-								new CalendarDate(2024, 6, 21),
-							]}
+							TakenValues={
+								allReservations.map((reservation, index) => {
+									const beginDate = new Date(reservation.beginDate);
+									const endDate = new Date(reservation.endDate);
+
+									return getDaysArray(beginDate, endDate, colors[index % colors.length]);
+								})
+							}
 						/>
 						<RightPanel
 							{...{ date, timeZone, weeksInMonth, handleChangeAvailableTime }}

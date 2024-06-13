@@ -8,11 +8,11 @@ import {
 } from "@react-aria/calendar";
 import { useLocale } from "@react-aria/i18n";
 import { useCalendarState } from "@react-stately/calendar";
-import { CalendarGrid } from "./calendar-grid";
+import { CalendarGrid, TakenValues } from "./calendar-grid";
 import { CalendarHeader } from "./calendar-header";
 
-export function Calendar(props: CalendarProps<DateValue> & { ImpossiblesValues: CalendarDate[] }) {
-  	const { ImpossiblesValues } = props;
+export function Calendar(props: CalendarProps<DateValue> & { TakenValues: TakenValues[][] }) {
+  	const { TakenValues } = props;
 	const { locale } = useLocale();
 	const state = useCalendarState({
 		...props,
@@ -35,7 +35,7 @@ export function Calendar(props: CalendarProps<DateValue> & { ImpossiblesValues: 
 				nextButtonProps={nextButtonProps}
 			/>
 			<div className="flex gap-8">
-				<CalendarGrid state={state} ImpossiblesValues={ImpossiblesValues} />
+				<CalendarGrid state={state} TakenValues={TakenValues} />
 			</div>
 		</div>
 	);

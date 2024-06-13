@@ -16,11 +16,13 @@ export function CalendarCell({
 	date,
 	currentMonth,
 	disallowed,
+	colors
 }: {
 	state: CalendarState;
 	date: CalendarDate;
 	currentMonth: CalendarDate;
 	disallowed: boolean;
+	colors: string[];
 }) {
 	const ref = useRef<HTMLDivElement>(null);
 	const { cellProps, buttonProps, isSelected, isDisabled, formattedDate } =
@@ -63,14 +65,28 @@ export function CalendarCell({
 					)}
 				>
 					{formattedDate}
-					{isDateToday && (
-						<div
-							className={cn(
-								"absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-1/2 size-1.5 bg-gray-12 rounded-full",
-								isSelected && "bg-gray-1",
-							)}
-						/>
-					)}
+					<div className="flex justify-around items-center w-full absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-1/2 size-1.5" style={{height: "16px"}}>
+						{isDateToday && (
+							<>
+								<div
+									className={cn(
+										"size-1.5 bg-gray-12 rounded-full",
+										isSelected && "bg-gray-1",
+									)}
+								/>
+							</>
+						)}
+						{colors.map((c, index) => (
+							<div key={index}
+								className={cn(
+									"size-1.5 bg-" + c + "-1 rounded-full",
+									isSelected && `bg-gray-1`,
+								)}
+
+								style={{backgroundColor: c}}
+							/>
+						))}
+					</div>
 				</div>
 			</div>
 		</td>

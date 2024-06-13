@@ -59,7 +59,7 @@ export function MainScreen({ self }: { self: User }) {
                 <div className="flex flex-row justify-between gap-4 items-center">
                     {
                         self.firstName ?
-                        <Button variant="gooeyRight"><a href={`/${self.type}/dashboard`}>Dashboard</a></Button> :
+                        <Button variant="gooeyRight"><a href={`/${self.type}/dashboard`}>Login</a></Button> :
                         <Button variant="gooeyRight"><a href="/login">Login</a></Button>
                     }
                     <Button variant="ghost" size="icon" className="overflow-hidden rounded-full">
