@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Token, User } from "@/type/User";
+import {  User } from "@/type/User";
 import { ChatDTO, Contact } from "@/type/Chat";
 
 const ContactList = ({
@@ -47,6 +47,10 @@ const ContactList = ({
             const finalChat = await Promise.all(chatPromise);
             
             setChat(finalChat.filter((val) => toComparable(val.user2.firstName, val.user2.lastName).includes(filter)));
+
+            if (finalChat.length > 0) {
+                setContact(finalChat[0]);
+            };
         };
 
         dataFetch();

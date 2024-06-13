@@ -4,6 +4,7 @@ import * as React from "react"
 import { Castle, Dog, Home, Tent } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { User } from "@/type/User";
+import { PlaceholdersAndVanishInput } from "@/components/ui/placeholder";
 
 export function MainScreen({ self }: { self: User }) {
 
@@ -86,7 +87,16 @@ export function MainScreen({ self }: { self: User }) {
                         Découvrez des logements et des expériences uniques
                     </div>
                     <div className="flex flex-row justify-center gap-4 mt-4">
-                        <Input placeholder="Rechercher un bien" className="w-1/2" />
+                    
+                        <PlaceholdersAndVanishInput placeholders={
+                            [
+                                "Appartement Cosy au Centre-Ville",
+                                "Évasion en Bord de Mer avec Vue sur l'Océan",
+                                "Cabane Rustique dans les Bois",
+                                "Loft Moderne avec Vue sur la Ville",
+                                "Maison Familiale en plein Cœur de la Nature",
+                            ]
+                        } onChange={() => {}} onSubmit={() => {}}/>
                     </div>
                 </div>
             </div>

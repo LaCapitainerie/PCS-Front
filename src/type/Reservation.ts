@@ -1,11 +1,25 @@
+import { ServiceDTO } from "./Service";
+
 export interface Reservation {
+    travelerId: string;
+    propertyId: string;
+    beginDate: string;
+    endDate: string;
+    annulation: boolean;
+};
+
+export interface Bill {
     id: string;
-    idtenant: string;
-    idlessor: string;
-    idproperty: string;
-    status: "En attente" | "Acceptée" | "Refusée";
+    price: number;
     date: string;
-    description: string;
-    duree: number;
-    prix: number;
+    statut: string;
+    content: string;
+};
+
+export interface ReservationDTO {
+    reservations: {
+        reservation: Reservation;
+        bill: Bill;
+        service: ServiceDTO[];
+    }[];
 };
