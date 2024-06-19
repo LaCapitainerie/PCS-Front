@@ -32,6 +32,7 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
+          <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
         </body>
       </html>
     </>
