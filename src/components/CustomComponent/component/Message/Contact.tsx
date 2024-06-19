@@ -35,11 +35,15 @@ const ContactList = ({
                 )
             ).json() || {chat: []};
 
+            console.log(data);
+            
+
+
             const chatPromise = data.chat.map(async (value) => {
 
                 return {
-                    user1: {id: value.userId[0] == user_id ? value.userId[0] : value.userId[1]} as unknown as User,
-                    user2: {id: value.userId[0] == user_id ? value.userId[1] : value.userId[0]} as unknown as User,
+                    user1: {id: value.userId[0].id == user_id ? value.userId[0] : `${value.userId[1].mail}`} as unknown as User,
+                    user2: {id: value.userId[0].id == user_id ? value.userId[1] : `${value.userId[0].mail}`} as unknown as User,
                     chat: value
                 } as Contact;
             });

@@ -58,6 +58,10 @@ export const ReservationCrudView: React.FC<ReservationCrudViewProps> = (variant)
           accessorKey: 'Payment status',
           accessorFn: ({ bill }) => bill.statut,
         },
+        {
+          accessorKey: 'Services',
+          accessorFn: ({ service }) => service.map((service) => service.name).join(", "),
+        },
       ],
     }),
   });
