@@ -15,7 +15,7 @@ interface LayoutProps {
 
 const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
 
-    const [House, setHouse] = useState<Property>();
+    const [House, setHouse] = useState<Property>({} as Property);
 
     const SelectedHouse = (house: Property) => {
         setHouse(house);

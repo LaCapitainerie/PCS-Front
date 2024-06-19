@@ -22,7 +22,7 @@ export const ReservationCrudView: React.FC<ReservationCrudViewProps> = (variant)
     });
   }, [variant]);  
 
-  const CrudComponent = createCrudView<ObjectType, ObjectSummary>({ name: 'empty' })({
+  const CrudComponent = createCrudView<ObjectType, ObjectSummary>({ id: "" })({
     name: 'ReservationCrudView',
     action: {
       list: () => fetchData(filter),
@@ -39,24 +39,24 @@ export const ReservationCrudView: React.FC<ReservationCrudViewProps> = (variant)
       filter: { title: 'Property', content: getAllFilter },
       columns: () => [
         {
-          accessorKey: 'name',
-          accessorFn: ({ name }) => `${name}`,
+          accessorKey: 'Date',
+          accessorFn: ({ beginDate, endDate }) => `${beginDate.split("T")[0]} ${endDate.split("T")[0]}`,
         },
         {
-          accessorKey: 'targetCustomer',
-          accessorFn: ({ targetCustomer }) => targetCustomer,
+          accessorKey: 'Customer',
+          accessorFn: ({ travelerId }) => travelerId,
         },
         {
-          accessorKey: 'address',
-          accessorFn: ({ address }) => address,
+          accessorKey: 'Address',
+          accessorFn: ({ propertyId }) => propertyId,
         },
         {
-          accessorKey: 'city',
-          accessorFn: ({ city }) => city,
+          accessorKey: 'Price',
+          accessorFn: ({ bill }) => bill.price,
         },
         {
-          accessorKey: 'price',
-          accessorFn: ({ price }) => price,
+          accessorKey: 'Payment status',
+          accessorFn: ({ bill }) => bill.statut,
         },
       ],
     }),

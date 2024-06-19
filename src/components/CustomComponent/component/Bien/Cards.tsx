@@ -85,14 +85,10 @@ export function CardProperty({ Property, User_id }: { Property: Property | undef
         <CardHeader>
           <div className="flex flex-row justify-between">
             <CardTitle className="">Details du bien</CardTitle>
-            {
-              Property?.userId == User_id ?
-              <Button variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
-                {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
-              </Button> :
-              ""
-            }
             
+            <Button hidden={Property?.userId != User_id} variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
+              {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
+            </Button>
           </div>
         </CardHeader>
         <CardContent className="grid gap-4">

@@ -11,6 +11,8 @@ export interface Reservation {
     service: Service[];
 
     status: string;
+
+    id: string;
 };
 
 export interface Bill {

@@ -1,7 +1,7 @@
 import { ObjectType, ObjectSummary } from './res_schem'
 import { User } from '@/type/User'
 import { Property } from '@/type/Property'
-import { PrestationDTO } from '@/type/Prestation'
+import { Reservation } from '@/type/Reservation'
 
 
 const props: { [id: string]: ObjectType } = {}
@@ -10,38 +10,46 @@ const fetchPath = `/allreservation`
 const createPath = `/`
 const updatePath = `/`
 const deletePath = `/annulation`
-interface ObjectDTO { prestation: PrestationDTO[]; }
+interface ObjectDTO { reservation: Reservation[] }
 
 
 export const fetchData = async (propertyID?: Property["id"]) => {
-  try {
-    const retour: ObjectDTO = await (
+
+  const token = (JSON.parse(localStorage.getItem("user") as string) as User).token!
+  console.log("TOKEN", token);
+
+  var retour: ObjectDTO = {reservation: []}
+  
+  if (propertyID !== undefined && propertyID !== "") {
+    const Tmpretour: ObjectDTO = await (
       await fetch(
-        `${path}${fetchPath}/${propertyID}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${propertyID}`,
         {
-          method: "GET",
-          headers: {
-            "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
-          },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token,
+            },
+            method: 'GET',
         }
       )
-    ).json();  
-  
-    console.log(retour.prestation, propertyID);
-  
-    retour.prestation.forEach(element => {
-      // props[element.id] = element as ObjectType;
-    });
-  
-    return {
-      total: props.length,
-      props: Object.values(props),
-    }
-  } catch (error) {
-    return {
-      total: 0,
-      props: [],
-    }
+    ).json();
+
+    retour = Tmpretour;
+  }
+
+  console.log(retour.reservation, propertyID);
+
+  retour.reservation.forEach(element => {
+    // Generate a random id
+    element.id = Math.random().toString(36).substring(7);
+    props[element.id] = element as ObjectType;
+  });
+
+  console.log(props.length, Object.values(props) )
+
+  return {
+    total: props.length,
+    props: Object.values(props),
   }
   
 }
