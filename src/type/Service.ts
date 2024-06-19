@@ -13,6 +13,7 @@ export interface Service {
     rangeAction: number;
     description: string;
     providerId: string;
+    type: string;
 }
 
 export interface ServiceDTO {

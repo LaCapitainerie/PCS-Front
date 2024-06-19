@@ -10,6 +10,7 @@ import {Property} from "@/type/Property";
 import { ReservationDTO, Reservation as ReservationType } from "@/type/Reservation";
 import { Prestataire } from "@/type/Prestataire";
 import { User } from "@/type/User";
+import { Service } from "@/type/Service";
 
 
 const MainContent = ({house, User_id, token}: {house:Property | undefined, User_id: User["id"], token: User["token"]}) => {
@@ -21,12 +22,17 @@ const MainContent = ({house, User_id, token}: {house:Property | undefined, User_
     }, [house]);
 
     const [reservation, setReservation] = useState<ReservationType[]>([]);
-    const [prestataire, setPrestataire] = useState<Prestataire[]>([]);
+    const [prestations, setPrestations] = useState<Service[]>([]);
 
     useEffect(() => {
         const dataFetch = async () => {
+            if (house?.id === undefined) {
+                setReservation([]);
+                setPrestations([]);
+                return;
+            };
 
-            const data2: ReservationDTO = await (
+            const data: ReservationDTO = await (
                 await fetch(
                     `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${house?.id}`,
                     {
@@ -38,10 +44,18 @@ const MainContent = ({house, User_id, token}: {house:Property | undefined, User_
                     }
                 )
             ).json();
-            
-            setReservation(data2.reservation);
 
-            // setPrestataire(data3.filter((prest) => reservation.map((res) => res.idlessor).includes(prest.id)));
+            setReservation(data.reservation);
+
+            const myArr = data.reservation.map((res) => res.service).flat();
+            
+            
+
+            setPrestations(
+                myArr.filter((obj1, i, arr) => 
+                    arr.findIndex(obj2 => (obj2.id === obj1.id)) === i
+                )
+            );
         };
 
         dataFetch();
@@ -55,7 +69,7 @@ const MainContent = ({house, User_id, token}: {house:Property | undefined, User_
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Nom du bien" sous_titre={state?.description}/>
-                        <CardProperty Prestataire={prestataire} Property={state} User_id={User_id} />
+                        <CardProperty Property={state} User_id={User_id} Prestation={prestations}/>
                     </div>
                 </div>
                 <div className="p-1">

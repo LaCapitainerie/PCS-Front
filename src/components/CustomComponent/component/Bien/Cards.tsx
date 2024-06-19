@@ -13,6 +13,7 @@ import { Prestataire } from "@/type/Prestataire"
 import { User } from "@/type/User"
 import { Prestation, PrestationDTO } from "@/type/Prestation"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Service } from "@/type/Service"
 
 function statusToColor(params: Prestation["status"]) {
   switch (params) {
@@ -51,32 +52,11 @@ export function typeToDom(type: string = "", id: number = 0) {
 
 const descriptionKey = ["type", "price", "surface", "room", "bathroom", "garage", "address", "city", "zipcode"]
 
-interface UserTypeDTO {
-  user: User[];
-}
-
-export function CardProperty({ Property, User_id }: { Property: Property | undefined, Prestataire: Prestataire[], User_id: User["id"] }) {
+export function CardProperty({ Property, User_id, Prestation }: { Property: Property | undefined, Prestation: Service[], User_id: User["id"] }) {
 
   const { toast } = useToast();
   
   const [edit, setEdit] = useState<boolean>(false);
-
-  const [prestation, setPresta] = useState<Prestation[]>([]);
-
-  useEffect(() => {
-    const dataFetch = async () => {
-
-        const data: PrestationDTO = await (
-            await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/service/all`
-            )
-        ).json();
-        
-        setPresta(data.service);
-    };
-
-    dataFetch();
-  }, [Property]);
 
   function toTitleCase(str:string) {
     return str.replace(/\w\S*/g, function(txt) {
@@ -145,8 +125,8 @@ export function CardProperty({ Property, User_id }: { Property: Property | undef
               `
             }}>
               <TooltipProvider delayDuration={100}>
-                {prestation.map((presta, index) =>
-                  <Tooltip>
+                {Prestation.map((presta, index) =>
+                  <Tooltip key={index}>
                     <TooltipTrigger asChild>
                       {typeToDom(presta.type, index)}
                     </TooltipTrigger>

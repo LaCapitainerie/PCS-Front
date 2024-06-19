@@ -3,7 +3,6 @@ import { createAutoForm } from '@/components/ui/auto-crud/createAutoForm'
 import { createCrudList } from '@/components/ui/auto-crud/createCrudList'
 import { createData, use_deleteData, fetchData, readData, updateData } from './pres-api'
 import { Schema, type ObjectType, type ObjectSummary } from './pres_schem'
-import { User } from '@/type/User'
 
 export const PresCrudView = createCrudView<ObjectType, ObjectSummary>({description: 'empty'})({
   name: 'Prestations',
