@@ -20,6 +20,7 @@ export interface Prestation {
     status: "pending" | "accepted" | "refused" | "done";
     idStripe: string;
     name: string;
+    type: string;
 };
 
 export interface PrestationDTO {

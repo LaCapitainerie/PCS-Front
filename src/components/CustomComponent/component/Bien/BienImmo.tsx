@@ -14,9 +14,9 @@ function getIcon(type: string) {
     
     switch (type) {
         case "Appartement":
-            return <HomeIcon />;
-        case "Maison": case "Villa":
             return <Hotel />;
+        case "Maison": case "Villa":
+            return <HomeIcon />;
     }
 }
 

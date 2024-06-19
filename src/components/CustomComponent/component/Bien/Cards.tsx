@@ -3,7 +3,7 @@
 import { CheckIcon } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, } from "@/components/ui/card"
-import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence, Check } from "lucide-react"
+import { Edit2, UserPlus, Heater, Cable, Drill, KeyRound, Paintbrush2, Fence, Check, CarTaxiFront, SprayCan } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { useEffect, useState } from "react"
@@ -12,6 +12,7 @@ import { Property } from "@/type/Property"
 import { Prestataire } from "@/type/Prestataire"
 import { User } from "@/type/User"
 import { Prestation, PrestationDTO } from "@/type/Prestation"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 function statusToColor(params: Prestation["status"]) {
   switch (params) {
@@ -27,20 +28,24 @@ function statusToColor(params: Prestation["status"]) {
 
 }
 
-export function typeToDom(type: string = "", status: Prestation["status"]) {
+export function typeToDom(type: string = "", id: number = 0) {
   switch (type) {
+    case "transport":
+      return <CarTaxiFront key={id} className={`h-10 w-10 text-grey-500`} />
+    case "nettoyage":
+      return <SprayCan key={id} className={`h-10 w-10 text-grey-500`} />
     case "chauffage":
-      return <Heater className={`h-5 w-5 text-${statusToColor(status)}-500`} />
+      return <Heater key={id} className={`h-10 w-10 text-grey-500`} />
     case "electricite":
-      return <Cable className={`h-5 w-5 text-${statusToColor(status)}-500`} />
+      return <Cable key={id} className={`h-10 w-10 text-grey-500`} />
     case "jardinage":
-      return <Fence className={`h-5 w-5 text-${statusToColor(status)}-500`} />
+      return <Fence key={id} className={`h-10 w-10 text-grey-500`} />
     case "peinture":
-      return <Paintbrush2 className={`h-5 w-5 text-${statusToColor(status)}-500`} />
+      return <Paintbrush2 key={id} className={`h-10 w-10 text-grey-500`} />
     case "reparation":
-      return <Drill className={`h-5 w-5 text-${statusToColor(status)}-500`} />
+      return <Drill key={id} className={`h-10 w-10 text-grey-500`} />
     case "conciergerie":
-      return <KeyRound className={`h-5 w-5 text-${statusToColor(status)}-500`} />
+      return <KeyRound key={id} className={`h-10 w-10 text-grey-500`} />
   }
 }
 
@@ -56,7 +61,7 @@ export function CardProperty({ Property, User_id }: { Property: Property | undef
   
   const [edit, setEdit] = useState<boolean>(false);
 
-  const [presta, setPresta] = useState<Prestation[]>([]);
+  const [prestation, setPresta] = useState<Prestation[]>([]);
 
   useEffect(() => {
     const dataFetch = async () => {
@@ -129,29 +134,32 @@ export function CardProperty({ Property, User_id }: { Property: Property | undef
           </CardHeader>
           <CardContent className="grid gap-4">
 
-            <div className="">
-              {/* {user.map((presta, index) => (
-                <Usercard user={presta as unknown as User} key={index}>
-                  {typeToDom("peinture", "pending")}
-                      <div className="space-y-1">
-                        
-                        <p className="text-sm font-medium leading-none">
-                          {presta.id}
-                        </p>
-
-                        <p className="text-sm text-muted-foreground">
-                          {presta.type}
-                        </p>
-                      </div>
-                </Usercard>
-              ))} */}
+            <div className="grid max-h-64 gap-2" style={{
+              gridTemplateColumns: 'repeat(5, 1fr)',
+              gridTemplateRows: 'repeat(3, 1fr)',
+              gridRowGap: '2rem',
+              gridTemplateAreas: `
+              ". . . . ."
+              ". . . . ."
+              ". . . . ."
+              `
+            }}>
+              <TooltipProvider delayDuration={100}>
+                {prestation.map((presta, index) =>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      {typeToDom(presta.type, index)}
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{presta.description}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                )}
+              </TooltipProvider>
             </div>
           </CardContent>
         </div>
         <CardFooter className="">
-          <Button className="w-full">
-            <CheckIcon className="mr-2 h-4 w-4" /> Mark all as read
-          </Button>
         </CardFooter>
       </Card>
     </div>
