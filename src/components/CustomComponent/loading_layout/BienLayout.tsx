@@ -1,25 +1,12 @@
-"use client"
-
-import React, { ReactNode, useState } from 'react';
-import Sidebar from "@/components/Sidebar/Sidebar";
-import BienImmo from '../component/Bien/BienImmo';
-import MainContent from '../component/Bien/MainContent';
-import { Toaster } from '@/components/ui/toaster';
-import {Property} from "@/type/Property";
-import CookieConsent from '@/components/ui/cookie';
-import { User } from '@/type/User';
+import React, { ReactNode } from 'react';
 
 import { Input } from "@/components/ui/input"
-import { Check, Edit2, HomeIcon, Hotel } from "lucide-react"
 import { Separator } from "@/components/ui/separator";
 import SkeletonSidebar from '@/components/Sidebar/loading';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CarouselPlugin } from '../component/Bien/Carroussel';
 import { LoadingCarouselPlugin } from '../component/Bien/LoadingCarrousel';
 import Title from '@/components/ui/title';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
 
 interface LayoutProps {
     children: ReactNode;

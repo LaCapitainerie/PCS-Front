@@ -1,8 +1,6 @@
 import SkeletonSidebar from "@/components/Sidebar/loading";
-import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ReactNode } from "react";
 
 interface LayoutProps {
