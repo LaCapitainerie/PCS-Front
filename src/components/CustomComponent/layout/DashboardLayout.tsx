@@ -14,7 +14,9 @@ interface DashBoardProps {
     customOnes: CrudVariant[];
 }
 
-const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, customOnes }) => {
+const Dashboard_Layout: React.FC<DashBoardProps> = async ({ children, dataColumn, customOnes }) => {
+    
+    await new Promise((resolve) => setTimeout(resolve, 300000))
 
     var getUserfromLocalStorage = "{}";
     
