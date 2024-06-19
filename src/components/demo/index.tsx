@@ -72,9 +72,6 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 						}
 					)
 				).json();
-
-				console.log();
-				
 	
 				setAllReservations(
 					data.reservation);
