@@ -14,7 +14,8 @@ interface MessageProps {
     categories: User["type"][];
 }
 
-const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
+const Message_Layout: React.FC<MessageProps> = async ({ children, categories }) => {
+
     const [Contact, setContact] = useState<Contact>();
 
     const SelectedContact = (Contact: Contact) => {

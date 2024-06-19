@@ -2,7 +2,7 @@ import { CrudVariant } from "@/components/CustomComponent/component/Dashboard/cr
 import { ValuableThing } from "@/components/CustomComponent/component/Dashboard/dashboard";
 import Dashboard_Layout from "@/components/CustomComponent/layout/DashboardLayout";
 
-export default function Bailleur() {
+export default async function Bailleur() {
     
     const Columns: ValuableThing[] = [
         // {

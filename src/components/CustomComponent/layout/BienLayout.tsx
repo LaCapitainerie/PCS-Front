@@ -13,7 +13,11 @@ interface LayoutProps {
     children: ReactNode;
 }
 
-const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
+const Bien_Layout: React.FC<LayoutProps> = async ({ children }) => {
+
+    
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+
     const [House, setHouse] = useState<Property>();
 
     const SelectedHouse = (house: Property) => {
