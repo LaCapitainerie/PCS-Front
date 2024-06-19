@@ -9,6 +9,8 @@ export interface Reservation {
 
     bill: Bill;
     service: Service[];
+
+    status: string;
 };
 
 export interface Bill {

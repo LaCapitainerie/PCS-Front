@@ -32,7 +32,7 @@ const MainContent = ({house, User_id}: {house:Property | undefined, User_id: Use
                 )
             ).json();
             
-            setReservation(data2.filter((res) => res.idproperty === house?.id));
+            setReservation(data2.filter((res) => res.propertyId === house?.id));
 
             const data3: Prestataire[] = await (
                 await fetch(
@@ -40,7 +40,7 @@ const MainContent = ({house, User_id}: {house:Property | undefined, User_id: Use
                 )
             ).json();
 
-            setPrestataire(data3.filter((prest) => reservation.map((res) => res.idlessor).includes(prest.id)));
+            // setPrestataire(data3.filter((prest) => reservation.map((res) => res.idlessor).includes(prest.id)));
         };
 
         dataFetch();
@@ -54,9 +54,7 @@ const MainContent = ({house, User_id}: {house:Property | undefined, User_id: Use
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Nom du bien" sous_titre={state?.description}/>
-                        <div className="flex flex-row justify-around gap-2">
-                            <CardProperty Prestataire={prestataire} Property={state} User_id={User_id} />
-                        </div>
+                        <CardProperty Prestataire={prestataire} Property={state} User_id={User_id} />
                     </div>
                 </div>
                 <div className="p-1">

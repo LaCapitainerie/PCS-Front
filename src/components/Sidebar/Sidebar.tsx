@@ -13,6 +13,7 @@ import { useEffect, useState } from 'react';
 import { Button } from "../ui/button"
 import { toComparable } from "../functions";
 import { Token, User as UserType } from "@/type/User";
+import { Separator } from "../ui/separator";
 
 // Store the icons in an dictionary
 const icons = {
@@ -66,6 +67,7 @@ const Component = (user: UserType) => {
 };
 
 const Sidebar = ({ user }: { user: UserType }) => {
+
     const { theme, setTheme } = useTheme();
 
     return (
@@ -98,6 +100,8 @@ const Sidebar = ({ user }: { user: UserType }) => {
                     </DropdownMenuContent>
                 </DropdownMenu>
 
+                <Separator className="my-2" />
+
                 {Component(user)}
             </nav>
             <nav key={1} className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
@@ -119,20 +123,6 @@ const Sidebar = ({ user }: { user: UserType }) => {
                         }
                     </DropdownMenuContent>
                 </DropdownMenu>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Link
-                                href="#"
-                                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                            >
-                                <Settings className="h-5 w-5" />
-                                <span className="sr-only">Settings</span>
-                            </Link>
-                        </TooltipTrigger>
-                        <TooltipContent side="right">Settings</TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
             </nav>
         </aside>
     )
