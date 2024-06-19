@@ -25,16 +25,6 @@ interface LayoutProps {
     children: ReactNode;
 }
 
-function getIcon(type: string) {
-    
-    switch (type) {
-        case "Appartement":
-            return <HomeIcon />;
-        case "Maison": case "Villa":
-            return <Hotel />;
-    }
-}
-
 const Loading_Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <>
