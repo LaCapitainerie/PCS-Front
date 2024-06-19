@@ -27,11 +27,10 @@
 - [ ] Calendrier des dates importantes
     - [ ] Option de verrouiller des dates
     - [x] Generer des factures
-- [ ] Système de messagerie
+- [x] Système de messagerie
     - [x] Système de message
     - [x] Pouvoir échanger avec les **Locataires**
     - [x] Pouvoir échanger avec les **Prestataires**
-    - [ ] Notification push sur téléphone
 
 ### Prestataires
 - [x] Apercu de son compte
@@ -42,7 +41,7 @@
     - [x] Generer des factures
 
 ### Admin
-- [ ] Dashboard
+- [X] Dashboard
     - [x] Partie Chiffre
         - [x] Informations Préstations (argent rapporté, croissance)
         - [x] Informations Réservations (argent rapporté, croissance)
@@ -51,4 +50,4 @@
     - [x] Overview des Reservations, Prestations et Issues
         - [x] Pouvoir ouvrir une popup des details
 
-    - [ ] Crud Utilisateur
+    - [X] Crud Utilisateur

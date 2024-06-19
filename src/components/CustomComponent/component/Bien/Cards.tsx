@@ -79,83 +79,85 @@ export function CardProperty({ Property, User_id }: { Property: Property | undef
     });
   }
 
-  return (<>
-    <Card className="w-full">
-      <CardHeader>
-        <div className="flex flex-row justify-between">
-          <CardTitle className="">Details du bien</CardTitle>
-          {
-            Property?.userId == User_id ?
-            <Button variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
-              {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
-            </Button> :
-            ""
-          }
-          
-        </div>
-      </CardHeader>
-      <CardContent className="grid gap-4">
-
-        <div className="grid max-h-64 gap-2" style={{
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gridTemplateRows: '1fr 1fr 1fr',
-            gridTemplateAreas: `
-              ". . ."
-              ". . ."
-              ". . ."
-            `
-          }}>
-
-          {Property && descriptionKey.map((key, index) => (
-            <div key={index} className="mb-4 pb-4 last:mb-0 last:pb-0" >
-              <div className="w-full">
-                <Label htmlFor={key}>{toTitleCase(key)} : </Label>
-                <Input id={key} type="text" defaultValue={Property ? Object.entries(Property).find((value, _index) => value[0] == key)?.[1] : ""} readOnly={!edit} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </CardContent>
-      <CardFooter>
-      </CardFooter>
-    </Card>
-
-    <Card className="w-full flex flex-col justify-between">
-      <div>
+  return (
+    <div className="flex flew-row w-full gap-4">
+      <Card className="w-full">
         <CardHeader>
           <div className="flex flex-row justify-between">
-            <CardTitle className="">Prestataires associés</CardTitle>
-            <Button variant="outline" size="icon">
-              <UserPlus className="h-4 w-4" />
-            </Button>
+            <CardTitle className="">Details du bien</CardTitle>
+            {
+              Property?.userId == User_id ?
+              <Button variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
+                {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
+              </Button> :
+              ""
+            }
+            
           </div>
         </CardHeader>
         <CardContent className="grid gap-4">
 
-          <div className="">
-            {/* {user.map((presta, index) => (
-              <Usercard user={presta as unknown as User} key={index}>
-                {typeToDom("peinture", "pending")}
-                    <div className="space-y-1">
-                      
-                      <p className="text-sm font-medium leading-none">
-                        {presta.id}
-                      </p>
+          <div className="grid max-h-64 gap-2" style={{
+              gridTemplateColumns: '1fr 1fr 1fr',
+              gridTemplateRows: '1fr 1fr 1fr',
+              gridTemplateAreas: `
+                ". . ."
+                ". . ."
+                ". . ."
+              `
+            }}>
 
-                      <p className="text-sm text-muted-foreground">
-                        {presta.type}
-                      </p>
-                    </div>
-              </Usercard>
-            ))} */}
+            {Property && descriptionKey.map((key, index) => (
+              <div key={index} className="mb-4 pb-4 last:mb-0 last:pb-0" >
+                <div className="w-full">
+                  <Label htmlFor={key}>{toTitleCase(key)} : </Label>
+                  <Input id={key} type="text" defaultValue={Property ? Object.entries(Property).find((value, _index) => value[0] == key)?.[1] : ""} readOnly={!edit} />
+                </div>
+              </div>
+            ))}
           </div>
         </CardContent>
-      </div>
-      <CardFooter className="">
-        <Button className="w-full">
-          <CheckIcon className="mr-2 h-4 w-4" /> Mark all as read
-        </Button>
-      </CardFooter>
-    </Card></>
+        <CardFooter>
+        </CardFooter>
+      </Card>
+
+      <Card className="w-full flex flex-col justify-between">
+        <div>
+          <CardHeader>
+            <div className="flex flex-row justify-between">
+              <CardTitle className="">Prestataires associés</CardTitle>
+              <Button variant="outline" size="icon">
+                <UserPlus className="h-4 w-4" />
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent className="grid gap-4">
+
+            <div className="">
+              {/* {user.map((presta, index) => (
+                <Usercard user={presta as unknown as User} key={index}>
+                  {typeToDom("peinture", "pending")}
+                      <div className="space-y-1">
+                        
+                        <p className="text-sm font-medium leading-none">
+                          {presta.id}
+                        </p>
+
+                        <p className="text-sm text-muted-foreground">
+                          {presta.type}
+                        </p>
+                      </div>
+                </Usercard>
+              ))} */}
+            </div>
+          </CardContent>
+        </div>
+        <CardFooter className="">
+          <Button className="w-full">
+            <CheckIcon className="mr-2 h-4 w-4" /> Mark all as read
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
   )
 }

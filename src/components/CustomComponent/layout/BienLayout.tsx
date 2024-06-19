@@ -13,10 +13,7 @@ interface LayoutProps {
     children: ReactNode;
 }
 
-const Bien_Layout: React.FC<LayoutProps> = async ({ children }) => {
-
-    
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
 
     const [House, setHouse] = useState<Property>();
 
@@ -37,7 +34,7 @@ const Bien_Layout: React.FC<LayoutProps> = async ({ children }) => {
             <CookieConsent/>
             <Sidebar user={user}/>
             <BienImmo onHouseChange={SelectedHouse} token={user.token}/>
-            <MainContent house={House} User_id={user.id}/>
+            <MainContent house={House} User_id={user.id} token={user.token}/>
             <Toaster />
         </>
     );

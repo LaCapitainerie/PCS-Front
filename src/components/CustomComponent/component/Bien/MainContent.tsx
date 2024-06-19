@@ -7,12 +7,12 @@ import { Reservation } from "./Reservation";
 import Title from "../../../ui/title";
 import { useEffect, useState } from "react";
 import {Property} from "@/type/Property";
-import { Reservation as ReservationType } from "@/type/Reservation";
+import { ReservationDTO, Reservation as ReservationType } from "@/type/Reservation";
 import { Prestataire } from "@/type/Prestataire";
 import { User } from "@/type/User";
 
 
-const MainContent = ({house, User_id}: {house:Property | undefined, User_id: User["id"]}) => {
+const MainContent = ({house, User_id, token}: {house:Property | undefined, User_id: User["id"], token: User["token"]}) => {
 
     const [state, setState] = useState<Property | undefined>(house);
     
@@ -26,19 +26,20 @@ const MainContent = ({house, User_id}: {house:Property | undefined, User_id: Use
     useEffect(() => {
         const dataFetch = async () => {
 
-            const data2: ReservationType[] = await (
+            const data2: ReservationDTO = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/reservation`
+                    `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${house?.id}`,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token,
+                        },
+                        method: 'GET',
+                    }
                 )
             ).json();
             
-            setReservation(data2.filter((res) => res.propertyId === house?.id));
-
-            const data3: Prestataire[] = await (
-                await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/prestataires`
-                )
-            ).json();
+            setReservation(data2.reservation);
 
             // setPrestataire(data3.filter((prest) => reservation.map((res) => res.idlessor).includes(prest.id)));
         };

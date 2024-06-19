@@ -23,7 +23,7 @@ const Loading_Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Separator className="my-2" />
 
                 <div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                    <Input contrains={"text"} placeholder="Search" className="w-full p-4"/>
+                <Skeleton className="w-full h-10 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"/>
                 </div>
 
                 <div className="flex flex-col gap-2 p-4 pt-0 overflow-y-hidden">
