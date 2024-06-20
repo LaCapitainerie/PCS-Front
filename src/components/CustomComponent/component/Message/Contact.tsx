@@ -58,7 +58,7 @@ const ContactList = ({
         };
 
         dataFetch();
-    }, [filter]);
+    }, [filter, setContact, token, user_id]);
 
 
     const ContactListFiltered = (contacts: Contact[]) => {

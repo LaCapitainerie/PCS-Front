@@ -59,56 +59,21 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 	// Get list of all reservations with fetch
 	React.useEffect(() => {
         const dataFetch = async () => {
-			try {
-				const data: ReservationDTO = await (
-					await fetch(
-						`${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${property.id}`,
-						{
-							method: "GET",
-							headers: {
-								"Content-Type": "application/json",
-								"Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
-							},
-						}
-					)
-				).json();
-	
-				setAllReservations(
-					data.reservation);
+			const data: ReservationDTO = await (
+				await fetch(
+					`${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${property.id}`,
+					{
+						method: "GET",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+						},
+					}
+				)
+			).json();
 
-				
-			} catch (error) {
-				console.error("Error fetching data", error);
-			} finally {
-				console.log("Data fetched");
-
-				// setAllReservations([
-				// 	{
-				// 		beginDate: "2024-06-20 00:00:00",
-				// 		endDate: "2024-06-24 23:59:59",
-				// 		annulation: false,
-				// 		propertyId: "",
-				// 		travelerId: "1111-1111-1111-1111"
-				// 	} as Reservation,
-				// 	{
-				// 		beginDate: "2024-06-22 00:00:00",
-				// 		endDate: "2024-06-27 23:59:59",
-				// 		annulation: false,
-				// 		propertyId: "",
-				// 		travelerId: "2222-2222-2222-2222"
-				// 	} as Reservation,
-				// 	{
-				// 		beginDate: "2024-06-23 00:00:00",
-				// 		endDate: "2024-06-25 23:59:59",
-				// 		annulation: false,
-				// 		propertyId: "",
-				// 		travelerId: "3333-3333-3333-3333"
-				// 	} as Reservation
-				// ])
-				
-				
-				console.log("allReservations", allReservations);
-			}
+			setAllReservations(
+				data.reservation);
         };
 
         dataFetch();

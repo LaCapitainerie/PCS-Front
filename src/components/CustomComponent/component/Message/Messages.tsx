@@ -64,7 +64,7 @@ const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined
         };
 
         dataFetch();
-    }, [contact]);
+    }, [contact, token]);
 
     return (
         <div className="absolute right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%] h-full">

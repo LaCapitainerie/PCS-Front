@@ -35,7 +35,7 @@ const LessorVitrine = ({User, token}: React.HTMLAttributes<HTMLDivElement> & Low
         };
 
         dataFetch();
-    }, [User]);
+    }, [User, token]);
 
     return (
         <Carousel className="w-full h-full p-4" opts={{loop: true}}>

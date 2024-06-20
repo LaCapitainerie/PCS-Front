@@ -59,7 +59,7 @@ const MainContent = ({house, User_id, token}: {house:Property | undefined, User_
         };
 
         dataFetch();
-    }, [house]);
+    }, [house, token]);
 
     return (
 

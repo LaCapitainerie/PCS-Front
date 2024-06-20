@@ -55,7 +55,7 @@ const BienImmo = ({
         };
 
         dataFetch();
-    }, [filter]);
+    }, [filter, token]);
     
     
     useEffect(() => {

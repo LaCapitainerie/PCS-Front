@@ -27,8 +27,8 @@ const Loading_Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
                 </div>
 
                 <div className="flex flex-col gap-2 p-4 pt-0 overflow-y-hidden">
-                    {Array.from({ length: 5 }).map(() =>
-                        <Skeleton className="w-full h-20 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"/>
+                    {Array.from({ length: 5 }).map((_, index) =>
+                        <Skeleton key={index} className="w-full h-20 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"/>
                     )}
                 </div>
             </div>
@@ -91,8 +91,8 @@ const Loading_Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
                                         ". . . . ."
                                         `
                                     }}>
-                                        {Array.from({ length: 15 }).map((presta, index) => (
-                                            <Skeleton className="w-9 h-9 rounded-full" />
+                                        {Array.from({ length: 15 }).map((_, index) => (
+                                            <Skeleton key={index} className="w-9 h-9 rounded-full" />
                                         ))}
                                     </div>
                                 </CardContent>

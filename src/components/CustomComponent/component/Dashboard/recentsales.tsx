@@ -27,7 +27,7 @@ export default function RecentSales({token}: {token: User["token"]}) {
     };
 
     dataFetch();
-  }, []);
+  }, [token]);
   
   return (
     <Card className="w-full ">

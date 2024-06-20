@@ -9,12 +9,11 @@ import React from "react";
 export type CrudVariant = "Properties" | "Prestations" | "Reservations" | "Users" | "Issues";
 
 interface CrudBoardProps {
-    children?: React.ReactNode;
     variant: CrudVariant;
     token: User["token"]
   }
 
-export default ({children, variant, token}: CrudBoardProps) => {
+export default function Crud({variant, token}: CrudBoardProps): JSX.Element {
     
     switch (variant) {
         case "Properties":
