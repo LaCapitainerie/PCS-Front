@@ -20,7 +20,7 @@ export default function StepperComp({children, steps}: {children: React.ReactNod
 					return (
 						<Step key={stepProps.label} {...stepProps}>
 							<div className="flex items-center justify-center my-2 text-primary">
-								{children[index] || "No content"}
+								{children[index] || "Aucun Contenu"}
 							</div>
 						</Step>
 					);
@@ -45,13 +45,13 @@ const Footer = () => {
 		<>
 			{hasCompletedAllSteps && (
 				<div className="h-40 flex items-center justify-center my-2 border bg-secondary text-primary rounded-md">
-					<h1 className="text-xl">Woohoo! All steps completed! 🎉</h1>
+					<h1 className="text-xl">Création du compte terminée !</h1>
 				</div>
 			)}
 			<div className="w-full flex justify-end gap-2">
 				{hasCompletedAllSteps ? (
 					<Button size="sm" onClick={resetSteps}>
-						Reset
+						Recommencer
 					</Button>
 				) : (
 					<>
@@ -61,10 +61,10 @@ const Footer = () => {
 							size="sm"
 							variant="secondary"
 						>
-							Prev
+							Retour
 						</Button>
 						<Button size="sm" onClick={nextStep}>
-							{isLastStep ? "Finish" : isOptionalStep ? "Skip" : "Next"}
+							{isLastStep ? "Terminer" : isOptionalStep ? "Passer" : "Suivant"}
 						</Button>
 					</>
 				)}

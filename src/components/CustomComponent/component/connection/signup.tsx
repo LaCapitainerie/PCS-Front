@@ -41,27 +41,27 @@ import StepperComp from "./stepper";
 
 const FormSchema = z.object({
   mail: z.string().email({
-    message: "Please enter a valid email.",
+    message: "Entrez un email valide.",
   }),
 
   password: z.string().min(1, {
-    message: "Please enter your password.",
+    message: "Entrez votre mot de passe.",
   }),
 
   firstName: z.string().min(1, {
-    message: "Please enter your first name.",
+    message: "Entrez votre prénom.",
   }),
 
   lastName: z.string().min(1, {
-    message: "Please enter your last name.",
+    message: "Entrez votre nom.",
   }),
 
   phoneNumber: z.string().min(1, {
-    message: "Please enter your phone number.",
+    message: "Entrez votre numéro de téléphone.",
   }),
 
   type: z.string().min(1, {
-    message: "Please enter your type.",
+    message: "Entrez votre rôle.",
   }),
 });
 
@@ -109,14 +109,18 @@ export default function Signup() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="overflow-y-hidden w-full h-screen space-y-6">
         <div className="h-screen w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
 
-          <div className="h-screen flex items-center justify-center px-8" style={{ paddingTop: '9rem', paddingBottom: '9rem' }}>
-            <StepperComp steps={[{ label: "Personnal Information" }, { label: "OTP verification" }, { label: "Finish !"}]}>
+          <div className="h-screen flex items-center justify-center px-8" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
+            <StepperComp steps={[
+              { label: "Information personnelle" },
+              // { label: "OTP verification" },
+              { label: "Terminé !"}
+            ]}>
 
               <div className="mx-auto grid w-[350px] gap-6">
                 <div className="grid gap-2 text-center">
-                  <h1 className="text-3xl font-bold">Sign up</h1>
+                  <h1 className="text-3xl font-bold">Créer un compte</h1>
                   <p className="text-balance text-muted-foreground">
-                    Enter your email below to login to your account
+                    Entrez vos informations personnelles
                   </p>
                 </div>
                 <div className="grid gap-4">
@@ -208,7 +212,7 @@ export default function Signup() {
                       name="type"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Rôle</FormLabel>
+                          <FormLabel>Votre Rôle</FormLabel>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
@@ -216,15 +220,11 @@ export default function Signup() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="traveler">Traveler</SelectItem>
-                              <SelectItem value="lessor">Lessor</SelectItem>
-                              <SelectItem value="provider">Provider</SelectItem>
+                              <SelectItem value="traveler">Voyageur</SelectItem>
+                              <SelectItem value="lessor">Bailleur</SelectItem>
+                              <SelectItem value="provider">Prestataire</SelectItem>
                             </SelectContent>
                           </Select>
-                          <FormDescription>
-                            You can manage email addresses in your{" "}
-                            <Link href="/examples/forms">email settings</Link>.
-                          </FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
@@ -233,7 +233,7 @@ export default function Signup() {
                 </div>
               </div>
 
-              <InputOTP maxLength={6}>
+              {/* <InputOTP maxLength={6}>
                 <InputOTPGroup>
                   <InputOTPSlot index={0} />
                   <InputOTPSlot index={1} />
@@ -245,10 +245,10 @@ export default function Signup() {
                   <InputOTPSlot index={4} />
                   <InputOTPSlot index={5} />
                 </InputOTPGroup>
-              </InputOTP>
+              </InputOTP> */}
 
               <Button type="submit" className="w-full">
-                Sign up
+                Créer un compte
               </Button>
 
             </StepperComp>
@@ -256,7 +256,7 @@ export default function Signup() {
 
           <div className="h-screen hidden bg-muted lg:block">
             <img
-              src="https://imgur.com/a/Q8ho4k3.png"
+              src="https://i.imgur.com/ae7ZTV6.png"
               alt="Image"
               width="1920"
               height="1080"

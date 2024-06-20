@@ -13,15 +13,15 @@ import {
   Form,
   FormField,
 } from "@/components/ui/form"
-import { Token, UserDTO } from "@/type/User";
+import { UserDTO } from "@/type/User";
 
 const FormSchema = z.object({
   mail: z.string().email({
-    message: "Please enter a valid email.",
+    message: "Entrez un email valide.",
   }),
 
   password: z.string().min(1, {
-    message: "Please enter your password.",
+    message: "Entrez votre mot de passe.",
   })
 });
 
@@ -67,9 +67,9 @@ export default function Login() {
           <div className="h-screen flex items-center justify-center py-12">
             <div className="mx-auto grid w-[350px] gap-6">
               <div className="grid gap-2 text-center">
-                <h1 className="text-3xl font-bold">Login</h1>
+                <h1 className="text-3xl font-bold">Connection</h1>
                 <p className="text-balance text-muted-foreground">
-                  Enter your email and password below to login to your account
+                  Entrer votre email et mot de passe pour vous connecter
                 </p>
               </div>
               <div className="grid gap-4">
@@ -92,12 +92,12 @@ export default function Login() {
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Mot de passe</Label>
                     <Link
                       href="#"
                       className="ml-auto inline-block text-sm underline"
                     >
-                      Forgot your password?
+                      Mot de passe oublié ?
                     </Link>
                   </div>
                   <FormField
@@ -116,20 +116,20 @@ export default function Login() {
                   />
                 </div>
                 <Button type="submit" className="w-full">
-                  Login
+                  Se Connecter
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Don&apos;t have an account?{" "}
+                Pas de compte ?{" "}
                 <Link href="/signup" className="underline">
-                  Sign up
+                  Créer un compte
                 </Link>
               </div>
             </div>
           </div>
           <div className="h-screen hidden bg-muted lg:block">
             <img
-              src="https://media.discordapp.net/attachments/597782659430613002/1240054056442007552/sciana-za-lozkiem-20-pomyslow-do-sypialni-piekne-inspiracje-5.webp?ex=66472416&is=6645d296&hm=d72b289f7ce67f4099ed5afed3b374ea72152abc1918ab7b3d5b6ecd69a01f06&=&format=webp&width=702&height=468"
+              src="https://i.imgur.com/ae7ZTV6.png"
               alt="Image"
               width="1920"
               height="1080"

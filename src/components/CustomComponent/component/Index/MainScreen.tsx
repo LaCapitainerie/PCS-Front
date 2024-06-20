@@ -48,19 +48,11 @@ export function MainScreen({ self }: { self: User }) {
                     Paris Caretaker Services
                 </div>
 
-                <div className="flex flex-row justify-between items-center gap-4">
-                    <a className="text-center align-center font-bold">Voyager</a>
-                    <a className="text-center align-center font-bold">Services</a>
-                    <a className="text-center align-center font-bold">À propos</a>
-                    <a className="text-center align-center font-bold">Blog</a>
-                    <a className="text-center align-center font-bold">Contact</a>
-                </div>
-
                 <div className="flex flex-row justify-between gap-4 items-center">
                     {
                         self.firstName ?
-                        <Button variant="gooeyRight"><a href={`/${self.type}/dashboard`}>Login</a></Button> :
-                        <Button variant="gooeyRight"><a href="/login">Login</a></Button>
+                        <Button variant="gooeyRight"><a href={`/${self.type}/dashboard`}>Connection</a></Button> :
+                        <Button variant="gooeyRight"><a href="/login">Connection</a></Button>
                     }
                     <Button variant="ghost" size="icon" className="overflow-hidden rounded-full">
                         <Avatar>
