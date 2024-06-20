@@ -36,7 +36,7 @@ const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
             <BienImmo onHouseChange={SelectedHouse} token={user.token}/>
             <MainContent house={House} User_id={user.id} token={user.token}/>
             <Toaster />
-            <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
+            {/* <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script> */}
         </>
     );
 }

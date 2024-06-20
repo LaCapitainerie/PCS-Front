@@ -59,18 +59,28 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 	// Get list of all reservations with fetch
 	React.useEffect(() => {
         const dataFetch = async () => {
-			const data: ReservationDTO = await (
-				await fetch(
-					`${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${property.id}`,
-					{
-						method: "GET",
-						headers: {
-							"Content-Type": "application/json",
-							"Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
-						},
-					}
-				)
-			).json();
+			if (property.id === undefined) {
+				setAllReservations([]);
+				return;
+			};
+
+			const response = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${property.id}`,
+				{
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						"Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+					},
+				}
+			)
+
+			if (!response.ok) {
+				setAllReservations([]);
+				return;
+			};
+
+			const data: ReservationDTO = await (response).json();
 
 			setAllReservations(
 				data.reservation);
@@ -188,9 +198,9 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 							}
 							mode={mode}
 						/>
-						<RightPanel
+						{/* <RightPanel
 							{...{ date, timeZone, weeksInMonth, handleChangeAvailableTime }}
-						/>
+						/> */}
 					</>
 				) : (
 					<FormPanel />

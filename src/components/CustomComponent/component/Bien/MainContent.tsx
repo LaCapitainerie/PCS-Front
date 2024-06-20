@@ -11,11 +11,12 @@ import { ReservationDTO, Reservation as ReservationType } from "@/type/Reservati
 import { Prestataire } from "@/type/Prestataire";
 import { User } from "@/type/User";
 import { Service } from "@/type/Service";
+import Calendar from "@/components/demo/index";
 
 
-const MainContent = ({house, User_id, token}: {house:Property | undefined, User_id: User["id"], token: User["token"]}) => {
+const MainContent = ({house, User_id, token}: {house:Property, User_id: User["id"], token: User["token"]}) => {
 
-    const [state, setState] = useState<Property | undefined>(house);
+    const [state, setState] = useState<Property>(house);
     
     useEffect(() => {
         setState(house);
@@ -32,18 +33,24 @@ const MainContent = ({house, User_id, token}: {house:Property | undefined, User_
                 return;
             };
 
-            const data: ReservationDTO = await (
-                await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${house?.id}`,
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': token,
-                        },
-                        method: 'GET',
-                    }
-                )
-            ).json();
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${house?.id}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': token,
+                    },
+                    method: 'GET',
+                }
+            )
+
+            if (!response.ok) {
+                setReservation([]);
+                setPrestations([]);
+                return;
+            };
+
+            const data: ReservationDTO = await (response).json();
 
             setReservation(data.reservation);
 
@@ -63,7 +70,7 @@ const MainContent = ({house, User_id, token}: {house:Property | undefined, User_
 
     return (
 
-        <div className="absolute w-fit right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%]">
+        <div className="absolute w-auto right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%]">
             <main className="w-full h-full flex flex-col">
                 <CarouselPlugin images={house?.images || []}/>
                 <div className="p-1">
@@ -73,10 +80,10 @@ const MainContent = ({house, User_id, token}: {house:Property | undefined, User_
                     </div>
                 </div>
                 <div className="p-1">
-                    <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2" style={{height: '400px'}}>
+                    <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Réservations" sous_titre=""/>
                         <div className="flex flex-col justify-around gap-2">
-                            <Reservation ReservationVal={reservation}/>
+                            <Reservation ReservationVal={reservation} property={house} token={token}/>
                         </div>
                     </div>
                 </div>

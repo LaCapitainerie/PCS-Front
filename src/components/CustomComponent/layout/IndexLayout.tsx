@@ -33,6 +33,7 @@ const Index_Layout: React.FC<IndexProps> = ({ children }) => {
             <Pricing/>
             <Separator/>
             <Footer/>
+            <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
         </div>
     );
 }

@@ -31,6 +31,11 @@ const Message_Layout: React.FC<MessageProps> = ({ categories }) => {
 
     return (
         <>
+            <style jsx>{`
+                html {
+                    overflow-hidden;
+                }
+            `}</style>
             <CookieConsent/>
             <Sidebar user={user}/>
             <ContactList setContact={SelectedContact} Categories={categories} token={user.token} user_id={user.id}/>
