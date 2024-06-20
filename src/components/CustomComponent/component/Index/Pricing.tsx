@@ -35,10 +35,10 @@ const PricingSwitch = ({ onSwitch }: PricingSwitchProps) => (
   <Tabs defaultValue="0" className="w-40 mx-auto" onValueChange={onSwitch}>
     <TabsList className="py-6 px-2">
       <TabsTrigger value="0" className="text-base">
-        Monthly
+        Mensuel
       </TabsTrigger>
       <TabsTrigger value="1" className="text-base">
-        Yearly
+        Annuel
       </TabsTrigger>
     </TabsList>
   </Tabs>
@@ -59,15 +59,15 @@ const PricingCard = ({ isYearly, title, monthlyPrice, yearlyPrice, description, 
               className={cn("px-2.5 rounded-xl h-fit text-sm py-1 bg-zinc-200 text-black dark:bg-zinc-800 dark:text-white", {
                 "bg-gradient-to-r from-orange-400 to-rose-400 dark:text-black ": popular,
               })}>
-              Save ${monthlyPrice * 12 - yearlyPrice}
+              Save {((monthlyPrice * 12 - yearlyPrice).toFixed(2))}€
             </div>
           </div>
         ) : (
           <CardTitle className="text-zinc-700 dark:text-zinc-300 text-lg">{title}</CardTitle>
         )}
         <div className="flex gap-0.5">
-          <h3 className="text-3xl font-bold">{yearlyPrice && isYearly ? "€" + yearlyPrice : monthlyPrice ? "€" + monthlyPrice : "Gratuit"}</h3>
-          <span className="flex flex-col justify-end text-sm mb-1">{yearlyPrice && isYearly ? "/year" : monthlyPrice ? "/month" : null}</span>
+        <h3 className="text-3xl font-bold">{yearlyPrice && isYearly ? yearlyPrice + "€" : monthlyPrice ? monthlyPrice + "€" : "Gratuit"}</h3>
+          <span className="flex flex-col justify-end text-sm mb-1">{yearlyPrice && isYearly ? "/an" : monthlyPrice ? "/mois" : null}</span>
         </div>
         <CardDescription className="pt-1.5 h-12">{description}</CardDescription>
       </CardHeader>
@@ -99,34 +99,40 @@ export default function Pricing() {
 
   const plans = [
     {
-      title: "Basic",
-      monthlyPrice: 10,
-      yearlyPrice: 100,
-      description: "Essential features you need to get started",
-      features: ["Example Feature Number 1", "Example Feature Number 2", "Example Feature Number 3"],
-      actionLabel: "Get Started",
+      title: "Gratuit",
+      price: "Gratuit",
+      description: "Accédez à notre contenu avec publicités et partagez vos avis. Parfait pour une utilisation basique.",
+      features: ["Publicités", "Commenter et publier des avis"],
+      actionLabel: "Commencer",
     },
     {
-      title: "Pro",
-      monthlyPrice: 25,
-      yearlyPrice: 250,
-      description: "Perfect for owners of small & medium businessess",
-      features: ["Example Feature Number 1", "Example Feature Number 2", "Example Feature Number 3"],
-      actionLabel: "Get Started",
+      title: "Voyageur",
+      monthlyPrice: 9.99,
+      yearlyPrice: 113,
+      description: "Sans publicité, 5% de réduction sur les prestations, et une prestation gratuite par an",
+      features: ["Pas de publicités", "Commenter et publier des avis","1 prestation par an offerte d'un montant inférieur à 80€"],
+      actionLabel: "Commencer",
       popular: true,
     },
     {
-      title: "Enterprise",
-      price: "Custom",
-      description: "Dedicated support and infrastructure to fit your needs",
-      features: ["Example Feature Number 1", "Example Feature Number 2", "Example Feature Number 3", "Super Exclusive Feature"],
-      actionLabel: "Contact Sales",
+      title: "Explorateur",
+      monthlyPrice: 19,
+      yearlyPrice: 220,
+      description: "Tous les avantages du voyageur, avec une prestation gratuite par semestre et d'autres avantages !",
+      features: ["Pas de publicités",
+        "Commenter et publier des avis",
+        "Réduction de 5% sur les prestations",
+        "1 prestation par semestre offerte",
+        "Accès prioritaire à certaines prestations et aux prestations VIP",
+        "Réduction de 10% du montant de l’abonnement en cas de renouvellement, valable uniquement sur le tarif annuel"],
+      actionLabel: "Commencer",
       exclusive: true,
     },
   ]
+
   return (
     <div className="py-8">
-      <PricingHeader title="Pricing Plans" subtitle="Choose the plan that's right for you" />
+      <PricingHeader title="Plans tarifaires" subtitle="Choisissez le plan qui vous convient le mieux" />
       <PricingSwitch onSwitch={togglePricingPeriod} />
       <section className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-8 mt-8">
         {plans.map((plan) => {
