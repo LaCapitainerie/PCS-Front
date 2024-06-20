@@ -19,7 +19,7 @@ const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, cust
     var getUserfromLocalStorage = "{}";
     
     if (typeof window !== 'undefined') {
-        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+        getUserfromLocalStorage = localStorage.getItem("user") || "{}";
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
@@ -30,6 +30,7 @@ const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, cust
             <Sidebar user={user}/>
             <Dashboard Column={dataColumn} CustomOnes={customOnes} Token={user.token}/>
             <Toaster />
+            <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
         </>
     );
 }

@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Token, User } from "@/type/User";
+import {  User } from "@/type/User";
 import { ChatDTO, Contact } from "@/type/Chat";
 
 const ContactList = ({
@@ -35,11 +35,15 @@ const ContactList = ({
                 )
             ).json() || {chat: []};
 
+            console.log(data);
+            
+
+
             const chatPromise = data.chat.map(async (value) => {
 
                 return {
-                    user1: {id: value.userId[0] == user_id ? value.userId[0] : value.userId[1]} as unknown as User,
-                    user2: {id: value.userId[0] == user_id ? value.userId[1] : value.userId[0]} as unknown as User,
+                    user1: {id: value.userId[0].id == user_id ? value.userId[0] : `${value.userId[1].mail}`} as unknown as User,
+                    user2: {id: value.userId[0].id == user_id ? value.userId[1] : `${value.userId[0].mail}`} as unknown as User,
                     chat: value
                 } as Contact;
             });
@@ -47,6 +51,10 @@ const ContactList = ({
             const finalChat = await Promise.all(chatPromise);
             
             setChat(finalChat.filter((val) => toComparable(val.user2.firstName, val.user2.lastName).includes(filter)));
+
+            if (finalChat.length > 0) {
+                setContact(finalChat[0]);
+            };
         };
 
         dataFetch();
@@ -89,7 +97,7 @@ const ContactList = ({
             <Separator className="my-2" />
 
             <div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <Input placeholder="Search" className="w-full p-4" onChange={(event) => {setFilter(event.target.value)}}/>
+                <Input placeholder="Rechercher" className="w-full p-4" onChange={(event) => {setFilter(event.target.value)}}/>
             </div>
 
             <div className="flex flex-col gap-2 p-4 pt-0">

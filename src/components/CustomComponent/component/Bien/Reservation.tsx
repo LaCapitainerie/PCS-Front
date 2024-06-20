@@ -25,6 +25,8 @@ import { DateRange } from "react-day-picker";
 import Usercard from "@/components/ui/usercard";
 import { Reservation as ReservationType } from "@/type/Reservation";
 import { User } from "@/type/User";
+import { Property } from "@/type/Property";
+import Calendar from "@/components/demo/index";
 
 type aggregate = {
   Reservation: ReservationType;
@@ -123,7 +125,7 @@ export function CardWithForm({ DateVal, ReservationVal }: { DateVal: string | nu
   )
 }
 
-const Reservation = ( { ReservationVal }: { ReservationVal: ReservationType[] | undefined } ) => {
+const Reservation = ( { ReservationVal, property, token }: { ReservationVal: ReservationType[] | undefined, property: Property, token: User["token"] } ) => {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
   const handleDateChange = (date: DateRange | undefined) => {
@@ -139,7 +141,17 @@ const Reservation = ( { ReservationVal }: { ReservationVal: ReservationType[] | 
   return (
     <>
       <DatePickerWithRange id="date" onDateChange={handleDateChange} />
-      <CardWithForm DateVal={selectedDate} ReservationVal={ReservationVal}/>
+      <Card className="w-full">
+        <div className="flex flex-row items-center p-6 gap-6">
+          <CardHeader className="p-0">
+            <CardTitle>Réservations</CardTitle>
+            <CardDescription>{`Reservation du ${selectedDate}`}</CardDescription>
+          </CardHeader>
+        </div>
+        <CardContent>
+          <Calendar property={property} token={token} mode={"traveler"}/>
+        </CardContent>
+      </Card>
     </>
   );
 };

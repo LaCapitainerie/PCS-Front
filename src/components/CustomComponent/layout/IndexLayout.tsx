@@ -18,7 +18,7 @@ const Index_Layout: React.FC<IndexProps> = ({ children }) => {
     var getUserfromLocalStorage = "{}";
     
     if (typeof window !== 'undefined') {
-        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+        getUserfromLocalStorage = localStorage.getItem("user") || "{}";
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
@@ -33,6 +33,7 @@ const Index_Layout: React.FC<IndexProps> = ({ children }) => {
             <Pricing/>
             <Separator/>
             <Footer/>
+            <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
         </div>
     );
 }

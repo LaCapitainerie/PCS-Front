@@ -11,7 +11,7 @@ export interface Chat {
         description: string;
         chatId: string;
     };
-    userId: string[];
+    userId: User[];
     message: Message[];
 };
 

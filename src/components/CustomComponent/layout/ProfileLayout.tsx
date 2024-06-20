@@ -25,7 +25,7 @@ const ProfilLayout: React.FC<LayoutProps> = ({ children }) => {
     var getUserfromLocalStorage = "{}";
     
     if (typeof window !== 'undefined') {
-        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+        getUserfromLocalStorage = localStorage.getItem("user") || "{}";
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
@@ -38,6 +38,7 @@ const ProfilLayout: React.FC<LayoutProps> = ({ children }) => {
             <Sidebar user={user}/>
             <MainContent id={id} token={user.token} myid={user.id}/>
             <Toaster />
+            <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
         </>
     );
 }

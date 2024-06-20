@@ -19,15 +19,12 @@ export const fetchData = async (token?: User["token"]) => {
       {
         method: "GET",
         headers: {
-          "Authorization": localStorage.getItem("token")!,
+          "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
         },
       }
     )
-  ).json();  
-
-  console.log("retour", retour);
+  ).json();
   
-
   retour.service.forEach(element => {
     props[element.id] = element;
   });
@@ -46,7 +43,7 @@ export const createData = async (prop: ObjectType, token?: User["token"]) => {
       method: "POST",
       body: JSON.stringify(prop),
       headers: {
-        "Authorization": localStorage.getItem("token")!,
+        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
       },
     }
   )
@@ -65,7 +62,7 @@ export const updateData = async (id: string, data: ObjectType, token?: User["tok
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
-        "Authorization": localStorage.getItem("token")!,
+        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
       },
     }
   )
@@ -77,7 +74,7 @@ export const use_deleteData = async (id: ObjectSummary, token?: User["token"]) =
     {
       method: "DELETE",
       headers: {
-        "Authorization": localStorage.getItem("token")!,
+        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
       },
     }
   )

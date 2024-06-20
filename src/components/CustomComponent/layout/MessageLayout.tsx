@@ -10,11 +10,11 @@ import CookieConsent from '@/components/ui/cookie';
 import { Contact } from "@/type/Chat";
 
 interface MessageProps {
-    children: ReactNode;
     categories: User["type"][];
 }
 
-const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
+const Message_Layout: React.FC<MessageProps> = ({ categories }) => {
+
     const [Contact, setContact] = useState<Contact>();
 
     const SelectedContact = (Contact: Contact) => {
@@ -24,13 +24,18 @@ const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
     var getUserfromLocalStorage = "{}";
     
     if (typeof window !== 'undefined') {
-        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+        getUserfromLocalStorage = localStorage.getItem("user") || "{}";
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
 
     return (
         <>
+            <style jsx>{`
+                html {
+                    overflow-hidden;
+                }
+            `}</style>
             <CookieConsent/>
             <Sidebar user={user}/>
             <ContactList setContact={SelectedContact} Categories={categories} token={user.token} user_id={user.id}/>

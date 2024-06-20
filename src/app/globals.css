@@ -1,6 +1,13 @@
+@import "@radix-ui/colors/slate.css";
+@import "@radix-ui/colors/slate-dark.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#tidio-chat-iframe {
+  z-index: 25 !important;
+}
  
 @layer base {
   :root {

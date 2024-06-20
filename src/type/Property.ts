@@ -20,6 +20,8 @@ export interface Property {
     country: string;
     administrationValidation: boolean;
     userId: string;
+
+    idStripe: string;
 }
 
 export interface PropertyDTO {

@@ -129,7 +129,7 @@ export default function Signup() {
                         <Input
                           id="mail"
                           type="email"
-                          placeholder="m@example.com"
+                          placeholder="mail@example.com"
                           required
                           onChange={field.onChange}
                           defaultValue={field.value}
@@ -212,7 +212,7 @@ export default function Signup() {
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Select a rôle" />
+                                <SelectValue placeholder="Selectionner un rôle" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>

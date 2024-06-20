@@ -58,7 +58,7 @@ const Order = ({
         }
 
         dataFetch();
-    }, [order]);
+    }, [order, token]);
 
     return (
         <Card className="h-full" x-chunk="dashboard-05-chunk-4" style={{width: '33%'}}>

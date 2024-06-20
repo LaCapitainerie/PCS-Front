@@ -14,7 +14,8 @@ interface LayoutProps {
 }
 
 const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
-    const [House, setHouse] = useState<Property>();
+
+    const [House, setHouse] = useState<Property>({} as Property);
 
     const SelectedHouse = (house: Property) => {
         setHouse(house);
@@ -23,7 +24,7 @@ const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
     var getUserfromLocalStorage = "{}";
     
     if (typeof window !== 'undefined') {
-        getUserfromLocalStorage = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") || "{}") : "{}";
+        getUserfromLocalStorage = localStorage.getItem("user") || "{}";
     };
 
     const user = JSON.parse(getUserfromLocalStorage) as User;
@@ -33,8 +34,9 @@ const Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
             <CookieConsent/>
             <Sidebar user={user}/>
             <BienImmo onHouseChange={SelectedHouse} token={user.token}/>
-            <MainContent house={House} User_id={user.id}/>
+            <MainContent house={House} User_id={user.id} token={user.token}/>
             <Toaster />
+            {/* <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script> */}
         </>
     );
 }

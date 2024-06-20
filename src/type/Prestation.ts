@@ -14,9 +14,13 @@ export interface Prestation {
     description: string;
     providerId: string;
     userId: string;
+    date: string;
     _user: User;
 
     status: "pending" | "accepted" | "refused" | "done";
+    idStripe: string;
+    name: string;
+    type: string;
 };
 
 export interface PrestationDTO {

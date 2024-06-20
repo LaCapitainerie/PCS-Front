@@ -1,9 +1,11 @@
 export interface Issue {
     id: string;
-    idclient: string;
-    idproperty: string;
-    created: string;
+    type: string;
+    state: "Backlog" | "Ready" | "In progress" | "Done";
     description: string;
-    status: "open" | "closed";
-    done: string;
+    chat_id: string;
 };
+
+export interface IssueDTO {
+    ticket: Issue[];
+}

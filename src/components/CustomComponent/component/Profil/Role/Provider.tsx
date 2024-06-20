@@ -35,7 +35,7 @@ const ProviderVitrine = ({User, token}: React.HTMLAttributes<HTMLDivElement> & L
         };
 
         dataFetch();
-    }, [User]);
+    }, [User, token]);
 
     return (
         <Carousel className="w-full h-full p-4" opts={{loop: true}}>

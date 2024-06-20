@@ -168,7 +168,7 @@ const CardForm = z.object({
                   <Input
                     {...field}
                     className={`border focus-visible:ring-0 border-none w-full`}
-                    placeholder="Your message here"
+                    placeholder="Votre message"
                   />
                 </FormItem>
               )}

@@ -37,12 +37,7 @@ const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined
     const [Messages, setMessages] = useState<Message[]>([]);
 
     const Send = (msg: Message) => {
-        setMessages([...Messages, msg])
-
-        console.log("Send", msg);
-        console.log("Messages", Messages);
-        
-        
+        setMessages([...Messages, msg]);
     };
     
     // Message
@@ -65,9 +60,6 @@ const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined
                 )
             ).json();
 
-            console.log("Data", data);
-            
-
             setMessages(data?.chat?.message || []);
         };
 
@@ -75,19 +67,19 @@ const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined
     }, [contact]);
 
     return (
+        
         <div className="absolute right-0 flex flex-col left-[calc(3.5rem+30%)] w-[66%] h-full">
             <a className="py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">{contact?.user2?.firstName} {contact?.user2?.lastName}</a>
 
             <Separator className="my-2" />
 
-            <div className="flex flex-col h-full justify-between">
-                <div className="flex flex-col gap-2 p-4 pt-0">
-                    {contact && Messages.map((value, index) => 
-                        <div key={index} className={`flex ${value.userId == user_id && "justify-end"}`}>
+            <div className="flex flex-col h-full justify-between overflow-hidden">
+                <div className="overflow-y-scroll flex flex-col gap-2 p-4 pt-0">
+                    {contact && Messages.map((value, index) => <div key={index} className={`flex ${value.userId == user_id && "justify-end"}`}>
                             {
                                 <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== user_id && "bg-accent"}`}>
                                     <div className="flex w-full flex-col gap-1">
-                                        <div className="text-xs font-medium">{value.date.toString()}</div>
+                                        <div className="text-xs font-medium text-right">{(value.userId == user_id ? contact.user1 : contact.user2).id} {value.date.toString().split("T")[0]}</div>
                                     </div>
                                     <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.content}</div>
                                 </div>

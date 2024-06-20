@@ -53,12 +53,7 @@ export default function EditForm({user, token}: {user: User, token: User["token"
             )
         ).json();
 
-        console.log(retour);
-
-        // Reload the page
-
-        location.reload();
-        
+        user = retour.user;
     }
 
     return (

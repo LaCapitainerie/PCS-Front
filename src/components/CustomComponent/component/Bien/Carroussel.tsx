@@ -40,6 +40,7 @@ export function CarouselPlugin({ images }: { images: Property["images"]}) {
                           onError={(e) => { e.currentTarget.src = "https://i.imgur.com/1kH8tiQ.png" }}
                           alt={`Random Image ${index + 1}`}
                           className="rounded-lg"
+                          height="400px"
                       />
                   </CardContent>
                 </Card>

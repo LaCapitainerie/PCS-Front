@@ -82,7 +82,7 @@ export default function Login() {
                       <Input
                         id="mail"
                         type="email"
-                        placeholder="m@example.com"
+                        placeholder="mail@example.com"
                         required
                         onChange={field.onChange}
                         defaultValue={field.value}

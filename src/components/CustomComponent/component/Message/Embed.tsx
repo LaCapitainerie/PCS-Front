@@ -62,7 +62,7 @@ export const Embed = ( Embed : EmbedProps) => {
                 <div style={{maxWidth: '40%'}} className="border rounded-md flex flex-col justify-between w-fit min-w-40 min-h-40">
                     <div className="h-max">
                         <div className="mt-4 mx-4 uppercase font-bold flex flex-row gap-4">
-                            <CircleDot color={EmbedIssue.status == "open"?"#238636":"#237A84"}/>
+                            {/* <CircleDot color={EmbedIssue.status == "open"?"#238636":"#237A84"}/> */}
                             Issue #{EmbedIssue.id.slice(0, 5)}
                         </div>
                         <Separator className="mt-4"/>
@@ -74,7 +74,7 @@ export const Embed = ( Embed : EmbedProps) => {
                     
                     <div className="h-max">
                         <Separator className="mb-4"/>
-                        <div className="m-2 mx-4 text-xs text-right">{EmbedIssue.idclient} - {EmbedIssue.created}</div>
+                        {/* <div className="m-2 mx-4 text-xs text-right">{EmbedIssue.idclient} - {EmbedIssue.created}</div> */}
                     </div>
                 </div>
             )

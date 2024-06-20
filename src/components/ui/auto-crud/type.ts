@@ -14,7 +14,7 @@ export type CrudManifest<T extends Crud> = {
    */
   action: {
     list: () => Promise<T['list']>
-    create: (payload: T['data']) => Promise<void>
+    create?: (payload: T['data']) => Promise<void>
     read: (item: T['listItem']) => Promise<T['data']>
     update: (data: T['data'], listItem: T['listItem']) => Promise<void>
     delete: (item: T['listItem']) => Promise<void>
@@ -38,7 +38,7 @@ export type CrudFormComponent<T extends Crud> = React.FunctionComponent<{
 
 export type CrudListComponent<T extends Crud> = React.FunctionComponent<{
   dataSource: T['listItem'][] | undefined
-  create: VoidFunction
+  create?: VoidFunction
   update: (item: T['listItem']) => void
   del: (item: T['listItem']) => void
   isLoading: boolean

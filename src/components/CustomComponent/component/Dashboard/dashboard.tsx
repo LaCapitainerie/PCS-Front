@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import RecentSales from "./recentsales"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import CRUD, { CrudVariant } from "./crud/Crud"
+import Crud, { CrudVariant } from "./crud/Crud"
 import { User } from "@/type/User"
 const queryClient = new QueryClient()
 
@@ -95,6 +95,8 @@ export function Dashboard({Column, CustomOnes, Token}: {Column: ValuableThing[],
 
   }, [Column, currentValuable]);
 
+  const [tab, setTab] = useState<CrudVariant>(CustomOnes[0]);
+
   return (
     <div className="flex min-h-screen h-full w-full flex-col left-[3.5rem]" style={{paddingLeft: '3.5rem'}}>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
@@ -121,13 +123,9 @@ export function Dashboard({Column, CustomOnes, Token}: {Column: ValuableThing[],
             ""
         }
         
-        
-
-
-
-        <div className="h-full w-full grid gap-y-8 gap-x-0 grid-cols-1 grid-rows-2 lg:grid-cols-3 lg:grid-rows-1 lg:gap-y-0 lg:gap-x-8">
+        <div className={`h-full w-full grid gap-y-8 gap-x-0 grid-cols-1 grid-rows-2 lg:grid-cols-${tab=='Issues'?1:3} lg:grid-rows-1 lg:gap-y-0 lg:gap-x-8`}>
           
-          <Tabs defaultValue={CustomOnes[0]} className="flex flex-col h-full w-full col-span-2">
+          <Tabs onValueChange={(e) => setTab(e as CrudVariant)} defaultValue={CustomOnes[0]} className={`flex flex-col h-full w-full col-span-2`}>
             <TabsList className="w-fit">
               {
                 CustomOnes.map((_, index) => (
@@ -140,7 +138,7 @@ export function Dashboard({Column, CustomOnes, Token}: {Column: ValuableThing[],
                 <TabsContent value={CustomOnes[index]} key={index+1}>
                   <QueryClientProvider client={queryClient}>
                     <>
-                      {CRUD({variant: value, token: Token})}
+                      {Crud({variant: value, token: Token})}
                     </>
                   </QueryClientProvider>
                 </TabsContent>
@@ -148,7 +146,9 @@ export function Dashboard({Column, CustomOnes, Token}: {Column: ValuableThing[],
             }
           </Tabs>
 
-          <RecentSales token={Token}/>
+          {
+            tab == "Issues"?"":<RecentSales token={Token}/>
+          }
         </div>
 
       </main>
