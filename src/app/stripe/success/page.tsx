@@ -1,6 +1,6 @@
 "use client"
 
-import SuccessPageLayout from "@/components/CustomComponent/layout/StripeLayout";
+import SuccessPageLayout from "@/app/stripe/success/StripeLayout";
 import { Suspense } from "react";
 
 export default function SuccessPage() {

@@ -38,6 +38,7 @@ const ProfilLayout: React.FC<LayoutProps> = ({ children }) => {
             <Sidebar user={user}/>
             <MainContent id={id} token={user.token} myid={user.id}/>
             <Toaster />
+            <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
         </>
     );
 }

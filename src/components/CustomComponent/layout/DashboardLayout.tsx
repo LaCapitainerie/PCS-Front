@@ -30,6 +30,7 @@ const Dashboard_Layout: React.FC<DashBoardProps> = ({ children, dataColumn, cust
             <Sidebar user={user}/>
             <Dashboard Column={dataColumn} CustomOnes={customOnes} Token={user.token}/>
             <Toaster />
+            <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
         </>
     );
 }

@@ -10,11 +10,10 @@ import CookieConsent from '@/components/ui/cookie';
 import { Contact } from "@/type/Chat";
 
 interface MessageProps {
-    children: ReactNode;
     categories: User["type"][];
 }
 
-const Message_Layout: React.FC<MessageProps> = ({ children, categories }) => {
+const Message_Layout: React.FC<MessageProps> = ({ categories }) => {
 
     const [Contact, setContact] = useState<Contact>();
 

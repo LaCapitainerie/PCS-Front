@@ -23,7 +23,7 @@ export default function RootLayout({
         <html lang="fr" suppressHydrationWarning>
           <link rel="icon" href="/favicon.ico" sizes="any" />
         <head />
-        <body className={`${inter.className} h-screen`}>
+        <body className={`${inter.className} h-screen overflow-hidden`}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -32,7 +32,6 @@ export default function RootLayout({
           >
             {children}
           </ThemeProvider>
-          <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
         </body>
       </html>
     </>
