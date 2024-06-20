@@ -23,12 +23,10 @@ import { useState } from "react";
 
 export function LeftPanel({
 	Reservations,
-	showForm,
 	timeZone,
 	setTimeZone,
 }: {
 	Reservations: Reservation[];
-	showForm: boolean | null;
 	timeZone: string;
 	setTimeZone: (timeZone: string) => void;
 }) {
@@ -47,8 +45,7 @@ export function LeftPanel({
 			</div>
 			<div className="grid gap-3">
 				<p className="text-gray-12 text-2xl font-bold">John.Doe</p>
-				{showForm && (
-					<div className="flex text-gray-12">
+				<div className="flex text-gray-12">
 						<CalendarIcon className="size-4 mr-2" />
 						<div className="flex flex-col text-sm font-semibold">
 							<p>
@@ -63,7 +60,6 @@ export function LeftPanel({
 							</p>
 						</div>
 					</div>
-				)}
 				<div className="flex items-center text-gray-12">
 					<Clock4 className="size-4 mr-2" />
 					<p className="text-sm font-semibold">12:00</p>
@@ -99,8 +95,8 @@ export function LeftPanel({
 				</Select> */}
 				<Select value={timeZone} onValueChange={(e) => setReservation(Reservations.find((r) => r.travelerId === e))} disabled={Reservations.length == 0}>
 					<SelectTrigger className="w-fit">
-						<SelectValue placeholder="Select a Property">
-							{Reservations.length == 0 ? "No reservation on this day" : "Select a Property"}
+						<SelectValue placeholder="Selectionner un bien">
+							{Reservations.length == 0 ? "Pas de reservation à ce jour" : `${Reservations.length} réservation(s)`}
 						</SelectValue>
 					</SelectTrigger>
 					<SelectContent className="w-fit dark:bg-gray-5">

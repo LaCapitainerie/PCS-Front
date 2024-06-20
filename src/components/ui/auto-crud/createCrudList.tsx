@@ -17,7 +17,7 @@ export const createCrudList = <T extends Crud>({ columns, mode, filter, setFilte
     ) : mode === "allow" && filter ? (
       <Select onValueChange={setFilter}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder={`Select a ${filter.title}`} />
+            <SelectValue placeholder={`Selectionner un ${filter.title}`} />
           </SelectTrigger>
         <SelectContent>
             <SelectGroup>

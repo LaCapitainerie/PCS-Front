@@ -97,7 +97,7 @@ const ContactList = ({
             <Separator className="my-2" />
 
             <div className="bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <Input placeholder="Search" className="w-full p-4" onChange={(event) => {setFilter(event.target.value)}}/>
+                <Input placeholder="Rechercher" className="w-full p-4" onChange={(event) => {setFilter(event.target.value)}}/>
             </div>
 
             <div className="flex flex-col gap-2 p-4 pt-0">

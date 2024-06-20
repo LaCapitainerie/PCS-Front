@@ -4,6 +4,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#tidio-chat-iframe {
+  z-index: 25 !important;
+}
  
 @layer base {
   :root {

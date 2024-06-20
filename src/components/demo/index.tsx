@@ -43,8 +43,6 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 	const router = useRouter();
 	const { locale } = useLocale();
 
-	const [dateParam, slotParam] = Search();
-
 	const [timeZone, setTimeZone] = React.useState("UTC");
 	const [date, setDate] = React.useState(today(getLocalTimeZone()));
 	const [focusedDate, setFocusedDate] = React.useState<CalendarDate | null>(
@@ -93,12 +91,12 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 
 	const handleChangeDate = (date: DateValue) => {
 		setDate(date as CalendarDate);
-		const url = new URL(window.location.href);
-		url.searchParams.set(
-			"date",
-			date.toDate(timeZone).toISOString().split("T")[0],
-		);
-		router.push(url.toString());
+		// const url = new URL(window.location.href);
+		// url.searchParams.set(
+		// 	"date",
+		// 	date.toDate(timeZone).toISOString().split("T")[0],
+		// );
+		// router.push(url.toString());
 
 		setSelectedReservation(
 			// If the date is between the beginDate and endDate of a reservation, we add it to the selectedReservation
@@ -141,9 +139,9 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 		const currentDate = date.toDate(timeZone);
 		currentDate.setHours(hours, minutes);
 
-		const url = new URL(window.location.href);
-		url.searchParams.set("slot", currentDate.toISOString());
-		router.push(url.toString());
+		// const url = new URL(window.location.href);
+		// url.searchParams.set("slot", currentDate.toISOString());
+		// router.push(url.toString());
 	};
 
 	
@@ -158,10 +156,6 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 		return arr;
 	};
 
-
-	const showForm = !!dateParam && !!slotParam;
-
-
 	const colors = [
 		"#264653",
 		"#2a9d8f",
@@ -175,11 +169,10 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 			<div className="flex gap-6">
 				<LeftPanel
 					Reservations={selectedReservation}
-					showForm={showForm}
 					timeZone={timeZone}
 					setTimeZone={setTimeZone}
 				/>
-				{!showForm ? (
+				{true ? (
 					<>
 						<Calendar
 							minValue={today(getLocalTimeZone()).add({ days: 1 })}

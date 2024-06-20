@@ -38,27 +38,27 @@ export function FormPanel() {
 	return (
 		<form className="flex flex-col gap-5 w-[360px]">
 			<div className="flex flex-col space-y-1.5">
-				<Label htmlFor="name">Your name *</Label>
+				<Label htmlFor="name">Votre Nom *</Label>
 				<Input id="name" defaultValue="Damián Ricobelli" />
 			</div>
 			<div className="flex flex-col space-y-1.5">
-				<Label htmlFor="email">Email address *</Label>
+				<Label htmlFor="email">Addresse Email *</Label>
 				<Input id="email" type="email" defaultValue="dricobelli@gmail.com" />
 			</div>
 			<div className="flex flex-col space-y-1.5">
-				<Label htmlFor="phone">Phone number *</Label>
+				<Label htmlFor="phone">Numéro de tel *</Label>
 				<PhoneInput id="phone" />
 			</div>
 			<div className="flex flex-col space-y-1.5">
-				<Label htmlFor="email">Additional notes</Label>
+				<Label htmlFor="email">Notes supplémentaires</Label>
 				<Textarea
 					id="notes"
-					placeholder="Please share anything that will help prepare for our meeting"
+					placeholder="Ajouter un commentaire..."
 				/>
 			</div>
 			{hasGuests && (
 				<>
-					<Label htmlFor="email">Add guests</Label>
+					<Label htmlFor="email">Ajouter un prestataire</Label>
 					<div className="flex flex-col gap-1">
 						{guests.map((guest, index) => (
 							<div key={index} className="flex items-center space-x-2 relative">
@@ -77,7 +77,7 @@ export function FormPanel() {
 												onClick={() => removeGuest(index)}
 											/>
 										</TooltipTrigger>
-										<TooltipContent>Remove email</TooltipContent>
+										<TooltipContent>Retirer l'email</TooltipContent>
 									</Tooltip>
 								</TooltipProvider>
 							</div>
@@ -92,12 +92,12 @@ export function FormPanel() {
 				className="w-fit"
 			>
 				<UserPlus className="mr-2 size-4" />
-				Add guests
+				Ajouter un prestataire
 			</Button>
 			<p className="text-gray-11 text-xs my-4">
-				By proceeding, you agree to our{" "}
-				<span className="text-gray-12">Terms</span> and{" "}
-				<span className="text-gray-12">Privacy Policy</span>.
+				En continuant, vous acceptez nos {" "}
+				<span className="text-gray-12">Termes</span> et{" "}
+				<span className="text-gray-12">Condition d'utilisation</span>.
 			</p>
 			<div className="flex justify-end gap-2">
 				<Button
@@ -106,11 +106,11 @@ export function FormPanel() {
 						router.back();
 					}}
 				>
-					Back
+					Retour
 				</Button>
 				<Button asChild type="button">
 					<Link href="https://github.com/damianricobelli/shadcn-cal-com">
-						Continue
+						Continuer
 					</Link>
 				</Button>
 			</div>

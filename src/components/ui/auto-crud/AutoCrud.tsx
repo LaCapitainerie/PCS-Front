@@ -54,6 +54,17 @@ export const createCrudView =
       })
       const isFormMode = selectedId !== null && selectedId !== undefined
 
+
+      if (typeof window !== undefined && typeof window.document !== undefined){
+        const iframe = window.document.querySelector<HTMLIFrameElement>("#tidio-chat-iframe");
+        if (iframe && iframe.style){
+          console.log(iframe);
+          
+          iframe.style.zIndex = "25";
+        }
+      }
+
+
       const listComponent = (
         <ListComponent
           useHooks={manifest.useHooks}

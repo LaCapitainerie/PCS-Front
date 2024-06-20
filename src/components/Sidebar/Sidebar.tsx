@@ -3,7 +3,7 @@
 import { SideBarDTO, Sidebar as SidebarType } from "../../type/Sidebar";
 import * as React from "react"
 import Link from "next/link"
-import { Home, Settings, MessagesSquareIcon, GaugeIcon, User, Check } from "lucide-react"
+import { Home, MessagesSquareIcon, GaugeIcon, User, Check } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
@@ -12,7 +12,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { useEffect, useState } from 'react';
 import { Button } from "../ui/button"
 import { toComparable } from "../functions";
-import { Token, User as UserType } from "@/type/User";
+import { User as UserType } from "@/type/User";
 import { Separator } from "../ui/separator";
 
 // Store the icons in an dictionary
@@ -87,7 +87,7 @@ const Sidebar = ({ user }: { user: UserType }) => {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuLabel><a href={`/profile?user=${user.id}`}>My Account</a></DropdownMenuLabel>
+                        <DropdownMenuLabel><a href={`/profile?user=${user.id}`}>Mon compte</a></DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={(e) => {
                             if(window){
@@ -95,7 +95,7 @@ const Sidebar = ({ user }: { user: UserType }) => {
                                 window.location.assign("/login");
                             }
                         }}>
-                            Logout
+                            Deconnection
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
@@ -110,14 +110,14 @@ const Sidebar = ({ user }: { user: UserType }) => {
                         <Button variant="outline" size="icon">
                             <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                             <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                            <span className="sr-only">Toggle theme</span>
+                            <span className="sr-only">Changer de thème</span>
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         {
                             ["light", "dark", "system"].map((value, i) => (
                                 <DropdownMenuItem key={i} onClick={() => setTheme(value)} className="capitalize justify-between">
-                                    {value} {theme == value ? <Check /> : ""}
+                                    {["clair", "sombre", "système"][i]} {theme == value ? <Check /> : ""}
                                 </DropdownMenuItem>
                             ))
                         }

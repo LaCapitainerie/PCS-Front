@@ -170,7 +170,7 @@ export function PhoneInput({
 				</PopoverTrigger>
 				<PopoverContent className="p-0 w-max" align="start">
 					<Command>
-						<CommandInput placeholder="Search country..." />
+						<CommandInput placeholder="Rechercher un pays..." />
 						<CommandList>
 							<CommandEmpty>No country found.</CommandEmpty>
 							<ScrollArea
@@ -228,7 +228,7 @@ export function PhoneInput({
 				pattern="^(\+)?[0-9\s]*$"
 				name="phone"
 				id={id}
-				placeholder="Phone"
+				placeholder="Téléphone"
 				defaultValue={initializeDefaultValue()}
 				onInput={handleOnInput}
 				onPaste={handleOnPaste}
