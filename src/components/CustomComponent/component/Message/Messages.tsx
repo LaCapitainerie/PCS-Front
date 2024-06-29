@@ -34,6 +34,7 @@ export interface ChatDTO {
 
 const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined, token: User["token"], user_id: User["id"] }) => {
 
+    const [chat, setChat] = useState<Chat | undefined>(undefined);
     const [Messages, setMessages] = useState<Message[]>([]);
 
     const Send = (msg: Message) => {
@@ -60,6 +61,7 @@ const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined
                 )
             ).json();
 
+            setChat(data?.chat || {} as Chat)
             setMessages(data?.chat?.message || []);
         };
 
@@ -117,7 +119,7 @@ const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined
                 </div>
 
                 <div className="flex flex-row p-4 gap-4">
-                    <FileUploadDropzone token={token} user1={contact?.user1.id || ""} user2={contact?.user2.id || ""} sendFunction={Send}/>
+                    <FileUploadDropzone token={token} user1={chat?.userId[0] || {} as User} user2={chat?.userId[1] || {} as User} sendFunction={Send}/>
                 </div>
             </div>
 

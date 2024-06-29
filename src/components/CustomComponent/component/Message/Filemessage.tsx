@@ -1,11 +1,5 @@
 "use client";
  
-import {
-  FileUploader,
-  FileInput,
-  FileUploaderContent,
-  FileUploaderItem,
-} from "@/components/ui/file-upload";
 import { DropzoneOptions } from "react-dropzone";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,13 +7,10 @@ import { useForm } from "react-hook-form";
 import { Form, FormField, FormItem } from "@/components/ui/form";
 
 // rest of the code...
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast"
 import { Input } from "@/components/ui/input";
-import { CornerDownLeft, Paperclip } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import Image from "next/image";
+import { CornerDownLeft } from "lucide-react";
 import { User } from "@/type/User";
 import { Message, MessageDTO } from "@/type/Message";
 
@@ -39,7 +30,7 @@ const CardForm = z.object({
    
   type CardFormType = z.infer<typeof CardForm>;
    
-  const FileUploadDropzone = ({token, user1, user2, sendFunction}: {token: User["token"], user1: string, user2:string, sendFunction: (msg: Message) => void}) => {
+  const FileUploadDropzone = ({token, user1, user2, sendFunction}: {token: User["token"], user1: User, user2:User, sendFunction: (msg: Message) => void}) => {
     const form = useForm<CardFormType>({
       resolver: zodResolver(CardForm),
       defaultValues: {
