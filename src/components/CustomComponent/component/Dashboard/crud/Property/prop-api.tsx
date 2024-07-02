@@ -19,14 +19,23 @@ export const fetchData = async (token?: User["token"]) => {
       {
         method: "GET",
         headers: {
-          "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+          "Authorization": token || "",
         },
       }
     )
   ).json();
 
-  retour.Property.forEach(element => {
-    props[element.id] = element as ObjectType;
+  retour?.Property.forEach(element => {
+    props[element.id] = {
+      id: element.id,
+      price: element.price,
+      surface: element.surface,
+      room: element.room,
+      bathroom: element.bathroom,
+      garage: element.garage,
+      urls: element.images.map((image) => { return { url: image } }),
+      images: element.images
+    } as ObjectType;
   });
 
   return {
@@ -43,7 +52,7 @@ export const createData = async (prop: ObjectType, token?: User["token"]) => {
       method: "POST",
       body: JSON.stringify(prop),
       headers: {
-        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+        "Authorization": token || "",
       },
     }
   )
@@ -70,7 +79,7 @@ export const updateData = async (id: string, data: ObjectType, token?: User["tok
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
-        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+        "Authorization": token || "",
       },
     }
   )
@@ -82,7 +91,7 @@ export const use_deleteData = async (id: ObjectSummary, token?: User["token"]) =
     {
       method: "DELETE",
       headers: {
-        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+        "Authorization": token || "",
       },
     }
   )

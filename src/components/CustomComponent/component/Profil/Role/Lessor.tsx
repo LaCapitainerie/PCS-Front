@@ -31,7 +31,7 @@ const LessorVitrine = ({User, token}: React.HTMLAttributes<HTMLDivElement> & Low
                 )
             ).json();            
 
-            setProperty(data.Property);
+            setProperty(data.Property || []);
         };
 
         dataFetch();

@@ -3,14 +3,14 @@ import z from 'zod'
 
 export const Schema = z.object({
   
-  price: z.coerce.number().gte(1, 'Must be 1 and above'),
+  price: z.coerce.string(),
   targetCustomer: z.enum(["traveler", "lessor"]),
   address: z.string(),
   city: z.string(),
   zipCode: z.string(),
   country: z.string(),
   
-  rangeAction: z.coerce.number().gte(0, 'Must be 0 and above'),
+  rangeAction: z.coerce.string(),
   description: z.string().min(10, "The description must be at least 10 characters long")
 
 })

@@ -31,44 +31,53 @@ export const Schema = z.object({
       message: 'Address must be at least 10 characters.',
     }),
 
-  price: z
-    .number({
-      required_error: 'Price is required.',
+  zipCode: z
+    .string({
+      required_error: 'Zipcode is required.',
     })
-    .min(1, {
-      message: 'Price must be at least 1.',
+    .min(5, {
+      message: 'Zipcode must be at least 5 characters.',
+    }),
+
+  city: z
+    .string({
+      required_error: 'City is required.',
+    })
+    .min(2, {
+      message: 'City must be at least 2 characters.',
+    }),
+
+  country: z
+    .string({
+      required_error: 'Country is required.',
+    })
+    .min(2, {
+      message: 'Country must be at least 2 characters.',
+    }),
+
+  price: z
+  .coerce.number({
+      required_error: 'Price is required.',
     }),
 
   surface: z
-    .number({
+  .coerce.number({
       required_error: 'Surface is required.',
-    })
-    .min(1, {
-      message: 'Surface must be at least 1.',
     }),
 
   room: z
-    .number({
+    .coerce.number({
       required_error: 'Room is required.',
-    })
-    .min(1, {
-      message: 'Room must be at least 1.',
     }),
 
   bathroom: z
-    .number({
+    .coerce.number({
       required_error: 'Bathroom is required.',
-    })
-    .min(1, {
-      message: 'Bathroom must be at least 1.',
     }),
 
   garage: z
-    .number({
+    .coerce.number({
       required_error: 'Garage is required.',
-    })
-    .min(1, {
-      message: 'Garage must be at least 1.',
     }),
 
   urls: z
@@ -99,6 +108,7 @@ export type ObjectSummary = {
   type: Property["type"]
   description: Property["description"]
   address: Property["address"]
+  zipCode: Property["zipCode"]
   price: Property['price']
   surface: Property['surface']
   images: Property['images']

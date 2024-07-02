@@ -13,10 +13,7 @@ const deletePath = `/annulation`
 interface ObjectDTO { reservation: Reservation[] }
 
 
-export const fetchData = async (propertyID?: Property["id"]) => {
-
-  const token = (JSON.parse(localStorage.getItem("user") as string) as User).token!
-  console.log("TOKEN", token);
+export const fetchData = async (token:User["token"], propertyID?: Property["id"]) => {
 
   var retour: ObjectDTO = {reservation: []}
   
@@ -76,10 +73,6 @@ export const updateData = async (id: string, data: ObjectType, token?: User["tok
 
   props[id] = data
 
-  console.log("UPDATE", data);
-  console.log(props, id);
-  
-  
   await fetch(
     `${path}${updatePath}/${id}`,
     {
@@ -92,13 +85,13 @@ export const updateData = async (id: string, data: ObjectType, token?: User["tok
   )
 }
 
-export const deleteData = async (id: ObjectSummary) => {
+export const deleteData = async (id: ObjectSummary, token:User["token"]) => {
   const result = await fetch(
     `${path}${deletePath}/${(id as any).original.id}`,
     {
       method: "DELETE",
       headers: {
-        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+        "Authorization": token
       },
     }
   )

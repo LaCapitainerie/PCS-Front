@@ -1,6 +1,6 @@
 import { User } from "@/type/User";
-import { PresCrudView } from "./Prestation/prescrud";
-import { PropCrudView } from "./Property/propcrud";
+import { PrestationCrudView } from "./Prestation/prescrud";
+import { PropertyCrudView } from "./Property/propcrud";
 import { KanbanBoard } from "../../Issue/KanbanBoard";
 import { UserCrudView } from "./Users/usercrud";
 import { ReservationCrudView } from "./Reservations/rescrud";
@@ -17,10 +17,10 @@ export default function Crud({variant, token}: CrudBoardProps): JSX.Element {
     
     switch (variant) {
         case "Properties":
-            return <PropCrudView/>;
+            return <PropertyCrudView/>;
 
         case "Prestations":
-            return <PresCrudView/>;
+            return <PrestationCrudView/>;
 
         case "Reservations":
             return <ReservationCrudView variant={variant}/>;
