@@ -8,13 +8,11 @@ import Title from "../../../ui/title";
 import { useEffect, useState } from "react";
 import {Property} from "@/type/Property";
 import { ReservationDTO, Reservation as ReservationType } from "@/type/Reservation";
-import { Prestataire } from "@/type/Prestataire";
 import { User } from "@/type/User";
 import { Service } from "@/type/Service";
-import Calendar from "@/components/demo/index";
 
 
-const MainContent = ({house, User_id, token}: {house:Property, User_id: User["id"], token: User["token"]}) => {
+const MainContent = ({house, User_id, token, id}: {house:Property, User_id: User["id"], token: User["token"], id: User["id"]}) => {
 
     const [state, setState] = useState<Property>(house);
     
@@ -74,16 +72,16 @@ const MainContent = ({house, User_id, token}: {house:Property, User_id: User["id
             <main className="w-full h-full flex flex-col">
                 <CarouselPlugin images={house?.images || []}/>
                 <div className="p-1">
-                    <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
+                    <div className="flex flex-col rounded-lg bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Nom du bien" sous_titre={state?.description}/>
                         <CardProperty Property={state} User_id={User_id} Prestation={prestations}/>
                     </div>
                 </div>
                 <div className="p-1">
-                    <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2">
+                    <div className="flex flex-col rounded-lg bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Réservations" sous_titre=""/>
                         <div className="flex flex-col justify-around gap-2">
-                            <Reservation ReservationVal={reservation} property={house} token={token}/>
+                            <Reservation property={house} token={token} id={id}/>
                         </div>
                     </div>
                 </div>

@@ -50,7 +50,7 @@ export function typeToDom(type: string = "", id: number = 0) {
   }
 }
 
-const descriptionKey = ["type", "price", "surface", "room", "bathroom", "garage", "address", "city", "zipcode"]
+const descriptionKey = ["type", "price", "surface", "room", "bathroom", "garage", "address", "city", "zipCode"]
 
 export function CardProperty({ Property, User_id, Prestation }: { Property: Property | undefined, Prestation: Service[], User_id: User["id"] }) {
 
@@ -70,10 +70,6 @@ export function CardProperty({ Property, User_id, Prestation }: { Property: Prop
         <CardHeader>
           <div className="flex flex-row justify-between">
             <CardTitle className="">Details du bien</CardTitle>
-            
-            <Button hidden={Property?.userId != User_id} variant="outline" size="icon" onClick={() => {if(edit)toast({ description: "Your changes have been saved !", }); setEdit(!edit);}}>
-              {edit?<Check className="h-4 w-4" />:<Edit2 className="h-4 w-4" />}
-            </Button>
           </div>
         </CardHeader>
         <CardContent className="grid gap-4">
@@ -88,11 +84,13 @@ export function CardProperty({ Property, User_id, Prestation }: { Property: Prop
               `
             }}>
 
+              
+
             {Property && descriptionKey.map((key, index) => (
               <div key={index} className="mb-4 pb-4 last:mb-0 last:pb-0" >
-                <div className="w-full">
-                  <Label htmlFor={key}>{toTitleCase(key)} : </Label>
-                  <Input id={key} type="text" defaultValue={Property ? Object.entries(Property).find((value, _index) => value[0] == key)?.[1] : ""} readOnly={!edit} />
+                <div className="w-full flex flex-col">
+                  <p className="text-l font-semibold leading-none tracking-tight">{toTitleCase(key)} : </p>
+                  <p id={key} className="text-sm text-muted-foreground">{Property ? Object.entries(Property).find((value, _index) => value[0] == key)?.[1] : ""}</p>
                 </div>
               </div>
             ))}

@@ -54,6 +54,11 @@ export default function EditForm({user, token}: {user: User, token: User["token"
         ).json();
 
         user = retour.user;
+
+        if(typeof window !== 'undefined') {
+            localStorage.setItem("user", JSON.stringify(user));
+            location.reload();
+        }
     }
 
     return (

@@ -167,11 +167,11 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 	return (
 		<div className="w-full px-8 py-6 rounded-md max-w-max mx-auto">
 			<div className="flex gap-6">
-				<LeftPanel
+				{mode == "lessor" ? <LeftPanel
 					Reservations={selectedReservation}
 					timeZone={timeZone}
 					setTimeZone={setTimeZone}
-				/>
+				/> : null}
 				{true ? (
 					<>
 						<Calendar
