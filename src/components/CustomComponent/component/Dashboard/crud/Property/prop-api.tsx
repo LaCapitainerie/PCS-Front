@@ -27,14 +27,8 @@ export const fetchData = async (token?: User["token"]) => {
 
   retour?.Property.forEach(element => {
     props[element.id] = {
-      id: element.id,
-      price: element.price,
-      surface: element.surface,
-      room: element.room,
-      bathroom: element.bathroom,
-      garage: element.garage,
-      urls: element.images.map((image) => { return { url: image } }),
-      images: element.images
+      ...element,
+      images: element.images.map((image) => { return { url: image } }),
     } as ObjectType;
   });
 
@@ -64,8 +58,10 @@ export const readData = async (id: string) => {
 
 export const updateData = async (id: string, data: ObjectType, token?: User["token"]) => {
   
-  data.images = data.urls.map((image) => { return image.url })
-  delete (data as any).urls
+  const finalData = {
+    ...data,
+    images: data.images.map((image) => image.url),
+  }
   
   props[id] = data
 
@@ -77,7 +73,7 @@ export const updateData = async (id: string, data: ObjectType, token?: User["tok
     `${path}${updatePath}/${id}`,
     {
       method: "PUT",
-      body: JSON.stringify(data),
+      body: JSON.stringify(finalData),
       headers: {
         "Authorization": token || "",
       },

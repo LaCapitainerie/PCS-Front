@@ -80,7 +80,7 @@ export const Schema = z.object({
       required_error: 'Garage is required.',
     }),
 
-  urls: z
+  images: z
     .array(
       z.object({
         url: z.string(),
@@ -93,13 +93,19 @@ export const Schema = z.object({
 // & the type of the data that won't be passed to the form
 export type ObjectType = z.infer<typeof Schema> & {
   id: Property['id']
+  name: Property['name']
+  type: Property["type"]
+  description: Property["description"]
+  address: Property["address"]
+  zipCode: Property["zipCode"]
+  city: Property['city']
   price: Property['price']
   surface: Property['surface']
   room: Property['room']
   bathroom: Property['bathroom']
   garage: Property['garage']
-  urls?: {url: string}[] | undefined
-  images: Property['images']
+  images: {url: string}[]
+  
 };
 
 export type ObjectSummary = {
@@ -111,5 +117,5 @@ export type ObjectSummary = {
   zipCode: Property["zipCode"]
   price: Property['price']
   surface: Property['surface']
-  images: Property['images']
+  images: {url: string}[]
 }

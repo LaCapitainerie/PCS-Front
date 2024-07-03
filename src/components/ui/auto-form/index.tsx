@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { z } from "zod";
 import { Form } from "../form";
 import { DefaultValues, useForm } from "react-hook-form";
@@ -16,8 +16,12 @@ import {
 } from "./utils";
 import AutoFormObject from "./fields/object";
 
+import { Spinner } from '@/components/ui/spinner';
+
 export function AutoFormSubmit({ children }: { children?: React.ReactNode }) {
-  return <Button type="submit">{children ?? "Submit"}</Button>;
+  const [show, setShow] = useState(false);
+
+  return show?<Spinner/>:<Button type="submit" className="w-full">{children ?? "Submit"}</Button>;
 }
 
 function AutoForm<SchemaType extends ZodObjectOrWrapped>({

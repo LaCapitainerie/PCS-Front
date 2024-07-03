@@ -57,9 +57,7 @@ export const createCrudView =
 
       if (typeof window !== undefined){
         const iframe = window.document.querySelector<HTMLIFrameElement>("#tidio-chat-iframe");
-        if (iframe && iframe.style){
-          console.log(iframe);
-          
+        if (iframe && iframe.style){          
           iframe.style.zIndex = "25";
         }
       }
