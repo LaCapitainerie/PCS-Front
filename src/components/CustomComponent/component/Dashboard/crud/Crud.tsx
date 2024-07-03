@@ -17,16 +17,16 @@ export default function Crud({variant, token}: CrudBoardProps): JSX.Element {
     
     switch (variant) {
         case "Properties":
-            return <PropertyCrudView/>;
+            return <PropertyCrudView token={token}/>;
 
         case "Prestations":
-            return <PrestationCrudView/>;
+            return <PrestationCrudView token={token}/>;
 
         case "Reservations":
-            return <ReservationCrudView variant={variant}/>;
+            return <ReservationCrudView token={token} variant={variant}/>;
 
         case "Users":
-            return <UserCrudView/>;
+            return <UserCrudView token={token}/>;
 
         case "Issues":
             return <KanbanBoard token={token}/>

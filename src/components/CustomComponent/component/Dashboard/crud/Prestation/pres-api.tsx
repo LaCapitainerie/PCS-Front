@@ -12,14 +12,15 @@ const deletePath = `/management`
 interface ObjectDTO { service: Prestation[] }
 
 
-export const fetchData = async (token?: User["token"]) => {
+export const fetchData = async (token: User["token"]) => {
+
   const retour: ObjectDTO = await (
     await fetch(
       `${path}${fetchPath}`,
       {
         method: "GET",
         headers: {
-          "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+          "Authorization": token || "not found",
         },
       }
     )
@@ -35,7 +36,7 @@ export const fetchData = async (token?: User["token"]) => {
   }
 }
 
-export const createData = async (prop: ObjectType, token?: User["token"]) => {
+export const createData = async (prop: ObjectType, token: User["token"]) => {
 
   await fetch(
     `${path}${createPath}`,
@@ -43,7 +44,7 @@ export const createData = async (prop: ObjectType, token?: User["token"]) => {
       method: "POST",
       body: JSON.stringify(prop),
       headers: {
-        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+        "Authorization": token || "",
       },
     }
   )
@@ -53,7 +54,7 @@ export const readData = async (id: string) => {
   return props[id]! // TODO: handle undefined
 }
 
-export const updateData = async (id: string, data: ObjectType, token?: User["token"]) => {
+export const updateData = async (id: string, data: ObjectType, token: User["token"]) => {
   props[id] = data
   
   await fetch(
@@ -62,19 +63,19 @@ export const updateData = async (id: string, data: ObjectType, token?: User["tok
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
-        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+        "Authorization": token || "",
       },
     }
   )
 }
 
-export const use_deleteData = async (id: ObjectSummary, token?: User["token"]) => {
+export const use_deleteData = async (id: ObjectSummary, token: User["token"]) => {
   const result = await fetch(
     `${path}${deletePath}/${(id as any).original.id}`,
     {
       method: "DELETE",
       headers: {
-        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+        "Authorization": token || "",
       },
     }
   )

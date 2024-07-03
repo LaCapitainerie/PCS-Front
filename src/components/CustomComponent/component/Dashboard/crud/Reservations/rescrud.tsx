@@ -10,12 +10,11 @@ import { User } from '@/type/User'
 import { Property } from '@/type/Property'
 
 interface CrudViewProps {
+  token: User["token"];
   variant: CrudVariant;
 }
 
-export const ReservationCrudView: React.FC<CrudViewProps> = (variant) => {
-
-  
+export const ReservationCrudView: React.FC<CrudViewProps> = ({token, variant}) => {
 
 
 
@@ -23,30 +22,20 @@ export const ReservationCrudView: React.FC<CrudViewProps> = (variant) => {
   const [getAllFilter, setGetAllFilter] = useState<string[]>([]);
 
   useEffect(() => {
-    fetchDataProp().then((data) => {
+    fetchDataProp(token).then((data) => {
       setGetAllFilter(data.props.map((prop) => (prop.id)))
     });
   }, [variant]);  
 
 
 
-
-
-  var getUserfromLocalStorage = "{}";
-    
-  if (typeof window !== 'undefined') {
-      getUserfromLocalStorage = localStorage.getItem("user") || "{}";
-  };
-
-  const user = JSON.parse(getUserfromLocalStorage) as User;
-
   const CrudComponent = createCrudView<ObjectType, ObjectSummary>({ id: "" })({
     name: 'ReservationCrudView',
     action: {
-      list: () => fetchData(user.token, filter),
+      list: () => fetchData(token, filter),
       read: ({ id }) => readData(id),
-      update: (prop, { id }) => updateData(id, prop, user.token),
-      delete: (prop) => deleteData(prop, user.token),
+      update: (prop, { id }) => updateData(id, prop, token),
+      delete: (prop) => deleteData(prop, token),
     },
     getId: ({ id }) => id,
     listToDataSource: (list) => list.props,

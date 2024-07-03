@@ -5,9 +5,9 @@ import { createData, use_deleteData, fetchData, readData, updateData } from './u
 import { Schema, type ObjectType, type ObjectSummary } from './user_schem'
 import { User } from '@/type/User'
 
-interface CrudViewProps {}
+interface CrudViewProps {token: User["token"]}
 
-export const UserCrudView: React.FC<CrudViewProps> = () => {
+export const UserCrudView: React.FC<CrudViewProps> = ({token}) => {
 
 
   var getUserfromLocalStorage = "{}";

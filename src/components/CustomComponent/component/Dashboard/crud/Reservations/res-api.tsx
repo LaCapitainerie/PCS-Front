@@ -15,24 +15,19 @@ interface ObjectDTO { reservation: Reservation[] }
 
 export const fetchData = async (token:User["token"], propertyID?: Property["id"]) => {
 
-  var retour: ObjectDTO = {reservation: []}
+  console.log(token, propertyID);
   
-  if (propertyID !== undefined && propertyID !== "") {
-    const Tmpretour: ObjectDTO = await (
-      await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${propertyID}`,
-        {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': token,
-            },
-            method: 'GET',
-        }
-      )
-    ).json();
-
-    retour = Tmpretour;
-  }
+  const retour: ObjectDTO = propertyID ? await (
+    await fetch(
+      `${path}${fetchPath}/${propertyID}`,
+      {
+          headers: {
+              'Authorization': token,
+          },
+          method: 'GET',
+      }
+    )
+  ).json() : { reservation: [] };
 
   console.log(retour.reservation, propertyID);
 
@@ -51,7 +46,7 @@ export const fetchData = async (token:User["token"], propertyID?: Property["id"]
   
 }
 
-export const createData = async (prop: ObjectType, token?: User["token"]) => {
+export const createData = async (prop: ObjectType, token: User["token"]) => {
 
   await fetch(
     `${path}${createPath}`,
@@ -59,7 +54,7 @@ export const createData = async (prop: ObjectType, token?: User["token"]) => {
       method: "POST",
       body: JSON.stringify(prop),
       headers: {
-        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+        "Authorization": token || "",
       },
     }
   )
@@ -69,7 +64,7 @@ export const readData = async (id: string) => {
   return props[id]! // TODO: handle undefined
 }
 
-export const updateData = async (id: string, data: ObjectType, token?: User["token"]) => {  
+export const updateData = async (id: string, data: ObjectType, token: User["token"]) => {  
 
   props[id] = data
 
@@ -79,7 +74,7 @@ export const updateData = async (id: string, data: ObjectType, token?: User["tok
       method: "PUT",
       body: JSON.stringify(data),
       headers: {
-        "Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+        "Authorization": token || "",
       },
     }
   )

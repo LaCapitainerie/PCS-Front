@@ -12,10 +12,10 @@ const deletePath = ``
 interface ObjectDTO { Property: Property[] }
 
 
-export const fetchData = async (token?: User["token"]) => {
+export const fetchData = async (token: User["token"]) => {
   const retour: ObjectDTO = await (
     await fetch(
-      `${path}${fetchPath}`,
+      `${path}`,
       {
         method: "GET",
         headers: {
@@ -38,7 +38,7 @@ export const fetchData = async (token?: User["token"]) => {
   }
 }
 
-export const createData = async (prop: ObjectType, token?: User["token"]) => {
+export const createData = async (prop: ObjectType, token: User["token"]) => {
 
   await fetch(
     `${path}${createPath}`,
@@ -56,7 +56,7 @@ export const readData = async (id: string) => {
   return props[id]! // TODO: handle undefined
 }
 
-export const updateData = async (id: string, data: ObjectType, token?: User["token"]) => {
+export const updateData = async (id: string, data: ObjectType, token: User["token"]) => {
   
   const finalData = {
     ...data,
@@ -81,7 +81,7 @@ export const updateData = async (id: string, data: ObjectType, token?: User["tok
   )
 }
 
-export const use_deleteData = async (id: ObjectSummary, token?: User["token"]) => {
+export const use_deleteData = async (id: ObjectSummary, token: User["token"]) => {
   const result = await fetch(
     `${path}${deletePath}/${(id as any).original.id}`,
     {

@@ -5,27 +5,20 @@ import { createData, use_deleteData, fetchData, readData, updateData } from './p
 import { Schema, type ObjectType, type ObjectSummary } from './pres_schem'
 import { User } from '@/type/User'
 
-interface CrudViewProps {}
+interface CrudViewProps {token: User["token"]}
 
-export const PrestationCrudView: React.FC<CrudViewProps> = () => {
+export const PrestationCrudView: React.FC<CrudViewProps> = ({token}) => {
 
 
-  var getUserfromLocalStorage = "{}";
-    
-  if (typeof window !== 'undefined') {
-      getUserfromLocalStorage = localStorage.getItem("user") || "{}";
-  };
-
-  const user = JSON.parse(getUserfromLocalStorage) as User;
 
   const CrudComponent = createCrudView<ObjectType, ObjectSummary>({ id: "" })({
     name: 'Prestations',
     action: {
-      list: () => fetchData(user.token),
-      create: (payload) => createData(payload, user.token),
+      list: () => fetchData(token),
+      create: (payload) => createData(payload, token),
       read: ({ id }) => readData(id),
-      update: (pres, { id }) => updateData(id, pres, user.token),
-      delete: (pres) => use_deleteData(pres, user.token),
+      update: (pres, { id }) => updateData(id, pres, token),
+      delete: (pres) => use_deleteData(pres, token),
     },
     getId: ({ id }) => id,
     listToDataSource: (list) => list.props,

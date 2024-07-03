@@ -68,7 +68,7 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						"Authorization": (JSON.parse(localStorage.getItem("user") as string) as User).token!,
+						"Authorization": token || "",
 					},
 				}
 			)
