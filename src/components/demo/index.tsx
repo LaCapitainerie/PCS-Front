@@ -13,21 +13,17 @@ import { useLocale } from "@react-aria/i18n";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { FormPanel } from "./form-panel";
-import { LeftPanel } from "./left-panel";
-import { RightPanel } from "./right-panel";
-import { Prestation, PrestationDTO } from "@/type/Prestation";
 import { Property } from "@/type/Property";
-import { Bill, Reservation, ReservationDTO } from "@/type/Reservation";
+import { Reservation, ReservationDTO } from "@/type/Reservation";
 import { User } from "@/type/User";
 import { TakenValues } from "../calendar/calendar-grid";
-import { Service } from "@/type/Service";
+import { Button } from "../ui/button";
 
 
 
 interface CalendarProps {
 	property: Property;
-	token: User["token"];
-	mode: "lessor" | "traveler";
+	user: User;
 }
 
 function Search(): [string | null, string | null] {
@@ -39,7 +35,7 @@ function Search(): [string | null, string | null] {
 	return [dateParam, slotParam];
 }
 
-export default function CalendarLayout({property, token, mode}: CalendarProps) {
+export default function CalendarLayout({property, user}: CalendarProps) {
 	const router = useRouter();
 	const { locale } = useLocale();
 
@@ -68,7 +64,7 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						"Authorization": token || "",
+						"Authorization": user.token || "",
 					},
 				}
 			)
@@ -164,15 +160,19 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 		"#e76f51",
 	]
 
+	const [calMode, setCalMode] = React.useState<"calendar" | "form">("calendar");
+
 	return (
 		<div className="w-full px-8 py-6 rounded-md max-w-max mx-auto">
 			<div className="flex gap-6">
-				{mode == "lessor" ? <LeftPanel
+				{
+				/* {mode == "lessor" ? <LeftPanel
 					Reservations={selectedReservation}
 					timeZone={timeZone}
 					setTimeZone={setTimeZone}
-				/> : null}
-				{true ? (
+				/> : null}  */}
+				{calMode == "calendar" ?
+				(
 					<>
 						<Calendar
 							minValue={today(getLocalTimeZone()).add({ days: 1 })}
@@ -189,15 +189,16 @@ export default function CalendarLayout({property, token, mode}: CalendarProps) {
 									return getDaysArray(beginDate, endDate, colors[index % colors.length]);
 								})
 							}
-							mode={mode}
+							mode={user.id === property.userId ? "lessor" : "traveler"}
 						/>
 						{/* <RightPanel
 							{...{ date, timeZone, weeksInMonth, handleChangeAvailableTime }}
 						/> */}
 					</>
 				) : (
-					<FormPanel />
+					<FormPanel user={user} />
 				)}
+				<Button onClick={() => setCalMode(calMode == "calendar" ? "form" : "calendar")}>{calMode == "calendar" ? "Form" : "Calendar"}</Button>
 			</div>
 		</div>
 	);

@@ -11,12 +11,13 @@ import { PhoneInput } from "../phone-input";
 
 import * as React from "react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { User } from "@/type/User";
 
 type Guest = {
 	email: string;
 };
 
-export function FormPanel() {
+export function FormPanel({user}: {user: User}) {
 	const router = useRouter();
 
 	const [guests, setGuests] = React.useState<Guest[]>([]);
@@ -39,15 +40,15 @@ export function FormPanel() {
 		<form className="flex flex-col gap-5 w-[360px]">
 			<div className="flex flex-col space-y-1.5">
 				<Label htmlFor="name">Votre Nom *</Label>
-				<Input id="name" defaultValue="Damián Ricobelli" />
+				<Input id="name" defaultValue={`${user.firstName} ${user.lastName}`} />
 			</div>
 			<div className="flex flex-col space-y-1.5">
 				<Label htmlFor="email">Addresse Email *</Label>
-				<Input id="email" type="email" defaultValue="dricobelli@gmail.com" />
+				<Input id="email" type="email" defaultValue={user.mail} />
 			</div>
 			<div className="flex flex-col space-y-1.5">
 				<Label htmlFor="phone">Numéro de tel *</Label>
-				<PhoneInput id="phone" />
+				<PhoneInput id="phone" defaultValue={user.phoneNumber}/>
 			</div>
 			<div className="flex flex-col space-y-1.5">
 				<Label htmlFor="email">Notes supplémentaires</Label>

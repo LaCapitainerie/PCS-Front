@@ -20,6 +20,7 @@ export interface Property {
     country: string;
     administrationValidation: boolean;
     userId: string;
+    lessorId: string;
 
     idStripe: string;
 }

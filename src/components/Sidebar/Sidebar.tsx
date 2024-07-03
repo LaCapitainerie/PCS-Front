@@ -90,7 +90,7 @@ const Sidebar = ({ user }: { user: UserType }) => {
                         <DropdownMenuLabel><a href={`/profile?user=${user.id}`}>Mon compte</a></DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={(e) => {
-                            if(window){
+                            if(typeof window !== 'undefined' && confirm("Voulez-vous vraiment vous déconnecter ?")){
                                 window.localStorage.clear();
                                 window.location.assign("/login");
                             }

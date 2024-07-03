@@ -12,7 +12,7 @@ import { User } from "@/type/User";
 import { Service } from "@/type/Service";
 
 
-const MainContent = ({house, User_id, token, id}: {house:Property, User_id: User["id"], token: User["token"], id: User["id"]}) => {
+const MainContent = ({house, user}: {house:Property, user: User}) => {
 
     const [state, setState] = useState<Property>(house);
     
@@ -36,7 +36,7 @@ const MainContent = ({house, User_id, token, id}: {house:Property, User_id: User
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': token,
+                        'Authorization': user.token || '',
                     },
                     method: 'GET',
                 }
@@ -64,7 +64,7 @@ const MainContent = ({house, User_id, token, id}: {house:Property, User_id: User
         };
 
         dataFetch();
-    }, [house, token]);
+    }, [house, user]);
 
     return (
 
@@ -74,14 +74,14 @@ const MainContent = ({house, User_id, token, id}: {house:Property, User_id: User
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Nom du bien" sous_titre={state?.description}/>
-                        <CardProperty Property={state} User_id={User_id} Prestation={prestations}/>
+                        <CardProperty Property={state} User_id={user.id} Prestation={prestations}/>
                     </div>
                 </div>
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Réservations" sous_titre=""/>
                         <div className="flex flex-col justify-around gap-2">
-                            <Reservation property={house} token={token} id={id}/>
+                            <Reservation property={house} user={user}/>
                         </div>
                     </div>
                 </div>
