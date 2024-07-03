@@ -95,7 +95,7 @@ const Sidebar = ({ user }: { user: UserType }) => {
                                 window.location.assign("/login");
                             }
                         }}>
-                            Deconnection
+                            Deconnexion
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

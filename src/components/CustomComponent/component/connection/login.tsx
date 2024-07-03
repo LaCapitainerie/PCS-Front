@@ -56,7 +56,7 @@ export default function Login() {
     ).json();
     if(typeof window !== "undefined"){
       window.localStorage.setItem('user', JSON.stringify(retour.user));
-      window.location.assign(`/profile?user=${retour.user.id}`);
+      window.location.assign(`/Profile?user=${retour.user.id}`);
     }
   }
 
