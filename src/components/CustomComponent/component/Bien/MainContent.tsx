@@ -81,7 +81,7 @@ const MainContent = ({house, user}: {house:Property, user: User}) => {
                     <div className="flex flex-col rounded-lg bg-card text-card-foreground shadow-sm p-2">
                         <Title titre="Réservations" sous_titre=""/>
                         <div className="flex flex-col justify-around gap-2">
-                            <Reservation property={house} user={user}/>
+                            <Reservation property={house} user={user} prestations={prestations}/>
                         </div>
                     </div>
                 </div>

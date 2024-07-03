@@ -4,37 +4,30 @@ import { Label } from "@/components/ui/label";
 
 import { Textarea } from "@/components/ui/textarea";
 
-import { UserPlus, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PhoneInput } from "../phone-input";
 
 import * as React from "react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { User } from "@/type/User";
+import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
+import { Service } from "@/type/Service";
 
 type Guest = {
 	email: string;
 };
 
-export function FormPanel({user}: {user: User}) {
+export function FormPanel({user, prestations}: {user: User, prestations: Service[]}) {
 	const router = useRouter();
 
-	const [guests, setGuests] = React.useState<Guest[]>([]);
+	const [value, setValue] = React.useState<Option[]>([]);
 
-	const addGuest = () => {
-		setGuests([...guests, { email: "" }]);
-	};
-
-	const removeGuest = (index: number) => {
-		setGuests(guests.filter((_, i) => i !== index));
-	};
-
-	const handleChange = (index: number, email: string) => {
-		setGuests(guests.map((guest, i) => (i === index ? { email } : guest)));
-	};
-
-	const hasGuests = guests.length > 0;
+	const OPTIONS: Option[] = prestations.map((prestation) => {
+		return {
+			label: prestation.name,
+			value: prestation.id
+		}
+	});
 
 	return (
 		<form className="flex flex-col gap-5 w-[360px]">
@@ -57,44 +50,19 @@ export function FormPanel({user}: {user: User}) {
 					placeholder="Ajouter un commentaire..."
 				/>
 			</div>
-			{hasGuests && (
-				<>
-					<Label htmlFor="email">Ajouter un prestataire</Label>
-					<div className="flex flex-col gap-1">
-						{guests.map((guest, index) => (
-							<div key={index} className="flex items-center space-x-2 relative">
-								<Input
-									id="guest"
-									type="email"
-									placeholder="Email"
-									value={guest.email}
-									onChange={(e) => handleChange(index, e.target.value)}
-								/>
-								<TooltipProvider>
-									<Tooltip>
-										<TooltipTrigger asChild>
-											<X
-												className="cursor-pointer absolute right-2 top-1/2 transform -translate-y-1/2 size-4"
-												onClick={() => removeGuest(index)}
-											/>
-										</TooltipTrigger>
-										<TooltipContent>Retirer l'email</TooltipContent>
-									</Tooltip>
-								</TooltipProvider>
-							</div>
-						))}
-					</div>
-				</>
-			)}
-			<Button
-				type="button"
-				variant="ghost"
-				onClick={() => addGuest()}
-				className="w-fit"
-			>
-				<UserPlus className="mr-2 size-4" />
-				Ajouter un prestataire
-			</Button>
+
+			<MultipleSelector
+				value={value}
+				onChange={setValue}
+				defaultOptions={OPTIONS}
+				placeholder="Choisir les prestations..."
+				emptyIndicator={
+				<p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+					aucun résultat trouvé.
+				</p>
+				}
+			/>
+			
 			<p className="text-gray-11 text-xs my-4">
 				En continuant, vous acceptez nos {" "}
 				<span className="text-gray-12">Termes</span> et{" "}

@@ -18,12 +18,14 @@ import { Reservation, ReservationDTO } from "@/type/Reservation";
 import { User } from "@/type/User";
 import { TakenValues } from "../calendar/calendar-grid";
 import { Button } from "../ui/button";
+import { Service } from "@/type/Service";
 
 
 
 interface CalendarProps {
 	property: Property;
 	user: User;
+	prestations: Service[];
 }
 
 function Search(): [string | null, string | null] {
@@ -35,7 +37,7 @@ function Search(): [string | null, string | null] {
 	return [dateParam, slotParam];
 }
 
-export default function CalendarLayout({property, user}: CalendarProps) {
+export default function CalendarLayout({property, user, prestations}: CalendarProps) {
 	const router = useRouter();
 	const { locale } = useLocale();
 
@@ -173,30 +175,25 @@ export default function CalendarLayout({property, user}: CalendarProps) {
 				/> : null}  */}
 				{calMode == "calendar" ?
 				(
-					<>
-						<Calendar
-							minValue={today(getLocalTimeZone()).add({ days: 1 })}
-							defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
-							value={date}
-							onChange={handleChangeDate}
-							onFocusChange={(focused) => setFocusedDate(focused)}
-							TakenValues={
-								allReservations.map((reservation, index) => {
-									
-									const beginDate = new Date(reservation.beginDate);
-									const endDate = new Date(reservation.endDate);
+					<Calendar
+						minValue={today(getLocalTimeZone()).add({ days: 1 })}
+						defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
+						value={date}
+						onChange={handleChangeDate}
+						onFocusChange={(focused) => setFocusedDate(focused)}
+						TakenValues={
+							allReservations.map((reservation, index) => {
+								
+								const beginDate = new Date(reservation.beginDate);
+								const endDate = new Date(reservation.endDate);
 
-									return getDaysArray(beginDate, endDate, colors[index % colors.length]);
-								})
-							}
-							mode={user.id === property.userId ? "lessor" : "traveler"}
-						/>
-						{/* <RightPanel
-							{...{ date, timeZone, weeksInMonth, handleChangeAvailableTime }}
-						/> */}
-					</>
+								return getDaysArray(beginDate, endDate, colors[index % colors.length]);
+							})
+						}
+						mode={user.id === property.userId ? "lessor" : "traveler"}
+					/>
 				) : (
-					<FormPanel user={user} />
+					<FormPanel user={user}	prestations={prestations}/>
 				)}
 				<Button onClick={() => setCalMode(calMode == "calendar" ? "form" : "calendar")}>{calMode == "calendar" ? "Form" : "Calendar"}</Button>
 			</div>
