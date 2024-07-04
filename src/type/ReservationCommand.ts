@@ -1,6 +1,5 @@
 import {Bill} from "@/type/Bill";
-import {Prestation} from "@/type/Prestation";
-import { Service } from "./Service";
+import { ServiceDTO } from "./Service";
 
 export interface ReservationCommand {
     id: string;
@@ -9,6 +8,8 @@ export interface ReservationCommand {
     beginDate: string;
     endDate: string;
     annulation: boolean
+
     bill: Bill;
-    service: Service[];
+
+    service: ServiceDTO[];
 }
