@@ -27,23 +27,23 @@ export const PrestationCrudView: React.FC<CrudViewProps> = ({token}) => {
       mode: 'make',
       columns: () => [
         {
-          accessorKey: 'Target',
+          accessorKey: 'Client',
           accessorFn: ({ targetCustomer }) => targetCustomer,
         },
         {
-          accessorKey: 'Address',
+          accessorKey: 'Adresse',
           accessorFn: ({ address }) => address,
         },
         {
-          accessorKey: 'City',
+          accessorKey: 'Ville',
           accessorFn: ({ city }) => city,
         },
         {
-          accessorKey: 'Price',
+          accessorKey: 'Prix',
           accessorFn: ({ price }) => price,
         },
         {
-          accessorKey: 'Range',
+          accessorKey: 'Distance',
           accessorFn: ({ rangeAction }) => rangeAction,
         },
         {

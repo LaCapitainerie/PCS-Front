@@ -34,15 +34,15 @@ export const UserCrudView: React.FC<CrudViewProps> = ({token}) => {
       mode: 'make',
       columns: () => [
         {
-          accessorKey: 'name',
+          accessorKey: 'Nom',
           accessorFn: ({ firstName, lastName }) => `${firstName} ${lastName}`,
         },
         {
-          accessorKey: 'type',
+          accessorKey: 'Type',
           accessorFn: ({ type }) => type,
         },
         {
-          accessorKey: 'description',
+          accessorKey: 'Description',
           accessorFn: ({ description }) => description,
         },
       ],

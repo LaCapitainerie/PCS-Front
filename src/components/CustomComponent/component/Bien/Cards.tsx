@@ -65,7 +65,7 @@ export function CardProperty({ Property, User_id, Prestation }: { Property: Prop
   }
 
   return (
-    <div className="flex flew-row w-full gap-4">
+    <div className="flex w-full gap-4 flex-col">
       <Card className="w-full">
         <CardHeader>
           <div className="flex flex-row justify-between">

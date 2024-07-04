@@ -50,23 +50,23 @@ export const ReservationCrudView: React.FC<CrudViewProps> = ({token, variant}) =
           accessorFn: ({ beginDate, endDate }) => `${beginDate.split("T")[0]} ${endDate.split("T")[0]}`,
         },
         {
-          accessorKey: 'Customer',
+          accessorKey: 'Client',
           accessorFn: ({ travelerId }) => travelerId,
         },
         {
-          accessorKey: 'Address',
+          accessorKey: 'Adresse',
           accessorFn: ({ propertyId }) => propertyId,
         },
         {
-          accessorKey: 'Price',
+          accessorKey: 'Prix',
           accessorFn: ({ bill }) => bill.price,
         },
         {
-          accessorKey: 'Payment status',
+          accessorKey: 'Statut du paiement',
           accessorFn: ({ bill }) => bill.statut,
         },
         {
-          accessorKey: 'Services',
+          accessorKey: 'Prestations',
           accessorFn: ({ service }) => service.map((service) => service.name).join(", "),
         },
       ],

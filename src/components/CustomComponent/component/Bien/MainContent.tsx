@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import {Property} from "@/type/Property";
 import { ReservationDTO, Reservation as ReservationType } from "@/type/Reservation";
 import { User } from "@/type/User";
-import { Service } from "@/type/Service";
+import { Service, ServiceDTOReturn } from "@/type/Service";
 
 
 const MainContent = ({house, user}: {house:Property, user: User}) => {
@@ -27,7 +27,6 @@ const MainContent = ({house, user}: {house:Property, user: User}) => {
         const dataFetch = async () => {
             if (house?.id === undefined) {
                 setReservation([]);
-                setPrestations([]);
                 return;
             };
 
@@ -44,23 +43,43 @@ const MainContent = ({house, user}: {house:Property, user: User}) => {
 
             if (!response.ok) {
                 setReservation([]);
-                setPrestations([]);
                 return;
             };
 
             const data: ReservationDTO = await (response).json();
 
             setReservation(data.reservation);
+        };
 
-            const myArr = data.reservation.map((res) => res.service).flat();
-            
-            
+        dataFetch();
+    }, [house, user]);
 
-            setPrestations(
-                myArr.filter((obj1, i, arr) => 
-                    arr.findIndex(obj2 => (obj2.id === obj1.id)) === i
-                )
-            );
+    useEffect(() => {
+        const dataFetch = async () => {
+            if (house?.id === undefined) {
+                setReservation([]);
+                return;
+            };
+
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/service/all`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': user.token || '',
+                    },
+                    method: 'GET',
+                }
+            )
+
+            if (!response.ok) {
+                setPrestations([]);
+                return;
+            };
+
+            const data: ServiceDTOReturn = await (response).json();
+
+            setPrestations(data.service);
         };
 
         dataFetch();

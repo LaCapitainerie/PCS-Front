@@ -47,6 +47,9 @@ const BienImmo = ({
             .json().catch((error) => {
                 console.error('Error:', error);
             });
+
+            console.log(data);
+            
             
             const biens = data.Property.filter((value: Property) => toComparable(value.name, value.description).includes(toComparable(filter)));
 
@@ -65,7 +68,7 @@ const BienImmo = ({
 
     return (
         <div className="fixed inset-y-0 left-[3.5rem] z-0 w-[30%] flex-col border-r bg-background sm:flex">
-            <a className="py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">Biens Immobiliers</a>
+            <a className="sm:text-[1rem] py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">Biens Immobiliers</a>
 
             <Separator className="my-2" />
 
@@ -77,7 +80,7 @@ const BienImmo = ({
                     <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => setHouse(value)}>
                         <div className="flex w-full flex-col gap-1">
                             <div className="flex items-center">
-                                <div className="flex flex-row items-center gap-2">
+                                <div className="flex  items-center gap-2 flex-col md:flex-row">
                                     {getIcon(value.type)}
                                     <div className="font-semibold">{value.name}</div>
                                 </div>
@@ -86,16 +89,17 @@ const BienImmo = ({
                             <div className="text-xs font-medium">{value.type}</div>
                         </div>
                         <div className="line-clamp-2 text-xs text-muted-foreground">{value.description}</div>
-                        <div className="flex items-center gap-2">
-                            <div
-                                className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80">
-                                {value.type}</div>
-                            <div
-                                className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                                Salle de bain : {value.bathroom}</div>
-                            {value.garage > 0 && <div
-                                className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                                Garage</div>}
+                        <div className="flex items-center gap-2 flew-col sm:flex-row">
+                            <div className="sm:w-fit w-full inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80">
+                                {value.type}
+                            </div>
+                            <div className="sm:w-fit w-full inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+                                Salle de bain : {value.bathroom}
+                            </div>
+                            {value.garage > 0 && 
+                            <div className="sm:w-fit w-full inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+                                Garage
+                            </div>}
                         </div>
                     </button>
                 )}

@@ -27,27 +27,27 @@ export const PropertyCrudView: React.FC<CrudViewProps> = ({token}) => {
       mode: 'make',
       columns: () => [
         {
-          accessorKey: 'name',
+          accessorKey: 'Nom',
           accessorFn: ({ name }) => name,
         },
         {
-          accessorKey: 'type',
+          accessorKey: 'Type',
           accessorFn: ({ type }) => type,
         },
         {
-          accessorKey: 'description',
+          accessorKey: 'Description',
           accessorFn: ({ description }) => description,
         },
         {
-          accessorKey: 'address',
+          accessorKey: 'Adresse',
           accessorFn: ({ address }) => address,
         },
         {
-          accessorKey: 'price',
+          accessorKey: 'Prix',
           accessorFn: ({ price }) => price,
         },
         {
-          accessorKey: 'surface',
+          accessorKey: 'Surface',
           accessorFn: ({ surface }) => surface,
         },
       ],
