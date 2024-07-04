@@ -87,7 +87,7 @@ const Sidebar = ({ user }: { user: UserType }) => {
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuLabel><a href={`/profile?user=${user.id}`}>Mon compte</a></DropdownMenuLabel>
+                        <DropdownMenuLabel><a href={`/Profile?user=${user.id}`}>Mon compte</a></DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={(e) => {
                             if(typeof window !== 'undefined' && confirm("Voulez-vous vraiment vous déconnecter ?")){
