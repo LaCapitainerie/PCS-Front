@@ -21,3 +21,7 @@ export interface ServiceDTO {
     userId: string;
     date: string;
 };
+
+export interface ServiceReturn {
+    service: Service[]
+}

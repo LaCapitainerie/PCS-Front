@@ -162,40 +162,27 @@ export default function CalendarLayout({property, user, prestations}: CalendarPr
 		"#e76f51",
 	]
 
-	const [calMode, setCalMode] = React.useState<"calendar" | "form">("calendar");
-
 	return (
-		<div className="w-full px-8 py-6 rounded-md max-w-max mx-auto">
-			<div className="flex gap-6">
-				{
-				/* {mode == "lessor" ? <LeftPanel
-					Reservations={selectedReservation}
-					timeZone={timeZone}
-					setTimeZone={setTimeZone}
-				/> : null}  */}
-				{calMode == "calendar" ?
-				(
-					<Calendar
-						minValue={today(getLocalTimeZone()).add({ days: 1 })}
-						defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
-						value={date}
-						onChange={handleChangeDate}
-						onFocusChange={(focused) => setFocusedDate(focused)}
-						TakenValues={
-							allReservations.map((reservation, index) => {
-								
-								const beginDate = new Date(reservation.beginDate);
-								const endDate = new Date(reservation.endDate);
+		<div className="w-full px-8 py-6 rounded-md">
+			<div className="flex flex-row justify-around">
+				<Calendar
+					minValue={today(getLocalTimeZone()).add({ days: 1 })}
+					defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
+					value={date}
+					onChange={handleChangeDate}
+					onFocusChange={(focused) => setFocusedDate(focused)}
+					TakenValues={
+						allReservations.map((reservation, index) => {
+							
+							const beginDate = new Date(reservation.beginDate);
+							const endDate = new Date(reservation.endDate);
 
-								return getDaysArray(beginDate, endDate, colors[index % colors.length]);
-							})
-						}
-						mode={user.id === property.userId ? "lessor" : "traveler"}
-					/>
-				) : (
-					<FormPanel user={user}	prestations={prestations}/>
-				)}
-				<Button onClick={() => setCalMode(calMode == "calendar" ? "form" : "calendar")}>{calMode == "calendar" ? "Form" : "Calendar"}</Button>
+							return getDaysArray(beginDate, endDate, colors[index % colors.length]);
+						})
+					}
+					mode={user.id === property.userId ? "lessor" : "traveler"}
+				/>
+				<FormPanel user={user} prestations={prestations} property={property}/>
 			</div>
 		</div>
 	);

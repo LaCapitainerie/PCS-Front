@@ -1,5 +1,6 @@
 import {Bill} from "@/type/Bill";
 import {Prestation} from "@/type/Prestation";
+import { Service } from "./Service";
 
 export interface ReservationCommand {
     id: string;
@@ -9,5 +10,5 @@ export interface ReservationCommand {
     endDate: string;
     annulation: boolean
     bill: Bill;
-    service: Prestation[];
+    service: Service[];
 }
