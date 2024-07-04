@@ -97,7 +97,7 @@ export function FormPanel({user, prestations, property}: {user: User, prestation
 			</div>
 			<div className="flex flex-col space-y-1.5">
 				<Label htmlFor="phone">Numéro de tel *</Label>
-				<PhoneInput id="phone" defaultValue={user.phoneNumber}/>
+				<Input id="phone" type="tel" defaultValue={user.phoneNumber} contrains="tel"/>
 			</div>
 			<div className="flex flex-col space-y-1.5">
 				<Label htmlFor="email">Notes supplémentaires</Label>
