@@ -76,7 +76,7 @@ export default function CalendarLayout({property, user, prestations}: CalendarPr
         };
 
         dataFetch();
-    }, [property]);
+    }, [property, user.token]);
 
 
 	

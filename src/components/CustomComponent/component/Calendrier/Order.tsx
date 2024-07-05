@@ -26,7 +26,8 @@ const Order = ({
         const dataFetch = async () => {
             const data: Command[] = await (
                 await fetch(
-                    `${process.env.NEXT_PUBLIC_LOCAL_API_URL}/command`
+                    ""
+                    //`${process.env.NEXT_PUBLIC_LOCAL_API_URL}/command`
                 )
             ).json();
 

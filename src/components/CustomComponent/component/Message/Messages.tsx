@@ -66,7 +66,7 @@ const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined
         };
 
         dataFetch();
-    }, [contact]);
+    }, [contact, token]);
 
     return (
         

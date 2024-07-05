@@ -100,7 +100,7 @@ export function FormPanel({user, prestations, property}: {user: User, prestation
 			<p className="text-gray-11 text-xs my-4">
 				En continuant, vous acceptez nos {" "}
 				<span className="text-gray-12">Termes</span> et{" "}
-				<span className="text-gray-12">Condition d'utilisation</span>.
+				<span className="text-gray-12">Condition d&apos;utilisation</span>.
 			</p>
 			<div className="flex justify-end gap-2">
 				<Button type="button" onClick={_=>Submit(

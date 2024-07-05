@@ -49,11 +49,7 @@ export function MainScreen({ self }: { self: User }) {
                 </div>
 
                 <div className="flex flex-row justify-between gap-4 items-center">
-                    {
-                        self.firstName ?
-                        <Button variant="gooeyRight"><a href={`/${self.type}/dashboard`}>Connection</a></Button> :
-                        <Button variant="gooeyRight"><a href="/login">Connection</a></Button>
-                    }
+                    <Button variant="gooeyRight"><a href={self.firstName ? `/${self.type}/dashboard` : "/login"}>Connexion</a></Button>
                     <Button variant="ghost" size="icon" className="overflow-hidden rounded-full">
                         <Avatar>
                             <AvatarImage src={self?.avatar || default_profile} alt={self?.firstName || "@icon"} />

@@ -25,7 +25,7 @@ export const ReservationCrudView: React.FC<CrudViewProps> = ({token, variant}) =
     fetchDataProp(token).then((data) => {
       setGetAllFilter(data.props.map((prop) => (prop.id)))
     });
-  }, [variant]);  
+  }, [variant, token]);  
 
 
 
