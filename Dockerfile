@@ -12,6 +12,9 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
+# Configure Next.js to output standalone build
+RUN echo "module.exports = { output: 'standalone' };" > next.config.js
+
 # Build the application
 RUN npm run build
 
