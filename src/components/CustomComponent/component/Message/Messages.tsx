@@ -32,7 +32,7 @@ export interface ChatDTO {
     chat: Chat;
 }
 
-const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined, token: User["token"], user_id: User["id"] }) => {
+const MessageList = ({ contact, token, user_id }: { contact: Contact, token: User["token"], user_id: User["id"] }) => {
 
     const [chat, setChat] = useState<Chat | undefined>(undefined);
     const [Messages, setMessages] = useState<Message[]>([]);
@@ -77,16 +77,28 @@ const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined
 
             <div className="flex flex-col h-full justify-between overflow-hidden">
                 <div className="overflow-y-scroll flex flex-col gap-2 p-4 pt-0">
-                    {contact && Messages.map((value, index) => <div key={index} className={`flex ${value.userId == user_id && "justify-end"}`}>
-                            {
-                                <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== user_id && "bg-accent"}`}>
-                                    <div className="flex w-full flex-col gap-1">
-                                        <div className="text-xs font-medium text-right">{(value.userId == user_id ? contact.user1 : contact.user2).id} {value.date.toString().split("T")[0]}</div>
+                    {
+                        contact &&
+                        Messages.map(
+                            (value, index) => {
+
+                            console.log(value);
+
+                            return (
+                                <div key={index} className={`flex ${value.userId == user_id && "justify-end"}`}>
+                                    <div style={{ maxWidth: '40%' }} className={`flex flex-col w-fit items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all ${value.userId !== user_id && "bg-accent"}`}>
+                                        <div className="flex w-full flex-col gap-1">
+                                            <div className="text-xs font-medium text-right text-muted-foreground">
+                                                {value.date.toString().split("T")[0]}
+                                            </div>
+                                        </div>
+                                        <div className="line-clamp-2 text-s font-medium">
+                                            {value.content}
+                                        </div>
                                     </div>
-                                    <div className="line-clamp-2 text-s font-medium text-muted-foreground">{value.content}</div>
                                 </div>
-                            }
-                        </div>
+                            )
+                        }
                         
 
                         // if (value.idembed != undefined && value.resourceType != undefined) {

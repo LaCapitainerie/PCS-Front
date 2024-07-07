@@ -92,13 +92,13 @@ const MainContent = ({house, user}: {house:Property, user: User}) => {
                 <CarouselPlugin images={house?.images || []}/>
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg bg-card text-card-foreground shadow-sm p-2">
-                        <Title titre="Nom du bien" sous_titre={state?.description}/>
+                        <Title titre={state.name} sous_titre={state?.description} proprio={state.lessorId} user={user}/>
                         <CardProperty Property={state} User_id={user.id} Prestation={prestations}/>
                     </div>
                 </div>
                 <div className="p-1">
                     <div className="flex flex-col rounded-lg bg-card text-card-foreground shadow-sm p-2">
-                        <Title titre="Réservations" sous_titre=""/>
+                        <Title titre="Réservations" sous_titre="" proprio={""} user={user}/>
                         <div className="flex flex-col justify-around gap-2">
                             <Reservation property={house} user={user} prestations={prestations}/>
                         </div>

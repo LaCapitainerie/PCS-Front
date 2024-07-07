@@ -42,8 +42,8 @@ const ContactList = ({
             const chatPromise = data.chat.map(async (value) => {
 
                 return {
-                    user1: {id: value.userId[0].id == user_id ? value.userId[0] : `${value.userId[1].mail}`} as unknown as User,
-                    user2: {id: value.userId[0].id == user_id ? value.userId[1] : `${value.userId[0].mail}`} as unknown as User,
+                    user1: value.userId[0].id == user_id ? value.userId[0] : value.userId[1] as User,
+                    user2: value.userId[0].id == user_id ? value.userId[1] : value.userId[0] as User,
                     chat: value
                 } as Contact;
             });
@@ -53,7 +53,22 @@ const ContactList = ({
             setChat(finalChat.filter((val) => toComparable(val.user2.firstName, val.user2.lastName).includes(filter)));
 
             if (finalChat.length > 0) {
-                setContact(finalChat[0]);
+                // Assuming finalChat is an array of chat objects and each chat has an id property
+                const searchParams = new URLSearchParams(window.location.search);
+                const chatId = searchParams.get("chatId");
+
+                if (chatId) {
+                    const chat = finalChat.find(c => c.chat.id === chatId);
+                if (chat) {
+                    setContact(chat);
+                } else {
+                    // If no chat matches the provided chatId, default to the first chat
+                    setContact(finalChat[0]);
+                }
+                } else {
+                    // If no chatId is provided in the search params, default to the first chat
+                    setContact(finalChat[0]);
+                }
             };
         };
 
@@ -65,26 +80,32 @@ const ContactList = ({
         return (
             <div className="flex flex-col gap-2 py-4 pt-0">
                 {contacts.map((value, index) =>
-                    <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => {setContact(value)}}>
-                        <div className="flex w-full flex-col gap-1">
-                            <div className="flex items-center">
-                                <div className="flex flex-row items-center gap-2">
-                                    <div className="font-semibold">{value.user2.id} {value.user2.lastName}</div>
+                    {
+                        console.log(value);
+                        
+                        return (
+                            <button key={index} className="flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent" onClick={() => {setContact(value)}}>
+                                <div className="flex w-full flex-col gap-1">
+                                    <div className="flex items-center">
+                                        <div className="flex flex-row items-center gap-2">
+                                            <div className="font-semibold">{value.user2.firstName} {value.user2.lastName}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="ml-auto text-xs text-foreground">{}</div>
-                            </div>
-                            <div className="text-xs font-medium">{value.user2.type}</div>
-                        </div>
-                        <div className="line-clamp-2 text-xs text-muted-foreground">{value.user2.firstName}</div>
-                        <div className="flex items-center gap-2">
-                            <div
-                                className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80">
-                                {value.user2.type}</div>
-                            <div
-                                className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-                                {value.user2.lastName}</div>
-                        </div>
-                    </button>
+                                <div className="line-clamp-2 text-xs text-muted-foreground">
+                                    {value.user2.type}
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div
+                                        className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground shadow hover:bg-primary/80">
+                                        {value.user2.type}</div>
+                                    <div
+                                        className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+                                        {value.user2.lastName}</div>
+                                </div>
+                            </button>
+                        )
+                    }
                 )}
             </div>
         )
