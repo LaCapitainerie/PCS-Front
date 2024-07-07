@@ -166,7 +166,7 @@ const CardForm = z.object({
             />
             
             <Button type="submit" size="sm" className="ml-auto gap-1.5">
-                Send Message
+                Envoyer
                 <CornerDownLeft className="size-3.5" />
             </Button>
             

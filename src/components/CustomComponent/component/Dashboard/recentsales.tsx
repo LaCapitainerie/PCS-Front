@@ -32,7 +32,7 @@ export default function RecentSales({token}: {token: User["token"]}) {
   return (
     <Card className="w-full ">
       <CardHeader>
-        <CardTitle>Recent Sales</CardTitle>
+        <CardTitle>Ventes Recentes</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-8">
         {retour?.service?.map((prestation, index) => (

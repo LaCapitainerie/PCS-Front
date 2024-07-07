@@ -38,11 +38,13 @@ async function createChat(user: TUser, proprio: TUser["id"]) {
         return true;
     };
 
-    if (await dataFetch()) {
-        if (typeof window !== "undefined") {
-            window.location.href = `/${user.type}/messages?chatId=${proprio}`;
-        };
-    }
+    dataFetch();
+
+    // if (await dataFetch()) {
+    //     if (typeof window !== "undefined") {
+    //         window.location.href = `/${user.type}/messages?chatId=${proprio}`;
+    //     };
+    // }
 }
 
 const Title = ({titre, sous_titre, proprio, user}: {titre:string | undefined, sous_titre:string | null | undefined, proprio: TUser["id"], user: TUser}) => {

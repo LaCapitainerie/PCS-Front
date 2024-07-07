@@ -100,27 +100,25 @@ export default function CalendarLayout({property, user, prestations}: CalendarPr
 	]
 
 	return (
-		<div className="w-full px-8 py-6 rounded-md">
-			<div className="flex flex-row justify-around">
-				<Calendar
-					minValue={today(getLocalTimeZone()).add({ days: 1 })}
-					defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
-					value={date}
-					onChange={() => {}}
-					onFocusChange={() => {}}
-					TakenValues={
-						allReservations.map((reservation, index) => {
-							
-							const beginDate = new Date(reservation.beginDate);
-							const endDate = new Date(reservation.endDate);
+		<div className="flex flex-col xl:flex-row justify-around gap-8">
+			<Calendar
+				minValue={today(getLocalTimeZone()).add({ days: 1 })}
+				defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
+				value={date}
+				onChange={() => {}}
+				onFocusChange={() => {}}
+				TakenValues={
+					allReservations.map((reservation, index) => {
+						
+						const beginDate = new Date(reservation.beginDate);
+						const endDate = new Date(reservation.endDate);
 
-							return getDaysArray(beginDate, endDate, colors[index % colors.length]);
-						})
-					}
-					mode={user.id === property.userId ? "lessor" : "traveler"}
-				/>
-				<FormPanel user={user} prestations={prestations} property={property}/>
-			</div>
+						return getDaysArray(beginDate, endDate, colors[index % colors.length]);
+					})
+				}
+				mode={user.id === property.userId ? "lessor" : "traveler"}
+			/>
+			<FormPanel user={user} prestations={prestations} property={property}/>
 		</div>
 	);
 }

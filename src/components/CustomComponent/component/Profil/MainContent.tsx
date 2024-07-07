@@ -12,9 +12,10 @@ interface MainContentProps {
     id: User["id"];
     token: User["token"];
     myid: User["id"];
+    role: User["type"];
 }
 
-const MainContent = ({ id, token, myid }: MainContentProps) => {
+const MainContent = ({ id, token, myid, role }: MainContentProps) => {
 
     const [user, setUser] = useState({} as User);
     useEffect(() => {
@@ -35,7 +36,7 @@ const MainContent = ({ id, token, myid }: MainContentProps) => {
         <div className="flex flex-col w-full h-full overflow-hidden" style={{paddingLeft: '3.5rem'}}>
             <Upperband User={user} style={{ height: '33%' }} token={token} myid={myid}/>
             <Separator/>
-            <Lowerband User={user} style={{ height: '66%' }} token={token}/>
+            <Lowerband User={user} style={{ height: '66%' }} token={token} role={role}/>
         </div>
         
     )

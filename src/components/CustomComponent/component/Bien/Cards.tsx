@@ -50,7 +50,17 @@ export function typeToDom(type: string = "", id: number = 0) {
   }
 }
 
-const descriptionKey = ["type", "price", "surface", "room", "bathroom", "garage", "address", "city", "zipCode"]
+const descriptionKey = {
+  "type": "type",
+  "price": "prix",
+  "surface": "surface",
+  "room": "pièces",
+  "bathroom": "salle de bain",
+  "garage": "garage",
+  "address": "adresse",
+  "city": "ville",
+  "zipCode": "code postal",
+}
 
 export function CardProperty({ Property, User_id, Prestation }: { Property: Property | undefined, Prestation: Service[], User_id: User["id"] }) {
 
@@ -86,11 +96,11 @@ export function CardProperty({ Property, User_id, Prestation }: { Property: Prop
 
               
 
-            {Property && descriptionKey.map((key, index) => (
+            {Property && Object.entries(descriptionKey).map((key, index) => (
               <div key={index} className="mb-4 pb-4 last:mb-0 last:pb-0" >
                 <div className="w-full flex flex-col">
-                  <p className="text-l font-semibold leading-none tracking-tight">{toTitleCase(key)} : </p>
-                  <p id={key} className="text-sm text-muted-foreground">{Property ? Object.entries(Property).find((value, _index) => value[0] == key)?.[1] : ""}</p>
+                  <p className="text-l font-semibold leading-none tracking-tight">{toTitleCase(key[1])} : </p>
+                  <p id={key[0]} className="text-sm text-muted-foreground">{Property ? Object.entries(Property).find((value, _index) => value[0] == key[0])?.[1] : ""}</p>
                 </div>
               </div>
             ))}

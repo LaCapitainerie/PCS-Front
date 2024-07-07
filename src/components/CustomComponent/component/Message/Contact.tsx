@@ -135,6 +135,14 @@ const ContactList = ({
         )
     };
 
+    const trad = {
+        "traveler": "Locataire",
+        "provider": "Servicier",
+        "lessor": "Bailleur",
+        "admin": "Administrateur",
+        "ticket": "Ticket"
+    }
+
     return (
         <div className="fixed inset-y-0 left-[3.5rem] z-0 hidden w-[30%] flex-col border-r bg-background sm:flex">
             <a className="py-2 w-full h-14 text-[2rem] leading-[3.25rem] px-4 font-semibold">Messages</a>
@@ -152,13 +160,13 @@ const ContactList = ({
                     // setUser(state.filter((val) => val.type === e)[0]) 
                 }}>
                     <TabsList className="w-full">
-                        <TabsTrigger key={-1} value="All" className="w-full">All</TabsTrigger>
+                        <TabsTrigger key={-1} value="All" className="w-full">Tous</TabsTrigger>
                         {
                             Categories.map((value, index) => (
-                                <TabsTrigger key={index} value={value} className="w-full">{value+"s"}</TabsTrigger>
+                                <TabsTrigger key={index} value={value} className="w-full">{trad[value]+"s"}</TabsTrigger>
                             ))
                         }
-                        <TabsTrigger key={Categories.length} value="Issue" className="w-full">Issues</TabsTrigger>
+                        <TabsTrigger key={Categories.length} value="Issue" className="w-full">Tickets</TabsTrigger>
                     </TabsList>
                     <TabsContent value={"All"}>
                         {ContactListFiltered(chat)}
@@ -171,7 +179,7 @@ const ContactList = ({
                         ))
                     }
                     <TabsContent value="Issue">
-                        {ContactListFiltered(chat.filter((val) => val.chat.ticket))}
+                        {ContactListFiltered(chat.filter((val) => val.chat.ticket.id !== "00000000-0000-0000-0000-000000000000"))}
                     </TabsContent>
                 </Tabs>
             </div>

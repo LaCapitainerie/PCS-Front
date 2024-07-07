@@ -19,6 +19,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { IssueMakerDTO } from "@/type/Issue";
+import toast from "react-hot-toast";
 
 export function IssueMaker({user_id, token}: {user_id: UserType["id"], token: UserType["token"]}) {
     const [type, setType] = useState("");
@@ -46,16 +47,22 @@ export function IssueMaker({user_id, token}: {user_id: UserType["id"], token: Us
 
             if (response.ok) {
                 console.log("Incident reported successfully");
+                toast.success("Incident reported successfully");
             } else {
                 console.error("Failed to report incident");
+                toast.error("Failed to report incident");
             };
         } catch (error) {
             console.error("An error occurred while reporting incident", error);
+        } finally {
+            setOpen(false);
         };
     };
 
+    const [open, setOpen] = useState(false);
+
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button variant="outline" size="icon">
                     <CircleDotIcon className="h-[1.2rem] w-[1.2rem]" />

@@ -36,7 +36,7 @@ const ProfilLayout: React.FC<LayoutProps> = ({ children }) => {
         <>
             <CookieConsent/>
             <Sidebar user={user}/>
-            <MainContent id={id} token={user.token} myid={user.id}/>
+            <MainContent id={id} token={user.token} myid={user.id} role={user.type}/>
             <Toaster />
             <script src="//code.tidio.co/rrhxy5qfajr80zppfhfaenxthcf0pkkw.js" async></script>
         </>

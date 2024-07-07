@@ -9,12 +9,10 @@ interface LowerbandProps {
     children?: React.ReactNode;
     User: User;
     token: User["token"];
+    role: User["type"];
 }
 
-const Lowerband = ({User, token}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps) => {
-
-    console.log(User.type);
-    
+const Lowerband = ({User, token, role}: React.HTMLAttributes<HTMLDivElement> & LowerbandProps) => {
 
     return (
         <div className="flex flex-row justify-around w-full p-4" style={{height: '66%'}}>
@@ -31,11 +29,11 @@ const Lowerband = ({User, token}: React.HTMLAttributes<HTMLDivElement> & Lowerba
             </div>
             {
                 // switch on user type
-                User.type === "lessor" &&
-                <LessorVitrine User={User} token={token} />
-                ||
-                User.type === "provider" &&
-                <ProviderVitrine User={User} token={token} />
+
+                User.type === "lessor" ?
+                (<LessorVitrine User={User} token={token} />)
+                :
+                (<div></div>)
             }
         </div>
     )
