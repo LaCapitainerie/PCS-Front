@@ -59,7 +59,7 @@ const PricingCard = ({ isYearly, title, monthlyPrice, yearlyPrice, description, 
               className={cn("px-2.5 rounded-xl h-fit text-sm py-1 bg-zinc-200 text-black dark:bg-zinc-800 dark:text-white", {
                 "bg-gradient-to-r from-orange-400 to-rose-400 dark:text-black ": popular,
               })}>
-              Save {((monthlyPrice * 12 - yearlyPrice).toFixed(2))}€
+              Economisez {((monthlyPrice * 12 - yearlyPrice).toFixed(2))}€
             </div>
           </div>
         ) : (

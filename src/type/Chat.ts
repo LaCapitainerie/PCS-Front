@@ -15,6 +15,10 @@ export interface Chat {
     message: Message[];
 };
 
+export interface ChatMessageDTO {
+    chat: Chat;
+};
+
 export interface ChatDTO {
     chat: Chat[];
 }

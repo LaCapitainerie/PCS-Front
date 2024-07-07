@@ -10,7 +10,7 @@ import CookieConsent from '@/components/ui/cookie';
 import { Contact } from "@/type/Chat";
 
 interface MessageProps {
-    categories: User["type"][];
+    categories: (User["type"])[];
 }
 
 const Message_Layout: React.FC<MessageProps> = ({ categories }) => {

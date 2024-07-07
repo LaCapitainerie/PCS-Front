@@ -32,7 +32,7 @@ export interface ChatDTO {
     chat: Chat;
 }
 
-const MessageList = ({ contact, token, user_id }: { contact: Contact, token: User["token"], user_id: User["id"] }) => {
+const MessageList = ({ contact, token, user_id }: { contact: Contact | undefined, token: User["token"], user_id: User["id"] }) => {
 
     const [chat, setChat] = useState<Chat | undefined>(undefined);
     const [Messages, setMessages] = useState<Message[]>([]);

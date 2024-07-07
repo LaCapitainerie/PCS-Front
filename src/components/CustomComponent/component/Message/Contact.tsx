@@ -8,14 +8,14 @@ import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {  User } from "@/type/User";
-import { ChatDTO, Contact } from "@/type/Chat";
+import { ChatDTO, ChatMessageDTO, Contact } from "@/type/Chat";
 
 const ContactList = ({
     setContact,
     Categories,
     token,
     user_id
-  }: React.HTMLAttributes<HTMLDivElement> & { setContact: (contact : Contact) => void , Categories: User["type"][], token: User["token"], user_id: User["id"]}) => {    
+  }: React.HTMLAttributes<HTMLDivElement> & { setContact: (contact : Contact) => void , Categories: (User["type"])[], token: User["token"], user_id: User["id"]}) => {    
     
     const [chat, setChat] = useState<Contact[]>([]);
     const [filter, setFilter] = useState<string>("");
@@ -38,13 +38,37 @@ const ContactList = ({
             console.log(data);
             
 
+            
 
             const chatPromise = data.chat.map(async (value) => {
+                
+                const contactFetch = async () => {
+                    const data: ChatMessageDTO = await (
+                        await fetch(
+                            `${process.env.NEXT_PUBLIC_API_URL}/chat/${value.id}`,
+                            {
+                                method: "GET",
+                                headers: {
+                                  "Authorization": token,
+                                },
+                            }
+                                    
+                        )
+                    ).json() || {chat: []};
 
+                    return data.chat;
+                };
+
+                const chat = await contactFetch();
+
+                console.log(chat);
+                
+                
+                
                 return {
-                    user1: value.userId[0].id == user_id ? value.userId[0] : value.userId[1] as User,
-                    user2: value.userId[0].id == user_id ? value.userId[1] : value.userId[0] as User,
-                    chat: value
+                    user1: chat.userId[0].id == user_id ? chat.userId[0] : chat.userId[1] as User,
+                    user2: chat.userId[0].id == user_id ? chat.userId[1] : chat.userId[0] as User,
+                    chat: chat
                 } as Contact;
             });
 
@@ -88,7 +112,7 @@ const ContactList = ({
                                 <div className="flex w-full flex-col gap-1">
                                     <div className="flex items-center">
                                         <div className="flex flex-row items-center gap-2">
-                                            <div className="font-semibold">{value.user2.firstName} {value.user2.lastName}</div>
+                                            <div className="font-semibold">{value.chat.ticket?.type || value.user2.firstName + value.user2.lastName}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -134,6 +158,7 @@ const ContactList = ({
                                 <TabsTrigger key={index} value={value} className="w-full">{value+"s"}</TabsTrigger>
                             ))
                         }
+                        <TabsTrigger key={Categories.length} value="Issue" className="w-full">Issues</TabsTrigger>
                     </TabsList>
                     <TabsContent value={"All"}>
                         {ContactListFiltered(chat)}
@@ -141,10 +166,13 @@ const ContactList = ({
                     {
                         Categories.map((value, index) => (
                             <TabsContent key={index} value={value}>
-                                {/* {ContactListFiltered(state.filter((val) => val.type === value))} */}
+                                {ContactListFiltered(chat.filter((val) => val.user2.type === value))}
                             </TabsContent>
                         ))
                     }
+                    <TabsContent value="Issue">
+                        {ContactListFiltered(chat.filter((val) => val.chat.ticket))}
+                    </TabsContent>
                 </Tabs>
             </div>
             

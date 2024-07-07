@@ -97,13 +97,13 @@ const Upperband = ({ children, User, token, myid }: React.HTMLAttributes<HTMLDiv
                         <div hidden={User.id != myid}>
                             <Dialog>
                                 <DialogTrigger asChild>
-                                    <Button variant="outline">Edit Profile <Edit/></Button>
+                                    <Button variant="outline">Modifier le Profil <Edit/></Button>
                                 </DialogTrigger>
                                 <DialogContent className="sm:max-w-[425px]">
                                     <DialogHeader>
-                                        <DialogTitle>Edit profile</DialogTitle>
+                                        <DialogTitle>Modifier le Profil</DialogTitle>
                                         <DialogDescription>
-                                            Make changes to your profile here. Click save when you&apos;re done.
+                                            Remplissez le formulaire ci-dessous pour modifier votre profil.
                                         </DialogDescription>
                                     </DialogHeader>
                                     <div className="grid gap-4 py-4">
