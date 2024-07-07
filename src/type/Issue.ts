@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export interface Issue {
     id: string;
     type: string;
@@ -8,4 +10,10 @@ export interface Issue {
 
 export interface IssueDTO {
     ticket: Issue[];
+}
+
+export interface IssueMakerDTO {
+    user_id: User["id"];
+    type: string;
+    description: string;
 }

@@ -3,7 +3,7 @@
 import { SideBarDTO, Sidebar as SidebarType } from "../../type/Sidebar";
 import * as React from "react"
 import Link from "next/link"
-import { Home, MessagesSquareIcon, GaugeIcon, User, Check } from "lucide-react"
+import { Home, MessagesSquareIcon, GaugeIcon, User, Check, CircleDot, CircleDotIcon } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
@@ -14,6 +14,82 @@ import { Button } from "../ui/button"
 import { toComparable } from "../functions";
 import { User as UserType } from "@/type/User";
 import { Separator } from "../ui/separator";
+
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { IssueMakerDTO } from "@/type/Issue";
+
+export function IssueMaker({user_id, token}: {user_id: UserType["id"], token: UserType["token"]}) {
+    const [type, setType] = useState("");
+    const [description, setDescription] = useState("");
+
+    const handleSubmit = async () => {
+
+        const data = {
+            user_id: user_id,
+            type: type,
+            description: description
+        } as IssueMakerDTO;
+
+        try {
+            const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/ticket/`,
+                {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token,
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                console.log("Incident reported successfully");
+            } else {
+                console.error("Failed to report incident");
+            };
+        } catch (error) {
+            console.error("An error occurred while reporting incident", error);
+        };
+    };
+
+    return (
+        <Dialog>
+            <DialogTrigger asChild>
+                <Button variant="outline" size="icon">
+                    <CircleDotIcon className="h-[1.2rem] w-[1.2rem]" />
+                </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                    <DialogTitle>Un Problème ?</DialogTitle>
+                    <DialogDescription>
+                        Remplissez le formulaire ci-dessous pour signaler un problème.
+                    </DialogDescription>
+                </DialogHeader>
+                <div className="grid gap-4 py-4">
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="type" className="text-right">
+                            Type de l'incident
+                        </Label>
+                        <Input id="type" value={type} className="col-span-3" onChange={(e) => setType(e.target.value)} />
+                    </div>
+                    <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="description" className="text-right">
+                            Description de l'incident
+                        </Label>
+                        <Input id="description" value={description} className="col-span-3" onChange={(e) => setDescription(e.target.value)} />
+                    </div>
+                </div>
+                <DialogFooter>
+                    <Button type="submit" onClick={handleSubmit}>Declarer l'incident</Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
+    )
+}
+
 
 // Store the icons in an dictionary
 const icons = {
@@ -54,7 +130,7 @@ const Component = (user: UserType) => {
                 <TooltipTrigger asChild>
                     <Link
                         href={value.Href}
-                        className={`flex h-9 w-9 items-center justify-center rounded-lg text-${ true ? 'muted' : '' }-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
+                        className={`flex h-9 w-9 items-center justify-center rounded-lg text-${true ? 'muted' : ''}-foreground transition-colors hover:text-foreground md:h-8 md:w-8`}
                     >
                         {React.createElement(icons[toComparable(value.Icon) as keyof typeof icons], { className: "h-5 w-5" })}
                         <span className="sr-only">{value.Hover}</span>
@@ -65,6 +141,9 @@ const Component = (user: UserType) => {
         </TooltipProvider>)
     );
 };
+
+
+
 
 const Sidebar = ({ user }: { user: UserType }) => {
 
@@ -90,7 +169,7 @@ const Sidebar = ({ user }: { user: UserType }) => {
                         <DropdownMenuLabel><a href={`/profile?user=${user.id}`}>Mon compte</a></DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={(e) => {
-                            if(typeof window !== 'undefined' && confirm("Voulez-vous vraiment vous déconnecter ?")){
+                            if (typeof window !== 'undefined' && confirm("Voulez-vous vraiment vous déconnecter ?")) {
                                 window.localStorage.clear();
                                 window.location.assign("/login");
                             }
@@ -123,6 +202,7 @@ const Sidebar = ({ user }: { user: UserType }) => {
                         }
                     </DropdownMenuContent>
                 </DropdownMenu>
+                <IssueMaker user_id={user.id} token={user.token}/>
             </nav>
         </aside>
     )
