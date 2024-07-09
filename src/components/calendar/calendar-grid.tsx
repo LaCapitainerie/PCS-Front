@@ -9,6 +9,7 @@ import { useCalendarGrid } from "@react-aria/calendar";
 import { useLocale } from "@react-aria/i18n";
 import type { CalendarState } from "@react-stately/calendar";
 import { CalendarCell } from "./calendar-cell";
+import { useEffect } from "react";
 
 export interface TakenValues {
 	day: string;
@@ -53,7 +54,7 @@ export function CalendarGrid({
 				</tr>
 			</thead>
 			<tbody>
-				{[...new Array(weeksInMonth).keys()].map((weekIndex, index) => (
+				{[...new Array(weeksInMonth).keys()].map((weekIndex) => (
 					<tr key={weekIndex}>
 						{state.getDatesInWeek(weekIndex, startDate).map((date, index) => {
 							if (!date) {

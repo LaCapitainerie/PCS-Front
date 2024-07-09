@@ -1,66 +1,57 @@
 "use client";
 
 import { User } from "@/type/User";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, Suspense, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const VerifyParam = (setId: React.Dispatch<React.SetStateAction<string | null>>) => {
-    const params = useSearchParams();
+export default function SuccessPageLayout() {
+
+    
+    const params = new URLSearchParams(window.location.search);
     const success = params.get('success');
     const idReservation = params.get('id_reservation') || "";
 
-    if (success !== "true" || idReservation === "") {
-        if (typeof window !== 'undefined') {
-            
-            const user = JSON.parse(localStorage.getItem("user") || "{}") as User;
-            window.location.href = `/${user.type}/property`;
-        }
-    } else {
-        setId(idReservation);
-    }
-};
+    console.log(success, idReservation);
 
-export default function SuccessPageLayout() {
-    const [valide, setValide] = useState<boolean>(false);
-    const [id, setId] = useState<string | null>(null);
-    const [user, setUser] = useState<User | null>(null);
-
+    var getUserfromLocalStorage = "{}";
+    
     if (typeof window !== 'undefined') {
-        const getUserfromLocalStorage = localStorage.getItem("user") || "{}";
-        setUser(JSON.parse(getUserfromLocalStorage) as User);
+
+        getUserfromLocalStorage = localStorage.getItem("user") || "{}";
+    };
+
+    const user = JSON.parse(getUserfromLocalStorage) as User;
+
+    if(typeof window !== 'undefined' && success !== "true") {
+        window.location.href = `/${user.type}/property`;
     }
 
-    VerifyParam(setId);
+
+    const [valide, setValide] = useState(false);
 
     useEffect(() => {
-        if (id && user) {
-            const dataFetch = async () => {
-                try {
-                    const response = await fetch(
-                        `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/validation/${id}`,
-                        {
-                            method: 'POST',
-                            headers: {
-                                'Authorization': `${user.token}`,
-                            },
-                        }
-                    );
-                    const data = await response.json();
-                    setValide(data.ok);
-                } catch (error) {
-                    console.error('Error:', error);
-                }
-            };
+        const dataFetch = async () => {
+            try {
+                const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/validation/${idReservation}`,
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `${user?.token}`,
+                        },
+                    }
+                );
+                const data = await response.json();
 
-            dataFetch();
-        }
-    }, [id, user]);
+                setValide(data.ok);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
 
-    return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <h1>
-                {valide ? "Bravo la commande est validée !" : "Validation en cours..."}
-            </h1>
-        </Suspense>
-    );
+        dataFetch();
+    }, [user]);
+
+    if (typeof window !== 'undefined') {
+        window.location.href = `/${user.type}/property`;
+    };
 };

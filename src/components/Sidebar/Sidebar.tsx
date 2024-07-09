@@ -3,7 +3,7 @@
 import { SideBarDTO, Sidebar as SidebarType } from "../../type/Sidebar";
 import * as React from "react"
 import Link from "next/link"
-import { Home, MessagesSquareIcon, GaugeIcon, User, Check, CircleDot, CircleDotIcon } from "lucide-react"
+import { Home, MessagesSquareIcon, GaugeIcon, User, Check, CircleDot, CircleDotIcon, NotebookTextIcon } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
 import { useTheme } from "next-themes"
@@ -109,6 +109,7 @@ const icons = {
     "msg": MessagesSquareIcon,
     "gauge": GaugeIcon,
     "user": User,
+    "notebook": NotebookTextIcon
 };
 
 const RoleToPermission: Map<UserType["type"], number> = new Map([

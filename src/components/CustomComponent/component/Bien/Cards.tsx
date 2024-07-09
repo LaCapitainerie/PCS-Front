@@ -63,11 +63,7 @@ const descriptionKey = {
   "zipCode": "code postal",
 }
 
-export function CardProperty({ Property, User_id, Prestation }: { Property: Property | undefined, Prestation: Service[], User_id: User["id"] }) {
-
-
-  console.log(Prestation);
-  
+export function CardProperty({ Property, User_id, Prestation }: { Property: Property | undefined, Prestation: Service[], User_id: User["id"] }) {  
 
   function toTitleCase(str:string) {
     return str.replace(/\w\S*/g, function(txt) {

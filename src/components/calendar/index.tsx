@@ -24,7 +24,7 @@ export function Calendar(props: CalendarProps<DateValue> & { TakenValues: TakenV
 	const { calendarProps, prevButtonProps, nextButtonProps } = useCalendar(
 		props,
 		state,
-	);
+	);	
 
 	return (
 		<div {...calendarProps} className="inline-block text-gray-800">

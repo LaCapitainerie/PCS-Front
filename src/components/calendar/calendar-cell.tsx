@@ -9,7 +9,7 @@ import { useCalendarCell } from "@react-aria/calendar";
 import { useFocusRing } from "@react-aria/focus";
 import { mergeProps } from "@react-aria/utils";
 import type { CalendarState } from "@react-stately/calendar";
-import { useRef } from "react";
+import { use, useEffect, useRef } from "react";
 
 export function CalendarCell({
 	state,
@@ -60,7 +60,7 @@ export function CalendarCell({
 						isFocusVisible &&
 							"ring-1 group-focus:z-2 ring-gray-12 ring-offset-1",
 						// Darker selection background for the start and end.
-						isSelected && "bg-gray-12 text-gray-1",
+						(state.focusedDate?.compare(date) == 0) && "bg-gray-12 text-gray-1",
 						// Hover state for non-selected cells.
 						!isSelected && !isDisabled && !disallowed && "hover:ring-2 hover:ring-gray-12",
 						// isDateToday && "bg-gray-1 text-primary ring-0 ring-offset-0",

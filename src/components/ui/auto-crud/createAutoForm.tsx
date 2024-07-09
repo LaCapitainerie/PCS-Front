@@ -14,6 +14,7 @@ export const createAutoForm = <TSchema extends ZodObjectOrWrapped, T extends Cru
   schema,
   fieldConfig,
 }: Props<TSchema>) => {
+
   const AutoFormInstance: CrudFormComponent<T> = (props) => {
     if (props.loading) return <FormSkeleton />
     return (
@@ -22,6 +23,7 @@ export const createAutoForm = <TSchema extends ZodObjectOrWrapped, T extends Cru
       </AutoForm>
     )
   }
+
   return AutoFormInstance
 }
 

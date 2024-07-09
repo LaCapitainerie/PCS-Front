@@ -5,7 +5,6 @@ import { Form } from "../form";
 import { DefaultValues, useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "../button";
 import { cn } from "@/lib/utils";
 
 import { FieldConfig } from "./types";
@@ -16,12 +15,13 @@ import {
 } from "./utils";
 import AutoFormObject from "./fields/object";
 
-import { Spinner } from '@/components/ui/spinner';
+import { LoadingButton } from "../loading-button";
 
 export function AutoFormSubmit({ children }: { children?: React.ReactNode }) {
-  const [show, setShow] = useState(false);
 
-  return show?<Spinner/>:<Button type="submit" className="w-full">{children ?? "Submit"}</Button>;
+  const [loading, setLoading] = useState(false);
+
+  return <LoadingButton loading={loading} type="submit" className="w-full" onClick={(e) => {setLoading(true);e;setLoading(false)}}>{children ?? "Submit"}</LoadingButton>;
 }
 
 function AutoForm<SchemaType extends ZodObjectOrWrapped>({
@@ -53,11 +53,15 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
     values: valuesProp,
   });
 
+  const [loading, setLoading] = useState(false);
+
   function onSubmit(values: z.infer<typeof formSchema>) {
+    setLoading(true);
     const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
       onSubmitProp?.(parsedValues.data);
     }
+    setLoading(false);
   }
 
   return (

@@ -3,30 +3,26 @@
 import { Calendar } from "@/components/calendar";
 
 import {
-	CalendarDate,
 	getLocalTimeZone,
-	getWeeksInMonth,
 	today,
 } from "@internationalized/date";
-import type { DateValue } from "@react-aria/calendar";
-import { useLocale } from "@react-aria/i18n";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { FormPanel } from "./form-panel";
 import { Property } from "@/type/Property";
-import { Reservation, ReservationDTO } from "@/type/Reservation";
+import { Reservation } from "@/type/Reservation";
 import { User } from "@/type/User";
 import { TakenValues } from "../calendar/calendar-grid";
-import { Button } from "../ui/button";
 import { Service } from "@/type/Service";
 
 
 
 interface CalendarProps {
-	property: Property;
+	property: Property | null;
 	user: User;
-	prestations: Service[];
+	prestations: Service[] | null;
 	reservations: Reservation[];
+	mode?: "lessor" | "traveler";
 }
 
 function Search(): [string | null, string | null] {
@@ -38,7 +34,7 @@ function Search(): [string | null, string | null] {
 	return [dateParam, slotParam];
 }
 
-export default function CalendarLayout({property, user, prestations, reservations}: CalendarProps) {
+export default function CalendarLayout({property, user, prestations, reservations, mode}: CalendarProps) {
 
 	const [date, setDate] = React.useState(today(getLocalTimeZone()));
 	
@@ -61,6 +57,11 @@ export default function CalendarLayout({property, user, prestations, reservation
 		"#e76f51",
 	]
 
+	const finalmode = mode ?? (user.id === property?.userId ? "lessor" : "traveler")
+
+	console.log(reservations);
+	
+
 	return (
 		<div className="flex flex-col xl:flex-row justify-around gap-8">
 			<Calendar
@@ -78,9 +79,9 @@ export default function CalendarLayout({property, user, prestations, reservation
 						return getDaysArray(beginDate, endDate, colors[index % colors.length]);
 					})
 				}
-				mode={user.id === property.userId ? "lessor" : "traveler"}
+				mode={finalmode}
 			/>
-			<FormPanel user={user} prestations={prestations} property={property}/>
+			{finalmode == "traveler" ? <FormPanel user={user} prestations={prestations || []} property={property || {} as Property}/> : ""}
 		</div>
 	);
 }
