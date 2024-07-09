@@ -1,6 +1,7 @@
 import { Prestation } from '@/type/Prestation'
 import { ObjectType, ObjectSummary } from './pres_schem'
 import { User } from '@/type/User'
+import { Service } from '@/type/Service'
 
 
 const props: { [id: string]: ObjectType } = {}
@@ -9,7 +10,7 @@ const fetchPath = `/all`
 const createPath = `/management`
 const updatePath = `/management`
 const deletePath = `/management`
-interface ObjectDTO { service: Prestation[] }
+interface ObjectDTO { service: Service[] }
 
 
 export const fetchData = async (token: User["token"]) => {

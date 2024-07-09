@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import toast from 'react-hot-toast'
 import { Alert, AlertTitle, AlertDescription } from '../alert'
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
+import { set } from 'date-fns'
 
 const CREATE_INDICATOR = '_create_new_'
 
@@ -55,12 +56,12 @@ export const createCrudView =
       const isFormMode = selectedId !== null && selectedId !== undefined
 
 
-      if (typeof window !== 'undefined'){
-        const iframe = window.document.querySelector<HTMLIFrameElement>("#tidio-chat-iframe");
-        if (iframe && iframe.style){          
-          iframe.style.zIndex = "25";
-        }
-      }
+      // if (typeof window !== 'undefined'){
+      //   const iframe = window.document.querySelector<HTMLIFrameElement>("#tidio-chat-iframe");
+      //   if (iframe && iframe.style){          
+      //     iframe.style.zIndex = "25";
+      //   }
+      // }
 
 
       const listComponent = (
@@ -68,15 +69,22 @@ export const createCrudView =
           useHooks={manifest.useHooks}
           isLoading={list.isLoading}
           dataSource={dataSource}
-          create={() => setSelectedId(CREATE_INDICATOR)}
+          create={(setLoading) => {setLoading(true);setSelectedId(CREATE_INDICATOR);setLoading(false);}}
           refresh={invalidate}
-          update={(record) => setSelectedId(String(getId(record)))}
-          del={(record) =>
-            toast.promise(deletion.mutateAsync(record), {
-              loading: `Deleting ${name} (${selectedId})...`,
-              success: `${name} (${selectedId}) deleted`,
-              error: `Failed to delete ${name} (${selectedId})`,
-            })
+          update={(record, setLoading) => {setLoading(true);setSelectedId(String(getId(record)));setLoading(false);}}
+          del={(record, setLoading) => {
+
+              setLoading(true);
+
+              toast.promise(deletion.mutateAsync(record), {
+                loading: `Deleting ${name} (${selectedId})...`,
+                success: `${name} (${selectedId}) deleted`,
+                error: `Failed to delete ${name} (${selectedId})`,
+              })
+
+              setLoading(false);
+
+            }
           }
         />
       )

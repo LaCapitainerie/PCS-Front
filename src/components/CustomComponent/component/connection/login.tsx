@@ -14,6 +14,8 @@ import {
   FormField,
 } from "@/components/ui/form"
 import { UserDTO } from "@/type/User";
+import { LoadingButton } from "@/components/ui/loading-button";
+import { useState } from "react";
 
 const FormSchema = z.object({
   mail: z.string().email({
@@ -31,15 +33,11 @@ export default function Login() {
     resolver: zodResolver(FormSchema),
   });
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // });
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(data: z.infer<typeof FormSchema>, setLoading: React.Dispatch<React.SetStateAction<boolean>>) {
+
+    setLoading(true);
 
     form.reset();
 
@@ -54,6 +52,9 @@ export default function Login() {
         },
       })
     ).json();
+
+    setLoading(false);
+
     if(typeof window !== "undefined"){
       window.localStorage.setItem('user', JSON.stringify(retour.user));
       window.location.assign(`/profile?user=${retour.user.id}`);
@@ -62,7 +63,7 @@ export default function Login() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="overflow-y-hidden w-full h-screen space-y-6">
+      <form onSubmit={form.handleSubmit(d => onSubmit(d, setLoading))} className="overflow-y-hidden w-full h-screen space-y-6">
         <div className="h-screen w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
           <div className="h-screen flex items-center justify-center py-12">
             <div className="mx-auto grid w-[350px] gap-6">
@@ -115,9 +116,9 @@ export default function Login() {
                     )}
                   />
                 </div>
-                <Button type="submit" className="w-full">
+                <LoadingButton loading={loading} type="submit" className="w-full">
                   Se Connecter
-                </Button>
+                </LoadingButton>
               </div>
               <div className="mt-4 text-center text-sm">
                 Pas de compte ?{" "}

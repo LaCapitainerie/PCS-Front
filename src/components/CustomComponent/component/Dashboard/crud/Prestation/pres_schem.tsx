@@ -1,7 +1,11 @@
-import { Prestation } from '@/type/Prestation'
+import { Service } from '@/type/Service'
 import z from 'zod'
 
 export const Schema = z.object({
+
+  name: z.string().min(3, "The name must be at least 3 characters long"),
+
+  type: z.enum(["transport", "nettoyage", "chauffage", "electricite", "jardinage", "peinture", "reparation", "conciergerie"]),
   
   targetCustomer: z.enum(["traveler", "lessor"]),
   price: z.coerce.number(),
@@ -18,15 +22,16 @@ export const Schema = z.object({
 // This is the type of the data that will be passed to the form
 // & the type of the data that won't be passed to the form
 export type ObjectType = z.infer<typeof Schema> & {
-  id: Prestation["id"];
+  id: Service["id"];
 }
 
 export type ObjectSummary = {
-  id: Prestation["id"];
-  targetCustomer: Prestation["targetCustomer"];
-  address: Prestation["address"];
-  city: Prestation["city"];
-  price: Prestation["price"];
-  rangeAction: Prestation["rangeAction"];
-  description: Prestation["description"];
+  id: Service["id"];
+  type: Service["type"];
+  targetCustomer: Service["targetCustomer"];
+  address: Service["address"];
+  city: Service["city"];
+  price: Service["price"];
+  rangeAction: Service["rangeAction"];
+  description: Service["description"];
 }

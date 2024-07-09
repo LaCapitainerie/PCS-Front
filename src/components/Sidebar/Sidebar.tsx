@@ -20,12 +20,15 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { IssueMakerDTO } from "@/type/Issue";
 import toast from "react-hot-toast";
+import { LoadingButton } from "../ui/loading-button";
 
 export function IssueMaker({user_id, token}: {user_id: UserType["id"], token: UserType["token"]}) {
     const [type, setType] = useState("");
     const [description, setDescription] = useState("");
 
-    const handleSubmit = async () => {
+    async function handleSubmit(setLoading: React.Dispatch<React.SetStateAction<boolean>>) {
+
+        setLoading(true);
 
         const data = {
             user_id: user_id,
@@ -55,11 +58,13 @@ export function IssueMaker({user_id, token}: {user_id: UserType["id"], token: Us
         } catch (error) {
             console.error("An error occurred while reporting incident", error);
         } finally {
+            setLoading(false);
             setOpen(false);
         };
     };
 
     const [open, setOpen] = useState(false);
+	const [loading, setLoading] = React.useState(false);
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
@@ -90,7 +95,7 @@ export function IssueMaker({user_id, token}: {user_id: UserType["id"], token: Us
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit" onClick={handleSubmit}>Declarer l'incident</Button>
+                    <LoadingButton loading={loading} type="submit" onClick={_=>handleSubmit(setLoading)}>Declarer l'incident</LoadingButton>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

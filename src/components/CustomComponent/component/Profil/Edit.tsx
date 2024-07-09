@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button"
 import { Form, FormField} from "@/components/ui/form"
 import { User, UserDTO } from "@/type/User";
 import { toast } from "@/components/ui/use-toast";
+import { useState } from "react";
+import { LoadingButton } from "@/components/ui/loading-button";
 
 
 const FormSchema = z.object({
@@ -27,7 +29,12 @@ export default function EditForm({user, token}: {user: User, token: User["token"
         resolver: zodResolver(FormSchema),
     })
 
-    async function onSubmit(data: z.infer<typeof FormSchema>) {
+	const [loading, setLoading] = useState(false);
+
+    async function onSubmit(data: z.infer<typeof FormSchema>, setLoading: React.Dispatch<React.SetStateAction<boolean>>) {
+
+        setLoading(true);
+
         toast({
             title: "You submitted the following values:",
             description: (
@@ -53,27 +60,25 @@ export default function EditForm({user, token}: {user: User, token: User["token"
             )
         ).json();
 
+        setLoading(false);
+
         user = retour.user;
 
         if(typeof window !== 'undefined') {
             localStorage.setItem("user", JSON.stringify(user));
             location.reload();
         }
+
+
     }
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="overflow-y-hidden w-full space-y-6">
+            <form onSubmit={form.handleSubmit((d) => onSubmit(d, setLoading))} className="overflow-y-hidden w-full space-y-6">
 
                 <div className="flex flex-col items-center justify-center px-8 gap-4">
 
                     <div className="mx-auto grid gap-6">
-                        <div className="grid gap-2 text-center">
-                            <h1 className="text-3xl font-bold">Modify</h1>
-                            <p className="text-balance text-muted-foreground">
-                                Enter your new informations here
-                            </p>
-                        </div>
                         <div className="grid gap-4">
                             <Label htmlFor="avatar">Avatar</Label>
                             <FormField
@@ -91,7 +96,9 @@ export default function EditForm({user, token}: {user: User, token: User["token"
                                 )}
                             />
 
-                            <Label htmlFor="Firstname">Firstname</Label>
+                            <Label htmlFor="Firstname">
+                                Prénom
+                            </Label>
                             <FormField
                                 control={form.control}
                                 name="firstName"
@@ -108,7 +115,9 @@ export default function EditForm({user, token}: {user: User, token: User["token"
                                 )}
                             />
 
-                            <Label htmlFor="Lastname">Lastname</Label>
+                            <Label htmlFor="Lastname">
+                                Nom de famille
+                            </Label>
                             <FormField
                                 control={form.control}
                                 name="lastName"
@@ -125,7 +134,9 @@ export default function EditForm({user, token}: {user: User, token: User["token"
                                 )}
                             />
 
-                            <Label htmlFor="Nickname">Nickname</Label>
+                            <Label htmlFor="Nickname">
+                                Pseudo
+                            </Label>
                             <FormField
                                 control={form.control}
                                 name="nickname"
@@ -142,7 +153,9 @@ export default function EditForm({user, token}: {user: User, token: User["token"
                                 )}
                             />
 
-                            <Label htmlFor="Mail">Mail</Label>
+                            <Label htmlFor="Mail">
+                                Mail
+                            </Label>
                             <FormField
                                 control={form.control}
                                 name="mail"
@@ -159,7 +172,9 @@ export default function EditForm({user, token}: {user: User, token: User["token"
                                 )}
                             />
 
-                            <Label htmlFor="PhoneNumber">PhoneNumber</Label>
+                            <Label htmlFor="PhoneNumber">
+                                Numéro de téléphone
+                            </Label>
                             <FormField
                                 control={form.control}
                                 name="phoneNumber"
@@ -179,9 +194,9 @@ export default function EditForm({user, token}: {user: User, token: User["token"
                         </div>
                     </div>
 
-                    <Button type="submit" className="w-full">
-                        Modify
-                    </Button>
+                    <LoadingButton loading={loading} type="submit" className="w-full">
+                        Modifier
+                    </LoadingButton>
                 </div>
             </form>
 

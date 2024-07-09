@@ -10,19 +10,24 @@ import MultipleSelector, { Option } from '@/components/ui/multiple-selector';
 import { Service } from "@/type/Service";
 import { Property } from "@/type/Property";
 import { ReservationCommand } from "@/type/ReservationCommand";
+import { LoadingButton } from '@/components/ui/loading-button';
 
 // nombre de jour
 const quantity= 3;
 
 interface ReservationCommandProps {
+	setLoading: React.Dispatch<React.SetStateAction<boolean>>
 	stripeId: string;
 	quantity: number;
 	tokenUser: string;
 	reservationCommand: ReservationCommand;
 }
 
-async function Submit({stripeId, quantity, tokenUser, reservationCommand}: ReservationCommandProps) {
+async function Submit({setLoading, stripeId, quantity, tokenUser, reservationCommand}: ReservationCommandProps) {
     async function onSubmit() {
+
+		setLoading(true);
+
         // IMPORTANT les deux paramètres dans le lien de la requête sont obligatoire, sinon erreur
         const link= `${process.env.NEXT_PUBLIC_API_URL}/reservation/checkout/session/${stripeId}/${quantity}`
         try {
@@ -35,6 +40,7 @@ async function Submit({stripeId, quantity, tokenUser, reservationCommand}: Reser
             });
 
             if (!response.ok) {
+				setLoading(false);
                 throw new Error('La requête a échoué');
             }
 
@@ -42,16 +48,19 @@ async function Submit({stripeId, quantity, tokenUser, reservationCommand}: Reser
 
             window.location.href = data.url;
         } catch (error) {
+			setLoading(false);
             console.error('Erreur lors de la requête:', error);
         }
 
     }
+	setLoading(false);
     await onSubmit()
 }
 
 export function FormPanel({user, prestations, property}: {user: User, prestations: Service[], property: Property}) {
 
 	const [value, setValue] = React.useState<Option[]>([]);
+	const [loading, setLoading] = React.useState(false);
 
 	const OPTIONS: Option[] = prestations.map((prestation) => {
 		return {
@@ -103,8 +112,10 @@ export function FormPanel({user, prestations, property}: {user: User, prestation
 				<span className="text-gray-12">Condition d&apos;utilisation</span>.
 			</p>
 			<div className="flex justify-end gap-2">
-				<Button type="button" onClick={_=>Submit(
+				
+				<LoadingButton loading={loading} onClick={_=>Submit(
 					{
+						setLoading,
 						stripeId: property.idStripe,
 						quantity: quantity,
 						tokenUser: user.token || "",
@@ -117,17 +128,16 @@ export function FormPanel({user, prestations, property}: {user: User, prestation
 								prestation => value.map(v => v.value).includes(prestation.id)
 							).map(prestation => {
 								return {
-									service: prestation,
+									...prestation,
 									userId: user.id,
 									date: "2024-09-29T00:00:00Z"
 								}
 							})
-							,
 						} as ReservationCommand
 					}
 				)}>
 					Payer
-				</Button>
+				</LoadingButton>
 			</div>
 		</form>
 	);

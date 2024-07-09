@@ -7,6 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { LoadingCarouselPlugin } from '../component/Bien/LoadingCarrousel';
 import Title from '@/components/ui/title';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { User } from '@/type/User';
 
 interface LayoutProps {
     children: ReactNode;
@@ -104,7 +105,7 @@ const Loading_Bien_Layout: React.FC<LayoutProps> = ({ children }) => {
                     </div>
                     <div className="p-1">
                         <div className="flex flex-col rounded-lg border bg-card text-card-foreground shadow-sm p-2" style={{height: '400px'}}>
-                            <Title titre="Réservations" sous_titre=""/>
+                            <Title titre="Réservations" sous_titre="" proprio={''} user={{} as User}/>
                             <div className="flex flex-col justify-around gap-2 h-full">
                                 <Skeleton className="w-full h-full rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent"/>
                             </div>

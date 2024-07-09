@@ -5,15 +5,18 @@ import { Button } from '@/components/ui/button'
 import { DataTable } from '../data-table'
 import { Check, X } from 'lucide-react'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../select'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
+import { LoadingButton } from '../loading-button'
 
 export const createCrudList = <T extends Crud>({ columns, mode, filter, setFilter }: { columns: () => ColumnDef<T['listItem']>[], mode: "make" | "allow", filter?: {title: string; content: string[]}, setFilter?: Dispatch<SetStateAction<string>> }) => {
   const CrudListTable: CrudListComponent<T> = ({ dataSource, update, del, create }) => {
 
+    const [loading, setLoading] = useState(false);
+
     const toolbar = mode === "make" ? (
-      <Button onClick={create}>
+      <LoadingButton loading={loading} onClick={_ => create?create(setLoading):()=>{}}>
         <PlusIcon className="w-4 h-4 mr-2" /> New
-      </Button>
+      </LoadingButton>
     ) : mode === "allow" && filter ? (
       <Select onValueChange={setFilter}>
           <SelectTrigger className="w-[180px]">
@@ -46,21 +49,21 @@ export const createCrudList = <T extends Crud>({ columns, mode, filter, setFilte
                   {
                     mode === "make" &&
                     <>
-                      <Button onClick={() => update(row)} variant="ghost" size="icon">
+                      <LoadingButton loading={loading} onClick={() => update(row, setLoading)} variant="ghost" size="icon">
                         <Pencil1Icon className="w-4 h-4" />
-                      </Button>
-                      <Button variant="ghost" onClick={() => del(row)} size="icon">
+                      </LoadingButton>
+                      <LoadingButton loading={loading} variant="ghost" onClick={() => del(row, setLoading)} size="icon">
                         <TrashIcon className="w-4 h-4 text-destructive" />
-                      </Button>
+                      </LoadingButton>
                     </> ||
                     mode === "allow" &&
                     <>
-                      <Button onClick={() => update(row)} variant="ghost" size="icon">
+                      <LoadingButton loading={loading} onClick={() => update(row, setLoading)} variant="ghost" size="icon">
                         <Check className="w-4 h-4" />
-                      </Button>
-                      <Button variant="ghost" onClick={() => del(row)} size="icon">
+                      </LoadingButton>
+                      <LoadingButton loading={loading} variant="ghost" onClick={() => del(row, setLoading)} size="icon">
                         <X className="w-4 h-4 text-destructive" />
-                      </Button>
+                      </LoadingButton>
                     </>
                     }
 

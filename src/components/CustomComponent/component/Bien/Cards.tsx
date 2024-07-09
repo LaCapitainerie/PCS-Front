@@ -29,7 +29,8 @@ function statusToColor(params: Prestation["status"]) {
 
 }
 
-export function typeToDom(type: string = "", id: number = 0) {
+export function typeToDom(type: Service["type"], id: number = 0) {
+
   switch (type) {
     case "transport":
       return <CarTaxiFront key={id} className={`h-10 w-10 text-grey-500`} />
@@ -64,9 +65,9 @@ const descriptionKey = {
 
 export function CardProperty({ Property, User_id, Prestation }: { Property: Property | undefined, Prestation: Service[], User_id: User["id"] }) {
 
-  const { toast } = useToast();
+
+  console.log(Prestation);
   
-  const [edit, setEdit] = useState<boolean>(false);
 
   function toTitleCase(str:string) {
     return str.replace(/\w\S*/g, function(txt) {
@@ -115,9 +116,6 @@ export function CardProperty({ Property, User_id, Prestation }: { Property: Prop
           <CardHeader>
             <div className="flex flex-row justify-between">
               <CardTitle className="">Prestataires associés</CardTitle>
-              <Button variant="outline" size="icon">
-                <UserPlus className="h-4 w-4" />
-              </Button>
             </div>
           </CardHeader>
           <CardContent className="grid gap-4">

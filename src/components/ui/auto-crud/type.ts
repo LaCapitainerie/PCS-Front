@@ -38,9 +38,9 @@ export type CrudFormComponent<T extends Crud> = React.FunctionComponent<{
 
 export type CrudListComponent<T extends Crud> = React.FunctionComponent<{
   dataSource: T['listItem'][] | undefined
-  create?: VoidFunction
-  update: (item: T['listItem']) => void
-  del: (item: T['listItem']) => void
+  create?: (setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void
+  update: (item: T['listItem'], setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void
+  del: (item: T['listItem'], setLoading: React.Dispatch<React.SetStateAction<boolean>>) => void
   isLoading: boolean
   refresh: VoidFunction
   useHooks?: () => T['hooks']

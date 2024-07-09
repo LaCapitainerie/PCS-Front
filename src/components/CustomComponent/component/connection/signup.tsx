@@ -83,8 +83,6 @@ export default function Signup() {
 
     form.reset()
 
-    // Call your API endpoint here    
-
     const retour: UserDTO = await (
       await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/user/register`,

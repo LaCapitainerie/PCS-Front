@@ -26,6 +26,7 @@ interface CalendarProps {
 	property: Property;
 	user: User;
 	prestations: Service[];
+	reservations: Reservation[];
 }
 
 function Search(): [string | null, string | null] {
@@ -37,48 +38,9 @@ function Search(): [string | null, string | null] {
 	return [dateParam, slotParam];
 }
 
-export default function CalendarLayout({property, user, prestations}: CalendarProps) {
+export default function CalendarLayout({property, user, prestations, reservations}: CalendarProps) {
 
-	const [timeZone, setTimeZone] = React.useState("UTC");
 	const [date, setDate] = React.useState(today(getLocalTimeZone()));
-
-
-	const [allReservations, setAllReservations] = React.useState<Reservation[]>([]);
-
-	// Get list of all reservations with fetch
-	React.useEffect(() => {
-        const dataFetch = async () => {
-			if (property.id === undefined) {
-				setAllReservations([]);
-				return;
-			};
-
-			const response = await fetch(
-				`${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${property.id}`,
-				{
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						"Authorization": user.token || "",
-					},
-				}
-			)
-
-			if (!response.ok) {
-				setAllReservations([]);
-				return;
-			};
-
-			const data: ReservationDTO = await (response).json();
-
-			setAllReservations(
-				data.reservation);
-        };
-
-        dataFetch();
-    }, [property, user.token]);
-
-
 	
 	const getDaysArray = function(start: Date, end: Date, color: typeof colors[number]) {
 		const arr: TakenValues[] = [];
@@ -108,7 +70,7 @@ export default function CalendarLayout({property, user, prestations}: CalendarPr
 				onChange={() => {}}
 				onFocusChange={() => {}}
 				TakenValues={
-					allReservations.map((reservation, index) => {
+					reservations.map((reservation, index) => {
 						
 						const beginDate = new Date(reservation.beginDate);
 						const endDate = new Date(reservation.endDate);
