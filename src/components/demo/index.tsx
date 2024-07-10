@@ -78,6 +78,7 @@ export default function CalendarLayout({property, user, prestations, reservation
 				}
 				mode={finalmode}
 			/>
+			{finalmode == "traveler" ? <FormPanel user={user} prestations={prestations || []} property={property || {} as Property}/> : ""}
 		</div>
 	);
 }
