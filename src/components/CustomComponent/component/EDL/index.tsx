@@ -8,12 +8,14 @@ import {
 } from "@internationalized/date";
 import { useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
-import { FormPanel } from "./form-panel";
+import { FormPanel } from "@/components/demo/form-panel";
 import { Property } from "@/type/Property";
 import { Reservation } from "@/type/Reservation";
 import { User } from "@/type/User";
-import { TakenValues } from "../calendar/calendar-grid";
+import { TakenValues } from "@/components/calendar/calendar-grid";
 import { Service } from "@/type/Service";
+import { useEffect } from "react";
+import { set } from "date-fns";
 
 
 
@@ -23,6 +25,7 @@ interface CalendarProps {
 	prestations: Service[] | null;
 	reservations: Reservation[];
 	mode?: "lessor" | "traveler";
+	setReservation: React.Dispatch<React.SetStateAction<Reservation["id"]>>;
 }
 
 function Search(): [string | null, string | null] {
@@ -34,7 +37,7 @@ function Search(): [string | null, string | null] {
 	return [dateParam, slotParam];
 }
 
-export default function CalendarLayout({property, user, prestations, reservations, mode}: CalendarProps) {
+export default function CalendarLayout({property, user, prestations, reservations, mode, setReservation}: CalendarProps) {
 
 	const [date, setDate] = React.useState(today(getLocalTimeZone()));
 	
@@ -59,6 +62,29 @@ export default function CalendarLayout({property, user, prestations, reservation
 
 	const finalmode = mode ?? (user.id === property?.userId ? "lessor" : "traveler")
 
+	console.log(reservations);
+
+	const [dateV, setDateV] = React.useState(today(getLocalTimeZone()));
+	
+	useEffect(() => {
+		// Loop through every reservations and check if the date is in the range
+		// If it is, setReservation to the reservation id
+
+		const found = reservations.find((reservation) => {
+			const beginDate = new Date(reservation.beginDate).setHours(0, 0, 0, 0);
+			const endDate = new Date(reservation.endDate).setHours(0, 0, 0, 0);
+			const toDate = dateV.toDate(getLocalTimeZone()).setHours(0, 0, 0, 0);
+
+			console.log(beginDate, endDate, toDate);
+			
+
+			return toDate >= beginDate && toDate <= endDate;
+		});
+
+		setReservation(found?.id ?? "");
+
+	}, [dateV]);
+
 	return (
 		<div className="flex flex-col xl:flex-row justify-around gap-8">
 			<Calendar
@@ -66,7 +92,7 @@ export default function CalendarLayout({property, user, prestations, reservation
 				defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
 				value={date}
 				onChange={_ => _}
-				onFocusChange={_ => _}
+				onFocusChange={setDateV}
 				TakenValues={
 					reservations.map((reservation, index) => {
 						
@@ -78,6 +104,7 @@ export default function CalendarLayout({property, user, prestations, reservation
 				}
 				mode={finalmode}
 			/>
+			{finalmode == "traveler" ? <FormPanel user={user} prestations={prestations || []} property={property || {} as Property}/> : ""}
 		</div>
 	);
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import CalendarLayout from '@/components/demo';
+import CalendarLayout from './index';
 import { Reservation } from '@/type/Reservation';
 import { User } from '@/type/User';
 import React, { useEffect } from 'react';

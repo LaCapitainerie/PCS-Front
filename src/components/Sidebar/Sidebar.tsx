@@ -95,19 +95,19 @@ export function IssueMaker({user_id, token}: {user_id: UserType["id"], token: Us
                 <div className="grid gap-4 py-4">
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="type" className="text-right">
-                            Type de l'incident
+                            Type de l&apos;incident
                         </Label>
                         <Input id="type" value={type} className="col-span-3" onChange={(e) => setType(e.target.value)} />
                     </div>
                     <div className="grid grid-cols-4 items-center gap-4">
                         <Label htmlFor="description" className="text-right">
-                            Description de l'incident
+                            Description de l&apos;incident
                         </Label>
                         <Input id="description" value={description} className="col-span-3" onChange={(e) => setDescription(e.target.value)} />
                     </div>
                 </div>
                 <DialogFooter>
-                    <LoadingButton loading={loading} type="submit" onClick={_=>handleSubmit(setLoading)}>Declarer l'incident</LoadingButton>
+                    <LoadingButton loading={loading} type="submit" onClick={_=>handleSubmit(setLoading)}>Declarer l&apos;incident</LoadingButton>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
