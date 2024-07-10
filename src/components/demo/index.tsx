@@ -59,6 +59,9 @@ export default function CalendarLayout({property, user, prestations, reservation
 
 	const finalmode = mode ?? (user.id === property?.userId ? "lessor" : "traveler")
 
+	console.log("property", property);
+	
+
 	return (
 		<div className="flex flex-col xl:flex-row justify-around gap-8">
 			<Calendar
@@ -66,7 +69,7 @@ export default function CalendarLayout({property, user, prestations, reservation
 				defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
 				value={date}
 				onChange={_ => _}
-				onFocusChange={_ => _}
+				onFocusChange={setDate}
 				TakenValues={
 					reservations.map((reservation, index) => {
 						
@@ -78,7 +81,7 @@ export default function CalendarLayout({property, user, prestations, reservation
 				}
 				mode={finalmode}
 			/>
-			{finalmode == "traveler" ? <FormPanel user={user} prestations={prestations || []} property={property || {} as Property}/> : ""}
+			{finalmode == "traveler" ? <FormPanel user={user} date={date} prestations={prestations || []} property={property || {} as Property}/> : ""}
 		</div>
 	);
 }

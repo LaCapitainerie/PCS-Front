@@ -40,11 +40,16 @@ export const fetchData = async (token: User["token"]) => {
 
 export const createData = async (prop: ObjectType, token: User["token"]) => {
 
+  const newProps = {
+    ...prop,
+    images: prop.images.map((image) => image.url)
+  }
+
   await fetch(
     `${path}${createPath}`,
     {
       method: "POST",
-      body: JSON.stringify(prop),
+      body: JSON.stringify(newProps),
       headers: {
         "Authorization": token || "",
       },

@@ -172,7 +172,10 @@ const Component = (user: UserType) => {
 
 const Sidebar = ({ user }: { user: UserType }) => {
 
+    interface language {value: "Français" | "English"};
+
     const { theme, setTheme } = useTheme();
+    const [langue, setLangue] = useState<language["value"]>("Français");
 
     return (
         <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -209,6 +212,24 @@ const Sidebar = ({ user }: { user: UserType }) => {
                 {Component(user)}
             </nav>
             <nav key={1} className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="icon">
+                            <SunIcon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                            <MoonIcon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                            <span className="sr-only">Changer de thème</span>
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        {
+                            ["Français", "English"].map((value, i) => (
+                                <DropdownMenuItem key={i} onClick={_ => setLangue(value as language["value"])} className="capitalize justify-between">
+                                    {value} {langue == value ? <Check /> : ""}
+                                </DropdownMenuItem>
+                            ))
+                        }
+                    </DropdownMenuContent>
+                </DropdownMenu>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" size="icon">

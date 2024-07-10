@@ -12,6 +12,7 @@ import { Property } from "@/type/Property";
 import { ReservationCommand } from "@/type/ReservationCommand";
 import { LoadingButton } from '@/components/ui/loading-button';
 import { toast } from "../ui/use-toast";
+import { CalendarDate, getLocalTimeZone } from "@internationalized/date";
 
 // nombre de jour
 const quantity= 3;
@@ -62,8 +63,8 @@ async function Submit({setLoading, stripeId, quantity, tokenUser, reservationCom
     await onSubmit()
 }
 
-export function FormPanel({user, prestations, property}: {user: User, prestations: Service[], property: Property}) {
-
+export function FormPanel({user, date, prestations, property}: {user: User, date: CalendarDate, prestations: Service[], property: Property}) {
+	
 	const [value, setValue] = React.useState<Option[]>([]);
 	const [loading, setLoading] = React.useState(false);
 
@@ -73,6 +74,11 @@ export function FormPanel({user, prestations, property}: {user: User, prestation
 			value: prestation.id
 		}
 	});
+
+	const [duree, setDuree] = React.useState(1);
+
+	console.log(property);
+	
 
 	return (
 		<form className="flex flex-col gap-5 w-[360px]">
@@ -89,17 +95,10 @@ export function FormPanel({user, prestations, property}: {user: User, prestation
 				<Input id="phone" type="tel" defaultValue={user.phoneNumber} contrains="tel"/>
 			</div>
 			<div className="flex flex-col space-y-1.5">
-				<Label htmlFor="email">Notes supplémentaires</Label>
-				<Textarea
-					id="notes"
-					placeholder="Ajouter un commentaire..."
-				/>
+				<Label htmlFor="duree">Duree</Label>
+				<Input id="duree" type="number" defaultValue={1} onChange={(e) => setDuree(e.target.valueAsNumber)}/>
 			</div>
 
-
-
-
-			
 
 
 			<div className="flex flex-col space-y-1.5">
@@ -122,20 +121,20 @@ export function FormPanel({user, prestations, property}: {user: User, prestation
 					{
 						setLoading,
 						stripeId: property.idStripe,
-						quantity: quantity,
+						quantity: duree,
 						tokenUser: user.token || "",
 						reservationCommand: {
 							travelerId: user.id,
 							propertyId: property.id,
-							beginDate: "2024-09-28T00:00:00Z",
-							endDate: "2024-09-30T00:00:00Z",
+							beginDate: date.toDate(getLocalTimeZone()).toISOString(),
+							endDate: date.add({ days: duree }).toDate(getLocalTimeZone()).toISOString(),
 							service: prestations.filter(
 								prestation => value.map(v => v.value).includes(prestation.id)
 							).map(prestation => {
 								return {
 									...prestation,
 									userId: user.id,
-									date: "2024-09-29T00:00:00Z"
+									date: date.toDate(getLocalTimeZone()).toISOString()
 								}
 							})
 						} as ReservationCommand

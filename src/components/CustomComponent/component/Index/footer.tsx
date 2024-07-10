@@ -13,7 +13,7 @@ export function Footer() {
                       </div>
                       <div className="flex flex-col justify-center">
                           <h5>Paris Caretaker Services</h5>
-                          <h6></h6>
+                          <h6>Chez vous, partout dans le monde</h6>
                       </div>
                   </div>
                   

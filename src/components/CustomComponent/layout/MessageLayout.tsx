@@ -17,10 +17,6 @@ const Message_Layout: React.FC<MessageProps> = ({ categories }) => {
 
     const [Contact, setContact] = useState<Contact>();
 
-    const SelectedContact = (Contact: Contact) => {
-        setContact(Contact);
-    };
-
     var getUserfromLocalStorage = "{}";
     
     if (typeof window !== 'undefined') {
@@ -38,7 +34,7 @@ const Message_Layout: React.FC<MessageProps> = ({ categories }) => {
             `}</style>
             <CookieConsent/>
             <Sidebar user={user}/>
-            <ContactList setContact={SelectedContact} Categories={categories} token={user.token} user_id={user.id}/>
+            <ContactList setContact={setContact} Categories={categories} token={user.token} user_id={user.id}/>
             <MessageList contact={Contact} token={user.token} user_id={user.id}/>
             <Toaster />
         </>
