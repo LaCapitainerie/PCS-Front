@@ -101,7 +101,7 @@ const EDLForm: React.FC<LayoutProps> = ({ user, idReservation }: LayoutProps ) =
             ...newEdl,
             idreservation: idReservation,
         });
-    }, [idReservation])
+    }, [idReservation, newEdl])
     
     
 

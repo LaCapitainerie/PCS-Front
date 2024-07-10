@@ -81,9 +81,13 @@ export default function CalendarLayout({property, user, prestations, reservation
 			return toDate >= beginDate && toDate <= endDate;
 		});
 
-		setReservation(found?.id ?? "");
+		if (found) {
+			setReservation(found.id);
+		} else {
+			setReservation("");
+		};
 
-	}, [dateV]);
+	}, [dateV, reservations, setReservation]);
 
 	return (
 		<div className="flex flex-col xl:flex-row justify-around gap-8">
