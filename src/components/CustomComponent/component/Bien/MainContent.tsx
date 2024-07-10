@@ -10,6 +10,7 @@ import {Property} from "@/type/Property";
 import { ReservationDTO, Reservation as ReservationType } from "@/type/Reservation";
 import { User } from "@/type/User";
 import { Service, ServiceReturn } from "@/type/Service";
+import { toast } from "@/components/ui/use-toast";
 
 
 const MainContent = ({house, user}: {house:Property, user: User}) => {
@@ -24,65 +25,82 @@ const MainContent = ({house, user}: {house:Property, user: User}) => {
     const [prestations, setPrestations] = useState<Service[]>([]);
 
     useEffect(() => {
-        const dataFetch = async () => {
-            if (house?.id === undefined) {
-                setReservation([]);
-                return;
+        try {
+            const dataFetch = async () => {
+                if (house?.id === undefined) {
+                    setReservation([]);
+                    return;
+                };
+
+                const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${house?.id}`,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': user.token || '',
+                        },
+                        method: 'GET',
+                    }
+                )
+
+                if (!response.ok) {
+                    setReservation([]);
+                    return;
+                };
+
+                const data: ReservationDTO = await (response).json();
+
+                setReservation(data.reservation);
             };
 
-            const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/reservation/property/allreservation/${house?.id}`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': user.token || '',
-                    },
-                    method: 'GET',
-                }
-            )
+            dataFetch();
+        } catch (error) {
+            console.error('Error:', error);
+            toast({
+                title: "Erreur lors de la récupération des réservations",
+                description: "Veuillez réessayer plus tard",
+            })
+        }
 
-            if (!response.ok) {
-                setReservation([]);
-                return;
-            };
-
-            const data: ReservationDTO = await (response).json();
-
-            setReservation(data.reservation);
-        };
-
-        dataFetch();
     }, [house, user]);
 
     useEffect(() => {
-        const dataFetch = async () => {
-            if (house?.id === undefined) {
-                setPrestations([]);
-                return;
+        try {
+            const dataFetch = async () => {
+                if (house?.id === undefined) {
+                    setPrestations([]);
+                    return;
+                };
+
+                const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/service/all`,
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': user.token || '',
+                        },
+                        method: 'GET',
+                    }
+                )
+
+                if (!response.ok) {
+                    setPrestations([]);
+                    return;
+                };
+
+                const data: ServiceReturn = await (response).json();
+
+                setPrestations(data.service);
             };
 
-            const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/service/all`,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': user.token || '',
-                    },
-                    method: 'GET',
-                }
-            )
-
-            if (!response.ok) {
-                setPrestations([]);
-                return;
-            };
-
-            const data: ServiceReturn = await (response).json();
-
-            setPrestations(data.service);
-        };
-
-        dataFetch();
+            dataFetch();
+        } catch (error) {
+            console.error('Error:', error);
+            toast({
+                title: "Erreur lors de la récupération des prestations",
+                description: "Veuillez réessayer plus tard",
+            })
+        }
     }, [house, user]);
 
     return (

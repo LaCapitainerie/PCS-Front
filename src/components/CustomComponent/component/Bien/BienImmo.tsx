@@ -9,6 +9,8 @@ import { Separator } from "@/components/ui/separator";
 import { toComparable } from "../../../functions";
 import { Property, PropertyDTO } from "@/type/Property";
 import { User } from "@/type/User";
+import { set } from "date-fns";
+import { toast } from "@/components/ui/use-toast";
 
 function getIcon(type: string) {
     
@@ -32,29 +34,39 @@ const BienImmo = ({
     const [filter, setFilter] = useState<string>("");
 
     useEffect(() => {
-        const dataFetch = async () => {
-            const data: PropertyDTO = await (
-                await fetch(
-                    `${process.env.NEXT_PUBLIC_API_URL}/property`,
-                    {
-                        method: "GET",
-                        headers: {
-                          "Authorization": token,
-                        },
-                    }
+        try {
+            const dataFetch = async () => {
+                const data: PropertyDTO = await (
+                    await fetch(
+                        `${process.env.NEXT_PUBLIC_API_URL}/property`,
+                        {
+                            method: "GET",
+                            headers: {
+                            "Authorization": token,
+                            },
+                        }
+                    )
                 )
-            )
-            .json().catch((error) => {
-                console.error('Error:', error);
-            });
+                .json().catch((error) => {
+                    console.error('Error:', error);
+                });
+                
+                const biens = data.Property.filter((value: Property) => toComparable(value.name, value.description).includes(toComparable(filter)));
+
+                setHouse(biens[0]);
+                setProperty(biens);
+            };
             
-            const biens = data.Property.filter((value: Property) => toComparable(value.name, value.description).includes(toComparable(filter)));
+            dataFetch();
+        } catch (error) {
+            console.error('Error:', error);
+            toast({
+                title: "Erreur lors de la récupération des biens immobiliers",
+                description: "Veuillez réessayer plus tard",
+            })
+            setProperty([]);
+        }
 
-            setHouse(biens[0]);
-            setProperty(biens);
-        };
-
-        dataFetch();
     }, [filter, token]);
     
     

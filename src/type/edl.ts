@@ -1,7 +1,7 @@
 import { Reservation } from "./Reservation";
 
 export interface edl {
-    idReservation: Reservation["id"];
+    idreservation: Reservation["id"];
     remark: string;
     status: boolean;
     final: boolean;

@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "@/components/ui/use-toast";
 import { User } from "@/type/User";
 import React, { useEffect, useState } from "react";
 
@@ -45,6 +46,10 @@ export default function SuccessPageLayout() {
                 setValide(data.ok);
             } catch (error) {
                 console.error('Error:', error);
+                toast({
+                    title: "Erreur lors de la validation de la réservation",
+                    description: "Veuillez réessayer plus tard",
+                })
             }
         };
 

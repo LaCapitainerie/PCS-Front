@@ -46,7 +46,6 @@ const CardForm = z.object({
     } satisfies DropzoneOptions;
    
     const onSubmit = (data: CardFormType) => {
-        toast({ description: "Your message has been sent.", })
 
         // Reset the form after submission
         form.reset();

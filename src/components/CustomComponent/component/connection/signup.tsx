@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { boolean, z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -28,6 +28,9 @@ import {
 import { Token, UserDTO } from "@/type/User";
 import { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "@/components/ui/input-otp";
 import StepperComp from "./stepper";
+import { LoadingButton } from "@/components/ui/loading-button";
+import { useState } from "react";
+import { toast } from "@/components/ui/use-toast";
 
 
 // {
@@ -67,38 +70,45 @@ const FormSchema = z.object({
 
 export default function Signup() {
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // })
+
+    setLoading(true);
 
     form.reset()
 
-    const retour: UserDTO = await (
-      await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-    ).json();
+    try {
 
-    if(typeof window !== "undefined"){
-      window.localStorage.setItem('user', JSON.stringify(retour.user));
-      window.location.assign(`/profile?user=${retour.user.id}`);
+      const retour: UserDTO = await (
+        await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/user/register`,
+          {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+      ).json();
+
+      if(typeof window !== "undefined"){
+        window.localStorage.setItem('user', JSON.stringify(retour.user));
+        window.location.assign(`/profile?user=${retour.user.id}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Erreur lors de la création du compte",
+        description: "Veuillez réessayer plus tard",
+      })
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -231,23 +241,9 @@ export default function Signup() {
                 </div>
               </div>
 
-              {/* <InputOTP maxLength={6}>
-                <InputOTPGroup>
-                  <InputOTPSlot index={0} />
-                  <InputOTPSlot index={1} />
-                  <InputOTPSlot index={2} />
-                </InputOTPGroup>
-                <InputOTPSeparator />
-                <InputOTPGroup>
-                  <InputOTPSlot index={3} />
-                  <InputOTPSlot index={4} />
-                  <InputOTPSlot index={5} />
-                </InputOTPGroup>
-              </InputOTP> */}
-
-              <Button type="submit" className="w-full">
+              <LoadingButton loading={loading} type="submit" className="w-full">
                 Créer un compte
-              </Button>
+              </LoadingButton>
 
             </StepperComp>
           </div>

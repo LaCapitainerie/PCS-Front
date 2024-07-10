@@ -16,6 +16,7 @@ import {
 import { UserDTO } from "@/type/User";
 import { LoadingButton } from "@/components/ui/loading-button";
 import { useState } from "react";
+import { toast } from "@/components/ui/use-toast";
 
 const FormSchema = z.object({
   mail: z.string().email({
@@ -43,22 +44,33 @@ export default function Login() {
 
     // Call your API endpoint here
 
-    const retour: UserDTO = await (
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
+    try {
+
+      const retour: UserDTO = await (
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/login`, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+      ).json();
+
+      if(typeof window !== "undefined"){
+        window.localStorage.setItem('user', JSON.stringify(retour.user));
+        window.location.assign(`/profile?user=${retour.user.id}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Erreur lors de la connexion",
+        description: "Vérifiez votre email et mot de passe",
       })
-    ).json();
-
-    setLoading(false);
-
-    if(typeof window !== "undefined"){
-      window.localStorage.setItem('user', JSON.stringify(retour.user));
-      window.location.assign(`/profile?user=${retour.user.id}`);
+    } finally {
+      setLoading(false);
     }
+
+    
   }
 
   return (

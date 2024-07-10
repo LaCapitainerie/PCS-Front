@@ -23,6 +23,7 @@ interface CalendarProps {
 	prestations: Service[] | null;
 	reservations: Reservation[];
 	mode?: "lessor" | "traveler";
+	setReservation: React.Dispatch<React.SetStateAction<Reservation["id"]>>;
 }
 
 function Search(): [string | null, string | null] {
@@ -34,7 +35,7 @@ function Search(): [string | null, string | null] {
 	return [dateParam, slotParam];
 }
 
-export default function CalendarLayout({property, user, prestations, reservations, mode}: CalendarProps) {
+export default function CalendarLayout({property, user, prestations, reservations, mode, setReservation}: CalendarProps) {
 
 	const [date, setDate] = React.useState(today(getLocalTimeZone()));
 	
@@ -60,7 +61,31 @@ export default function CalendarLayout({property, user, prestations, reservation
 	const finalmode = mode ?? (user.id === property?.userId ? "lessor" : "traveler")
 
 	console.log(reservations);
+
+	const [dateV, setDateV] = React.useState(today(getLocalTimeZone()));
 	
+	React.useEffect(() => {
+		// Loop through every reservations and check if the date is in the range
+		// If it is, setReservation to the reservation id
+
+		const found = reservations.find((reservation) => {
+			const beginDate = new Date(reservation.beginDate).setHours(0, 0, 0, 0);
+			const endDate = new Date(reservation.endDate).setHours(0, 0, 0, 0);
+			const toDate = dateV.toDate(getLocalTimeZone()).setHours(0, 0, 0, 0);
+
+			console.log(beginDate, endDate, toDate);
+			
+
+			return toDate >= beginDate && toDate <= endDate;
+		});
+
+		if (found) {
+			setReservation(found.id);
+		} else {
+			setReservation("");
+		};
+
+	}, [dateV]);
 
 	return (
 		<div className="flex flex-col xl:flex-row justify-around gap-8">
@@ -68,8 +93,8 @@ export default function CalendarLayout({property, user, prestations, reservation
 				minValue={today(getLocalTimeZone()).add({ days: 1 })}
 				defaultValue={today(getLocalTimeZone()).add({ days: 1 })}
 				value={date}
-				onChange={() => {}}
-				onFocusChange={() => {}}
+				onChange={_ => _}
+				onFocusChange={setDateV}
 				TakenValues={
 					reservations.map((reservation, index) => {
 						

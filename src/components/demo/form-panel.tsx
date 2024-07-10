@@ -11,6 +11,7 @@ import { Service } from "@/type/Service";
 import { Property } from "@/type/Property";
 import { ReservationCommand } from "@/type/ReservationCommand";
 import { LoadingButton } from '@/components/ui/loading-button';
+import { toast } from "../ui/use-toast";
 
 // nombre de jour
 const quantity= 3;
@@ -50,6 +51,10 @@ async function Submit({setLoading, stripeId, quantity, tokenUser, reservationCom
         } catch (error) {
 			setLoading(false);
             console.error('Erreur lors de la requête:', error);
+			toast({
+                title: "Erreur lors de la validation du paiement",
+                description: "Veuillez réessayer plus tard",
+            })
         }
 
     }

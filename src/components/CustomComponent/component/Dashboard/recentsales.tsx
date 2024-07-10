@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage, } from "@/components/ui/avatar"
 import { Card, CardContent, CardHeader, CardTitle, } from "@/components/ui/card"
+import { toast } from "@/components/ui/use-toast";
 import Usercard from "@/components/ui/usercard";
 import { PrestationDTO } from "@/type/Prestation";
 import { User } from "@/type/User";
@@ -10,23 +11,31 @@ export default function RecentSales({token}: {token: User["token"]}) {
   const [retour, setRetour] = useState<PrestationDTO>({service: []});
 
   useEffect(() => {
-    const dataFetch = async () => {
-      const retourDTO: PrestationDTO = await (
-        await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/service/all`,
-          {
-            method: "GET",
-            headers: {
-              "Authorization": token,
-            },
-          }
-        )
-      ).json();
-
-      setRetour(retourDTO || {service: []});
-    };
-
-    dataFetch();
+    try {
+      const dataFetch = async () => {
+        const retourDTO: PrestationDTO = await (
+          await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/service/all`,
+            {
+              method: "GET",
+              headers: {
+                "Authorization": token,
+              },
+            }
+          )
+        ).json();
+  
+        setRetour(retourDTO || {service: []});
+      };
+  
+      dataFetch();
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Erreur lors de la récupeation des ventes recentes",
+        description: "Veuillez réessayer plus tard",
+      })
+    }
   }, [token]);
   
   return (

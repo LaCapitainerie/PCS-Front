@@ -2,6 +2,7 @@ import { Prestation } from '@/type/Prestation'
 import { ObjectType, ObjectSummary } from './pres_schem'
 import { User } from '@/type/User'
 import { Service } from '@/type/Service'
+import { toast } from '@/components/ui/use-toast'
 
 
 const props: { [id: string]: ObjectType } = {}
@@ -15,25 +16,37 @@ interface ObjectDTO { service: Service[] }
 
 export const fetchData = async (token: User["token"]) => {
 
-  const retour: ObjectDTO = await (
-    await fetch(
-      `${path}${fetchPath}`,
-      {
-        method: "GET",
-        headers: {
-          "Authorization": token || "not found",
-        },
-      }
-    )
-  ).json();
+  try {
+    const retour: ObjectDTO = await (
+      await fetch(
+        `${path}${fetchPath}`,
+        {
+          method: "GET",
+          headers: {
+            "Authorization": token || "not found",
+          },
+        }
+      )
+    ).json();
+    
+    retour.service.forEach(element => {
+      props[element.id] = element;
+    });
   
-  retour.service.forEach(element => {
-    props[element.id] = element;
-  });
-
-  return {
-    total: props.length,
-    props: Object.values(props),
+    return {
+      total: props.length,
+      props: Object.values(props),
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    toast({
+      title: "Erreur lors de la requête",
+      description: "Veuillez réessayer plus tard",
+    })
+    return {
+      total: 0,
+      props: []
+    }
   }
 }
 

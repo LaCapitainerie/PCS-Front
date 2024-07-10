@@ -89,18 +89,6 @@ export const use_deleteData = async (id: ObjectSummary, token: User["token"]) =>
   if (result.status !== 200) {
     throw new Error("Failed to delete")
   }
-
-  // const { toast } = useToast()
-
-  // toast({
-  //   title: "Deleted",
-  //   description: (
-  //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-  //       <code className="text-white">{JSON.stringify(id, null, 2)}</code>
-  //     </pre>
-  //   ),
-  // });
-
   
   delete props[(id as any).original.id]
 }

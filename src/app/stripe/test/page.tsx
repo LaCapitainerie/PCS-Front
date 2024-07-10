@@ -3,6 +3,7 @@
 import React, {useState, useEffect, FormEvent} from "react";
 import {ReservationCommand} from "@/type/ReservationCommand";
 import {Prestation} from "@/type/Prestation";
+import { toast } from "@/components/ui/use-toast";
 
 // id stripe de l'objet (récupérable dorénavant en fetchant la propriété/prestatio)
 const stripeId = "price_1POo7DRrur5y60csjVWpmM34";
@@ -49,6 +50,10 @@ async function Submit() {
             window.location.href = data.url;
         } catch (error) {
             console.error('Erreur lors de la requête:', error);
+            toast({
+                title: "Erreur lors de la validation du paiement",
+                description: "Veuillez réessayer plus tard",
+            })
         }
 
     }

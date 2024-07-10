@@ -35,15 +35,6 @@ export default function EditForm({user, token}: {user: User, token: User["token"
 
         setLoading(true);
 
-        toast({
-            title: "You submitted the following values:",
-            description: (
-                <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                    <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-                </pre>
-            ),
-        })
-
         form.reset()
 
         const retour: UserDTO = await (

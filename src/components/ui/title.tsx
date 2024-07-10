@@ -29,7 +29,7 @@ async function createChat(user: TUser, proprio: TUser["id"]) {
 
         if (!response.ok) {
             toast({
-              title: "Erreur",
+              title: "Erreur lors de la création du chat",
               description: "Une erreur est survenue lors de la création du chat",
             })
             return false;

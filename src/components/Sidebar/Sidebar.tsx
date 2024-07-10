@@ -19,8 +19,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { IssueMakerDTO } from "@/type/Issue";
-import toast from "react-hot-toast";
 import { LoadingButton } from "../ui/loading-button";
+import { toast } from "../ui/use-toast";
 
 export function IssueMaker({user_id, token}: {user_id: UserType["id"], token: UserType["token"]}) {
     const [type, setType] = useState("");
@@ -50,13 +50,25 @@ export function IssueMaker({user_id, token}: {user_id: UserType["id"], token: Us
 
             if (response.ok) {
                 console.log("Incident reported successfully");
-                toast.success("Incident reported successfully");
+                //toast.success("Incident reported successfully");
+                toast({
+                    title: "Incident signalé avec succès",
+                    description: "Nous allons traiter votre demande dans les plus brefs délais",
+                })
             } else {
                 console.error("Failed to report incident");
-                toast.error("Failed to report incident");
+                //toast.error("Failed to report incident");
+                toast({
+                    title: "Erreur lors de la récupération des tickets",
+                    description: "Veuillez réessayer plus tard",
+                })
             };
         } catch (error) {
             console.error("An error occurred while reporting incident", error);
+            toast({
+                title: "Erreur lors de la requête",
+                description: "Veuillez réessayer plus tard",
+            })
         } finally {
             setLoading(false);
             setOpen(false);

@@ -6,6 +6,7 @@ import RecentSales from "./recentsales"
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import Crud, { CrudVariant } from "./crud/Crud"
 import { User } from "@/type/User"
+import { toast } from "@/components/ui/use-toast"
 const queryClient = new QueryClient()
 
 export interface cardProps {
@@ -27,69 +28,78 @@ export function Dashboard({Column, CustomOnes, Token}: {Column: ValuableThing[],
   const [cards, setCards] = useState<cardProps[]>([]);
 
   useEffect(() => {
-    const dataFetch = async () => {
 
-      Column.map(async (column) => {
+    try {
+      const dataFetch = async () => {
 
-        const data: any[] = await (
-          await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}${column.path}`
-          )
-        ).json();
+        Column.map(async (column) => {
+
+          const data: any[] = await (
+            await fetch(
+              `${process.env.NEXT_PUBLIC_API_URL}${column.path}`
+            )
+          ).json();
 
 
-        // Get prestation from the previous month and from this month
+          // Get prestation from the previous month and from this month
 
-        // Get the current date
-        const date = new Date();
-        const month = date.getMonth();
-        const year = date.getFullYear();
+          // Get the current date
+          const date = new Date();
+          const month = date.getMonth();
+          const year = date.getFullYear();
 
-        // Get the previous month
-        const prevMonth = month === 0 ? 11 : month - 1;
-        const prevYear = month === 0 ? year - 1 : year;
+          // Get the previous month
+          const prevMonth = month === 0 ? 11 : month - 1;
+          const prevYear = month === 0 ? year - 1 : year;
 
-        // Get the prestation from the previous month
-        const prestaPrev = data.filter((house) => {
-          const date = new Date(house[column.dateColumn]);
-          return date.getMonth() === prevMonth && date.getFullYear() === prevYear;
+          // Get the prestation from the previous month
+          const prestaPrev = data.filter((house) => {
+            const date = new Date(house[column.dateColumn]);
+            return date.getMonth() === prevMonth && date.getFullYear() === prevYear;
+          });
+
+          // Get the prestation from this month
+          const prestaThis = data.filter((house) => {
+            const date = new Date(house[column.dateColumn]);
+            return date.getMonth() === month && date.getFullYear() === year;
+          });
+
+          // Get the $ of prestation from the previous month
+          const previousMonthDollar:number = prestaPrev.reduce((acc, house) => acc + house[column.valueColumn], 0);
+          const thisMonthDollar:number = prestaThis.reduce((acc, house) => acc + house[column.valueColumn], 0);
+
+          // Get the augment percentage of $ from the previous month to this month
+          const dollarAugmentNumber = ((thisMonthDollar - previousMonthDollar) / previousMonthDollar) * 100;        
+
+          let newValuable = {
+            name: column.name,
+            currentPresta: thisMonthDollar.toFixed(2),
+            ratioPresta: dollarAugmentNumber.toFixed(2)
+          }
+
+          if (["Infinity", "-Infinity", "NaN", "-NaN"].includes(newValuable.ratioPresta)) {
+            newValuable.ratioPresta = "not enought data";
+          };
+
+          let tmpCurrentValuable = currentValuable;
+
+          if (!tmpCurrentValuable.map((valuable) => valuable.name).includes(column.name)) { tmpCurrentValuable.push(newValuable); }
+
+          
+
+          setValuable(tmpCurrentValuable);
+
         });
+      };
 
-        // Get the prestation from this month
-        const prestaThis = data.filter((house) => {
-          const date = new Date(house[column.dateColumn]);
-          return date.getMonth() === month && date.getFullYear() === year;
-        });
-
-        // Get the $ of prestation from the previous month
-        const previousMonthDollar:number = prestaPrev.reduce((acc, house) => acc + house[column.valueColumn], 0);
-        const thisMonthDollar:number = prestaThis.reduce((acc, house) => acc + house[column.valueColumn], 0);
-
-        // Get the augment percentage of $ from the previous month to this month
-        const dollarAugmentNumber = ((thisMonthDollar - previousMonthDollar) / previousMonthDollar) * 100;        
-
-        let newValuable = {
-          name: column.name,
-          currentPresta: thisMonthDollar.toFixed(2),
-          ratioPresta: dollarAugmentNumber.toFixed(2)
-        }
-
-        if (["Infinity", "-Infinity", "NaN", "-NaN"].includes(newValuable.ratioPresta)) {
-          newValuable.ratioPresta = "not enought data";
-        };
-
-        let tmpCurrentValuable = currentValuable;
-
-        if (!tmpCurrentValuable.map((valuable) => valuable.name).includes(column.name)) { tmpCurrentValuable.push(newValuable); }
-
-        
-
-        setValuable(tmpCurrentValuable);
-
-      });
-    };
-
-    dataFetch();
+      dataFetch();
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Erreur lors de la récuperation des chiffres",
+        description: "Veuillez réessayer plus tard",
+      })
+    }
     
     setCards(currentValuable);
 
