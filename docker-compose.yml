@@ -9,7 +9,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:8080/api
+      NEXT_PUBLIC_API_URL: http://77.237.246.8:8080/api
       NEXT_PUBLIC_ICON_URL: https://i.imgur.com/Yvs6KgF.png
       NEXT_PUBLIC_BIG_ICON_URL: https://i.imgur.com/AIEl1hF.png
     depends_on:
